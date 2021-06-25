@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": ["components/*"],
+            "@/blocks/*": ["components/blocks/*"],
+            "@/sections/*": ["components/sections/*"],
+            "@/layouts/*": ["components/layouts/*"],
+            "@/specialty/*": ["components/specialty/*"],
+            "@/pages/*": ["pages/*"],
+            "@/helpers/*": ["helpers/*"],
+            "@/constants/*": ["constants/*"]
+        }
+    },
+    
+}
