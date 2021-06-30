@@ -16,6 +16,6 @@
             "@/config/*": ["config/*"],
             "@/mockdata/*": ["mockdata/*"]
         }
-    },
+    }
     
 }
