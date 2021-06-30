@@ -1,0 +1,130 @@
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Search from '@/blocks/Search';
+import LangList from '@/blocks/LangList';
+import Avatar from '@/specialty/Avatar';
+import NavbarSidebar from '@/layouts/NavbarSidebar';
+import IconsLucide from '@/blocks/IconsLucide';
+import NavbarItem from '@/blocks/NavbarItem';
+
+import { useContext } from 'react';
+import AuthContext from '@/context/AuthContext';
+import { handleRowReverse } from '@/helpers/FEutils';
+import translations from '@/constants/translations';
+import uiStruct from '@/constants/uiStruct';
+import { NEXT_URL } from '@/config/index';
+
+const Header = ({}) => {
+    const { user, lang, setLang, rtl, setRtl, navIsOpen, toggleNav, logout } =
+        useContext(AuthContext);
+
+    return (
+        <>
+            <header
+                style={{ zIndex: 51 }}
+                className={`${
+                    handleRowReverse(rtl).rtl
+                } fixed bottom-0 md:top-0 inset-x-0 h-16 bg-white shadow-cards-top md:shadow-cards`}
+            >
+                <div className='flex flex-row justify-between items-center h-16 '>
+                    <div className='flex flex-shrink-0  lg:w-1/3'>
+                        <div
+                            className={`flex  items-center ${
+                                rtl
+                                    ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
+                                    : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
+                            } gap-3 ${handleRowReverse(rtl).flex}`}
+                        >
+                            <img src='/assets/media/kn_logoicon.svg' />
+                            <img
+                                className='hidden md:block'
+                                src='/assets/media/kn_logotext.svg'
+                            />
+                        </div>
+                    </div>
+                    <Search lang={lang} rtl={rtl} />
+                    <div className='flex justify-end items-center h-full  lg:w-1/3'>
+                        <div className='hidden lg:flex items-center '>
+                            <div className='hidden xl:block mx-4 text-sm'>
+                                {`${translations[lang].messages.hello} ${user.firstname}`}
+                            </div>
+                            <Avatar user={user} />
+                        </div>
+                        <LangList />
+
+                        <button
+                            onClick={() => toggleNav(!navIsOpen)}
+                            className={`focus:outline-none w-20 
+                               flex flex-shrink-0 h-full items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
+                                   rtl ? 'rounded-r-lg' : 'rounded-l-lg'
+                               }`}
+                        >
+                            <i
+                                className={`${
+                                    rtl ? 'ri-menu-2-line' : 'ri-menu-3-line'
+                                }`}
+                            ></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <NavbarSidebar>
+                <NavbarItem
+                    label={translations[lang].menu.messages.title}
+                    icon='Inbox'
+                    link={`${NEXT_URL}/c/messages`}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <NavbarItem
+                    label={translations[lang].menu.myPurchases.title}
+                    icon='LayoutGrid'
+                    link={`${NEXT_URL}/c/experiences`}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <NavbarItem
+                    label={translations[lang].menu.myFavourites.title}
+                    icon='Heart'
+                    link={`#`}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <NavbarItem
+                    label={translations[lang].menu.profile.title}
+                    icon='User'
+                    link={`${NEXT_URL}/c/profile`}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <NavbarItem
+                    label={translations[lang].menu.helpCenter.title}
+                    icon='HelpCircle'
+                    link={`http://academy.viakonnect.com`}
+                    handleClick={() => console.log('hello')}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <NavbarItem
+                    label={translations[lang].menu.signout.title}
+                    icon='LogOut'
+                    link='#'
+                    handleClick={() => console.log('hello')}
+                    handleClick={toggleNav}
+                    rtl={rtl}
+                />
+                <div className='px-12 flex items-center mt-8'>
+                    <a
+                        target='_blank'
+                        href='https://kreator.viakonnect.com'
+                        className='flex-1 py-3 px-4 rounded-full flex items-center justify-center border-2 border-green-400  hover:border-green-400 ring-4 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400'
+                    >
+                        Become a kreator
+                    </a>
+                </div>
+            </NavbarSidebar>
+        </>
+    );
+};
+
+export default Header;

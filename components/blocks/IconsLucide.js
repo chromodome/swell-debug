@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Heart,
+    LayoutGrid,
+    Inbox,
     Grid,
     User,
     DollarSign,
@@ -23,6 +26,9 @@ const IconsLucide = ({ icon, size, color, strokeWidth = '2' }) => {
 };
 
 const Map = {
+    Heart,
+    LayoutGrid,
+    Inbox,
     Grid,
     User,
     DollarSign,

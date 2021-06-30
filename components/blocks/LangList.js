@@ -1,36 +1,46 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 
-import { connect } from 'react-redux';
+import { useContext } from 'react';
+import AuthContext from '@/context/AuthContext';
+import { handleRowReverse } from '@/helpers/FEutils';
+import translations from '@/constants/translations';
+import uiStruct from '@/constants/uiStruct';
 
-import { handleRowReverse } from 'helpers/FEutils';
-import translations from 'constants/translations';
-
-function LangList({
-    listData,
-
-    val,
-    handleChange,
-    globalState: { lang },
-    textClass = '',
-}) {
-    const rtl = !!translations[lang].rtl;
+function LangList({ textClass = '' }) {
+    const { lang, setLang, rtl, setRtl, navIsOpen, toggleNav, logout } =
+        useContext(AuthContext);
 
     const handleData = (data) => {
         return data.name;
     };
 
+    const listData = uiStruct.ui.languages;
+
+    const [selectedLang, setSelectedLang] = useState(uiStruct.ui.languages[0]);
+
+    const handleChange = (selectedLang) => {
+        setSelectedLang(selectedLang);
+        setLang(selectedLang.id);
+    };
+
+    useEffect(() => {
+        setRtl(!!translations[lang].rtl);
+    }, [lang]);
+
     return (
         <>
             <div
-                className={`flex items-center ${
+                className={`hidden md:flex  items-center relative ${
                     handleRowReverse(rtl).mr
                 }-4 w-32 justify-end`}
             >
-                <span className='block truncate uppercase'>{val.short}</span>
-                <Listbox value={val} onChange={handleChange}>
-                    <div className={`z-50 relative `}>
+                <span className='block truncate uppercase text-sm'>
+                    {selectedLang.short}
+                </span>
+                <Listbox value={selectedLang} onChange={handleChange}>
+                    <div className={`z-50  `}>
                         <Listbox.Button
                             className={`focus:outline-none w-12 h-12 rounded-full mx-3
                             flex items-center justify-center text-xl hover:bg-green-100 hover:text-green-600`}
@@ -44,7 +54,7 @@ function LangList({
                             leaveTo='opacity-0'
                         >
                             <div
-                                className={` bg-white w-32 absolute ${
+                                className={` bg-white w-32 absolute top-16 ${
                                     handleRowReverse(rtl).right
                                 }-0 py-4 overflow-hidden rounded-xl block shadow-2xl-green-400 ring-1 ring-black ring-opacity-5`}
                             >
@@ -69,14 +79,15 @@ cursor-default select-none relative py-2 ${handleRowReverse(rtl).pl}-10 ${
                                                     <span
                                                         className={`${
                                                             lData.name ==
-                                                            val.name
+                                                            selectedLang.name
                                                                 ? 'font-medium'
                                                                 : 'font-normal'
                                                         } block truncate ${textClass}`}
                                                     >
                                                         {handleData(lData)}
                                                     </span>
-                                                    {lData.name == val.name ? (
+                                                    {lData.name ==
+                                                    selectedLang.name ? (
                                                         <span
                                                             className={`${
                                                                 active
@@ -109,8 +120,9 @@ absolute inset-y-0 ${handleRowReverse(rtl).left}-0 flex items-center ${
     );
 }
 
-const mapStateToProps = (state) => ({
-    globalState: state.globalState,
-});
+// const mapStateToProps = (state) => ({
+//     globalState: state.globalState,
+// });
 
-export default connect(mapStateToProps, null)(LangList);
+// export default connect(mapStateToProps, null)(LangList);
+export default LangList;

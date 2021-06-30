@@ -1,24 +1,24 @@
-import TagCard from '@/blocks/TagCard';
+import ResultCard from '@/blocks/ResultCard';
 import SliderList from '@/blocks/SliderList';
 
 const breakPoints = {
     default: { width: 320, slides: 2 },
     sm: { width: 640, slides: 2 },
-    md: { width: 768, slides: 4 },
-    lg: { width: 1024, slides: 5 },
-    xl: { width: 1280, slides: 7 },
+    md: { width: 768, slides: 3 },
+    lg: { width: 1024, slides: 4 },
+    xl: { width: 1280, slides: 5 },
 };
 
-const SliderInterests = ({ sectionTitles, data }) => {
+const SliderExperiences = ({ sectionTitles, data }) => {
     return (
         <>
             <SliderList breakPoints={breakPoints} section={sectionTitles}>
                 {data.map((item) => {
                     return (
-                        <TagCard
+                        <ResultCard
                             key={item.id}
                             data={item}
-                            containerClass='embla__slide x2 md:x4 lg:x5 xl:x7'
+                            containerClass='embla__slide x2 md:x3 lg:x4 xl:x5'
                         />
                     );
                 })}
@@ -27,4 +27,4 @@ const SliderInterests = ({ sectionTitles, data }) => {
     );
 };
 
-export default SliderInterests;
+export default SliderExperiences;

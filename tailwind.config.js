@@ -138,9 +138,10 @@ module.exports = {
                 'glass-50': '#ffffff88',
                 'glass-75': '#ffffffBB',
                 'modal-100': '#D5DCD9',
+                'glass-100': '#E4FBF4',
 
                 cyan: colors.cyan,
-                'light-blue': colors.lightBlue,
+                'light-blue': colors.sky,
                 teal: colors.teal,
             },
             maxHeight: {

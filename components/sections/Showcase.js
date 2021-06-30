@@ -1,6 +1,6 @@
-import { Pill__Logo } from '../blocks/Pills';
+import { Pill__Logo } from '@/blocks/Pills';
 
-const ContainerFullWidth = ({ pill }) => {
+const Showcase = ({ children, pill }) => {
     return (
         <div className={`w-full h-128 bg-gray-400 relative`}>
             {pill && (
@@ -14,8 +14,10 @@ const ContainerFullWidth = ({ pill }) => {
                     <Pill__Logo />
                 </div>
             )}
+
+            {children}
         </div>
     );
 };
 
-export default ContainerFullWidth;
+export default Showcase;

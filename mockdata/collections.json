@@ -1,0 +1,44 @@
+{
+    "collections": [
+        {
+            "name": "Winter Escapades",
+            "descriptionShort": "Freeszing cold? No problem We have you covered",
+            "descriptionLong": "Freeszing cold? No problem We have you covered",
+            "image": "https://ucarecdn.com/8fd31dc5-4ed8-4eeb-8924-c12681e1d605/photo153575238501616aa049b6a8d.jpg",
+            "direction": "vertical",
+            "url": "/search/extreme_destinations"
+        },
+        {
+            "name": "Wilderness Lovers",
+            "descriptionShort": "Find Anacondas and follow Grizzli bears",
+            "descriptionLong": "Find Anacondas and follow Grizzli bears",
+            "image": "https://ucarecdn.com/6ab5b3fe-3011-4704-9599-386d7303daa0/photo1587608131469ddf68c751678.jpg",
+            "direction": "horizontal",
+            "url": "/search/extreme_destinations"
+        },
+        {
+            "name": "Adrenaline Junkies",
+            "descriptionShort": "High impact action filled adventures",
+            "descriptionLong": "High impact action filled adventures",
+            "image": "https://ucarecdn.com/820bac44-b380-4e79-8205-32a251fb5f58/photo15223328969189622e84d53d7.jpg",
+            "direction": "vertical",
+            "url": "/search/extreme_destinations"
+        },
+        {
+            "name": "Boats Boats Boats!",
+            "descriptionShort": "Big or small, we have them all",
+            "descriptionLong": "Big or small, we have them all",
+            "image": "https://ucarecdn.com/cfeff242-8137-4da1-9882-cce32f7f9554/photo15211936986429810ddf4bff6.jpg",
+            "direction": "horizontal",
+            "url": "/search/extreme_destinations"
+        },
+        {
+            "name": "Castles in the sky",
+            "descriptionShort": "Experience living before the modern era",
+            "descriptionLong": "Experience living before the modern era",
+            "image": "https://ucarecdn.com/69104471-6a05-4671-a072-efcafc06a83e/photo15540726763ea1cdcb2c44.jpg",
+            "direction": "vertical",
+            "url": "/search/extreme_destinations"
+        }
+    ]
+}

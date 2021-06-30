@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import ResultCard from '../blocks/ResultCard';
-import * as data from '../../experiences.json';
+import SectionTitle from '@/blocks/SectionTitle';
 
-const GridList = ({ data1 }) => {
+const GridList = ({ sectionTitles, data }) => {
     return (
         <>
-            <div className=' my-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40'>
+            <div className=' mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40'>
+                <SectionTitle section={sectionTitles} className='mb-8' />
                 <div className='flex flex-wrap -mx-1 lg:-mx-4'>
-                    {data.results.map((item) => {
+                    {data.map((item) => {
                         return <ResultCard key={item.id} data={item} />;
                     })}
                 </div>

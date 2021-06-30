@@ -52,4 +52,18 @@ const Pill__Title = ({ title }) => {
     );
 };
 
-export { Pill__Icon, Pill__Title, Pill__Container, Pill__Logo };
+const Pill__Experience = ({ label = 'Digital' }) => {
+    return (
+        <div className='uppercase rounded-full h-8 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6'>
+            {label}
+        </div>
+    );
+};
+
+export {
+    Pill__Icon,
+    Pill__Title,
+    Pill__Container,
+    Pill__Logo,
+    Pill__Experience,
+};

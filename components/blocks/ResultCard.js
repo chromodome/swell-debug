@@ -24,7 +24,7 @@ const ResultCard = ({ data, containerClass }) => {
                         <img
                             alt='Placeholder'
                             className='rounded-xl object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96'
-                            src={data.featured_image}
+                            data-blink-src={data.featured_image}
                         />
                     </a>
                 </div>

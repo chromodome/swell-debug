@@ -86,6 +86,54 @@
             direction: ltr !important;
             text-align: left !important;
         }
+
+        .x1  {
+            position: relative; 
+            flex: 0 0 100%; 
+            margin-right: 0px;
+           
+          }
+
+          .x2 {
+            position: relative; 
+            flex: 0 0 50%; 
+            margin-right: 0px;
+           
+          }
+          .x3  {
+            position: relative; 
+            flex: 0 0 33.33%; 
+            margin-right: 0px;
+           
+          }
+         .x4 {
+            position: relative; 
+            flex: 0 0 25%; 
+            margin-right: 0px;
+           
+          }
+        
+          .x5  {
+            position: relative; 
+            flex: 0 0 20%; 
+            margin-right: 0px;
+           
+          }
+
+          .x6  {
+            position: relative; 
+            flex: 0 0 16.67%; 
+            margin-right: 0px;
+           
+          }
+        
+          .x7  {
+            position: relative; 
+            flex: 0 0 14.2%; 
+            margin-right: 0px;
+           
+          }
+
     }
 
     .z-100 {
@@ -121,15 +169,4 @@
     box-shadow: inset 7px 10px 12px #fcfcfc;
 }
 
-
-.embla {
-    overflow: hidden;
-  }
-  .embla__container {
-    display: flex;
-  }
-  .embla__slide {
-    position: relative;
-    flex: 0 0 100%;
-  }
 

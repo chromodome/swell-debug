@@ -1,4 +1,4 @@
-import iconConsts from 'constants/iconConsts';
+import iconConsts from '@/constants/iconConsts';
 
 const Icons = ({ iName, iClasses, size }) => {
     return (

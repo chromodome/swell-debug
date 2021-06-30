@@ -1,22 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import uiStruct from 'constants/uiStruct';
-import translations from 'constants/translations';
-import { toggleLang, toggleNav } from 'store/actions/globalState/master';
-import Icons from 'components/blocks/Icons';
+import { useContext } from 'react';
+import AuthContext from '@/context/AuthContext';
+import uiStruct from '@/constants/uiStruct';
+import translations from '@/constants/translations';
+import Icons from '@/blocks/Icons';
 import { handleRowReverse } from 'helpers/FEutils';
+import Avatar from '@/specialty/Avatar';
 
-import Avatar from 'components/specialty/Avatar';
-
-const LayoutNavbarSidebar = (props) => {
-    const {
-        toggleNav,
-        globalState: { lang, user, navIsOpen },
-        children,
-    } = props;
-
-    const rtl = !!translations[lang].rtl;
+const NavbarSidebar = ({ children }) => {
+    const { user, rtl, lang, navIsOpen, toggleNav, logout } =
+        useContext(AuthContext);
 
     return (
         <>
@@ -39,7 +32,21 @@ const LayoutNavbarSidebar = (props) => {
                 }`}
             >
                 <nav className=' flex flex-col relative flex-1 pt-28'>
-                    <div className='absolute inset-x-0 top-6'>
+                    <div className='md:hidden fixed inset-x-0 top-6'>
+                        <div
+                            className={`flex  items-center ml-8 gap-3 ${
+                                handleRowReverse(rtl).flex
+                            }`}
+                        >
+                            <img src='/assets/media/kn_logoicon.svg' />
+                            <img
+                                className=''
+                                src='/assets/media/kn_logotext.svg'
+                            />
+                        </div>
+                    </div>
+
+                    <div className='fixed inset-x-0 bottom-3 md:bottom-full md:top-6'>
                         <div
                             className={`flex ${
                                 handleRowReverse(rtl).rtl
@@ -50,7 +57,7 @@ const LayoutNavbarSidebar = (props) => {
                                     handleRowReverse(rtl).ml
                                 }-12 flex items-center`}
                             >
-                                <Avatar user={user} />
+                                <Avatar user={user} size={50} />
                                 <div className='px-2'>{user.handle}</div>
                             </div>
                             <button
@@ -83,20 +90,4 @@ const LayoutNavbarSidebar = (props) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    globalState: state.globalState,
-});
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(
-        {
-            toggleNav,
-        },
-        dispatch
-    );
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LayoutNavbarSidebar);
+export default NavbarSidebar;
