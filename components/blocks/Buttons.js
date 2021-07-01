@@ -20,7 +20,7 @@ const Buttons__Add = ({ handleClick, className, label, color, text, rtl }) => {
             onClick={handleClick}
             className={`${rtl ? handleRowReverse(rtl).flex : ''} ${
                 className || ''
-            } absolute -bottom-2.5 transform translate-y-1/2 text-gray-800 flex justify-center items-center rounded-full focus:outline-none hover:bg-gray-800 hover:text-white bg-${
+            } absolute -bottom-2.5 transform-gpu translate-y-1/2 text-gray-800 flex justify-center items-center rounded-full focus:outline-none hover:bg-gray-800 hover:text-white bg-${
                 color || 'kn-primary'
             } text-${text || 'white'}  h-12 px-6 uppercase font-medium  ${
                 rtl ? 'text-lg ' : 'tracking-wider text-sm'
@@ -146,7 +146,7 @@ const Buttons__Close = ({ rtl = false, handleClose, type = 'normal' }) => {
     };
     return (
         <div
-            className={`absolute transform ${posClass[type].pos}  rounded-full flex z-50  `}
+            className={`absolute transform-gpu ${posClass[type].pos}  rounded-full flex z-50  `}
         >
             <button
                 onClick={handleClose}

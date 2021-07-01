@@ -3,7 +3,7 @@ import React from 'react';
 const TagCard = ({ data, containerClass }) => {
     return (
         <div className={`my-3 pb-16 px-2 lg:my-4 lg:px-2 ${containerClass} `}>
-            <div className='overflow-hidden rounded-xl group relative  border-transparent hover:border-green ring-2 ring-transparent hover:ring-green-400 hover:shadow-2xl-green-600 transition-all duration-300 ease-in-out ring-offset-2'>
+            <div className='overflow-hidden rounded-xl group relative border-transparent hover:border-green ring-2 ring-transparent hover:ring-green-400 hover:shadow-2xl-green-600 ring-offset-2 transition-all duration-300 ease-in-out '>
                 <a href={data.url} className=''>
                     <img
                         alt='Placeholder'

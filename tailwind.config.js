@@ -98,6 +98,8 @@ module.exports = {
             '2xl-green-500-top': '0 -11px 20px -6px rgba(30, 208, 151,  0.5)',
             '2xl-green-400-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600-top': '0 -25px 30px -12px rgba(0, 128, 87,  0.4)',
+            '6xl-green-center': '0 15px 50px 0 rgba(0, 128, 87,  0.6)',
+            'xl-green':'0 6px 20px  rgba(0, 128, 87,  0.4)',
             cards: '0 25px 50px -12px rgba(0, 128, 87,  0.14)',
             images: '0 25px 40px -12px rgba(70, 128, 87,  0.4)',
             'cards-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.14)',

@@ -17,7 +17,7 @@ const ResultCard = ({ data, containerClass }) => {
         <div
             className={`my-3 px-2 w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 lg:my-4 lg:px-2 ${containerClass}`}
         >
-            <div className='group relative bg-transparent transition-all duration-300 transform overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white'>
+            <div className='group relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white'>
                 <KreatorBadge author={data.authorId} baseUrl={baseUrl} />
                 <div>
                     <a href={`${baseUrl.experiencePage}/${data.id}`}>
@@ -28,7 +28,7 @@ const ResultCard = ({ data, containerClass }) => {
                         />
                     </a>
                 </div>
-                <div className='flex justify-around w-full transform -mt-4 px-4'>
+                <div className='flex justify-around w-full transform-gpu -mt-4 px-4'>
                     <div className='uppercase rounded-full h-8 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6'>
                         {data.type}
                     </div>

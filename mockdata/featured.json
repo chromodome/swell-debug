@@ -1,19 +1,65 @@
 {
     "featured": [
         {
-            "type": "experience",
+            "id": "featured_001",
+            "collection": "experience",
             "label": "digital experience",
             "title": "Featured Experience of the week",
             "subtitle": "Sail to the edge of the world",
             "description": "The ultimate adventure of a lifetime. Take a 14 day trip to Antartica. You will never be the same.",
             "author": {
-                "avatar": "https://ucarecdn.com/4f294351-e1ae-44c9-8b23-0b3ae662a53b/photo14985036037228de8df0beb96.jpg",
+                "avatar": "https://ucarecdn.com/2503b127-354a-449e-8bf1-3d818a5b5172/0PqgkSEK.jpg",
                 "name": "Francesco de la Franca",
-                "handle": "francesco_franca"
+                "handle": "francesco.de.la.franca"
             },
-            "image": "https://ucarecdn.com/9bae8ab1-fe77-41a3-a69c-58d16a8db543/derekoyenm5r2FFo8NJMunsplash.jpg",
-            "bgimage": "https://ucarecdn.com/a2d79e9e-1fd3-443a-b0d2-df3ac26dd79c/photo14436949100043567042689f5.jpg",
-            "url": "/experience/10001"
+            "btn": {
+                "icon": "las la-arrow-right",
+                "label": "Take me there",
+                "url": "/experience/10001"
+            },
+            "image": "",
+            "bgImage": "https://ucarecdn.com/9bae8ab1-fe77-41a3-a69c-58d16a8db543/derekoyenm5r2FFo8NJMunsplash.jpg",
+            "darkMode": ""
+            
+        },
+        {
+            "id": "featured_002",
+            "collection": "showcase",
+            "label": "",
+            "title": "Konnect",
+            "subtitle": "Go where your heroes have gone",
+            "description": "",
+            "author": "",
+            "btn": {
+                "icon": "las la-play",
+                "label": "Konnect: the story",
+                "url": "/experience/10001"
+            },
+            "image": "",
+            "bgImage": "https://ucarecdn.com/39237123-ad58-4255-8c3b-4a281499ef17/whatiskonnect.png",
+            "darkMode": "true"
+        },
+        {
+            "id": "featured_003",
+            "collection": "experience",
+            "label": "digital experience",
+            "title": "Featured Experience of the week",
+            "subtitle": "Follow the footsteps of Luke skywalker",
+            "description": "Go see all shooting locations of the first Star wars trilogy, and get some behind the scenes access",
+            "author": {
+                "avatar": "https://ucarecdn.com/2503b127-354a-449e-8bf1-3d818a5b5172/0PqgkSEK.jpg",
+                "name": "Francesco de la Franca",
+                "handle": "80sChild"
+            },
+            "btn": {
+                "icon": "las la-arrow-right",
+                "label": "Take me there",
+                "url": "/experience/10001"
+            },
+            "image": "",
+            "bgImage": "https://ucarecdn.com/92f1d209-90f8-42f1-b4b7-b43a1d3e19cc/photo158727948479661a264afc18b.jpg",
+            "darkMode": "true"
+            
         }
     ]
 }

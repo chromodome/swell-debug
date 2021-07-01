@@ -31,13 +31,13 @@ const Pill__Icon = ({ icon, size }) => {
 const Pill__Logo = ({ noshadow }) => {
     return (
         <div
-            className={`w-8 h-12 flex flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-green-300 via-green-400 to-green-500 ${
+            className={`w-8 h-11 flex flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-green-300 via-green-400 to-green-500 ${
                 noshadow ? '' : 'shadow-2xl-green-500'
             }`}
         >
             <KnIcons
                 icon='KnLogo2'
-                size='26'
+                size='22'
                 className='text-gray-600 mix-blend-multiply'
             />
         </div>

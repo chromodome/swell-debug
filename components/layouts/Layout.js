@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Header from '@/layouts/Header';
 import Footer from '@/layouts/Footer';
 import Showcase from '@/sections/Showcase';
+import TopBar from '@/blocks/TopBar';
 
 export default function Layout({ title, keywords, description, children }) {
     const router = useRouter();
@@ -16,8 +17,7 @@ export default function Layout({ title, keywords, description, children }) {
             </Head>
 
             <Header />
-
-            {router.pathname === '/' && <Showcase pill />}
+            <TopBar />
 
             <div className='overflow-x-hidden'>{children}</div>
             <Footer />

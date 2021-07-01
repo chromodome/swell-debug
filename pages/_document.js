@@ -42,7 +42,7 @@ class MyDocument extends Document {
                     />
                     <script async src='/assets/scripts/uploadcare.js' />
                 </Head>
-                <body>
+                <body className='bg-gray-100'>
                     <Main />
                     <NextScript />
                 </body>

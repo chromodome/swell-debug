@@ -1,12 +1,15 @@
 import React from 'react';
 import {
+    Search,
     Heart,
     LayoutGrid,
     Inbox,
     Grid,
     User,
+    UserPlus,
     DollarSign,
     LogOut,
+    LogIn,
     HelpCircle,
     Sliders,
     Settings,
@@ -26,13 +29,16 @@ const IconsLucide = ({ icon, size, color, strokeWidth = '2' }) => {
 };
 
 const Map = {
+    Search,
     Heart,
     LayoutGrid,
     Inbox,
     Grid,
     User,
+    UserPlus,
     DollarSign,
     LogOut,
+    LogIn,
     HelpCircle,
     Sliders,
     Settings,

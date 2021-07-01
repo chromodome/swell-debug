@@ -1,8 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ResultCard from '../blocks/ResultCard';
 import SectionTitle from '@/blocks/SectionTitle';
+import ButtonLoad from '@/blocks/ButtonLoad';
 
 const GridList = ({ sectionTitles, data }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const handleClick = () => {
+        setIsLoading(!isLoading);
+    };
+
     return (
         <>
             <div className=' mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40'>
@@ -12,6 +18,11 @@ const GridList = ({ sectionTitles, data }) => {
                         return <ResultCard key={item.id} data={item} />;
                     })}
                 </div>
+                <ButtonLoad
+                    handleClick={handleClick}
+                    isLoading={isLoading}
+                    label='Load More'
+                />
             </div>
         </>
     );

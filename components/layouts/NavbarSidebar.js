@@ -6,6 +6,7 @@ import translations from '@/constants/translations';
 import Icons from '@/blocks/Icons';
 import { handleRowReverse } from 'helpers/FEutils';
 import Avatar from '@/specialty/Avatar';
+import IconsLucide from '@/blocks/IconsLucide';
 
 const NavbarSidebar = ({ children }) => {
     const { user, rtl, lang, navIsOpen, toggleNav, logout } =
@@ -14,17 +15,17 @@ const NavbarSidebar = ({ children }) => {
     return (
         <>
             <div
-                style={{ zIndex: 51 }}
+                style={{ zIndex: 302 }}
                 className={`fixed inset-0  ${
                     navIsOpen ? '' : 'pointer-events-none'
                 }`}
                 onClick={() => toggleNav(!navIsOpen)}
             ></div>
             <div
-                style={{ zIndex: 52 }}
+                style={{ zIndex: 303 }}
                 className={`fixed inset-y-0 ${
                     handleRowReverse(rtl).right
-                }-0 w-full md:w-96 bg-white  shadow-images transition duration-300 ease-in-out transform ${
+                }-0 w-full md:w-96 bg-white  shadow-images transition duration-300 ease-in-out transform-gpu ${
                     navIsOpen
                         ? 'translate-x-0'
                         : handleRowReverse(rtl).menuTranslateReverse +
@@ -57,8 +58,15 @@ const NavbarSidebar = ({ children }) => {
                                     handleRowReverse(rtl).ml
                                 }-12 flex items-center`}
                             >
-                                <Avatar user={user} size={50} />
-                                <div className='px-2'>{user.handle}</div>
+                                {user ? (
+                                    <Avatar user={user} size={50} />
+                                ) : (
+                                    <IconsLucide icon='User' />
+                                )}
+
+                                <div className='px-2'>
+                                    {user ? user.handle : 'Guest'}
+                                </div>
                             </div>
                             <button
                                 onClick={() => toggleNav(!navIsOpen)}
@@ -78,11 +86,20 @@ const NavbarSidebar = ({ children }) => {
                         </div>
                     </div>
                     <div
-                        className={`border-t border-gray-200 pt-8 ${
+                        className={`border-t border-b border-gray-200 pt-8 pb-8 ${
                             handleRowReverse(rtl).rtl
                         }`}
                     >
                         {children}
+                    </div>
+                    <div className='px-12 flex items-center mt-8'>
+                        <a
+                            target='_blank'
+                            href='https://kreator.viakonnect.com'
+                            className='flex-1 py-3 px-4 rounded-full flex items-center justify-center border-2 border-green-400  hover:border-green-400 ring-4 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400'
+                        >
+                            Become a kreator
+                        </a>
                     </div>
                 </nav>
             </div>

@@ -2,10 +2,9 @@ import Link from 'next/link';
 import Layout from '@/layouts/Layout';
 import { useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
-
+import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/components/sections/SliderExperiences';
 import SliderInterests from '@/sections/SliderInterests';
-import FeaturedContent from '@/sections/FeaturedContent';
 import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
@@ -23,6 +22,11 @@ export default function HomePage({
     const { lang } = useContext(AuthContext);
     return (
         <Layout>
+            <Showcase
+                pill='bottom'
+                data={dataFeatured.find((one) => one.collection == 'showcase')}
+            />
+
             <SliderExperiences
                 sectionTitles={translations[lang].sections.newThisMonth}
                 data={dataNewThisMonth}
@@ -31,7 +35,14 @@ export default function HomePage({
                 sectionTitles={translations[lang].sections.wanderByInterest}
                 data={dataInterests}
             />
-            <FeaturedContent data={dataFeatured} />
+            <Showcase
+                pill='top'
+                data={
+                    dataFeatured.filter(
+                        (one) => one.collection == 'experience'
+                    )[1]
+                }
+            />
             <SliderDestinations
                 sectionTitles={translations[lang].sections.wanderByDestination}
                 data={dataDestinations}

@@ -9,6 +9,10 @@ const langData = {
             welcomeBack: 'Welcome Back',
         },
 
+        navbar: {
+             search: "Find your experience"
+        },
+
         menu: {
             messages: {
                 title: 'Messages',
@@ -38,7 +42,7 @@ const langData = {
                 title: 'Sign up',
                 icon: 'LogOut',
             },
-            signup: {
+            signin: {
                 title: 'Sign in',
                 icon: 'LogOut',
             },

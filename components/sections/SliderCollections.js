@@ -20,7 +20,7 @@ const SliderCollections = ({ sectionTitles, data }) => {
             >
                 <img
                     data-blink-src='https://ucarecdn.com/a2d79e9e-1fd3-443a-b0d2-df3ac26dd79c/photo14436949100043567042689f5.jpg'
-                    className='object-cover w-full h-full filter blur-2xl'
+                    className='object-cover w-full h-full filter blur-2xl transform scale-110'
                 />
             </div>
             <div

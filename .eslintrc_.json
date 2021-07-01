@@ -1,0 +1,7 @@
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "react/jsx-pascal-case": "off"
+    },
+    "parser": "babel-eslint"
+}
