@@ -1,16 +1,16 @@
 const { experiences } = require('@/mockdata/experiences.json');
 
 export default (req, res) => {
-    const exp = experiences.filter(
-        (experience) => experience.slug === req.query.slug
+    const experience = experiences.filter(
+        (experience) => experience.id === req.query.id
     );
 
     if (req.method === 'GET') {
-        res.status(200).json(exp);
+        res.status(200).json(experience);
     } else {
         res.setHeader('Allow', ['GET']);
         res.status(405).json({
-            message: `Method ${req.method} is not allowed`,
+            message: `Method ${req.method} is not allowed`
         });
     }
 };

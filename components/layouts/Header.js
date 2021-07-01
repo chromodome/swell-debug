@@ -50,28 +50,26 @@ const Header = ({}) => {
                     handleRowReverse(rtl).rtl
                 } fixed bottom-0 md:top-0 inset-x-0 h-16 md:h-20 bg-white shadow-cards-top md:shadow-cards flex items-center transform-gpu duration-300 ${
                     showHeader ? 'translate-y-0' : '-translate-y-24'
-                }`}
-            >
-                <div className='flex flex-1 flex-row justify-between items-center h-full '>
-                    <div className='flex flex-shrink-0  lg:w-1/3'>
+                }`}>
+                <div className="flex flex-1 flex-row justify-between items-center h-full ">
+                    <div className="flex flex-shrink-0  lg:w-1/3">
                         <div
                             className={`flex  items-center ${
                                 rtl
                                     ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
                                     : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
-                            } gap-3 ${handleRowReverse(rtl).flex}`}
-                        >
-                            <img src='/assets/media/kn_logoicon.svg' />
+                            } gap-3 ${handleRowReverse(rtl).flex}`}>
+                            <img src="/assets/media/kn_logoicon.svg" />
                             <img
-                                className='hidden md:block'
-                                src='/assets/media/kn_logotext.svg'
+                                className="hidden md:block"
+                                src="/assets/media/kn_logotext.svg"
                             />
                         </div>
                     </div>
                     <Search lang={lang} rtl={rtl} />
-                    <div className='flex justify-end items-center h-full  lg:w-1/3'>
-                        <div className='hidden lg:flex items-center '>
-                            <div className='hidden xl:block mx-4 text-sm'>
+                    <div className="flex justify-end items-center h-full  lg:w-1/3">
+                        <div className="hidden lg:flex items-center ">
+                            <div className="hidden xl:block mx-4 text-sm">
                                 {user
                                     ? `${translations[lang].messages.hello} ${user.firstname}`
                                     : `Guest`}
@@ -79,7 +77,7 @@ const Header = ({}) => {
                             {user ? (
                                 <Avatar user={user} />
                             ) : (
-                                <IconsLucide icon='User' />
+                                <IconsLucide icon="User" />
                             )}
                         </div>
                         <LangList />
@@ -89,13 +87,11 @@ const Header = ({}) => {
                             className={`focus:outline-none w-20 
                                flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-green-400 transition-all duration-200 hover:bg-gray-900 hover:text-white ${
                                    rtl ? 'rounded-r-lg' : 'rounded-l-lg'
-                               }`}
-                        >
+                               }`}>
                             <i
                                 className={`${
                                     rtl ? 'ri-menu-2-line' : 'ri-menu-3-line'
-                                }`}
-                            ></i>
+                                }`}></i>
                         </button>
                     </div>
                 </div>
@@ -105,35 +101,35 @@ const Header = ({}) => {
                     <>
                         <NavbarItem
                             label={translations[lang].menu.messages.title}
-                            icon='Inbox'
+                            icon="Inbox"
                             link={`${NEXT_URL}/c/messages`}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.myPurchases.title}
-                            icon='LayoutGrid'
-                            link={`${NEXT_URL}/c/experiences`}
+                            icon="LayoutGrid"
+                            link={`${NEXT_URL}/experiences`}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.myFavourites.title}
-                            icon='Heart'
-                            link={`#`}
+                            icon="Heart"
+                            link={`${NEXT_URL}/favourites`}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.profile.title}
-                            icon='User'
-                            link={`${NEXT_URL}/c/profile`}
+                            icon="User"
+                            link={`${NEXT_URL}/profile`}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.helpCenter.title}
-                            icon='HelpCircle'
+                            icon="HelpCircle"
                             link={`http://academy.viakonnect.com`}
                             handleClick={() => console.log('hello')}
                             handleClick={toggleNav}
@@ -141,8 +137,8 @@ const Header = ({}) => {
                         />
                         <NavbarItem
                             label={translations[lang].menu.signout.title}
-                            icon='LogOut'
-                            link='#'
+                            icon="LogOut"
+                            link="#"
                             handleClick={() => console.log('hello')}
                             handleClick={toggleNav}
                             rtl={rtl}
@@ -152,23 +148,23 @@ const Header = ({}) => {
                     <>
                         <NavbarItem
                             label={translations[lang].menu.signin.title}
-                            icon='LogIn'
-                            link='#'
+                            icon="LogIn"
+                            link="#"
                             handleClick={() => console.log('hello')}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.signup.title}
-                            icon='UserPlus'
-                            link='#'
+                            icon="UserPlus"
+                            link="#"
                             handleClick={() => console.log('hello')}
                             handleClick={toggleNav}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.helpCenter.title}
-                            icon='HelpCircle'
+                            icon="HelpCircle"
                             link={`http://academy.viakonnect.com`}
                             handleClick={() => console.log('hello')}
                             handleClick={toggleNav}

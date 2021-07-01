@@ -1,7 +1,6 @@
-import Link from 'next/link';
-import Layout from '@/layouts/Layout';
 import { useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
+import Layout from '@/layouts/Layout';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/components/sections/SliderExperiences';
 import SliderInterests from '@/sections/SliderInterests';
@@ -10,27 +9,39 @@ import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { API_URL } from '@/config/index';
+import ButtonsRow from '@/components/blocks/ButtonsRow';
+import Row from '@/sections/Row';
 
-export default function HomePage({
+export default function SearchPage({
     dataNewThisMonth,
     dataInterests,
     dataDestinations,
     dataFeatured,
     dataCollections,
-    dataTrending
+    dataTrending,
+    dataExperinces
 }) {
     const { lang } = useContext(AuthContext);
+
     return (
         <Layout>
-            <Showcase
-                pill="bottom"
-                data={dataFeatured.find((one) => one.collection == 'showcase')}
-            />
+            <Row classes="mt-20">
+                <ButtonsRow
+                    type="selectable"
+                    items={['All Types', 'Guided', 'Digital']}
+                />
+            </Row>
+            <Row classes="mt-10">
+                <h3 className="text-3xl">
+                    We found {dataExperinces.length} experiences
+                </h3>
+                <ButtonsRow
+                    type="exception"
+                    items={['France', 'Freestyle trekking', '7 days']}
+                />
+            </Row>
 
-            <SliderExperiences
-                sectionTitles={translations[lang].sections.newThisMonth}
-                data={dataNewThisMonth}
-            />
+            <GridList data={dataExperinces} />
             <SliderInterests
                 sectionTitles={translations[lang].sections.wanderByInterest}
                 data={dataInterests}
@@ -52,15 +63,15 @@ export default function HomePage({
                 data={dataCollections}
                 boxed
             />
-            <GridList
+            <SliderExperiences
                 sectionTitles={translations[lang].sections.trendingThisWeek}
-                data={dataTrending}
+                data={dataNewThisMonth}
             />
         </Layout>
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const res1 = await fetch(`${API_URL}/api/experiences`);
     const dataNewThisMonth = await res1.json();
 
@@ -86,8 +97,8 @@ export async function getStaticProps() {
             dataDestinations,
             dataFeatured,
             dataCollections,
-            dataTrending
-        },
-        revalidate: 1
+            dataTrending,
+            dataExperinces: dataTrending
+        }
     };
 }
