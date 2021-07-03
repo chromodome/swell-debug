@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Layout from '@/layouts/Layout';
 import { useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
@@ -26,7 +25,6 @@ export default function HomePage({
                 pill="bottom"
                 data={dataFeatured.find((one) => one.collection == 'showcase')}
             />
-
             <SliderExperiences
                 sectionTitles={translations[lang].sections.newThisMonth}
                 data={dataNewThisMonth}

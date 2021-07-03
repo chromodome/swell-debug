@@ -6,7 +6,7 @@ const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
     const [viewportRef, embla] = useEmblaCarousel({
         slidesToScroll: scrollSlides,
         skipSnaps: false,
-        loop: loop,
+        loop: loop
     });
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
@@ -26,8 +26,8 @@ const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
     }, [embla, onSelect]);
 
     return (
-        <div className=''>
-            <div className=''>
+        <div className="">
+            <div className="">
                 <Buttons__GroupNextPrev
                     nextEnabled={nextBtnEnabled}
                     nextAction={scrollNext}
@@ -39,9 +39,9 @@ const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
                 />
             </div>
 
-            <div className='embla'>
-                <div className='embla__viewport' ref={viewportRef}>
-                    <div className='embla__container'>
+            <div className="embla">
+                <div className="embla__viewport" ref={viewportRef}>
+                    <div className="embla__container">
                         {/* {slides.map((index) => (
                             <div className='embla__slide' key={index}>
                                 <div className='embla__slide__inner'>

@@ -33,7 +33,9 @@ export default function SearchPage({
             </Row>
             <Row classes="mt-10">
                 <h3 className="text-3xl">
-                    We found {dataExperinces.length} experiences
+                    {dataExperinces.length > 0
+                        ? `We found ${dataExperinces.length} experiences`
+                        : `We didn't found any experience. `}
                 </h3>
                 <ButtonsRow
                     type="exception"

@@ -1,5 +1,6 @@
 import Icons from '@/blocks/Icons';
 import { handleRowReverse, urlArrLength } from '@/helpers/FEutils';
+import { useRouter } from 'next/router';
 
 const Buttons__Help = ({ handleClick, className, label, color, text }) => {
     return (
@@ -62,8 +63,13 @@ const Buttons__NextPrev = ({
     icon = 'CHEVRON',
     handleClick,
     disabled = false,
-    rtl = false
+    rtl = false,
+    label = '',
+    buttonClasses = '',
+    goBackBtn = false
 }) => {
+    const router = useRouter();
+
     const pointing = next
         ? !rtl
             ? 'RIGHT'
@@ -79,13 +85,32 @@ const Buttons__NextPrev = ({
     return (
         <button
             disabled={disabled}
-            onClick={handleClick}
-            className={`${disabledClass} focus:outline-none h-9 w-9 border-2  rounded-full flex items-center justify-center`}>
-            <Icons
-                iName={`ARROW_${pointing}_${icon}`.toUpperCase()}
-                // iName={`CLOSE`}
-                size="2xl"
-            />
+            onClick={() => {
+                if (goBackBtn) {
+                    return router.back();
+                }
+                handleClick();
+            }}
+            className={`duration-300 ${disabledClass} ${buttonClasses} focus:outline-none h-9 w-9 border-2  rounded-full flex items-center justify-center`}>
+            {next ? (
+                <>
+                    {label}
+                    <Icons
+                        iName={`ARROW_${pointing}_${icon}`.toUpperCase()}
+                        iClasses={label ? 'ml-2' : ''}
+                        size="2xl"
+                    />
+                </>
+            ) : (
+                <>
+                    <Icons
+                        iName={`ARROW_${pointing}_${icon}`.toUpperCase()}
+                        size="2xl"
+                        iClasses={label ? 'mr-2' : ''}
+                    />
+                    {label}
+                </>
+            )}
         </button>
     );
 };
@@ -174,9 +199,32 @@ const Button__Selectable = ({
     );
 };
 
-const Button = ({ icon, children, iconClasses, wrapperClasses }) => {
+const Button = ({
+    icon,
+    children,
+    iconClasses,
+    wrapperClasses,
+    rounded = 'none',
+    type = 'default'
+}) => {
+    const typeClasses = {
+        default:
+            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center hover:text-black hover:bg-kn-white bg-gray-800 border-gray-800 hover:border-gray-800 text-white',
+        primary: [],
+        secondary: [],
+        outlined:
+            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white'
+    };
+
+    const roundedClasses = {
+        none: [],
+        lg: 'rounded-lg',
+        full: 'rounded-full'
+    };
+
     return (
-        <button className={wrapperClasses}>
+        <button
+            className={`transition-colors duration-300 ${wrapperClasses} ${roundedClasses[rounded]}  ${typeClasses[type]}`}>
             {children}
             {icon ? (
                 <Icons

@@ -5,7 +5,7 @@ const colors = require('tailwindcss/colors');
 module.exports = {
     purge: [
         './pages/**/*.{js,ts,jsx,tsx}',
-        './components/**/*.{js,ts,jsx,tsx}',
+        './components/**/*.{js,ts,jsx,tsx}'
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
@@ -20,7 +20,7 @@ module.exports = {
             '2xl': '1rem',
             '3xl': '1.5rem',
             '4xl': '2rem',
-            full: '9999px',
+            full: '9999px'
         },
 
         fontFamily: {
@@ -30,7 +30,7 @@ module.exports = {
             display: ['Oswald'],
             body: ['Open Sans'],
             'ar-display': ['Tajawal'],
-            'ar-body': ['Tajawal'],
+            'ar-body': ['Tajawal']
         },
         fontSize: {
             xxs: '0.65rem',
@@ -45,7 +45,7 @@ module.exports = {
             '4xl': '2.25rem',
             '5xl': '3rem',
             '6xl': '4rem',
-            '7xl': '5rem',
+            '7xl': '5rem'
         },
         letterSpacing: {
             tightest: '-.075em',
@@ -54,7 +54,7 @@ module.exports = {
             normal: '0',
             wide: '.1em',
             wider: '.2em',
-            widest: '.3em',
+            widest: '.3em'
         },
         screens: {
             // => @media (min-width: 390px) { ... }
@@ -76,7 +76,7 @@ module.exports = {
             xl: '1280px',
             // => @media (min-width: 1280px) { ... }
 
-            '2xl': '1536px',
+            '2xl': '1536px'
             // => @media (min-width: 1536px) { ... }
         },
         boxShadow: {
@@ -99,7 +99,7 @@ module.exports = {
             '2xl-green-400-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600-top': '0 -25px 30px -12px rgba(0, 128, 87,  0.4)',
             '6xl-green-center': '0 15px 50px 0 rgba(0, 128, 87,  0.6)',
-            'xl-green':'0 6px 20px  rgba(0, 128, 87,  0.4)',
+            'xl-green': '0 6px 20px  rgba(0, 128, 87,  0.4)',
             cards: '0 25px 50px -12px rgba(0, 128, 87,  0.14)',
             images: '0 25px 40px -12px rgba(70, 128, 87,  0.4)',
             'cards-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.14)',
@@ -109,11 +109,11 @@ module.exports = {
             'over-image-green':
                 '0 15px 30px 0 #328a6ec2, 0 15px 60px 0 #328a6ec2',
             inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-            none: 'none',
+            none: 'none'
         },
         extend: {
             screens: {
-                touch: { raw: '(hover: none)' },
+                touch: { raw: '(hover: none)' }
                 // => @media (orientation: portrait) { ... }
             },
             colors: {
@@ -144,7 +144,7 @@ module.exports = {
 
                 cyan: colors.cyan,
                 'light-blue': colors.sky,
-                teal: colors.teal,
+                teal: colors.teal
             },
             maxHeight: {
                 'screen-10': '10vh',
@@ -163,7 +163,7 @@ module.exports = {
                 'screen-80': '80vh',
                 'screen-90': '90vh',
                 'screen-95': '95vh',
-                'screen-100': '100vh',
+                'screen-100': '100vh'
             },
             maxWidth: {
                 'screen-10': '10vw',
@@ -184,7 +184,7 @@ module.exports = {
                 'screen-95': '95vw',
                 'screen-100': '100vw',
                 'parent-120': '120%',
-                'parent-150': '150%',
+                'parent-150': '150%'
             },
             height: {
                 128: '32rem',
@@ -209,7 +209,7 @@ module.exports = {
                 'screen-95': '95vh',
                 'screen-100': '100vh',
                 'screen-150': '150vh',
-                'screen-200': '200vh',
+                'screen-200': '200vh'
             },
             width: {
                 128: '32rem',
@@ -233,9 +233,9 @@ module.exports = {
                 'screen-95': '95vw',
                 'screen-100': '100vw',
                 'parent-120': '120%',
-                'parent-150': '150%',
-            },
-        },
+                'parent-150': '150%'
+            }
+        }
     },
     variants: {
         width: ['responsive', 'hover', 'focus'],
@@ -245,8 +245,8 @@ module.exports = {
             ringColor: ['group-hover', 'hover', 'active'],
             ringOpacity: ['group-hover', 'hover', 'active'],
             margin: ['last'],
-            padding: ['last'],
-        },
+            padding: ['last']
+        }
     },
-    plugins: [require('tailwind-scrollbar')],
+    plugins: [require('tailwind-scrollbar')]
 };

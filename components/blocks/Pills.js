@@ -50,9 +50,10 @@ const Pill__Title = ({ title }) => {
     );
 };
 
-const Pill__Experience = ({ label = 'Digital' }) => {
+const Pill__Experience = ({ label = 'Digital', classes = '' }) => {
     return (
-        <div className="uppercase rounded-full h-8 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6">
+        <div
+            className={`uppercase rounded-full h-8 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6 ${classes}`}>
             {label}
         </div>
     );

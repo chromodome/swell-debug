@@ -7,13 +7,11 @@ const Icons = ({ iName, iClasses, size }) => {
                 iClasses || iconConsts.icons[iName.toUpperCase()]?.classAdj
             }  text-${
                 size ? size : iconConsts.icons[iName.toUpperCase()]?.size
-            }`}
-        >
+            }`}>
             <i
                 className={`text-center  ${
                     iconConsts.icons[iName.toUpperCase()]?.icon || 'las la-ban'
-                }`}
-            ></i>
+                }`}></i>
         </div>
     );
 };
