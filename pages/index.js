@@ -9,7 +9,6 @@ import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { API_URL } from '@/config/index';
-import Modal from '@/blocks/Modal/Modal';
 
 export default function HomePage({
     dataNewThisMonth,
@@ -23,7 +22,6 @@ export default function HomePage({
 
     return (
         <Layout>
-            <Modal />
             <Showcase
                 pill="bottom"
                 data={dataFeatured.find((one) => one.collection == 'showcase')}
