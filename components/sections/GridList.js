@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ResultCard from '../blocks/ResultCard';
-import SectionTitle from '@/blocks/SectionTitle';
-import ButtonLoad from '@/blocks/ButtonLoad';
+import ResultCard from '../blocks/Card/ResultCard';
+import SectionTitle from '@/blocks/Title/SectionTitle';
+import ButtonLoad from '@/blocks/Button/ButtonLoad';
 
 const GridList = ({ sectionTitles, data }) => {
     const [isLoading, setIsLoading] = useState(false);

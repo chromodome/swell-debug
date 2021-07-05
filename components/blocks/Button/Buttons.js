@@ -1,4 +1,4 @@
-import Icons from '@/blocks/Icons';
+import Icons from '@/blocks/Icon/Icons';
 import { handleRowReverse, urlArrLength } from '@/helpers/FEutils';
 import { useRouter } from 'next/router';
 
@@ -66,7 +66,8 @@ const Buttons__NextPrev = ({
     rtl = false,
     label = '',
     buttonClasses = '',
-    goBackBtn = false
+    goBackBtn = false,
+    goToPage = null
 }) => {
     const router = useRouter();
 
@@ -82,12 +83,16 @@ const Buttons__NextPrev = ({
     const disabledClass = disabled
         ? 'border-gray-300 text-gray-300 pointer-events-none'
         : 'text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white';
+
     return (
         <button
             disabled={disabled}
             onClick={() => {
                 if (goBackBtn) {
                     return router.back();
+                }
+                if (goToPage) {
+                    return router.push(goToPage);
                 }
                 handleClick();
             }}
@@ -166,7 +171,7 @@ const Buttons__Close = ({ rtl = false, handleClose, type = 'normal' }) => {
     };
     return (
         <div
-            className={`absolute transform-gpu ${posClass[type].pos}  rounded-full flex z-50  `}>
+            className={`absolute transform-gpu ${posClass[type].pos}  rounded-full flex z-30  `}>
             <button
                 onClick={handleClose}
                 className={`border-2  border-transparent rounded-full ${posClass[type].btn}  focus:outline-none  flex items-center justify-center`}>
@@ -213,7 +218,8 @@ const Button = ({
         primary: [],
         secondary: [],
         outlined:
-            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white'
+            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white',
+        custom: []
     };
 
     const roundedClasses = {

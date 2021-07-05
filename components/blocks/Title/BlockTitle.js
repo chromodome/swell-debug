@@ -6,7 +6,7 @@ import React from 'react';
  * @returns
  */
 
-const Title = ({ text, classes, component = 1 }) => {
+const BlockTitle = ({ text, classes, component = 1 }) => {
     const TitleComponent = `h${component}`;
 
     return (
@@ -17,4 +17,4 @@ const Title = ({ text, classes, component = 1 }) => {
     );
 };
 
-export default Title;
+export default BlockTitle;

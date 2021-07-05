@@ -9,6 +9,7 @@ import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { API_URL } from '@/config/index';
+import Modal from '@/blocks/Modal/Modal';
 
 export default function HomePage({
     dataNewThisMonth,
@@ -19,8 +20,10 @@ export default function HomePage({
     dataTrending
 }) {
     const { lang } = useContext(AuthContext);
+
     return (
         <Layout>
+            <Modal />
             <Showcase
                 pill="bottom"
                 data={dataFeatured.find((one) => one.collection == 'showcase')}
@@ -58,7 +61,7 @@ export default function HomePage({
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const res1 = await fetch(`${API_URL}/api/experiences`);
     const dataNewThisMonth = await res1.json();
 
@@ -85,7 +88,7 @@ export async function getStaticProps() {
             dataFeatured,
             dataCollections,
             dataTrending
-        },
-        revalidate: 1
+        }
+        // revalidate: 1
     };
 }

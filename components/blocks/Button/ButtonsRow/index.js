@@ -1,6 +1,6 @@
 import React from 'react';
-import Exception from '../ButtonsRow/Exception';
-import Selectable from '../ButtonsRow/Selectable';
+import Exception from './Exception';
+import Selectable from './Selectable';
 
 /**
  * ButtonsRow

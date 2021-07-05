@@ -4,7 +4,7 @@ import Search from '@/blocks/Search';
 import LangList from '@/blocks/LangList';
 import Avatar from '@/specialty/Avatar';
 import NavbarSidebar from '@/layouts/NavbarSidebar';
-import IconsLucide from '@/blocks/IconsLucide';
+import IconsLucide from '@/blocks/Icon/IconsLucide';
 import NavbarItem from '@/blocks/NavbarItem';
 
 import AuthContext from '@/context/AuthContext';

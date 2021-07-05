@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useEmblaCarousel } from 'embla-carousel/react';
-import { Buttons__GroupNextPrev } from '@/blocks/Buttons';
+import { Buttons__GroupNextPrev } from '@/blocks/Button/Buttons';
 
 const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
     const [viewportRef, embla] = useEmblaCarousel({
@@ -34,7 +34,7 @@ const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
                     prevEnabled={prevBtnEnabled}
                     prevAction={scrollPrev}
                     // isPrev={!prevBtnState}
-                    className={`z-50 touch:hidden`}
+                    className={`z-30 touch:hidden`}
                     // rtl={rtl}
                 />
             </div>

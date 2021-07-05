@@ -1,6 +1,6 @@
 import React from 'react';
-import Title from '@/blocks/Title';
-import Icons from '@/blocks/Icons';
+import BlockTitle from '@/blocks/Title/BlockTitle';
+import Icons from '@/blocks/Icon/Icons';
 
 /**
  *
@@ -11,8 +11,8 @@ import Icons from '@/blocks/Icons';
 const ListWithIcon = ({ title = '', items = [], cols = 2 }) => {
     const itemsLength = items.length;
     return (
-        <div>
-            <Title text={title} component={3} classes="mb-4" />
+        <div className="px-4">
+            <BlockTitle text={title} component={3} classes="mb-4" />
             <div
                 className={`grid grid-cols-${cols} grid-rows-${Math.round(
                     itemsLength / cols

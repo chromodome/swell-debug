@@ -1,7 +1,7 @@
 import React from 'react';
-import SectionTitle from '@/blocks/SectionTitle';
+import SectionTitle from '@/blocks/Title/SectionTitle';
 import { Pill__Experience } from '@/blocks/Pills';
-import Icons from '@/blocks/Icons';
+import Icons from '@/blocks/Icon/Icons';
 import Avatar from '@/blocks/Avatar';
 
 /**

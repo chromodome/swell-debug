@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import translations from '@/constants/translations';
 import { handleRowReverse } from '@/helpers/FEutils';
-import IconsLucide from '@/blocks/IconsLucide';
+import IconsLucide from '@/blocks/Icon/IconsLucide';
 
 export default function Search({ lang = 'en', rtl }) {
     const [term, setTerm] = useState('');

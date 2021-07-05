@@ -1,4 +1,4 @@
-import Icons from 'components/blocks/Icons';
+import Icons from '@/blocks/Icon/Icons';
 import { handleRowReverse } from 'helpers/FEutils';
 import KnIcons from 'constants/KnIcons';
 

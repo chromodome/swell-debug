@@ -1,4 +1,4 @@
-import ResultCard from '@/blocks/ResultCard';
+import ResultCard from '@/blocks/Card/ResultCard';
 import SliderList from '@/blocks/SliderList';
 
 const breakPoints = {
@@ -6,7 +6,7 @@ const breakPoints = {
     sm: { width: 640, slides: 2 },
     md: { width: 768, slides: 3 },
     lg: { width: 1024, slides: 4 },
-    xl: { width: 1280, slides: 5 },
+    xl: { width: 1280, slides: 5 }
 };
 
 const SliderExperiences = ({ sectionTitles, data }) => {
@@ -18,7 +18,7 @@ const SliderExperiences = ({ sectionTitles, data }) => {
                         <ResultCard
                             key={item.id}
                             data={item}
-                            containerClass='embla__slide x2 md:x3 lg:x4 xl:x5'
+                            containerClass="embla__slide x2 md:x3 lg:x4 xl:x5"
                         />
                     );
                 })}

@@ -3,17 +3,17 @@ import { API_URL } from '@/config/index';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import Row from '@/sections/Row';
-import { Buttons__NextPrev, Button } from '@/blocks/Buttons';
-import ButtonLoad from '@/blocks/ButtonLoad';
+import { Buttons__NextPrev, Button } from '@/blocks/Button/Buttons';
+import ButtonLoad from '@/blocks/Button/ButtonLoad';
 import ExperienceHeader from '@/sections/ExperienceHeader';
 import TileImages from '@/sections/TileImages';
-import BookingWindow from '@/blocks/BookingWindow';
-import Title from '@/blocks/Title';
-import Icons from '@/blocks/Icons';
+import BookingCard from '@/blocks/Card/BookingCard';
+import BuyingCard from '@/blocks/Card/BuyingCard';
+import BlockTitle from '@/blocks/Title/BlockTitle';
 import ListWithIcon from '@/blocks/ListWithIcon';
 import JourneyDaySlider from '@/sections/JourneyDaySlider';
 import SliderExperiences from '@/sections/SliderExperiences';
-import KreatorCard from '@/sections/KreatorCard';
+import KreatorSection from '@/components/sections/KreatorSection';
 
 export default function ExperienceDetail({ data, allExpData }) {
     const router = useRouter();
@@ -60,6 +60,7 @@ export default function ExperienceDetail({ data, allExpData }) {
             </Row>
             <Row classes="mb-12">
                 <TileImages
+                    withGallery
                     url={[
                         featured_image,
                         featured_image,
@@ -68,8 +69,9 @@ export default function ExperienceDetail({ data, allExpData }) {
                     ]}
                 />
             </Row>
+
             <Row classes="grid grid-cols-3 grid-rows-2 gap-3 mb-12">
-                <div className="row-span-1 col-span-2 px-4 mb-12">
+                <div className="row-span-1 col-span-2 mb-12">
                     <ListWithIcon
                         title="What you need to know"
                         items={[
@@ -96,9 +98,23 @@ export default function ExperienceDetail({ data, allExpData }) {
                         ]}
                     />
                 </div>
-                <BookingWindow classes="row-span-2 col-span-1" />
+                <div className="row-span-2 col-span-1">
+                    {type === 'guided' ? (
+                        <BookingCard />
+                    ) : (
+                        <BuyingCard
+                            price="255"
+                            desc="Cras sit amet libero tempus, convallis lectus in,
+                        venenatis dui. Sed sed euismod sem, dictum commodo
+                        ipsum. Cras pellentesque ornare facilisis. Curabitur
+                        finibus laoreet lorem, vitae elementum nisi varius et.
+                        Praesent feugiat laoreet vulputate. Integer id aliquam
+                        dolor."
+                        />
+                    )}
+                </div>
                 <div className="row-span-1 col-span-2 px-4 ">
-                    <Title
+                    <BlockTitle
                         text="Where you'll go and what you'll do"
                         component={3}
                         classes="mb-4"
@@ -130,32 +146,36 @@ export default function ExperienceDetail({ data, allExpData }) {
                     ]}
                 />
             </Row>
-            <Row classes="mb-12">
-                <JourneyDaySlider
-                    slides={[
-                        {
-                            title: 'Gear up',
-                            desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                            img: featured_image,
-                            time: '9.30 AM'
-                        },
-                        {
-                            title: 'Start',
-                            desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                            img: featured_image,
-                            time: '10.00 AM'
-                        },
-                        {
-                            title: 'Start',
-                            desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                            img: featured_image,
-                            time: '10.00 AM'
-                        }
-                    ]}
-                />
-            </Row>
+            {type === 'guided' ? (
+                <Row classes="mb-12">
+                    <JourneyDaySlider
+                        day="1"
+                        data={[
+                            {
+                                title: 'Gear up',
+                                desc: 'Prepare all the gear and start a 300m upward journey with your mates',
+                                img: featured_image,
+                                time: '9.30 AM'
+                            },
+                            {
+                                title: 'Start',
+                                desc: 'Prepare all the gear and start a 300m upward journey with your mates',
+                                img: featured_image,
+                                time: '10.00 AM'
+                            },
+                            {
+                                title: 'Start',
+                                desc: 'Prepare all the gear and start a 300m upward journey with your mates',
+                                img: featured_image,
+                                time: '10.00 AM'
+                            }
+                        ]}
+                    />
+                </Row>
+            ) : null}
+
             <Row classes="mb-12 lg:w-3/4">
-                <Title
+                <BlockTitle
                     text="Special requirements for wanderers"
                     component={3}
                     classes="mb-6"
@@ -182,7 +202,7 @@ export default function ExperienceDetail({ data, allExpData }) {
                 data={allExpData}
             />
             <Row classes="mb-12">
-                <KreatorCard author={authorId} />
+                <KreatorSection author={authorId} />
             </Row>
             <SliderExperiences
                 sectionTitles={{

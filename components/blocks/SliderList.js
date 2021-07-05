@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import ResultCard from '@/blocks/ResultCard';
+import React, { useState, useEffect } from 'react';
 import CarouselCards from '@/specialty/CarouselCards';
-import SectionTitle from '@/blocks/SectionTitle';
+import SectionTitle from '@/blocks/Title/SectionTitle';
 import { getSlidesPerBp } from '@/helpers/responsive';
 import debounce from '@/helpers/debounce';
 

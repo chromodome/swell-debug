@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button__Selectable } from '@/blocks/Buttons';
+import { Button__Selectable } from '@/blocks/Button/Buttons';
 
 /**
  * SelectableButtonsRow

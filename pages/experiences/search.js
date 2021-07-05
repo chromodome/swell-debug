@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import AuthContext from '@/context/AuthContext';
 import Layout from '@/layouts/Layout';
 import Showcase from '@/sections/Showcase';
-import SliderExperiences from '@/components/sections/SliderExperiences';
+import SliderExperiences from '@/sections/SliderExperiences';
 import SliderInterests from '@/sections/SliderInterests';
 import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { API_URL } from '@/config/index';
-import ButtonsRow from '@/components/blocks/ButtonsRow';
+import ButtonsRow from '@/blocks/Button/ButtonsRow';
 import Row from '@/sections/Row';
 
 export default function SearchPage({

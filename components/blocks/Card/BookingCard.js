@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Title from '@/blocks/Title';
-import ButtonLoad from '@/blocks/ButtonLoad';
+import BlockTitle from '@/blocks/Title/BlockTitle';
+import ButtonLoad from '@/blocks/Button/ButtonLoad';
 
-const BookingWindow = ({ handleSubmit = () => {}, classes }) => {
+const BookingCard = ({ handleSubmit = () => {}, classes }) => {
     const [data, setData] = useState({
         guests: 1,
         leave: 1
@@ -18,7 +18,7 @@ const BookingWindow = ({ handleSubmit = () => {}, classes }) => {
     return (
         <div
             className={`flex flex-col p-4 bg-kn-white rounded-lg shadow-lg ${classes} `}>
-            <Title
+            <BlockTitle
                 text="Booking window"
                 component={3}
                 classes="flex px-4 mb-4"
@@ -56,4 +56,4 @@ const BookingWindow = ({ handleSubmit = () => {}, classes }) => {
     );
 };
 
-export default BookingWindow;
+export default BookingCard;
