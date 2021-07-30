@@ -13,7 +13,7 @@ const KreatorBadge = ({
                 <img
                     className="absolute z-10 inline-block h-8 w-8 rounded-full "
                     data-blink-src={`${avatar}`}
-                    alt=""
+                    alt="avatar"
                 />
                 <div className="h-8 bg-gradient-to-l from-kn-primary via-kn-primary to-blue-300 z-0 text-xs text-gray-900 flex items-center bg-kn-primary pl-10 pr-4 rounded-full transform-gpu transition-all duration-300 -translate-x-full group-hover:translate-x-0">
                     {handle}
