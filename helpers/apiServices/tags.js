@@ -1,11 +1,17 @@
-import makeRequest from '../makeRequest';
+import useSWR from 'swr';
+import makeRequest from './makeRequest';
 import { API_URL } from '../../config';
 
-const getAllTags = () => {
+const getAllTags = (url = null) => {
     return makeRequest({
-        url: `${API_URL}/api/content`,
+        url: `${API_URL}${url ? url : '/tags'}`,
         method: 'GET'
     });
 };
 
-export { getAllTags };
+const getAllTagsSwr = () => {
+    const { data, error } = useSWR(`/tags`, getAllTags);
+
+    return { data, error };
+};
+export { getAllTags, getAllTagsSwr };

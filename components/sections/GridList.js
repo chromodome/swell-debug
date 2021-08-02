@@ -23,11 +23,13 @@ const GridList = ({ sectionTitles, data }) => {
                         return <ResultCard key={item.id} data={item} />;
                     })}
                 </div>
-                <ButtonLoad
-                    handleClick={handleClick}
-                    isLoading={isLoading}
-                    label="Load More"
-                />
+                {data.length > 0 && (
+                    <ButtonLoad
+                        handleClick={handleClick}
+                        isLoading={isLoading}
+                        label="Load More"
+                    />
+                )}
             </div>
         </>
     );

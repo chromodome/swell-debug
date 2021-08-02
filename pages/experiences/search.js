@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthContext from '@/context/AuthContext';
+import { StoreContext } from 'store';
 import Layout from '@/layouts/Layout';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/sections/SliderExperiences';
@@ -12,7 +13,7 @@ import { API_URL_MOCK } from '@/config/index';
 import ButtonsRow from '@/blocks/Button/ButtonsRow';
 import Row from '@/sections/Row';
 import { getExperiences } from '../../helpers/apiServices/experiences';
-//import { getAllTags } from '@/apiServices/tags';
+import { getAllTags } from '../../helpers/apiServices/tags';
 
 export default function SearchPage({
     dataNewThisMonth,
@@ -20,11 +21,29 @@ export default function SearchPage({
     dataDestinations,
     dataFeatured,
     dataCollections,
-    dataTrending,
-    dataExperinces
+    dataExperinces,
+    tags
 }) {
     const { lang } = useContext(AuthContext);
-    console.log(dataExperinces);
+
+    const [{ search }, dispatch] = useContext(StoreContext);
+
+    const { selectedTags, filteredExperiences } = search;
+
+    const removeSelectedTag = async (id) => {
+        await dispatch({ type: 'removeSelectedTag', payload: id });
+        await dispatch({ type: 'searchExperiences' });
+    };
+
+    useEffect(() => {
+        if (search.tags.length === 0) {
+            dispatch({ type: 'addAllTags', payload: tags });
+        }
+        if (search.experiences.length === 0) {
+            dispatch({ type: 'addAllExperiences', payload: dataExperinces });
+        }
+    }, [search.tags, search.experiences]);
+
     return (
         <Layout>
             <Row classes="mt-20">
@@ -35,17 +54,18 @@ export default function SearchPage({
             </Row>
             <Row classes="mt-10">
                 <h3 className="text-3xl">
-                    {dataExperinces.length > 0
-                        ? `We found ${dataExperinces.length} experiences`
+                    {filteredExperiences.length > 0
+                        ? `We found ${filteredExperiences.length} experiences`
                         : `We didn't found any experience. `}
                 </h3>
                 <ButtonsRow
                     type="exception"
-                    items={['France', 'Freestyle trekking', '7 days']}
+                    items={selectedTags}
+                    handleClick={removeSelectedTag}
                 />
             </Row>
 
-            <GridList data={dataExperinces} />
+            <GridList data={filteredExperiences} />
             <SliderInterests
                 sectionTitles={translations[lang].sections.wanderByInterest}
                 data={dataInterests}
@@ -91,8 +111,9 @@ export async function getServerSideProps() {
     const res5 = await fetch(`${API_URL_MOCK}/api/collections`);
     const dataCollections = await res5.json();
 
-    const { data } = await getExperiences();
-    const experiences = await data;
+    const { data: experiences } = await getExperiences();
+
+    const { data: tags } = await getAllTags();
 
     return {
         props: {
@@ -101,8 +122,8 @@ export async function getServerSideProps() {
             dataDestinations,
             dataFeatured,
             dataCollections,
-            dataTrending: experiences,
-            dataExperinces: experiences
+            dataExperinces: experiences,
+            tags
         }
     };
 }

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
-import Search from '@/blocks/Search';
+import Search from '@/components/blocks/Search/Search';
 import LangList from '@/blocks/LangList';
 import Avatar from '@/specialty/Avatar';
 import NavbarSidebar from '@/layouts/NavbarSidebar';
@@ -15,7 +15,7 @@ import { NEXT_URL } from '@/config/index';
 
 import debounce from '@/helpers/debounce';
 
-const Header = ({}) => {
+const Header = () => {
     const { user, lang, setLang, rtl, setRtl, navIsOpen, toggleNav, logout } =
         useContext(AuthContext);
 

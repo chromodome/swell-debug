@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL } from '@/config/index';
+import { API_URL, API_URL_MOCK } from '@/config/index';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import Row from '@/sections/Row';
@@ -223,10 +223,10 @@ export default function ExperienceDetail({ data, allExpData }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const response = await fetch(`${API_URL}/api/experiences/${params.id}`);
+    const response = await fetch(`${API_URL}/experiences/${params.id}`);
     const data = await response.json();
 
-    const allExpResponse = await fetch(`${API_URL}/api/experiences`);
+    const allExpResponse = await fetch(`${API_URL_MOCK}/api/experiences`);
     const allExpData = await allExpResponse.json();
 
     return {

@@ -8,7 +8,7 @@ import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-import { API_URL } from '@/config/index';
+import { API_URL_MOCK } from '@/config/index';
 
 export default function HomePage({
     dataNewThisMonth,
@@ -60,22 +60,22 @@ export default function HomePage({
 }
 
 export async function getServerSideProps() {
-    const res1 = await fetch(`${API_URL}/api/experiences`);
+    const res1 = await fetch(`${API_URL_MOCK}/api/experiences`);
     const dataNewThisMonth = await res1.json();
 
-    const res2 = await fetch(`${API_URL}/api/interests`);
+    const res2 = await fetch(`${API_URL_MOCK}/api/interests`);
     const dataInterests = await res2.json();
 
-    const res3 = await fetch(`${API_URL}/api/destinations`);
+    const res3 = await fetch(`${API_URL_MOCK}/api/destinations`);
     const dataDestinations = await res3.json();
 
-    const res4 = await fetch(`${API_URL}/api/featured`);
+    const res4 = await fetch(`${API_URL_MOCK}/api/featured`);
     const dataFeatured = await res4.json();
 
-    const res5 = await fetch(`${API_URL}/api/collections`);
+    const res5 = await fetch(`${API_URL_MOCK}/api/collections`);
     const dataCollections = await res5.json();
 
-    const res6 = await fetch(`${API_URL}/api/experiences`);
+    const res6 = await fetch(`${API_URL_MOCK}/api/experiences`);
     const dataTrending = await res6.json();
 
     return {
