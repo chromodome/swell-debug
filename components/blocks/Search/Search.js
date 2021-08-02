@@ -65,9 +65,15 @@ function Search({ lang = 'en', rtl }) {
             payload: { findedTags, joinedTagsArray }
         });
 
-        await dispatch({
-            type: 'searchExperiences'
-        });
+        if (value === '') {
+            await dispatch({
+                type: 'addAllExperiences'
+            });
+        } else {
+            await dispatch({
+                type: 'searchExperiences'
+            });
+        }
 
         if (!isSearchPage) {
             router.push(searchPageHref);

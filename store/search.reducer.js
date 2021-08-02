@@ -36,6 +36,7 @@ const getUnique = (array) => Array.from(new Set(array));
  * @param [] argSearching
  * @return array[]
  */
+
 const searchByMultipleValues = (values, data, argSearching) => {
     let newValues = [];
 
@@ -63,10 +64,14 @@ function search(state, action) {
          * experiences: []
          */
         case 'addAllExperiences': {
+            const experiences = action.payload
+                ? action.payload
+                : state.experiences;
+
             return {
                 ...state,
-                experiences: action.payload,
-                filteredExperiences: action.payload
+                experiences: experiences,
+                filteredExperiences: experiences
             };
         }
         /**
@@ -111,13 +116,6 @@ function search(state, action) {
             let tags = selectedTags.map((k) => {
                 return k.related;
             });
-
-            if (tags.length === 0) {
-                return {
-                    ...state,
-                    filteredExperiences: experiences
-                };
-            }
 
             let joined = mergedArray(tags);
 
