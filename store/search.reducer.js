@@ -136,12 +136,17 @@ function search(state, action) {
         }
 
         case 'searchTagsByValue': {
-            const tags = action.payload;
-            const clearTags = tags.map((key) => key.item);
+            const { findedTags, joinedTagsArray } = action.payload;
+            const clearTags = findedTags.map((key) => key.item);
+            let filteredTags = [];
 
-            let filteredTags = state.tags.filter(
-                ({ id: tagId }) => !clearTags.some(({ id }) => id === tagId)
-            );
+            filteredTags =
+                clearTags.length === 0
+                    ? joinedTagsArray
+                    : state.tags.filter(
+                          ({ id: tagId }) =>
+                              !clearTags.some(({ id }) => id === tagId)
+                      );
 
             return {
                 ...state,

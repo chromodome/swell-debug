@@ -62,7 +62,7 @@ function Search({ lang = 'en', rtl }) {
 
         await dispatch({
             type: 'searchTagsByValue',
-            payload: findedTags
+            payload: { findedTags, joinedTagsArray }
         });
 
         await dispatch({
