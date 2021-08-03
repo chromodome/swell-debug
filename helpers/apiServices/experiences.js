@@ -8,4 +8,14 @@ const getExperiences = () => {
     });
 };
 
-export { getExperiences };
+const getExperienceById = (id) => {
+    return makeRequest({
+        url: `${API_URL}/experiences`,
+        method: 'GET',
+        params: {
+            id
+        }
+    });
+};
+
+export { getExperiences, getExperienceById };

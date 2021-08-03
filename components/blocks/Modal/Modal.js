@@ -5,9 +5,9 @@ import Icons from '@/blocks/Icon/Icons';
 export default function Modal({
     isOpen = true,
     setIsClose = () => {},
-    title = 'Delete interest',
+    title = '',
     iconType = 'default',
-    iconName = 'EDIT',
+    iconName = '',
     children
 }) {
     const iconStyles = {
@@ -20,9 +20,12 @@ export default function Modal({
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog
                     as="div"
-                    className="fixed inset-0 z-40  overflow-auto"
-                    onClose={() => {}}>
-                    <div className="px-4 text-center">
+                    className="fixed inset-0 overflow-auto"
+                    onClose={() => {}}
+                    style={{ zIndex: 999 }}>
+                    <div
+                        style={{ width: '100%' }}
+                        className="px-4 flex text-center justify-center mt-24">
                         <Transition.Child
                             as={Fragment}
                             enter="duration-300"
@@ -31,7 +34,10 @@ export default function Modal({
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0">
-                            <Dialog.Overlay className="fixed z-10 inset-0 overflow-y-auto " />
+                            <Dialog.Overlay
+                                className="fixed inset-0 overflow-y-auto 
+                                    opacity-75 bg-kn-primary-100"
+                            />
                         </Transition.Child>
                         <Transition.Child
                             as={Fragment}
@@ -42,12 +48,13 @@ export default function Modal({
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95 ">
                             <div
-                                className="z-100 px-10 py-8 mt-36
-                                w-96 h-64 text-left align-middle 
+                                style={{ heigth: 'fit-content' }}
+                                className="z-100 px-10 py-8 
+                                w-96 text-left align-middle 
                                 transition-all transform bg-white 
                                 shadow-xl rounded-2xl shadow-md overflow-visible">
                                 <button
-                                    className="z-40 overflow-visible absolute right-7 top-3 cursor-pointer "
+                                    className="overflow-visible absolute right-7 top-3 cursor-pointer "
                                     onClick={setIsClose}>
                                     <Icons
                                         iName="close"
@@ -56,7 +63,8 @@ export default function Modal({
                                 </button>
                                 {iconName && (
                                     <div
-                                        className={`absolute -top-6 z-50 rounded-full h-12 w-12 flex align-center justify-center ${iconStyles[iconType]}`}>
+                                        className={`absolute -top-6 z-50 rounded-full 
+                                        h-12 w-12 flex align-center justify-center ${iconStyles[iconType]}`}>
                                         <Icons iName={iconName} size="3xl" />
                                     </div>
                                 )}
@@ -64,7 +72,7 @@ export default function Modal({
                                 <Dialog.Title className="mb-4">
                                     {title}
                                 </Dialog.Title>
-                                {children}
+                                <div className="z-40">{children}</div>
                             </div>
                         </Transition.Child>
                     </div>

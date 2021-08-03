@@ -80,12 +80,14 @@ function Search({ lang = 'en', rtl }) {
         }
     };
 
+    // Clear search input value by btn
     const handleClear = () => {
         setIsComponentVisible(false);
         setTagsShown([]);
         setValue('');
     };
 
+    // select tag from dropdown
     const onSelectTag = async (tag) => {
         await dispatch({ type: 'selectTag', payload: tag });
 

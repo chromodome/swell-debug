@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import BlockTitle from '@/blocks/Title/BlockTitle';
 import ButtonLoad from '@/blocks/Button/ButtonLoad';
 
-const BookingCard = ({ handleSubmit = () => {}, classes }) => {
+const BookingCard = ({
+    handleSubmit = () => {},
+    classes,
+    children,
+    setOpenBookingModal
+}) => {
     const [data, setData] = useState({
         guests: 1,
         leave: 1
@@ -50,7 +55,11 @@ const BookingCard = ({ handleSubmit = () => {}, classes }) => {
                             value={data['leave']}></input>
                     </div>
                 </div>
-                <ButtonLoad label="Wander NOW" />
+                <ButtonLoad
+                    label="Wander NOW"
+                    handleClick={setOpenBookingModal}
+                />
+                {children}
             </form>
         </div>
     );
