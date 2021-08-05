@@ -32,7 +32,10 @@ export default function SearchPage({
 
     const removeSelectedTag = async (id) => {
         await dispatch({ type: 'removeSelectedTag', payload: id });
-        await dispatch({ type: 'searchExperiences' });
+
+        if (selectedTags.length !== 1) {
+            await dispatch({ type: 'searchExperiences' });
+        }
     };
 
     useEffect(() => {

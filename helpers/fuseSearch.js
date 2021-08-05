@@ -1,7 +1,13 @@
 import Fuse from 'fuse.js';
 
-const fuseSearch = (allTags, keys) =>
-    new Fuse(allTags, {
+/**
+ *
+ * @param {[]} array
+ * @param {string[]} keys
+ * @returns
+ */
+const fuseSearch = (array, keys) =>
+    new Fuse(array, {
         includeScore: true,
         shouldSort: true,
         keys,

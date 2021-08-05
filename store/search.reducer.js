@@ -4,7 +4,8 @@ const initStateSearch = {
     tags: [],
     selectedTags: [],
     experiences: [],
-    filteredExperiences: []
+    filteredExperiences: [],
+    tagsShown: []
 };
 
 /**
@@ -39,14 +40,18 @@ const getUnique = (array) => Array.from(new Set(array));
 
 const searchByMultipleValues = (values, data, argSearching) => {
     let newValues = [];
+    let tags = values.join(' | ');
+    tags = tags + '$';
 
-    values.forEach((value) => {
-        const nexExp = fuseSearch(data, argSearching).search(value);
+    // tags.forEach((value) => {
+    //     const nexExp = fuseSearch(data, argSearching).search(value);
+    //     newValues = [...newValues, ...nexExp.map((value) => value.item)];
+    // });
+    return fuseSearch(data, argSearching).search(newValues);
+};
 
-        newValues = [...newValues, ...nexExp.map((value) => value.item)];
-    });
-
-    return newValues;
+const findTags = (tags, value) => {
+    return fuseSearch(tags, ['related', 'name']).search(value);
 };
 
 function search(state, action) {
@@ -79,11 +84,20 @@ function search(state, action) {
          */
         case 'selectTag': {
             const selectedTags = action.payload;
+            let hasSelectedTag = false;
+
+            if (state.selectedTags.length > 0) {
+                hasSelectedTag = state.selectedTags.some(
+                    ({ id }) => id === selectedTags.id
+                );
+            }
+
+            if (hasSelectedTag) {
+                return state;
+            }
+
             return {
                 ...state,
-                tags: state.tags.filter(
-                    (value) => value.id !== selectedTags.id
-                ),
                 selectedTags: [...state.selectedTags, selectedTags]
             };
         }
@@ -94,11 +108,14 @@ function search(state, action) {
             const selectedTags = state.selectedTags.filter(
                 (value) => value.id !== action.payload.id
             );
+            const isEmptySelected = selectedTags.length === 0;
 
             return {
                 ...state,
                 selectedTags,
-                tags: [...state.tags, action.payload]
+                ...(isEmptySelected && {
+                    filteredExperiences: state.experiences
+                })
             };
         }
 
@@ -113,8 +130,8 @@ function search(state, action) {
         case 'searchExperiences': {
             const { selectedTags, experiences } = state;
 
-            let tags = selectedTags.map((k) => {
-                return k.related;
+            let tags = selectedTags.map((value) => {
+                return [...value.related, value.name];
             });
 
             let joined = mergedArray(tags);
@@ -124,7 +141,7 @@ function search(state, action) {
             let filteredExperiences = searchByMultipleValues(
                 uniqTags,
                 experiences,
-                ['tags']
+                ['tags', 'name']
             );
 
             return {
@@ -150,6 +167,34 @@ function search(state, action) {
                 ...state,
                 selectedTags: clearTags,
                 tags: filteredTags
+            };
+        }
+
+        case 'changeShownTags': {
+            let tagsShown = findTags(state.tags, action.payload);
+
+            tagsShown.sort(function (a, b) {
+                let nameA = a.item.name.toUpperCase();
+                let nameB = b.item.name.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            return {
+                ...state,
+                tagsShown: tagsShown
+            };
+        }
+
+        case 'setShownTags': {
+            return {
+                ...state,
+                tagsShown: action.payload
             };
         }
     }
