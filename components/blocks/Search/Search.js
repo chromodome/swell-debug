@@ -6,6 +6,7 @@ import IconsLucide from '@/blocks/Icon/IconsLucide';
 import { StoreContext } from '../../../store';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import Autocomplete from './Autocomplete';
+import { fuseSearch } from '@/helpers/fuseSearch';
 
 function Search({ lang = 'en', rtl }) {
     const router = useRouter();
@@ -23,9 +24,9 @@ function Search({ lang = 'en', rtl }) {
         useComponentVisible();
 
     const handleChangeSearch = (v) => {
+        dispatch({ type: 'changeShownTags', payload: v });
         setValue(v);
         setIsComponentVisible(true);
-        dispatch({ type: 'changeShownTags', payload: v });
     };
 
     const handleSubmit = async (e) => {
@@ -33,24 +34,13 @@ function Search({ lang = 'en', rtl }) {
 
         setIsComponentVisible(false);
 
-        const joinedTagsArray = tags.concat(selectedTags);
+        if (!value) return false;
+        let findedTags = fuseSearch(tags, ['name', 'related']).search(value);
 
-        //const findedTags = findTags(joinedTagsArray, value);
+        findedTags = findedTags.map((tag) => tag.item);
 
-        await dispatch({
-            type: 'searchTagsByValue',
-            payload: { findedTags, joinedTagsArray }
-        });
-
-        if (value === '') {
-            await dispatch({
-                type: 'addAllExperiences'
-            });
-        } else {
-            await dispatch({
-                type: 'searchExperiences'
-            });
-        }
+        await dispatch({ type: 'setSelectedTags', payload: findedTags });
+        await dispatch({ type: 'searchExperiences' });
 
         if (!isSearchPage) {
             router.push(searchPageHref);
@@ -73,23 +63,14 @@ function Search({ lang = 'en', rtl }) {
     const availableTags = useMemo(() => {
         let filteredTags = [];
 
-        if (selectedTags.length > 0) {
-            filteredTags = tagsShown.filter(
-                ({ item }) => !selectedTags.some(({ id }) => id === item.id)
-            );
+        filteredTags = tagsShown.filter(
+            ({ item }) => !selectedTags.some(({ id }) => id === item.id)
+        );
 
-            return filteredTags;
-        }
-        if (tagsShown.length > 0) {
-            return tagsShown;
-        }
+        return filteredTags;
     }, [tagsShown, selectedTags]);
 
     const searchInputOnFocus = () => setIsComponentVisible(true);
-
-    const tagsAutocompleteShowed = value !== '' && isComponentVisible;
-
-    const warnMessageShowed = tagsShown.length === 0 && tagsAutocompleteShowed;
 
     return (
         <div className="hidden md:block md:flex-1 mx-8 relative" ref={ref}>
@@ -127,11 +108,11 @@ function Search({ lang = 'en', rtl }) {
                 </span>
             </span>
             <Autocomplete
+                value={value}
+                tagsShown={tagsShown}
                 isComponentVisible={isComponentVisible}
-                tagsAutocompleteShowed={tagsAutocompleteShowed}
                 availableTags={availableTags}
                 onSelectTag={onSelectTag}
-                warnMessageShowed={warnMessageShowed}
             />
         </div>
     );

@@ -1,4 +1,5 @@
 import { fuseSearch } from '@/helpers/fuseSearch';
+import Fuse from 'fuse.js';
 
 const initStateSearch = {
     tags: [],
@@ -39,19 +40,15 @@ const getUnique = (array) => Array.from(new Set(array));
  */
 
 const searchByMultipleValues = (values, data, argSearching) => {
-    let newValues = [];
-    let tags = values.join(' | ');
-    tags = tags + '$';
+    const parsedValue = values.join(' | ');
 
-    // tags.forEach((value) => {
-    //     const nexExp = fuseSearch(data, argSearching).search(value);
-    //     newValues = [...newValues, ...nexExp.map((value) => value.item)];
-    // });
-    return fuseSearch(data, argSearching).search(newValues);
-};
+    let nexExp = fuseSearch(data, argSearching, {
+        useExtendedSearch: true
+    }).search(parsedValue);
 
-const findTags = (tags, value) => {
-    return fuseSearch(tags, ['related', 'name']).search(value);
+    nexExp = nexExp.map((experience) => experience.item);
+
+    return nexExp;
 };
 
 function search(state, action) {
@@ -83,9 +80,8 @@ function search(state, action) {
          * tag: any{}
          */
         case 'selectTag': {
-            const selectedTags = action.payload;
+            let selectedTags = action.payload;
             let hasSelectedTag = false;
-
             if (state.selectedTags.length > 0) {
                 hasSelectedTag = state.selectedTags.some(
                     ({ id }) => id === selectedTags.id
@@ -130,8 +126,12 @@ function search(state, action) {
         case 'searchExperiences': {
             const { selectedTags, experiences } = state;
 
-            let tags = selectedTags.map((value) => {
-                return [...value.related, value.name];
+            if (selectedTags.length === 0) {
+                return { ...state, filteredExperiences: [] };
+            }
+
+            let tags = selectedTags.map((tag) => {
+                return [...tag.related, tag.name];
             });
 
             let joined = mergedArray(tags);
@@ -171,7 +171,14 @@ function search(state, action) {
         }
 
         case 'changeShownTags': {
-            let tagsShown = findTags(state.tags, action.payload);
+            let tagsShown = fuseSearch(state.tags, ['name', 'related']).search(
+                action.payload
+            );
+
+            // tagsShown = tagsShown.filter(
+            //     ({ item: { id: itemId } }) =>
+            //         !state.selectedTags.some(({ id }) => id === itemId)
+            // );
 
             tagsShown.sort(function (a, b) {
                 let nameA = a.item.name.toUpperCase();
@@ -195,6 +202,13 @@ function search(state, action) {
             return {
                 ...state,
                 tagsShown: action.payload
+            };
+        }
+
+        case 'setSelectedTags': {
+            return {
+                ...state,
+                selectedTags: action.payload
             };
         }
     }

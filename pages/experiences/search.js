@@ -32,10 +32,7 @@ export default function SearchPage({
 
     const removeSelectedTag = async (id) => {
         await dispatch({ type: 'removeSelectedTag', payload: id });
-
-        if (selectedTags.length !== 1) {
-            await dispatch({ type: 'searchExperiences' });
-        }
+        await dispatch({ type: 'searchExperiences' });
     };
 
     useEffect(() => {
@@ -58,7 +55,9 @@ export default function SearchPage({
             <Row classes="mt-10">
                 <h3 className="text-3xl">
                     {filteredExperiences.length > 0
-                        ? `We found ${filteredExperiences.length} experiences`
+                        ? `We found ${filteredExperiences.length} experience${
+                              filteredExperiences.length > 1 ? 's' : ''
+                          }`
                         : `We didn't found any experience. `}
                 </h3>
                 <ButtonsRow

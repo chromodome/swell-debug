@@ -6,12 +6,14 @@ import Fuse from 'fuse.js';
  * @param {string[]} keys
  * @returns
  */
-const fuseSearch = (array, keys) =>
+
+const fuseSearch = (array, keys, options = {}) =>
     new Fuse(array, {
+        keys,
         includeScore: true,
         shouldSort: true,
-        keys,
-        threshold: 0
+        threshold: 0,
+        ...options
     });
-
+console.log({ fuseSearch, Fuse });
 export { fuseSearch };

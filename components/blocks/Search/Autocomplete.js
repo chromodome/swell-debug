@@ -1,11 +1,18 @@
 import React, { memo } from 'react';
 
 function Autocomplete({
-    tagsAutocompleteShowed,
     availableTags,
     onSelectTag,
-    warnMessageShowed
+    tagsShown,
+    value,
+    isComponentVisible
 }) {
+    const tagsAutocompleteShowed = value !== '' && isComponentVisible;
+
+    const warnMessageShowed =
+        availableTags.length === 0 && tagsAutocompleteShowed;
+
+    if (!tagsAutocompleteShowed) return null;
     return (
         <ul
             className={`mt-1 transition-all duration-300 ease-in-out absolute 
