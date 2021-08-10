@@ -62,9 +62,7 @@ function search(state, action) {
                 tags: action.payload
             };
         }
-        /**
-         * experiences: []
-         */
+
         case 'addAllExperiences': {
             const experiences = action.payload
                 ? action.payload
