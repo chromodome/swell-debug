@@ -6,7 +6,7 @@ import IconsLucide from '@/blocks/Icon/IconsLucide';
 import { StoreContext } from '../../../store';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import Autocomplete from './Autocomplete';
-import { fuseSearch } from '@/helpers/fuseSearch';
+import { SearchPackage } from '@/helpers/fuseSearch';
 
 function Search({ lang = 'en', rtl }) {
     const router = useRouter();
@@ -23,6 +23,8 @@ function Search({ lang = 'en', rtl }) {
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible();
 
+    const searchTags = new SearchPackage(tags, ['name', 'related']);
+
     const handleChangeSearch = (v) => {
         dispatch({ type: 'changeShownTags', payload: v });
         setValue(v);
@@ -35,9 +37,8 @@ function Search({ lang = 'en', rtl }) {
         setIsComponentVisible(false);
 
         if (!value) return false;
-        let findedTags = fuseSearch(tags, ['name', 'related']).search(value);
 
-        findedTags = findedTags.map((tag) => tag.item);
+        const findedTags = searchTags.search(value);
 
         await dispatch({ type: 'setSelectedTags', payload: findedTags });
         await dispatch({ type: 'searchExperiences' });
@@ -64,7 +65,7 @@ function Search({ lang = 'en', rtl }) {
         let filteredTags = [];
 
         filteredTags = tagsShown.filter(
-            ({ item }) => !selectedTags.some(({ id }) => id === item.id)
+            ({ id: tagId }) => !selectedTags.some(({ id }) => id === tagId)
         );
 
         return filteredTags;

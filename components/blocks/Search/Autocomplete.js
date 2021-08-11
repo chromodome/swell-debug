@@ -3,7 +3,6 @@ import React, { memo } from 'react';
 function Autocomplete({
     availableTags,
     onSelectTag,
-    tagsShown,
     value,
     isComponentVisible
 }) {
@@ -27,11 +26,11 @@ function Autocomplete({
                 availableTags.map((value) => {
                     return (
                         <li
-                            onClick={() => onSelectTag(value.item)}
+                            onClick={() => onSelectTag(value)}
                             className="cursor-pointer px-8 py-3 capitalize rounded-3xl 
               hover:bg-kn-primary-100"
-                            key={value.item.id}>
-                            {value.item.name}
+                            key={value.id}>
+                            {value.name}
                         </li>
                     );
                 })}

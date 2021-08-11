@@ -21,7 +21,7 @@ const StoreProvider = ({ children }) => {
 
     const store = useMemo(() => [state, dispatch], [state]);
 
-    console.log(store[0].search);
+    //console.log(store[0].search);
 
     return (
         <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

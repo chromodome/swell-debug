@@ -1,5 +1,4 @@
-import { fuseSearch } from '@/helpers/fuseSearch';
-import Fuse from 'fuse.js';
+import { SearchPackage } from '@/helpers/fuseSearch';
 
 const initStateSearch = {
     tags: [],
@@ -39,16 +38,11 @@ const getUnique = (array) => Array.from(new Set(array));
  * @return array[]
  */
 
-const searchByMultipleValues = (values, data, argSearching) => {
-    const parsedValue = values.join(' | ');
+const searchByMultipleValues = (data, tags) => {
+    const searchExperiences = new SearchPackage(data, ['tags'], true);
+    const filteredExperiences = searchExperiences.search(tags);
 
-    let nexExp = fuseSearch(data, argSearching, {
-        useExtendedSearch: true
-    }).search(parsedValue);
-
-    nexExp = nexExp.map((experience) => experience.item);
-
-    return nexExp;
+    return filteredExperiences;
 };
 
 function search(state, action) {
@@ -62,7 +56,6 @@ function search(state, action) {
                 tags: action.payload
             };
         }
-
         case 'addAllExperiences': {
             const experiences = action.payload
                 ? action.payload
@@ -74,12 +67,11 @@ function search(state, action) {
                 filteredExperiences: experiences
             };
         }
-        /**
-         * tag: any{}
-         */
+
         case 'selectTag': {
             let selectedTags = action.payload;
             let hasSelectedTag = false;
+
             if (state.selectedTags.length > 0) {
                 hasSelectedTag = state.selectedTags.some(
                     ({ id }) => id === selectedTags.id
@@ -137,9 +129,8 @@ function search(state, action) {
             let uniqTags = getUnique(joined);
 
             let filteredExperiences = searchByMultipleValues(
-                uniqTags,
                 experiences,
-                ['tags', 'name']
+                uniqTags
             );
 
             return {
@@ -169,9 +160,12 @@ function search(state, action) {
         }
 
         case 'changeShownTags': {
-            let tagsShown = fuseSearch(state.tags, ['name', 'related']).search(
-                action.payload
-            );
+            const searching = new SearchPackage(state.tags, [
+                'name',
+                'related'
+            ]);
+
+            let tagsShown = searching.search(action.payload);
 
             // tagsShown = tagsShown.filter(
             //     ({ item: { id: itemId } }) =>
@@ -179,8 +173,8 @@ function search(state, action) {
             // );
 
             tagsShown.sort(function (a, b) {
-                let nameA = a.item.name.toUpperCase();
-                let nameB = b.item.name.toUpperCase();
+                let nameA = a.name.toUpperCase();
+                let nameB = b.name.toUpperCase();
                 if (nameA < nameB) {
                     return -1;
                 }
