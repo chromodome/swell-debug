@@ -6,47 +6,81 @@ class SearchPackage {
         this.strict = strict;
     }
 
+    // transform search string to array
     _transformValue(value) {
         this.searchString = typeof value === 'string' ? [value] : value;
     }
 
-    _setMatch(match = false, length = 0) {
-        let condition = false;
+    // filter experience by matching tags
+    experienceSearch(value) {
+        this._transformValue(value);
+        let searchedArray = [];
 
-        if (this.strict) {
-            condition = match === length;
-        } else {
-            condition = match;
+        const _array = this.array;
+        const _searchString = this.searchString;
+
+        for (let dataItem of _array) {
+            let searchingTagLength = _searchString.length;
+            let matches = 0;
+
+            if (dataItem.tags.length === 0) continue;
+
+            for (let searchItem of _searchString) {
+                for (let tagLabel of dataItem.tags) {
+                    this._searchIsMatch(tagLabel, searchItem) && ++matches;
+                }
+            }
+
+            if (
+                searchingTagLength === 1
+                    ? matches === 1
+                    : matches === searchingTagLength
+            ) {
+                searchedArray.push(dataItem);
+            }
         }
 
-        return condition;
+        return searchedArray;
     }
 
+    _searchIsMatch(value = '', search = '') {
+        if (value.search(search) === 0) return true;
+
+        return false;
+    }
+
+    // find all items by one match
     search(value) {
         this._transformValue(value);
 
         const _array = this.array;
         const _keys = this.keys;
         const _searchString = this.searchString;
+        let searchedArray = [];
 
-        let searchedArray = _array.filter((value) => {
+        for (let dataItem of _array) {
             let isMatch = 0;
-            let length = _searchString.length;
 
-            _keys.forEach((keysValue) => {
-                _searchString.forEach((searchV) => {
-                    if (value[keysValue]?.includes(searchV)) {
-                        ++isMatch;
+            for (let key of _keys) {
+                for (let searchValue of _searchString) {
+                    const keyTypeString = typeof dataItem[key] === 'string';
+
+                    if (keyTypeString) {
+                        this._searchIsMatch(dataItem[key], searchValue) &&
+                            ++isMatch;
+                    } else {
+                        if (dataItem[key].length === 0) continue;
+
+                        for (let dataItemValue of dataItem[key]) {
+                            this._searchIsMatch(dataItemValue, searchValue) &&
+                                ++isMatch;
+                        }
                     }
-                });
-            });
+                }
+            }
 
-            return this._setMatch(isMatch, length);
-        });
-
-        searchedArray.tags.filter(
-            ({ id: tagId }) => !_searchString.some(({ id }) => id === tagId)
-        );
+            if (isMatch) searchedArray.push(dataItem);
+        }
 
         return searchedArray;
     }

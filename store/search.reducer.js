@@ -121,17 +121,17 @@ function search(state, action) {
             }
 
             let tags = selectedTags.map((tag) => {
-                return [...tag.related, tag.name];
+                return tag.name;
             });
 
-            let joined = mergedArray(tags);
-
-            let uniqTags = getUnique(joined);
-
-            let filteredExperiences = searchByMultipleValues(
+            const searchExperiences = new SearchPackage(
                 experiences,
-                uniqTags
+                ['tags'],
+                true
             );
+
+            const filteredExperiences =
+                searchExperiences.experienceSearch(tags);
 
             return {
                 ...state,
@@ -166,11 +166,6 @@ function search(state, action) {
             ]);
 
             let tagsShown = searching.search(action.payload);
-
-            // tagsShown = tagsShown.filter(
-            //     ({ item: { id: itemId } }) =>
-            //         !state.selectedTags.some(({ id }) => id === itemId)
-            // );
 
             tagsShown.sort(function (a, b) {
                 let nameA = a.name.toUpperCase();

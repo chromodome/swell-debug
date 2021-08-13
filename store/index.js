@@ -1,4 +1,4 @@
-import { createContext, useMemo, useReducer, useState, useEffect } from 'react';
+import { createContext, useMemo, useReducer } from 'react';
 import { initStateSearch, search } from './search.reducer';
 
 const combineReducers = (slices) => (state, action) =>
