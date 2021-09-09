@@ -197,6 +197,11 @@ const iconConsts = {
             classAdj: '',
             size: '4xl'
         },
+        COINS: {
+            icon: 'las la-coins',
+            classAdj: '',
+            size: '4xl'
+        },
         WALLET: {
             icon: 'las la-wallet',
             classAdj: '',
@@ -306,6 +311,12 @@ const iconConsts = {
             classAdj: '',
             size: '4xl'
         },
+        MAIL: {
+            icon: 'ri-mail-line',
+            classAdj: '',
+            size: '2xl'
+        },
+
         TRASH: {
             icon: 'las la-trash-alt',
             classAdj: '',
@@ -321,8 +332,18 @@ const iconConsts = {
             classAdj: '',
             size: '4xl'
         },
+        IMAGEALT2: {
+            icon: 'ri-image-line',
+            classAdj: '',
+            size: '2xl'
+        },
         GALLERY: {
             icon: 'las la-photo-video',
+            classAdj: '',
+            size: '4xl'
+        },
+        HOTEL: {
+            icon: 'las la-hotel',
             classAdj: '',
             size: '4xl'
         },
@@ -344,12 +365,12 @@ const iconConsts = {
         EYE: {
             icon: 'las la-eye',
             classAdj: '',
-            size: '4xl'
+            size: '2xl'
         },
         EYE_SLASH: {
             icon: 'las la-eye-slash',
             classAdj: '',
-            size: '4xl'
+            size: '2xl'
         },
         HELP: {
             icon: 'las la-question-circle',
@@ -464,6 +485,16 @@ const iconConsts = {
         },
         WATER_BASED: {
             icon: 'fas fa-water',
+            classAdj: '',
+            size: '2xl'
+        },
+        ARCHIVE: {
+            icon: 'ri-dropbox-fill',
+            classAdj: '',
+            size: '2xl'
+        },
+        HASHTAG: {
+            icon: 'ri-hashtag',
             classAdj: '',
             size: '2xl'
         }

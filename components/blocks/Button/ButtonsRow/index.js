@@ -10,16 +10,22 @@ import Selectable from './Selectable';
  * @returns
  */
 
-const ButtonsRow = ({ items = [], type = '', classes, handleClick }) => {
-    // Choose type
-    const View = { exception: Exception, selectable: Selectable }[type];
-
+const ButtonsRow = ({
+    items = [],
+    type = 'exception',
+    classes,
+    handleClick
+}) => {
     if (!type) return null;
 
     return (
         <>
-            <div className={`flex flex-row mt-5 mb-5 ${classes}`}>
-                <View items={items} handleClick={handleClick} />
+            <div className={`flex flex-row flex-wrap mt-5 mb-5 ${classes}`}>
+                {type === 'exception' ? (
+                    <Exception items={items} handleClick={handleClick} />
+                ) : (
+                    <Selectable items={items} handleClick={handleClick} />
+                )}
             </div>
         </>
     );

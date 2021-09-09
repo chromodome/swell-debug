@@ -31,10 +31,10 @@ const SliderCollections = ({ sectionTitles, data }) => {
             </div>
 
             <SliderList breakPoints={breakPoints} section={sectionTitles} boxed>
-                {data.map((item) => {
+                {data.map((item, index) => {
                     return (
                         <CollectionCard
-                            key={item.id}
+                            key={`coll_${item.id}_${index}`}
                             data={item}
                             containerClass="embla__slide x1 md:x2 lg:x2 xl:x3"
                         />

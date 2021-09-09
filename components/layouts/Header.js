@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Search from '@/blocks/Search';
+import Search from '@/components/blocks/Search/Search';
 import LangList from '@/blocks/LangList';
 import Avatar from '@/specialty/Avatar';
 import NavbarSidebar from '@/layouts/NavbarSidebar';
@@ -15,12 +16,18 @@ import { NEXT_URL } from '@/config/index';
 
 import debounce from '@/helpers/debounce';
 
-const Header = ({}) => {
+const Header = () => {
     const { user, lang, setLang, rtl, setRtl, navIsOpen, toggleNav, logout } =
         useContext(AuthContext);
 
     const [scrollPos, setScrollPos] = useState(0);
     const [showHeader, setShowHeader] = useState(true);
+
+    const router = useRouter();
+    const handleClick = (e) => {
+        e.preventDefault();
+        router.push('/');
+    };
 
     useEffect(() => {
         const debouncedHandleScroll = debounce(handleScroll, 100);
@@ -35,7 +42,7 @@ const Header = ({}) => {
     const handleScroll = () => {
         if (typeof window !== 'undefined') {
             const currentScrollPos = window.scrollY;
-            console.log('direction: ', currentScrollPos - scrollPos);
+            // console.log('direction: ', currentScrollPos - scrollPos);
 
             setShowHeader(currentScrollPos - scrollPos < 0 || scrollPos < 400);
             setScrollPos(currentScrollPos);
@@ -54,7 +61,8 @@ const Header = ({}) => {
                 <div className="flex flex-1 flex-row justify-between items-center h-full ">
                     <div className="flex flex-shrink-0  lg:w-1/3">
                         <div
-                            className={`flex  items-center ${
+                            onClick={handleClick}
+                            className={`flex  items-center cursor-pointer ${
                                 rtl
                                     ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
                                     : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'

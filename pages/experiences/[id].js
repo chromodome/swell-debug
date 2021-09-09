@@ -1,5 +1,5 @@
-import React from 'react';
-import { API_URL } from '@/config/index';
+import React, { useState } from 'react';
+import { API_URL, API_URL_MOCK } from '@/config/index';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import Row from '@/sections/Row';
@@ -14,30 +14,33 @@ import ListWithIcon from '@/blocks/ListWithIcon';
 import JourneyDaySlider from '@/sections/JourneyDaySlider';
 import SliderExperiences from '@/sections/SliderExperiences';
 import KreatorSection from '@/components/sections/KreatorSection';
+import { BookingPickerModal } from '@/blocks/BookingPicker';
 
 export default function ExperienceDetail({ data, allExpData }) {
     const router = useRouter();
+    const [opened, setOpened] = useState(false);
 
-    if (data.length === 0) {
+    if (!data) {
         return <div>Experience {router.query?.id} doesn't exist.</div>;
     }
 
-    console.log(data[0]);
+    const { user, featured_image, id, type, content } = data;
 
-    const {
-        authorId,
-        days,
-        destination,
-        featured_image,
-        id,
-        price,
-        type,
-        recommended_for,
-        overview_intro
-    } = data[0];
+    const { days, recommended_for, price, destination } = content;
 
+    const openBookingModal = (e) => {
+        e.preventDefault();
+        setOpened(true);
+    };
     return (
         <Layout>
+            <BookingPickerModal
+                opened={opened}
+                days={days}
+                persons={recommended_for}
+                price={price}
+                onClose={() => setOpened(false)}
+            />
             <Row classes="mt-20 mb-12 mx-4">
                 <Buttons__NextPrev
                     prev
@@ -50,22 +53,22 @@ export default function ExperienceDetail({ data, allExpData }) {
             <Row classes="mt-20 mb-12">
                 <ExperienceHeader
                     sectionTitles={{
-                        title: overview_intro.title,
-                        subTitle: destination.locations[0].place
+                        title: content.overview_intro.title,
+                        subTitle: destination.locations[0].country
                     }}
                     days={days}
                     type={type}
-                    authorId={authorId}
+                    user={user}
                 />
             </Row>
             <Row classes="mb-12">
                 <TileImages
                     withGallery
                     url={[
-                        featured_image,
-                        featured_image,
-                        featured_image,
-                        featured_image
+                        content.featured_image,
+                        content.featured_image,
+                        content.featured_image,
+                        content.featured_image
                     ]}
                 />
             </Row>
@@ -81,7 +84,7 @@ export default function ExperienceDetail({ data, allExpData }) {
                                     destination.locations.length
                                 }
                         ${
-                            destination.locations.length > 1
+                            content.destination.locations.length > 1
                                 ? 'Contries'
                                 : 'Contry'
                         }`
@@ -90,9 +93,7 @@ export default function ExperienceDetail({ data, allExpData }) {
                             {
                                 icon: 'USER',
                                 value: `For maximum
-                            ${
-                                recommended_for[recommended_for.length - 1]
-                            } people`
+                            ${Number(recommended_for)} people`
                             },
                             { icon: null, value: 'Intense activity level' }
                         ]}
@@ -100,10 +101,11 @@ export default function ExperienceDetail({ data, allExpData }) {
                 </div>
                 <div className="row-span-2 col-span-1">
                     {type === 'guided' ? (
-                        <BookingCard />
+                        <BookingCard setOpenBookingModal={openBookingModal} />
                     ) : (
                         <BuyingCard
-                            price="255"
+                            setOpenBookingModal={openBookingModal}
+                            price={Number(price)}
                             desc="Cras sit amet libero tempus, convallis lectus in,
                         venenatis dui. Sed sed euismod sem, dictum commodo
                         ipsum. Cras pellentesque ornare facilisis. Curabitur
@@ -202,7 +204,7 @@ export default function ExperienceDetail({ data, allExpData }) {
                 data={allExpData}
             />
             <Row classes="mb-12">
-                <KreatorSection author={authorId} />
+                <KreatorSection author={user} />
             </Row>
             <SliderExperiences
                 sectionTitles={{
@@ -223,10 +225,10 @@ export default function ExperienceDetail({ data, allExpData }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const response = await fetch(`${API_URL}/api/experiences/${params.id}`);
+    const response = await fetch(`${API_URL}/experiences/${params.id}`);
     const data = await response.json();
 
-    const allExpResponse = await fetch(`${API_URL}/api/experiences`);
+    const allExpResponse = await fetch(`${API_URL}/experiences`);
     const allExpData = await allExpResponse.json();
 
     return {

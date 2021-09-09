@@ -14,7 +14,8 @@
             "@/constants/*": ["constants/*"],
             "@/context/*": ["context/*"],
             "@/config/*": ["config/*"],
-            "@/mockdata/*": ["mockdata/*"]
+            "@/mockdata/*": ["mockdata/*"],
+            "@/apiServices/*": ["helpers/apiServices/*"]
         }
     }
     

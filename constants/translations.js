@@ -6,73 +6,73 @@ const langData = {
         messages: {
             hello: 'Hello',
             welcome: 'Welcome',
-            welcomeBack: 'Welcome Back',
+            welcomeBack: 'Welcome Back'
         },
 
         navbar: {
-             search: "Find your experience"
+            search: 'Find your experience'
         },
 
         menu: {
             messages: {
                 title: 'Messages',
-                icon: 'Grid',
+                icon: 'Grid'
             },
             myPurchases: {
                 title: 'My Purchases',
-                icon: 'DollarSign',
+                icon: 'DollarSign'
             },
             myFavourites: {
                 title: 'My Favourites',
-                icon: 'User',
+                icon: 'User'
             },
             profile: {
                 title: 'Profile',
-                icon: 'User',
+                icon: 'User'
             },
             helpCenter: {
                 title: 'Konnect Academy',
-                icon: 'HelpCircle',
+                icon: 'HelpCircle'
             },
             signout: {
                 title: 'Log out',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             signup: {
                 title: 'Sign up',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             signin: {
                 title: 'Sign in',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             becomeKreator: {
                 title: 'Become a Kreator',
-                icon: 'LogOut',
-            },
+                icon: 'LogOut'
+            }
         },
         sections: {
             newThisMonth: {
-                title: 'New this month',
-                subTitle: 'Fresh new adventures from around the globe',
+                title: 'Latest experiences',
+                subTitle: 'Fresh new adventures from around the globe'
             },
             wanderByDestination: {
                 title: 'Wander by destination',
-                subTitle: 'Every corner of the world is up for grabs.',
+                subTitle: 'Every corner of the world is up for grabs.'
             },
             wanderByInterest: {
                 title: 'Wander by interest',
-                subTitle: 'A glimpse of what other wanderers are looking for',
+                subTitle: 'A glimpse of what other wanderers are looking for'
             },
             curatedCollections: {
                 title: 'Curated collections',
-                subTitle: 'Hand picked by our staff',
+                subTitle: 'Hand picked by our staff'
             },
             trendingThisWeek: {
                 title: 'Trending this week',
-                subTitle: 'Check what other wanderers are looking for',
-            },
-        },
+                subTitle: 'Check what other wanderers are looking for'
+            }
+        }
     },
     ar: {
         rtl: 'true',
@@ -81,71 +81,71 @@ const langData = {
         messages: {
             hello: 'Hello',
             welcome: 'Welcome',
-            welcomeBack: 'Welcome Back',
+            welcomeBack: 'Welcome Back'
         },
 
         menu: {
             messages: {
                 title: 'Messages',
-                icon: 'Grid',
+                icon: 'Grid'
             },
             myPurchases: {
                 title: 'My Purchases',
-                icon: 'DollarSign',
+                icon: 'DollarSign'
             },
             myFavourites: {
                 title: 'My Favourites',
-                icon: 'User',
+                icon: 'User'
             },
             profile: {
                 title: 'Profile',
-                icon: 'User',
+                icon: 'User'
             },
             helpCenter: {
                 title: 'Konnect Academy',
-                icon: 'HelpCircle',
+                icon: 'HelpCircle'
             },
             signout: {
                 title: 'Log out',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             signup: {
                 title: 'Sign up',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             signup: {
                 title: 'Sign in',
-                icon: 'LogOut',
+                icon: 'LogOut'
             },
             becomeKreator: {
                 title: 'Become a Kreator',
-                icon: 'LogOut',
-            },
+                icon: 'LogOut'
+            }
         },
 
         sections: {
             newThisMonth: {
                 title: 'New this month',
-                subTitle: 'Fresh new adventures from around the globe',
+                subTitle: 'Fresh new adventures from around the globe'
             },
             wanderByInterest: {
                 title: 'Wander by interest',
-                subTitle: 'A glimpse of what other wanderers are looking for',
+                subTitle: 'A glimpse of what other wanderers are looking for'
             },
             wanderByDestination: {
                 title: 'Wander by destination',
-                subTitle: 'Every corner of the world is up for grabs.',
+                subTitle: 'Every corner of the world is up for grabs.'
             },
             curatedCollections: {
                 title: 'Curated collections',
-                subTitle: 'Hand picked by our staff',
+                subTitle: 'Hand picked by our staff'
             },
             trendingThisWeek: {
                 title: 'Trending this week',
-                subTitle: 'Check what other wanderers are looking for',
-            },
-        },
-    },
+                subTitle: 'Check what other wanderers are looking for'
+            }
+        }
+    }
 };
 
 export default langData;

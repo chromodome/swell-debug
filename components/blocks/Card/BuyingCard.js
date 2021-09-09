@@ -6,7 +6,9 @@ const BookingCard = ({
     handleSubmit = () => {},
     classes,
     price = 0,
-    desc = ''
+    desc = '',
+    children,
+    setOpenBookingModal
 }) => {
     return (
         <div
@@ -23,7 +25,11 @@ const BookingCard = ({
                     <p className="mb-4">Price: ${price}</p>
                     <p>{desc}</p>
                 </div>
-                <ButtonLoad label="Wander NOW" />
+                <ButtonLoad
+                    label="Wander NOW"
+                    handleClick={setOpenBookingModal}
+                />
+                {children}
             </form>
         </div>
     );

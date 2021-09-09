@@ -1,5 +1,15 @@
 // Returns true if text is longer than count or if it has any of the words in findWords
 
+export const randomNumber = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const randomItem = (array) => {
+    return array[randomNumber(0, array.length - 1)];
+};
+
 export const checkMultiLine = (str, count) => {
     const findWords = [, '<br>', '<br/>', '\r', '\n'];
     let result = false;
@@ -42,7 +52,7 @@ export const handleRowReverse = (rtl) => {
         justifyreverse: rtl ? 'justify-start' : 'justify-end',
         smText: rtl ? '' : '',
         neg: rtl ? '-' : '',
-        negReverse: rtl ? '' : '-',
+        negReverse: rtl ? '' : '-'
     };
 };
 
