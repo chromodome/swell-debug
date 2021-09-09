@@ -248,5 +248,8 @@ module.exports = {
             padding: ['last']
         }
     },
-    plugins: [require('tailwind-scrollbar')]
+    plugins: [
+        require('tailwind-scrollbar'),
+        require('tailwindcss-nested-groups')
+    ]
 };

@@ -4,7 +4,14 @@ import SectionTitle from '@/blocks/Title/SectionTitle';
 import { getSlidesPerBp } from '@/helpers/responsive';
 import debounce from '@/helpers/debounce';
 
-const SliderList = ({ section, children, breakPoints, boxed, classes }) => {
+const SliderList = ({
+    section,
+    children,
+    breakPoints,
+    boxed,
+    classes,
+    dataLoading
+}) => {
     const [slidesPerBp, setSlidesPerBp] = useState(getSlidesPerBp(breakPoints));
 
     useEffect(() => {
@@ -26,11 +33,15 @@ const SliderList = ({ section, children, breakPoints, boxed, classes }) => {
                     boxed ? 'mt-12' : 'mt-24'
                 } mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${classes}`}>
                 <SectionTitle section={section} />
-                <div>
-                    <CarouselCards scrollSlides={slidesPerBp}>
-                        {children}
-                    </CarouselCards>
-                </div>
+                {!dataLoading ? (
+                    <div>
+                        <CarouselCards scrollSlides={slidesPerBp}>
+                            {children}
+                        </CarouselCards>
+                    </div>
+                ) : (
+                    children
+                )}
             </div>
         </>
     );

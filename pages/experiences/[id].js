@@ -228,7 +228,7 @@ export async function getServerSideProps({ params }) {
     const response = await fetch(`${API_URL}/experiences/${params.id}`);
     const data = await response.json();
 
-    const allExpResponse = await fetch(`${API_URL_MOCK}/api/experiences`);
+    const allExpResponse = await fetch(`${API_URL}/experiences`);
     const allExpData = await allExpResponse.json();
 
     return {

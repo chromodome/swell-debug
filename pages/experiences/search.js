@@ -9,10 +9,13 @@ import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-import { API_URL_MOCK } from '@/config/index';
+import { API_URL, API_URL_MOCK } from '@/config/index';
 import ButtonsRow from '@/blocks/Button/ButtonsRow';
 import Row from '@/sections/Row';
-import { getExperiences } from '../../helpers/apiServices/experiences';
+import {
+    getExperiences,
+    getLatestExperiences
+} from '../../helpers/apiServices/experiences';
 import { getAllTags } from '../../helpers/apiServices/tags';
 
 export default function SearchPage({
@@ -21,7 +24,8 @@ export default function SearchPage({
     dataDestinations,
     dataFeatured,
     dataCollections,
-    dataExperinces,
+    dataExperiences,
+    dataTrending,
     tags
 }) {
     const { lang } = useContext(AuthContext);
@@ -43,10 +47,13 @@ export default function SearchPage({
             dispatch({ type: 'addAllTags', payload: tags });
         }
         if (search.experiences.length === 0) {
-            dispatch({ type: 'addAllExperiences', payload: dataExperinces });
+            dispatch({ type: 'addAllExperiences', payload: dataExperiences });
         }
     }, [search.tags, search.experiences]);
 
+    useEffect(() => {
+        console.log('axios', dataTrending.data.experiences);
+    }, []);
     return (
         <Layout>
             <Row classes="mt-20">
@@ -61,7 +68,7 @@ export default function SearchPage({
                         ? `We found ${filteredExperiences.length} experience${
                               filteredExperiences.length > 1 ? 's' : ''
                           }`
-                        : `We didn't found any experience. `}
+                        : `We didn't find any experience. `}
                 </h3>
                 <ButtonsRow
                     type="exception"
@@ -94,14 +101,14 @@ export default function SearchPage({
             />
             <SliderExperiences
                 sectionTitles={translations[lang].sections.trendingThisWeek}
-                data={dataNewThisMonth}
+                data={dataTrending.data.experiences}
             />
         </Layout>
     );
 }
 
 export async function getServerSideProps() {
-    const res1 = await fetch(`${API_URL_MOCK}/api/experiences`);
+    const res1 = await fetch(`${API_URL}/experiences`);
     const dataNewThisMonth = await res1.json();
 
     const res2 = await fetch(`${API_URL_MOCK}/api/interests`);
@@ -118,6 +125,8 @@ export async function getServerSideProps() {
 
     const { data: experiences } = await getExperiences();
 
+    const { data: dataTrending } = await getLatestExperiences();
+
     const { data: tags } = await getAllTags();
 
     return {
@@ -127,7 +136,8 @@ export async function getServerSideProps() {
             dataDestinations,
             dataFeatured,
             dataCollections,
-            dataExperinces: experiences,
+            dataExperiences: experiences,
+            dataTrending,
             tags
         }
     };
