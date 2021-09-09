@@ -7,7 +7,7 @@ const tmpUser1 = {
     lastname: 'Hafiz',
     handle: '@wolfalpha',
     email: 'mahmoud@viakonnect.com',
-    image: 'https://ucarecdn.com/5122fb4e-54fc-4da6-9a2f-24aeb634e61f/mahmoud_avatar.jpg',
+    image: 'https://ucarecdn.com/5122fb4e-54fc-4da6-9a2f-24aeb634e61f/mahmoud_avatar.jpg'
 };
 
 const tmpUser2 = null;
@@ -16,20 +16,20 @@ const tmpTopBar = {
     pill: {
         bgColor: 'bg-white',
         textColor: 'text-black',
-        text: 'COVID 19',
+        text: 'COVID 19'
     },
     bar: {
         bgColor: 'bg-gray-600',
         textColor: 'text-black',
-        text: 'Find out about our COVID 19 response',
+        text: 'Find out about our COVID 19 response'
     },
-    link: 'https://kreator.viakonnect.com',
+    link: 'https://kreator.viakonnect.com'
 };
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(tmpUser1);
+    const [user, setUser] = useState(tmpUser2);
     const [error, setError] = useState(null);
     const [lang, setLang] = useState('en');
     const [rtl, setRtl] = useState(false);
@@ -44,9 +44,9 @@ export const AuthProvider = ({ children }) => {
         const res = await fetch(`${NEXT_URL}/api/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(user)
         });
 
         const data = await res.json();
@@ -65,12 +65,12 @@ export const AuthProvider = ({ children }) => {
         const res = await fetch(`${NEXT_URL}/api/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 identifier,
-                password,
-            }),
+                password
+            })
         });
 
         const data = await res.json();
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     // Logout user
     const logout = async () => {
         const res = await fetch(`${NEXT_URL}/api/logout`, {
-            method: 'POST',
+            method: 'POST'
         });
 
         if (res.ok) {
@@ -122,9 +122,8 @@ export const AuthProvider = ({ children }) => {
                 register,
                 login,
                 logout,
-                topBar,
-            }}
-        >
+                topBar
+            }}>
             {children}
         </AuthContext.Provider>
     );
