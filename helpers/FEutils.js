@@ -76,3 +76,15 @@ export const testValidUrl = (str) => {
 
     return regexp.test(str);
 };
+
+export const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+};
+
+export const kreatorName = (profile) => {
+    return profile?.displayname || profile?.first;
+};
+
+export const getDays = (days) => {
+    return `${days}  ${days > 1 ? 'Days' : 'Day'}`;
+};

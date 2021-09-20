@@ -29,10 +29,10 @@ const SliderList = ({
     return (
         <>
             <div
-                className={`z-100 mb-12 ${
+                className={`overflow-x-hidden z-100 mb-12 ${
                     boxed ? 'mt-12' : 'mt-24'
                 } mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${classes}`}>
-                <SectionTitle section={section} />
+                {section && <SectionTitle section={section} />}
                 {!dataLoading ? (
                     <div>
                         <CarouselCards scrollSlides={slidesPerBp}>

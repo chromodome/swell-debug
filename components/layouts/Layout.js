@@ -15,7 +15,7 @@ export default function Layout({ title, keywords, description, children }) {
 
             <Header />
             <TopBar />
-            <div className="overflow-x-hidden">{children}</div>
+            <div className="overflow-x2-hidden">{children}</div>
             <Footer />
         </div>
     );

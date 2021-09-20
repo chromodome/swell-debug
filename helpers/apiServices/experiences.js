@@ -1,22 +1,92 @@
 import { makeRequest } from './makeRequest';
 import { API_URL } from '../../config';
 
-const getExperiences = () => {
+export const getExperiences = () => {
     return makeRequest({
         url: `${API_URL}/experiences`,
         method: 'GET'
     });
 };
 
-const getExperienceById = (id) => {
+export const getExperienceById = (id) => {
     return makeRequest({
-        url: `${API_URL}/experiences`,
+        url: `${API_URL}/publisheds`,
         method: 'GET',
         params: {
             id
         }
     });
 };
+
+export const getExperiencesByCreator = (id) => {
+    const newRequest = makeRequest({
+        url: `${API_URL}/graphql`,
+        method: 'post',
+        data: {
+            query: `
+                    query fetchExperienceById {
+                        publisheds (where: {isPublished: true, user:${id}}, limit: 12, start: 0, sort: "createdAt:desc")
+                        {
+                            id,
+                            experience_id,
+                            isPublished,
+                            short_content,
+                            type,
+                            experience_price,
+                            tags,
+                            cats,
+                            createdAt,
+                            user {
+                                username,
+                                profile {
+                                    first,
+                                    last,
+                                    displayname,
+                                    avatar
+                                }
+                            }
+                        }
+                    }`
+        }
+    });
+
+    return newRequest;
+};
+
+// const getExperienceById = (id) => {
+//     const newRequest = makeRequest({
+//         url: `${API_URL}/graphql`,
+//         method: 'post',
+//         data: {
+//             query: `
+//                     query fetchExperienceById {
+//                         publisheds (where: {isPublished: true, id:${id}})
+//                         {
+//                             id,
+//                             experience_id,
+//                             isPublished,
+//                             short_content,
+//                             content,
+//                             type,
+//                             experience_price,
+//                             tags,
+//                             cats,
+//                             createdAt,
+//                             user {
+//                                 username,
+//                                 profile {
+//                                     first,
+//                                     last,
+//                                     avatar
+//                                 }
+//                             }
+//                         }
+//                     }`
+//         }
+//     });
+
+//     return newRequest;
+// };
 
 export const getLandingPage = () => {
     const newRequest = makeRequest({
@@ -43,7 +113,10 @@ export const getLandingPage = () => {
                       id
                       username
                       profile {
+                        first
+                        last
                         avatar
+                        displayname,
                       }
                     }
                   }
@@ -66,8 +139,10 @@ export const getLandingPage = () => {
                   user {
                     username
                     profile {
-                      first
-                      last
+                        first
+                        last
+                        avatar
+                        displayname,
                     }
                   }
                 }
@@ -103,7 +178,10 @@ export const getLandingPage = () => {
                     id
                     username
                     profile {
-                      avatar
+                        first
+                        last
+                        avatar
+                        displayname,
                     }
                   }
                 }
@@ -116,7 +194,7 @@ export const getLandingPage = () => {
                 }
                 exp_trending: publisheds(
                   where: { isPublished: true }
-                  limit: 15
+                  limit: 45
                   start: 0
                   sort: "createdAt:desc"
                 ) {
@@ -131,8 +209,10 @@ export const getLandingPage = () => {
                   user {
                     username
                     profile {
-                      first
-                      last
+                        first
+                        last
+                        avatar
+                        displayname,
                     }
                   }
                 }
@@ -143,7 +223,7 @@ export const getLandingPage = () => {
     return newRequest;
 };
 
-const getLatestExperiences = (qty) => {
+export const getLatestExperiences = (qty) => {
     const newRequest = makeRequest({
         url: `${API_URL}/graphql`,
         method: 'post',
@@ -164,8 +244,10 @@ const getLatestExperiences = (qty) => {
                             user {
                                 username,
                                 profile {
-                                    first,
+                                    first
                                     last
+                                    avatar
+                                    displayname,
                                 }
                             }
                         }
@@ -199,4 +281,4 @@ const getLatestExperiences2 = (qty) => {
     });
 };
 
-export { getExperiences, getExperienceById, getLatestExperiences };
+// export { getExperiences, getExperienceById, getLatestExperiences };

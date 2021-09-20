@@ -16,17 +16,11 @@ import {
 } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
 
-export default function HomePage({
-    // dataLanding,
-    dataInterests,
-    dataDestinations,
-    dataFeatured,
-    dataCollections
-}) {
+export default function HomePage() {
     const { lang } = useContext(AuthContext);
     const [dataLanding, setDataLanding] = useState(null);
     const [dataLoading, setDataLoading] = useState(true);
-    // const { data: dataLanding } = await getLandingPage();
+
     useEffect(() => {
         const importData = async () => {
             const newData = await getLandingPage();

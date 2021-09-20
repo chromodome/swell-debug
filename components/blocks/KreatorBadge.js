@@ -16,7 +16,9 @@ const KreatorBadge = ({ author, baseUrl, nolink }) => {
                         alt=""
                     /> */}
                         <div className="h-8 bg-green-500 z-0 text-xs text-gray-900 flex items-center pl-10 pr-4 rounded-full transform-gpu transition-all duration-300 -translate-x-full group-scope-hover:translate-x-0">
-                            {author?.username}
+                            {author?.profile?.displayname
+                                ? author.profile.displayname
+                                : author.username}
                         </div>
                     </a>
                 </Link>
@@ -29,7 +31,9 @@ const KreatorBadge = ({ author, baseUrl, nolink }) => {
                     alt=""
                 /> */}
                     <div className="h-8 bg-green-500 z-0 text-xs text-gray-900 flex items-center pl-10 pr-4 rounded-full transform-gpu transition-all duration-300 -translate-x-full group-scope-hover:translate-x-0">
-                        {author?.username}
+                        {author?.profile?.displayname
+                            ? author.profile.displayname
+                            : author.username}
                     </div>
                 </div>
             )}

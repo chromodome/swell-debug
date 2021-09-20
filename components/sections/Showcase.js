@@ -2,6 +2,9 @@ import { Pill__Logo, Pill__Experience } from '@/blocks/Pills';
 
 import ButtonCard from '@/blocks/Button/ButtonCard';
 import { randomItem } from '@/helpers/FEutils';
+import Avatar from 'components/specialty/Avatar';
+import Link from 'next/link';
+import KreatorBadgeStatic from '../blocks/KreatorBadgeStatic';
 
 const Showcase = ({
     data,
@@ -36,7 +39,7 @@ const Showcase = ({
         <div className={`w-full h-128 relative pt-1`}>
             <div
                 style={{ zIndex: '-50' }}
-                className="z-1 absolute inset-0 overflow-hidden bg-cyan-100 opacity-100">
+                className="z-1 absolute inset-0 overflow-hidden bg-gray-200">
                 <img
                     data-blink-src={data.image}
                     className={`object-cover w-full h-full ${
@@ -80,22 +83,9 @@ const Showcase = ({
                 className={`z-100 mb-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40`}>
                 <div className={`z-100 px-4 mt-20`}>
                     {data.username && (
-                        <div
-                            className={`${
-                                dark ? 'text-white' : 'text-gray-800'
-                            } text-base mb-8 flex items-center `}>
-                            <div className="rounded-full bg-green-400 h-8 flex items-center text-gray-900 text-xs font-bold shadow-2xl-green-500">
-                                {/* <img
-                                src={author.username}
-                                className='object-cover rounded-full w-8 h-8 -mr-3'
-                                alt=''
-                            /> */}
-
-                                <span className="px-6">
-                                    @{data.user_id.username}
-                                </span>
-                            </div>
-                        </div>
+                        <>
+                            <KreatorBadgeStatic author={data?.user_id} />
+                        </>
                     )}
                     <div
                         className={`inline-flex ${

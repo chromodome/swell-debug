@@ -1,11 +1,11 @@
-const Avatar = ({ profile, card }) => {
+const Avatar = ({ profile, card, size = 'w-8 h-8' }) => {
     return (
         <div className={`${card ? 'absolute z-100 inline-block' : ''}`}>
             <div
-                className={`${
-                    card ? 'w-8 h-8 text-xs' : 'h-10 w-10'
+                className={`${size} ${
+                    card ? 'text-xs' : ''
                 } rounded-full flex justify-center items-center bg-green-500 text-white overflow-hidden`}>
-                {profile?.avatar ? (
+                {profile?.avatar && profile?.avatar != 'null' ? (
                     <img
                         src={profile.avatar}
                         className="object-cover w-full h-full"
