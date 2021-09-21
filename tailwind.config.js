@@ -101,6 +101,7 @@ module.exports = {
             '6xl-green-center': '0 15px 50px 0 rgba(0, 128, 87,  0.6)',
             'xl-green': '0 6px 20px  rgba(0, 128, 87,  0.4)',
             cards: '0 25px 50px -12px rgba(0, 128, 87,  0.14)',
+            'cards-blue': '0 25px 50px -12px rgba(0, 85, 128,  0.14)',
             images: '0 25px 40px -12px rgba(70, 128, 87,  0.4)',
             'cards-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.14)',
             'images-top': '0 -25px 40px -12px rgba(70, 128, 87,  0.4)',

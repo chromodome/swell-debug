@@ -31,6 +31,10 @@ import KreatorBadgeStatic from '@/components/blocks/KreatorBadgeStatic';
 import { capitalize, getDays, kreatorName } from '@/helpers/FEutils';
 import DestinationMap from '@/components/blocks/Map/DestinationMap';
 import ExpSubsection from '@/components/sections/ExpSubsection';
+import DestinationList from '@/components/blocks/Map/DestinationList';
+import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
+import AccommodationMap from '@/components/blocks/Map/AccommodationMap';
+import AccommodationList from '@/components/blocks/Map/AccommodationList';
 
 const options = {
     settings: {
@@ -158,6 +162,7 @@ export default function ExperienceDetail({ dataExperience }) {
         cats,
         guided_extra,
         experience_price,
+        experience_id,
         user,
         user: { profile }
     } = dataExperience[0];
@@ -188,7 +193,7 @@ export default function ExperienceDetail({ dataExperience }) {
             <Layout>
                 <SRLWrapper elements={expImages} options={options} />
                 <div
-                    className={`z-100 mb-12 mt-16 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-6xl`}>
+                    className={`z-100 mb-6 mt-16 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                     <div className={`px-4`}>
                         <div className="inline-flex text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-1 flex-shrink-0 flex-initial">
                             {title}
@@ -313,18 +318,19 @@ export default function ExperienceDetail({ dataExperience }) {
                     className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                     <main className={`px-4 flex items-start gap-12`}>
                         <section className="md:w-4/6 mb-24">
-                            <ExpSubsection className="border-b border-gray-300 pb-6 mb-12">
+                            <ExpSubsection className="border-b border-green-600 border-opacity-20 pb-6 mb-12">
                                 <div className="flex justify-between ">
                                     <div>
                                         <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-2">
                                             {`A ${capitalize(
                                                 type
-                                            )} Experience by ${kreatorName(
+                                            )} Experience by`}{' '}
+                                            <span className="underline ml-2 text-green-700">{`${kreatorName(
                                                 profile
-                                            )}`}
+                                            )}`}</span>
                                         </div>
                                         <div className=" text-sm text-gray-600">
-                                            {getDays(days)} · Brazil
+                                            Available in English
                                         </div>
                                     </div>
                                     <KreatorBadgeStatic
@@ -343,15 +349,50 @@ export default function ExperienceDetail({ dataExperience }) {
                                             .description_html
                                     }}
                                 />
+                                <BestTimeToGoRanges
+                                    timeRange={
+                                        content.best_time_to_go.time_range
+                                    }
+                                />
                             </ExpSubsection>
 
                             <ExpSubsection>
                                 <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6">
                                     {`Where you'll go and what you'll do`}
                                 </div>
-
+                                <div
+                                    className="text-gray-800 leading-7"
+                                    dangerouslySetInnerHTML={{
+                                        __html: content.destination
+                                            .description_html
+                                    }}
+                                />
+                                <DestinationList
+                                    destinations={content.destination.locations}
+                                />
                                 <DestinationMap
                                     destinations={content.destination.locations}
+                                />
+                            </ExpSubsection>
+
+                            <ExpSubsection>
+                                <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6">
+                                    {`Where you'll stay`}
+                                </div>
+                                <div
+                                    className="text-gray-800 leading-7 mb-12"
+                                    dangerouslySetInnerHTML={{
+                                        __html: content.accommodation
+                                            .description_html
+                                    }}
+                                />
+                                <AccommodationList
+                                    locations={content.accommodation.locations}
+                                />
+                                <AccommodationMap
+                                    locations={content.accommodation.locations}
+                                    showCountryLayer={false}
+                                    showCircleLayer={false}
                                 />
                             </ExpSubsection>
                         </section>
@@ -365,13 +406,9 @@ export default function ExperienceDetail({ dataExperience }) {
                                 ) : (
                                     <BuyingCard
                                         setOpenBookingModal={openBookingModal}
-                                        price={Number('50')}
-                                        desc="Cras sit amet libero tempus, convallis lectus in,
-                            venenatis dui. Sed sed euismod sem, dictum commodo
-                            ipsum. Cras pellentesque ornare facilisis. Curabitur
-                            finibus laoreet lorem, vitae elementum nisi varius et.
-                            Praesent feugiat laoreet vulputate. Integer id aliquam
-                            dolor."
+                                        price={experience_price.price.price}
+                                        desc="For a limited time only, you can try our experiences for free!"
+                                        expId={experience_id}
                                     />
                                 )}
                             </div>
@@ -443,15 +480,6 @@ export default function ExperienceDetail({ dataExperience }) {
                     price={'50'}
                     onClose={() => setOpened(false)}
                 />
-                <Row classes="mt-20 mb-12 mx-4">
-                    <Buttons__NextPrev
-                        prev
-                        icon="SHORT"
-                        label="All Experiences"
-                        buttonClasses="w-full max-w-max pl-4 pr-4 bg-kn-white"
-                        goBackBtn
-                    />
-                </Row>
 
                 {false && (
                     <Row classes="grid grid-cols-3 grid-rows-2 gap-3 mb-12">
@@ -491,13 +519,8 @@ export default function ExperienceDetail({ dataExperience }) {
                             ) : (
                                 <BuyingCard
                                     setOpenBookingModal={openBookingModal}
-                                    price={Number('50')}
-                                    desc="Cras sit amet libero tempus, convallis lectus in,
-                            venenatis dui. Sed sed euismod sem, dictum commodo
-                            ipsum. Cras pellentesque ornare facilisis. Curabitur
-                            finibus laoreet lorem, vitae elementum nisi varius et.
-                            Praesent feugiat laoreet vulputate. Integer id aliquam
-                            dolor."
+                                    price={experience_price.price.price}
+                                    desc="For a limited time only, you can try our experiences for free!"
                                 />
                             )}
                         </div>
@@ -523,45 +546,6 @@ export default function ExperienceDetail({ dataExperience }) {
                         </div>
                     </Row>
                 )}
-                <Row classes="mb-12 pr-4 pl-4">
-                    <ListWithIcon
-                        title="Included"
-                        items={[
-                            { icon: null, value: 'airport transfer' },
-                            { icon: null, value: 'accommodation' },
-                            { icon: null, value: 'food' },
-                            { icon: null, value: 'entries' },
-                            { icon: null, value: 'activity equipment' }
-                        ]}
-                    />
-                </Row>
-                {type === 'guided' ? (
-                    <Row classes="mb-12">
-                        <JourneyDaySlider
-                            day="1"
-                            data={[
-                                {
-                                    title: 'Gear up',
-                                    desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                                    img: featured_image,
-                                    time: '9.30 AM'
-                                },
-                                {
-                                    title: 'Start',
-                                    desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                                    img: featured_image,
-                                    time: '10.00 AM'
-                                },
-                                {
-                                    title: 'Start',
-                                    desc: 'Prepare all the gear and start a 300m upward journey with your mates',
-                                    img: featured_image,
-                                    time: '10.00 AM'
-                                }
-                            ]}
-                        />
-                    </Row>
-                ) : null}
 
                 <Row classes="mb-12 lg:w-3/4">
                     <BlockTitle
@@ -571,10 +555,9 @@ export default function ExperienceDetail({ dataExperience }) {
                     />
                     <div className="flex justify-between">
                         <p className="md:mr-4 lg:mr-8">
-                            If you or the people accompanying you have any
-                            speacial needs, please reach out to us via the
-                            contact button to see if we can accommodate your
-                            needs.
+                            If you have any special requests, please reach out
+                            to us via the contact button to see if we can
+                            accommodate your needs.
                         </p>
                         <Button type="outlined" rounded="lg">
                             Konnect with us
@@ -582,32 +565,8 @@ export default function ExperienceDetail({ dataExperience }) {
                     </div>
                 </Row>
                 <Row classes="mb-16 flex justify-center">
-                    <ButtonLoad label="Wonder NOW" />
+                    <ButtonLoad label="Try out this Experience" />
                 </Row>
-                {/* <SliderExperiences
-                    sectionTitles={{
-                        title: 'Other wanders by Nazar',
-                        subTitle: ''
-                    }}
-                    data={allExpData}
-                /> */}
-                <Row classes="mb-12">
-                    <KreatorSection author={user} />
-                </Row>
-                {/* <SliderExperiences
-                    sectionTitles={{
-                        title: 'Similar wanders by other Kreators',
-                        subTitle: ''
-                    }}
-                    data={allExpData}
-                /> */}
-                {/* <SliderExperiences
-                    sectionTitles={{
-                        title: 'Trending wanders',
-                        subTitle: ''
-                    }}
-                    data={allExpData}
-                /> */}
             </Layout>
         </>
     ) : (
@@ -617,82 +576,10 @@ export default function ExperienceDetail({ dataExperience }) {
 
 export async function getServerSideProps({ params }) {
     const { data: dataExperience } = await getExperienceById(params.id);
-    // const response = await fetch(`${API_URL}/experiences/${params.id}`);
-    // const data = await response.json();
-
-    // const allExpResponse = await fetch(`${API_URL}/experiences`);
-    // const allExpData = await allExpResponse.json();
 
     return {
         props: {
             dataExperience
-            // data,
-            // allExpData
         }
     };
-}
-
-// export async function getServerSideProps() {
-//     const { data: dataLanding } = await getLandingPage();
-//     const res1 = await fetch(`${API_URL}/experiences`);
-//     const dataNewThisMonth = await res1.json();
-//     const res4 = await fetch(`${API_URL_MOCK}/api/featured`);
-//     const dataFeatured = await res4.json();
-//     const res5 = await fetch(`${API_URL_MOCK}/api/collections`);
-//     const dataCollections = await res5.json();
-//     return {
-//         props: {
-//             dataLanding,
-//             dataFeatured,
-//             dataCollections
-//         }
-//     };
-// }
-
-{
-    /* <div className="w-1/2">
-                            <ImageHover
-                                url={expImages[0]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[0]}
-                            />
-                        </div>
-                        <div className="w-1/2 grid grid-rows-3 grid-flow-col gap-2">
-                            <ImageHover
-                                url={expImages[1]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[1]}
-                                className="row-span-2"
-                            />
-                            <ImageHover
-                                url={expImages[2]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[2]}
-                                className="row-span-1"
-                            />
-                            <ImageHover
-                                url={expImages[3]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[3]}
-                                className="row-span-1"
-                            />
-                            <ImageHover
-                                url={expImages[4]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[4]}
-                                className="row-span-2"
-                            />
-                            <ImageHover
-                                url={expImages[5]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[5]}
-                                className="row-span-2"
-                            />
-                            <ImageHover
-                                url={expImages[6]?.src}
-                                handleActionBtn={lightBoxHandler}
-                                params={[6]}
-                                className="row-span-1"
-                            />
-                        </div> */
 }

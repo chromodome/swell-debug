@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockTitle from '@/blocks/Title/BlockTitle';
-import ButtonLoad from '@/blocks/Button/ButtonLoad';
+import ButtonLink from '@/blocks/Button/ButtonLink';
 
 const BookingCard = ({
     handleSubmit = () => {},
@@ -8,26 +8,28 @@ const BookingCard = ({
     price = 0,
     desc = '',
     children,
-    setOpenBookingModal
+    setOpenBookingModal,
+    expId
 }) => {
     return (
         <div
-            className={`flex flex-col p-4 bg-kn-white rounded-lg shadow-lg ${classes} `}>
+            className={`flex flex-col p-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
             <BlockTitle
-                text="Buying window"
+                text="Digital Download"
                 component={3}
                 classes="flex px-4 mb-4"
             />
             <form
                 onSubmit={handleSubmit}
                 className="h-full flex items-center flex-col justify-between">
-                <div className="px-4 mb-4">
+                <div className="px-4 mb-4 text-sm">
                     <p className="mb-4">Price: ${price}</p>
                     <p>{desc}</p>
                 </div>
-                <ButtonLoad
-                    label="Wander NOW"
+                <ButtonLink
+                    label="Try it Now"
                     handleClick={setOpenBookingModal}
+                    expId={expId}
                 />
                 {children}
             </form>

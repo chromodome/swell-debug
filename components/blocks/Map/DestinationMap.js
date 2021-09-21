@@ -19,7 +19,8 @@ const mapContainerStyle = {
 };
 
 const mapOptions = {
-    zoomControl: false,
+    zoomControl: true,
+    scrollwheel: false,
     mapTypeControl: false,
     scaleControl: false,
     streetViewControl: false,
@@ -48,7 +49,13 @@ const options = {
     zIndex: 1
 };
 
-const DestinationMap = ({ loading = false, error = false, destinations }) => {
+const DestinationMap = ({
+    loading = false,
+    error = false,
+    destinations,
+    showCountryLayer = true,
+    showCircleLayer = true
+}) => {
     const rtl = false;
 
     const { isLoaded, loadError } = useLoadScript({
@@ -272,9 +279,9 @@ const DestinationMap = ({ loading = false, error = false, destinations }) => {
                         onClick={null}
                         onLoad={onMapLoad}
                         onIdle={onMapIdle}>
-                        {countryLayer && buildCountries()}
+                        {showCountryLayer && countryLayer && buildCountries()}
                         {buildMarkers()}
-                        {buildCircles()}
+                        {showCircleLayer && buildCircles()}
                     </GoogleMap>
                 </div>
             </div>

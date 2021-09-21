@@ -72,6 +72,75 @@ const langData = {
                 title: 'Trending this week',
                 subTitle: 'Check what other wanderers are looking for'
             }
+        },
+        components: {
+            bestTimeToGo: {
+                // Full Months
+                UI_DATE_MONTH_FULL_1: 'January',
+                UI_DATE_MONTH_FULL_2: 'February',
+                UI_DATE_MONTH_FULL_3: 'March',
+                UI_DATE_MONTH_FULL_4: 'April',
+                UI_DATE_MONTH_FULL_5: 'May',
+                UI_DATE_MONTH_FULL_6: 'June',
+                UI_DATE_MONTH_FULL_7: 'July',
+                UI_DATE_MONTH_FULL_8: 'August',
+                UI_DATE_MONTH_FULL_9: 'September',
+                UI_DATE_MONTH_FULL_10: 'October',
+                UI_DATE_MONTH_FULL_11: 'November',
+                UI_DATE_MONTH_FULL_12: 'December',
+
+                // 3 Letter or short months
+                UI_DATE_MONTH_SHORT_1: 'Jan',
+                UI_DATE_MONTH_SHORT_2: 'Feb',
+                UI_DATE_MONTH_SHORT_3: 'Mar',
+                UI_DATE_MONTH_SHORT_4: 'Apr',
+                UI_DATE_MONTH_SHORT_5: 'May',
+                UI_DATE_MONTH_SHORT_6: 'Jun',
+                UI_DATE_MONTH_SHORT_7: 'Jul',
+                UI_DATE_MONTH_SHORT_8: 'Aug',
+                UI_DATE_MONTH_SHORT_9: 'Sep',
+                UI_DATE_MONTH_SHORT_10: 'Oct',
+                UI_DATE_MONTH_SHORT_11: 'Nov',
+                UI_DATE_MONTH_SHORT_12: 'Dec'
+            },
+            hotelInfo: {
+                // Accommodation refs
+
+                ACC_HOTEL: 'Hotel',
+                ACC_MOTEL: 'Motel',
+                ACC_APARTMENT: 'Apartment',
+                ACC_CHALET: 'Chalet',
+                ACC_COTTAGE: 'Cottage',
+                ACC_LOG_CABIN: 'Log Cabin',
+                ACC_CAMPING_TENT: 'Camping Site',
+                ACC_CAMPING_SITE: 'Camping Site',
+                ACC_TEPEE: 'Tepee',
+                ACC_RESORT: 'Resort',
+                ACC_BED_N_BREAKFAST: 'Bed and Breakfast',
+                ACC_APART_HOTEL: 'Apart Hotel',
+                ACC_GUEST_HOUSE: 'Guest House',
+                ACC_YOUTH_HOSTEL: 'Youth Hostel',
+                ACC_BOAT: 'Boat',
+                ACC_CAMPER: 'Camper',
+                ACC_YURT: 'Yurt',
+                ACC_TREEHOUSE: 'Treehouse',
+
+                ACC_STAR1: '1 Star',
+                ACC_STAR2: '2 Stars',
+                ACC_STAR3: '3 Stars',
+                ACC_STAR4: '4 Stars',
+                ACC_STAR5: '5 Stars',
+                ACC_NA: 'Rating Not available',
+                ACC_BOUTIQUE: 'Boutique Hotel',
+
+                ACC_LUXURIOUS: 'Lurxurious',
+                ACC_UPSCALE: 'Upscale',
+                ACC_HOMEY: 'Homey',
+                ACC_COSEY: 'Cosey',
+                ACC_HIP: 'Hip / Trendy',
+                ACC_FAMILY: 'Family Friendly',
+                ACC_CORPORATE: 'Corporate'
+            }
         }
     },
     ar: {

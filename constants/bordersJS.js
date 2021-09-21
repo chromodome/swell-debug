@@ -1,7 +1,7 @@
 export const borders = {
-    "FJ": {
-        name: "Fiji",
-        type: "MultiPolygon",
+    FJ: {
+        name: 'Fiji',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -99,9 +99,9 @@ export const borders = {
             ]
         ]
     },
-    "TZ": {
-        name: "Tanzania",
-        type: "Polygon",
+    TZ: {
+        name: 'Tanzania',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 33.90371119710453,
@@ -313,9 +313,9 @@ export const borders = {
             }
         ]
     },
-    "EH": {
-        name: "Western Sahara",
-        type: "Polygon",
+    EH: {
+        name: 'Western Sahara',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -8.665589565454809,
@@ -431,9 +431,9 @@ export const borders = {
             }
         ]
     },
-    "CA": {
-        name: "Canada",
-        type: "MultiPolygon",
+    CA: {
+        name: 'Canada',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -3673,9 +3673,9 @@ export const borders = {
             ]
         ]
     },
-    "US": {
-        name: "United States of America",
-        type: "MultiPolygon",
+    US: {
+        name: 'United States of America',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -5487,9 +5487,9 @@ export const borders = {
             ]
         ]
     },
-    "KZ": {
-        name: "Kazakhstan",
-        type: "Polygon",
+    KZ: {
+        name: 'Kazakhstan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 87.35997033076265,
@@ -5941,9 +5941,9 @@ export const borders = {
             }
         ]
     },
-    "UZ": {
-        name: "Uzbekistan",
-        type: "Polygon",
+    UZ: {
+        name: 'Uzbekistan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 55.96819135928291,
@@ -6163,9 +6163,9 @@ export const borders = {
             }
         ]
     },
-    "PG": {
-        name: "Papua New Guinea",
-        type: "MultiPolygon",
+    PG: {
+        name: 'Papua New Guinea',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -6501,9 +6501,9 @@ export const borders = {
             ]
         ]
     },
-    "ID": {
-        name: "Indonesia",
-        type: "MultiPolygon",
+    ID: {
+        name: 'Indonesia',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -7533,9 +7533,9 @@ export const borders = {
             ]
         ]
     },
-    "AR": {
-        name: "Argentina",
-        type: "MultiPolygon",
+    AR: {
+        name: 'Argentina',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -8027,9 +8027,9 @@ export const borders = {
             ]
         ]
     },
-    "CL": {
-        name: "Chile",
-        type: "MultiPolygon",
+    CL: {
+        name: 'Chile',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -8493,9 +8493,9 @@ export const borders = {
             ]
         ]
     },
-    "CD": {
-        name: "Congo, Dem. Rep.",
-        type: "Polygon",
+    CD: {
+        name: 'Congo, Dem. Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 29.339997592900346,
@@ -8995,9 +8995,9 @@ export const borders = {
             }
         ]
     },
-    "SO": {
-        name: "Somalia",
-        type: "Polygon",
+    SO: {
+        name: 'Somalia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 41.58513,
@@ -9149,9 +9149,9 @@ export const borders = {
             }
         ]
     },
-    "KE": {
-        name: "Kenya",
-        type: "Polygon",
+    KE: {
+        name: 'Kenya',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 39.20222,
@@ -9303,9 +9303,9 @@ export const borders = {
             }
         ]
     },
-    "SD": {
-        name: "Sudan",
-        type: "Polygon",
+    SD: {
+        name: 'Sudan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 24.567369012152085,
@@ -9633,9 +9633,9 @@ export const borders = {
             }
         ]
     },
-    "TD": {
-        name: "Chad",
-        type: "Polygon",
+    TD: {
+        name: 'Chad',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 23.83766000000014,
@@ -9871,9 +9871,9 @@ export const borders = {
             }
         ]
     },
-    "HT": {
-        name: "Haiti",
-        type: "Polygon",
+    HT: {
+        name: 'Haiti',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -71.71236141629296,
@@ -9961,9 +9961,9 @@ export const borders = {
             }
         ]
     },
-    "DO": {
-        name: "Dominican Republic",
-        type: "Polygon",
+    DO: {
+        name: 'Dominican Republic',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -71.70830481635805,
@@ -10071,9 +10071,9 @@ export const borders = {
             }
         ]
     },
-    "RU": {
-        name: "Russian Federation",
-        type: "MultiPolygon",
+    RU: {
+        name: 'Russian Federation',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -12605,9 +12605,9 @@ export const borders = {
             ]
         ]
     },
-    "BS": {
-        name: "Bahamas, The",
-        type: "MultiPolygon",
+    BS: {
+        name: 'Bahamas, The',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -12701,9 +12701,9 @@ export const borders = {
             ]
         ]
     },
-    "FK": {
-        name: "Falkland Islands",
-        type: "Polygon",
+    FK: {
+        name: 'Falkland Islands',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -61.2,
@@ -12747,84 +12747,10 @@ export const borders = {
             }
         ]
     },
-    "NO": {
-        name: "Norway",
-        type: "MultiPolygon",
+    NO: {
+        name: 'Norway',
+        type: 'MultiPolygon',
         coordinates: [
-            [
-                {
-                    lng: 15.14282,
-                    lat: 79.67431
-                },
-                {
-                    lng: 15.52255,
-                    lat: 80.01608
-                },
-                {
-                    lng: 16.99085,
-                    lat: 80.05086
-                },
-                {
-                    lng: 18.25183,
-                    lat: 79.70175
-                },
-                {
-                    lng: 21.54383,
-                    lat: 78.95611
-                },
-                {
-                    lng: 19.02737,
-                    lat: 78.5626
-                },
-                {
-                    lng: 18.47172,
-                    lat: 77.82669
-                },
-                {
-                    lng: 17.59441,
-                    lat: 77.63796
-                },
-                {
-                    lng: 17.1182,
-                    lat: 76.80941
-                },
-                {
-                    lng: 15.91315,
-                    lat: 76.77045
-                },
-                {
-                    lng: 13.76259,
-                    lat: 77.38035
-                },
-                {
-                    lng: 14.66956,
-                    lat: 77.73565
-                },
-                {
-                    lng: 13.1706,
-                    lat: 78.02493
-                },
-                {
-                    lng: 11.22231,
-                    lat: 78.8693
-                },
-                {
-                    lng: 10.44453,
-                    lat: 79.65239
-                },
-                {
-                    lng: 13.17077,
-                    lat: 80.01046
-                },
-                {
-                    lng: 13.71852,
-                    lat: 79.66039
-                },
-                {
-                    lng: 15.14282,
-                    lat: 79.67431
-                }
-            ],
             [
                 {
                     lng: 31.101042202597625,
@@ -13026,96 +12952,12 @@ export const borders = {
                     lng: 31.101042202597625,
                     lat: 69.55810108805622
                 }
-            ],
-            [
-                {
-                    lng: 27.407505730913446,
-                    lat: 80.05640574820042
-                },
-                {
-                    lng: 25.92465050629815,
-                    lat: 79.51783397085451
-                },
-                {
-                    lng: 23.024465773213617,
-                    lat: 79.40001170522903
-                },
-                {
-                    lng: 20.075188429451828,
-                    lat: 79.56682322866722
-                },
-                {
-                    lng: 19.897266473070914,
-                    lat: 79.84236196564747
-                },
-                {
-                    lng: 18.462263624757867,
-                    lat: 79.85988027619443
-                },
-                {
-                    lng: 17.368015170977458,
-                    lat: 80.31889618602698
-                },
-                {
-                    lng: 20.45599205901064,
-                    lat: 80.59815562613225
-                },
-                {
-                    lng: 21.907944777115404,
-                    lat: 80.35767934846204
-                },
-                {
-                    lng: 22.91925255706738,
-                    lat: 80.65714427359343
-                },
-                {
-                    lng: 25.447625359811866,
-                    lat: 80.40734039989452
-                },
-                {
-                    lng: 27.407505730913446,
-                    lat: 80.05640574820042
-                }
-            ],
-            [
-                {
-                    lng: 24.72412,
-                    lat: 77.85385
-                },
-                {
-                    lng: 22.49032,
-                    lat: 77.44493
-                },
-                {
-                    lng: 20.72601,
-                    lat: 77.67704
-                },
-                {
-                    lng: 21.41611,
-                    lat: 77.93504
-                },
-                {
-                    lng: 20.8119,
-                    lat: 78.25463
-                },
-                {
-                    lng: 22.88426,
-                    lat: 78.45494
-                },
-                {
-                    lng: 23.28134,
-                    lat: 78.07954
-                },
-                {
-                    lng: 24.72412,
-                    lat: 77.85385
-                }
             ]
         ]
     },
-    "GL": {
-        name: "Greenland",
-        type: "Polygon",
+    GL: {
+        name: 'Greenland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -46.76379,
@@ -13647,10 +13489,10 @@ export const borders = {
             }
         ]
     },
-    
-    "TL": {
-        name: "Timor-Leste",
-        type: "Polygon",
+
+    TL: {
+        name: 'Timor-Leste',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 124.96868248911623,
@@ -13698,9 +13540,9 @@ export const borders = {
             }
         ]
     },
-    "ZA": {
-        name: "South Africa",
-        type: "Polygon",
+    ZA: {
+        name: 'South Africa',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 16.344976840895242,
@@ -14032,9 +13874,9 @@ export const borders = {
             }
         ]
     },
-    "LS": {
-        name: "Lesotho",
-        type: "Polygon",
+    LS: {
+        name: 'Lesotho',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 28.978262566857243,
@@ -14086,9 +13928,9 @@ export const borders = {
             }
         ]
     },
-    "MX": {
-        name: "Mexico",
-        type: "Polygon",
+    MX: {
+        name: 'Mexico',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -117.12775999999985,
@@ -14772,9 +14614,9 @@ export const borders = {
             }
         ]
     },
-    "UY": {
-        name: "Uruguay",
-        type: "Polygon",
+    UY: {
+        name: 'Uruguay',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -57.62513342958296,
@@ -14862,9 +14704,9 @@ export const borders = {
             }
         ]
     },
-    "BR": {
-        name: "Brazil",
-        type: "Polygon",
+    BR: {
+        name: 'Brazil',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -53.373661668498244,
@@ -15680,9 +15522,9 @@ export const borders = {
             }
         ]
     },
-    "BO": {
-        name: "Bolivia",
-        type: "Polygon",
+    BO: {
+        name: 'Bolivia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -69.52967810736496,
@@ -15926,9 +15768,9 @@ export const borders = {
             }
         ]
     },
-    "PE": {
-        name: "Peru",
-        type: "Polygon",
+    PE: {
+        name: 'Peru',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -69.89363521999663,
@@ -16236,9 +16078,9 @@ export const borders = {
             }
         ]
     },
-    "CO": {
-        name: "Colombia",
-        type: "Polygon",
+    CO: {
+        name: 'Colombia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -66.87632585312258,
@@ -16642,9 +16484,9 @@ export const borders = {
             }
         ]
     },
-    "PA": {
-        name: "Panama",
-        type: "Polygon",
+    PA: {
+        name: 'Panama',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -77.35336076527386,
@@ -16856,9 +16698,9 @@ export const borders = {
             }
         ]
     },
-    "CR": {
-        name: "Costa Rica",
-        type: "Polygon",
+    CR: {
+        name: 'Costa Rica',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -82.54619625520348,
@@ -17006,9 +16848,9 @@ export const borders = {
             }
         ]
     },
-    "NI": {
-        name: "Nicaragua",
-        type: "Polygon",
+    NI: {
+        name: 'Nicaragua',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -83.65561174186158,
@@ -17220,9 +17062,9 @@ export const borders = {
             }
         ]
     },
-    "HN": {
-        name: "Honduras",
-        type: "Polygon",
+    HN: {
+        name: 'Honduras',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -83.14721900097413,
@@ -17454,9 +17296,9 @@ export const borders = {
             }
         ]
     },
-    "SV": {
-        name: "El Salvador",
-        type: "Polygon",
+    SV: {
+        name: 'El Salvador',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -89.35332597528281,
@@ -17540,9 +17382,9 @@ export const borders = {
             }
         ]
     },
-    "GT": {
-        name: "Guatemala",
-        type: "Polygon",
+    GT: {
+        name: 'Guatemala',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -92.22775000686983,
@@ -17686,9 +17528,9 @@ export const borders = {
             }
         ]
     },
-    "BZ": {
-        name: "Belize",
-        type: "Polygon",
+    BZ: {
+        name: 'Belize',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -89.14308041050333,
@@ -17772,9 +17614,9 @@ export const borders = {
             }
         ]
     },
-    "VE": {
-        name: "Venezuela, RB",
-        type: "Polygon",
+    VE: {
+        name: 'Venezuela, RB',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -60.73357418480372,
@@ -18146,9 +17988,9 @@ export const borders = {
             }
         ]
     },
-    "GY": {
-        name: "Guyana",
-        type: "Polygon",
+    GY: {
+        name: 'Guyana',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -56.539385748914555,
@@ -18312,9 +18154,9 @@ export const borders = {
             }
         ]
     },
-    "SR": {
-        name: "Suriname",
-        type: "Polygon",
+    SR: {
+        name: 'Suriname',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -54.524754197799716,
@@ -18422,9 +18264,9 @@ export const borders = {
             }
         ]
     },
-    "FR": {
-        name: "France",
-        type: "MultiPolygon",
+    FR: {
+        name: 'France',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -18730,9 +18572,9 @@ export const borders = {
             ]
         ]
     },
-    "EC": {
-        name: "Ecuador",
-        type: "Polygon",
+    EC: {
+        name: 'Ecuador',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -75.37322323271385,
@@ -18868,9 +18710,9 @@ export const borders = {
             }
         ]
     },
-    "PR": {
-        name: "Puerto Rico",
-        type: "Polygon",
+    PR: {
+        name: 'Puerto Rico',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -66.28243445500821,
@@ -18910,9 +18752,9 @@ export const borders = {
             }
         ]
     },
-    "JM": {
-        name: "Jamaica",
-        type: "Polygon",
+    JM: {
+        name: 'Jamaica',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -77.56960079619921,
@@ -18960,9 +18802,9 @@ export const borders = {
             }
         ]
     },
-    "CU": {
-        name: "Cuba",
-        type: "Polygon",
+    CU: {
+        name: 'Cuba',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -82.26815121125706,
@@ -19134,9 +18976,9 @@ export const borders = {
             }
         ]
     },
-    "ZW": {
-        name: "Zimbabwe",
-        type: "Polygon",
+    ZW: {
+        name: 'Zimbabwe',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 31.19140913262129,
@@ -19288,9 +19130,9 @@ export const borders = {
             }
         ]
     },
-    "BW": {
-        name: "Botswana",
-        type: "Polygon",
+    BW: {
+        name: 'Botswana',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 29.43218834810904,
@@ -19454,9 +19296,9 @@ export const borders = {
             }
         ]
     },
-    "NA": {
-        name: "Namibia",
-        type: "Polygon",
+    NA: {
+        name: 'Namibia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 19.895767856534434,
@@ -19636,9 +19478,9 @@ export const borders = {
             }
         ]
     },
-    "SN": {
-        name: "Senegal",
-        type: "Polygon",
+    SN: {
+        name: 'Senegal',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -16.71372880702347,
@@ -19818,9 +19660,9 @@ export const borders = {
             }
         ]
     },
-    "ML": {
-        name: "Mali",
-        type: "Polygon",
+    ML: {
+        name: 'Mali',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -11.51394283695059,
@@ -20128,9 +19970,9 @@ export const borders = {
             }
         ]
     },
-    "MR": {
-        name: "Mauritania",
-        type: "Polygon",
+    MR: {
+        name: 'Mauritania',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -17.06342322434257,
@@ -20290,9 +20132,9 @@ export const borders = {
             }
         ]
     },
-    "BJ": {
-        name: "Benin",
-        type: "Polygon",
+    BJ: {
+        name: 'Benin',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 2.691701694356254,
@@ -20396,9 +20238,9 @@ export const borders = {
             }
         ]
     },
-    "NE": {
-        name: "Niger",
-        type: "Polygon",
+    NE: {
+        name: 'Niger',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 14.8513,
@@ -20634,9 +20476,9 @@ export const borders = {
             }
         ]
     },
-    "NG": {
-        name: "Nigeria",
-        type: "Polygon",
+    NG: {
+        name: 'Nigeria',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 2.691701694356254,
@@ -20872,9 +20714,9 @@ export const borders = {
             }
         ]
     },
-    "CM": {
-        name: "Cameroon",
-        type: "Polygon",
+    CM: {
+        name: 'Cameroon',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 14.495787387762846,
@@ -21122,9 +20964,9 @@ export const borders = {
             }
         ]
     },
-    "TG": {
-        name: "Togo",
-        type: "Polygon",
+    TG: {
+        name: 'Togo',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 0.899563022474069,
@@ -21204,9 +21046,9 @@ export const borders = {
             }
         ]
     },
-    "GH": {
-        name: "Ghana",
-        type: "Polygon",
+    GH: {
+        name: 'Ghana',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 0.023802524423701,
@@ -21310,9 +21152,9 @@ export const borders = {
             }
         ]
     },
-    "CI": {
+    CI: {
         name: "Côte d'Ivoire",
-        type: "Polygon",
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -8.029943610048619,
@@ -21500,9 +21342,9 @@ export const borders = {
             }
         ]
     },
-    "GN": {
-        name: "Guinea",
-        type: "Polygon",
+    GN: {
+        name: 'Guinea',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -13.700476040084325,
@@ -21786,9 +21628,9 @@ export const borders = {
             }
         ]
     },
-    "GW": {
-        name: "Guinea-Bissau",
-        type: "Polygon",
+    GW: {
+        name: 'Guinea-Bissau',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -16.677451951554573,
@@ -21868,9 +21710,9 @@ export const borders = {
             }
         ]
     },
-    "LR": {
-        name: "Liberia",
-        type: "Polygon",
+    LR: {
+        name: 'Liberia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -8.439298468448698,
@@ -21982,9 +21824,9 @@ export const borders = {
             }
         ]
     },
-    "SL": {
-        name: "Sierra Leone",
-        type: "Polygon",
+    SL: {
+        name: 'Sierra Leone',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -13.246550258832515,
@@ -22076,9 +21918,9 @@ export const borders = {
             }
         ]
     },
-    "BF": {
-        name: "Burkina Faso",
-        type: "Polygon",
+    BF: {
+        name: 'Burkina Faso',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -5.404341599946974,
@@ -22238,9 +22080,9 @@ export const borders = {
             }
         ]
     },
-    "CF": {
-        name: "Central African Republic",
-        type: "Polygon",
+    CF: {
+        name: 'Central African Republic',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 27.37422610851749,
@@ -22492,9 +22334,9 @@ export const borders = {
             }
         ]
     },
-    "CG": {
-        name: "Congo, Rep.",
-        type: "Polygon",
+    CG: {
+        name: 'Congo, Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 18.45306521980993,
@@ -22694,9 +22536,9 @@ export const borders = {
             }
         ]
     },
-    "GA": {
-        name: "Gabon",
-        type: "Polygon",
+    GA: {
+        name: 'Gabon',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 11.276449008843713,
@@ -22824,9 +22666,9 @@ export const borders = {
             }
         ]
     },
-    "GQ": {
-        name: "Equatorial Guinea",
-        type: "Polygon",
+    GQ: {
+        name: 'Equatorial Guinea',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 9.649158155972628,
@@ -22858,9 +22700,9 @@ export const borders = {
             }
         ]
     },
-    "ZM": {
-        name: "Zambia",
-        type: "Polygon",
+    ZM: {
+        name: 'Zambia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 30.740009731422095,
@@ -23108,9 +22950,9 @@ export const borders = {
             }
         ]
     },
-    "MW": {
-        name: "Malawi",
-        type: "Polygon",
+    MW: {
+        name: 'Malawi',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 32.75937544122132,
@@ -23226,9 +23068,9 @@ export const borders = {
             }
         ]
     },
-    "MZ": {
-        name: "Mozambique",
-        type: "Polygon",
+    MZ: {
+        name: 'Mozambique',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 34.55998904799935,
@@ -23548,9 +23390,9 @@ export const borders = {
             }
         ]
     },
-    "SZ": {
-        name: "eSwatini",
-        type: "Polygon",
+    SZ: {
+        name: 'eSwatini',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 32.07166548028107,
@@ -23598,9 +23440,9 @@ export const borders = {
             }
         ]
     },
-    "AO": {
-        name: "Angola",
-        type: "MultiPolygon",
+    AO: {
+        name: 'Angola',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -23908,9 +23750,9 @@ export const borders = {
             ]
         ]
     },
-    "BI": {
-        name: "Burundi",
-        type: "Polygon",
+    BI: {
+        name: 'Burundi',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 30.469673645761223,
@@ -23966,9 +23808,9 @@ export const borders = {
             }
         ]
     },
-    "IL": {
-        name: "Israel",
-        type: "Polygon",
+    IL: {
+        name: 'Israel',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 35.71991824722275,
@@ -24076,9 +23918,9 @@ export const borders = {
             }
         ]
     },
-    "LB": {
-        name: "Lebanon",
-        type: "Polygon",
+    LB: {
+        name: 'Lebanon',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 35.82110070165024,
@@ -24126,9 +23968,9 @@ export const borders = {
             }
         ]
     },
-    "MG": {
-        name: "Madagascar",
-        type: "Polygon",
+    MG: {
+        name: 'Madagascar',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 49.54351891459575,
@@ -24328,9 +24170,9 @@ export const borders = {
             }
         ]
     },
-    "PS": {
-        name: "Palestine (West Bank and Gaza)",
-        type: "Polygon",
+    PS: {
+        name: 'Palestine (West Bank and Gaza)',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 35.397560662586045,
@@ -24370,9 +24212,9 @@ export const borders = {
             }
         ]
     },
-    "GM": {
-        name: "Gambia, The",
-        type: "Polygon",
+    GM: {
+        name: 'Gambia, The',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -16.71372880702347,
@@ -24440,9 +24282,9 @@ export const borders = {
             }
         ]
     },
-    "TN": {
-        name: "Tunisia",
-        type: "Polygon",
+    TN: {
+        name: 'Tunisia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 9.482139926805274,
@@ -24570,9 +24412,9 @@ export const borders = {
             }
         ]
     },
-    "DZ": {
-        name: "Algeria",
-        type: "Polygon",
+    DZ: {
+        name: 'Algeria',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -8.684399786809053,
@@ -24824,9 +24666,9 @@ export const borders = {
             }
         ]
     },
-    "JO": {
-        name: "Jordan",
-        type: "Polygon",
+    JO: {
+        name: 'Jordan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 35.54566531753454,
@@ -24906,9 +24748,9 @@ export const borders = {
             }
         ]
     },
-    "AE": {
-        name: "United Arab Emirates",
-        type: "Polygon",
+    AE: {
+        name: 'United Arab Emirates',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 51.57951867046327,
@@ -25000,9 +24842,9 @@ export const borders = {
             }
         ]
     },
-    "QA": {
-        name: "Qatar",
-        type: "Polygon",
+    QA: {
+        name: 'Qatar',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 50.81010827006958,
@@ -25042,9 +24884,9 @@ export const borders = {
             }
         ]
     },
-    "KW": {
-        name: "Kuwait",
-        type: "Polygon",
+    KW: {
+        name: 'Kuwait',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 47.974519077349896,
@@ -25084,9 +24926,9 @@ export const borders = {
             }
         ]
     },
-    "IQ": {
-        name: "Iraq",
-        type: "Polygon",
+    IQ: {
+        name: 'Iraq',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 39.19546837744497,
@@ -25210,9 +25052,9 @@ export const borders = {
             }
         ]
     },
-    "OM": {
-        name: "Oman",
-        type: "MultiPolygon",
+    OM: {
+        name: 'Oman',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -25408,9 +25250,9 @@ export const borders = {
             ]
         ]
     },
-    "VU": {
-        name: "Vanuatu",
-        type: "MultiPolygon",
+    VU: {
+        name: 'Vanuatu',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -25466,9 +25308,9 @@ export const borders = {
             ]
         ]
     },
-    "KH": {
-        name: "Cambodia",
-        type: "Polygon",
+    KH: {
+        name: 'Cambodia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 102.5849324890267,
@@ -25540,9 +25382,9 @@ export const borders = {
             }
         ]
     },
-    "TH": {
-        name: "Thailand",
-        type: "Polygon",
+    TH: {
+        name: 'Thailand',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 105.21877689007889,
@@ -25802,9 +25644,9 @@ export const borders = {
             }
         ]
     },
-    "LA": {
-        name: "Lao PDR",
-        type: "Polygon",
+    LA: {
+        name: 'Lao PDR',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 107.38272749230109,
@@ -25956,9 +25798,9 @@ export const borders = {
             }
         ]
     },
-    "MM": {
-        name: "Myanmar",
-        type: "Polygon",
+    MM: {
+        name: 'Myanmar',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 100.11598758341785,
@@ -26242,9 +26084,9 @@ export const borders = {
             }
         ]
     },
-    "VN": {
-        name: "Vietnam",
-        type: "Polygon",
+    VN: {
+        name: 'Vietnam',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 104.33433475140347,
@@ -26424,9 +26266,9 @@ export const borders = {
             }
         ]
     },
-    "KP": {
-        name: "Korea, Dem. Rep.",
-        type: "MultiPolygon",
+    KP: {
+        name: 'Korea, Dem. Rep.',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -26626,9 +26468,9 @@ export const borders = {
             ]
         ]
     },
-    "KR": {
-        name: "Korea, Rep.",
-        type: "Polygon",
+    KR: {
+        name: 'Korea, Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 126.17475874237624,
@@ -26708,9 +26550,9 @@ export const borders = {
             }
         ]
     },
-    "MN": {
-        name: "Mongolia",
-        type: "Polygon",
+    MN: {
+        name: 'Mongolia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 87.75126427607671,
@@ -27014,9 +26856,9 @@ export const borders = {
             }
         ]
     },
-    "IN": {
-        name: "India",
-        type: "Polygon",
+    IN: {
+        name: 'India',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 97.32711388549004,
@@ -27564,9 +27406,9 @@ export const borders = {
             }
         ]
     },
-    "BD": {
-        name: "Bangladesh",
-        type: "Polygon",
+    BD: {
+        name: 'Bangladesh',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 92.67272098182556,
@@ -27714,9 +27556,9 @@ export const borders = {
             }
         ]
     },
-    "BT": {
-        name: "Bhutan",
-        type: "Polygon",
+    BT: {
+        name: 'Bhutan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 91.69665652869668,
@@ -27772,9 +27614,9 @@ export const borders = {
             }
         ]
     },
-    "NP": {
-        name: "Nepal",
-        type: "Polygon",
+    NP: {
+        name: 'Nepal',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 88.12044070836987,
@@ -27870,9 +27712,9 @@ export const borders = {
             }
         ]
     },
-    "PK": {
-        name: "Pakistan",
-        type: "Polygon",
+    PK: {
+        name: 'Pakistan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 77.83745079947457,
@@ -28140,9 +27982,9 @@ export const borders = {
             }
         ]
     },
-    "AF": {
-        name: "Afghanistan",
-        type: "Polygon",
+    AF: {
+        name: 'Afghanistan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 66.51860680528867,
@@ -28422,9 +28264,9 @@ export const borders = {
             }
         ]
     },
-    "TJ": {
-        name: "Tajikistan",
-        type: "Polygon",
+    TJ: {
+        name: 'Tajikistan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 67.82999962755952,
@@ -28592,9 +28434,9 @@ export const borders = {
             }
         ]
     },
-    "KG": {
-        name: "Kyrgyz Republic",
-        type: "Polygon",
+    KG: {
+        name: 'Kyrgyz Republic',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 70.96231489449914,
@@ -28738,9 +28580,9 @@ export const borders = {
             }
         ]
     },
-    "TM": {
-        name: "Turkmenistan",
-        type: "Polygon",
+    TM: {
+        name: 'Turkmenistan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 52.50245975119615,
@@ -28960,9 +28802,9 @@ export const borders = {
             }
         ]
     },
-    "IR": {
-        name: "Iran, Islamic Rep.",
-        type: "Polygon",
+    IR: {
+        name: 'Iran, Islamic Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 48.567971225789755,
@@ -29270,9 +29112,9 @@ export const borders = {
             }
         ]
     },
-    "SY": {
-        name: "Syrian Arab Republic",
-        type: "Polygon",
+    SY: {
+        name: 'Syrian Arab Republic',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 35.71991824722275,
@@ -29384,9 +29226,9 @@ export const borders = {
             }
         ]
     },
-    "AM": {
-        name: "Armenia",
-        type: "Polygon",
+    AM: {
+        name: 'Armenia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 46.50571984231797,
@@ -29470,9 +29312,9 @@ export const borders = {
             }
         ]
     },
-    "SE": {
-        name: "Sweden",
-        type: "Polygon",
+    SE: {
+        name: 'Sweden',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 11.027368605196868,
@@ -29636,9 +29478,9 @@ export const borders = {
             }
         ]
     },
-    "BY": {
-        name: "Belarus",
-        type: "Polygon",
+    BY: {
+        name: 'Belarus',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 28.17670942557794,
@@ -29822,9 +29664,9 @@ export const borders = {
             }
         ]
     },
-    "UA": {
-        name: "Ukraine",
-        type: "Polygon",
+    UA: {
+        name: 'Ukraine',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 31.78599244755525,
@@ -30200,9 +30042,9 @@ export const borders = {
             }
         ]
     },
-    "PL": {
-        name: "Poland",
-        type: "Polygon",
+    PL: {
+        name: 'Poland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 23.48412763844985,
@@ -30386,9 +30228,9 @@ export const borders = {
             }
         ]
     },
-    "AT": {
-        name: "Austria",
-        type: "Polygon",
+    AT: {
+        name: 'Austria',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 16.979666782304037,
@@ -30540,9 +30382,9 @@ export const borders = {
             }
         ]
     },
-    "HU": {
-        name: "Hungary",
-        type: "Polygon",
+    HU: {
+        name: 'Hungary',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 22.085608351334855,
@@ -30674,9 +30516,9 @@ export const borders = {
             }
         ]
     },
-    "MD": {
-        name: "Moldova",
-        type: "Polygon",
+    MD: {
+        name: 'Moldova',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 26.619336785597795,
@@ -30788,9 +30630,9 @@ export const borders = {
             }
         ]
     },
-    "RO": {
-        name: "Romania",
-        type: "Polygon",
+    RO: {
+        name: 'Romania',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 28.23355350109904,
@@ -30970,9 +30812,9 @@ export const borders = {
             }
         ]
     },
-    "LT": {
-        name: "Lithuania",
-        type: "Polygon",
+    LT: {
+        name: 'Lithuania',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 26.494331495883756,
@@ -31052,9 +30894,9 @@ export const borders = {
             }
         ]
     },
-    "LV": {
-        name: "Latvia",
-        type: "Polygon",
+    LV: {
+        name: 'Latvia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 27.288184848751513,
@@ -31146,9 +30988,9 @@ export const borders = {
             }
         ]
     },
-    "EE": {
-        name: "Estonia",
-        type: "Polygon",
+    EE: {
+        name: 'Estonia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 27.981126857000987,
@@ -31228,9 +31070,9 @@ export const borders = {
             }
         ]
     },
-    "DE": {
-        name: "Germany",
-        type: "Polygon",
+    DE: {
+        name: 'Germany',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 14.119686313542559,
@@ -31466,9 +31308,9 @@ export const borders = {
             }
         ]
     },
-    "BG": {
-        name: "Bulgaria",
-        type: "Polygon",
+    BG: {
+        name: 'Bulgaria',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 22.65714969248299,
@@ -31584,9 +31426,9 @@ export const borders = {
             }
         ]
     },
-    "GR": {
-        name: "Greece",
-        type: "MultiPolygon",
+    GR: {
+        name: 'Greece',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -31810,9 +31652,9 @@ export const borders = {
             ]
         ]
     },
-    "TR": {
-        name: "Turkey",
-        type: "MultiPolygon",
+    TR: {
+        name: 'Turkey',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -32092,9 +31934,9 @@ export const borders = {
             ]
         ]
     },
-    "AL": {
-        name: "Albania",
-        type: "Polygon",
+    AL: {
+        name: 'Albania',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 21.0200403174764,
@@ -32194,9 +32036,9 @@ export const borders = {
             }
         ]
     },
-    "HR": {
-        name: "Croatia",
-        type: "Polygon",
+    HR: {
+        name: 'Croatia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 16.564808383864857,
@@ -32372,9 +32214,9 @@ export const borders = {
             }
         ]
     },
-    "CH": {
-        name: "Switzerland",
-        type: "Polygon",
+    CH: {
+        name: 'Switzerland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 9.59422610844635,
@@ -32474,9 +32316,9 @@ export const borders = {
             }
         ]
     },
-    "LU": {
-        name: "Luxembourg",
-        type: "Polygon",
+    LU: {
+        name: 'Luxembourg',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 6.043073357781111,
@@ -32508,9 +32350,9 @@ export const borders = {
             }
         ]
     },
-    "BE": {
-        name: "Belgium",
-        type: "Polygon",
+    BE: {
+        name: 'Belgium',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 6.15665815595878,
@@ -32582,9 +32424,9 @@ export const borders = {
             }
         ]
     },
-    "NL": {
-        name: "Netherlands",
-        type: "Polygon",
+    NL: {
+        name: 'Netherlands',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 6.905139601274129,
@@ -32648,9 +32490,9 @@ export const borders = {
             }
         ]
     },
-    "PT": {
-        name: "Portugal",
-        type: "Polygon",
+    PT: {
+        name: 'Portugal',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -9.034817674180246,
@@ -32786,9 +32628,9 @@ export const borders = {
             }
         ]
     },
-    "ES": {
-        name: "Spain",
-        type: "Polygon",
+    ES: {
+        name: 'Spain',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -7.453725551778092,
@@ -32996,9 +32838,9 @@ export const borders = {
             }
         ]
     },
-    "IE": {
-        name: "Ireland",
-        type: "Polygon",
+    IE: {
+        name: 'Ireland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -6.197884894220991,
@@ -33054,9 +32896,9 @@ export const borders = {
             }
         ]
     },
-    "NC": {
-        name: "New Caledonia",
-        type: "Polygon",
+    NC: {
+        name: 'New Caledonia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 165.77998986232637,
@@ -33112,9 +32954,9 @@ export const borders = {
             }
         ]
     },
-    "SB": {
-        name: "Solomon Islands",
-        type: "MultiPolygon",
+    SB: {
+        name: 'Solomon Islands',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -33276,9 +33118,9 @@ export const borders = {
             ]
         ]
     },
-    "NZ": {
-        name: "New Zealand",
-        type: "MultiPolygon",
+    NZ: {
+        name: 'New Zealand',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -33550,9 +33392,9 @@ export const borders = {
             ]
         ]
     },
-    "AU": {
-        name: "Australia",
-        type: "MultiPolygon",
+    AU: {
+        name: 'Australia',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -34524,9 +34366,9 @@ export const borders = {
             ]
         ]
     },
-    "LK": {
-        name: "Sri Lanka",
-        type: "Polygon",
+    LK: {
+        name: 'Sri Lanka',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 81.7879590188914,
@@ -34570,9 +34412,9 @@ export const borders = {
             }
         ]
     },
-    "CN": {
-        name: "China",
-        type: "MultiPolygon",
+    CN: {
+        name: 'China',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -35540,9 +35382,9 @@ export const borders = {
             ]
         ]
     },
-    "TW": {
-        name: "Taiwan",
-        type: "Polygon",
+    TW: {
+        name: 'Taiwan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 121.77781782438993,
@@ -35582,9 +35424,9 @@ export const borders = {
             }
         ]
     },
-    "IT": {
-        name: "Italy",
-        type: "MultiPolygon",
+    IT: {
+        name: 'Italy',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -35942,9 +35784,9 @@ export const borders = {
             ]
         ]
     },
-    "DK": {
-        name: "Denmark",
-        type: "MultiPolygon",
+    DK: {
+        name: 'Denmark',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -36048,9 +35890,9 @@ export const borders = {
             ]
         ]
     },
-    "GB": {
-        name: "United Kingdom",
-        type: "MultiPolygon",
+    GB: {
+        name: 'United Kingdom',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -36282,9 +36124,9 @@ export const borders = {
             ]
         ]
     },
-    "IS": {
-        name: "Iceland",
-        type: "Polygon",
+    IS: {
+        name: 'Iceland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -14.508695441129234,
@@ -36368,9 +36210,9 @@ export const borders = {
             }
         ]
     },
-    "AZ": {
-        name: "Azerbaijan",
-        type: "MultiPolygon",
+    AZ: {
+        name: 'Azerbaijan',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -36554,9 +36396,9 @@ export const borders = {
             ]
         ]
     },
-    "GE": {
-        name: "Georgia",
-        type: "Polygon",
+    GE: {
+        name: 'Georgia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 39.955008579270924,
@@ -36656,9 +36498,9 @@ export const borders = {
             }
         ]
     },
-    "PH": {
-        name: "Philippines",
-        type: "MultiPolygon",
+    PH: {
+        name: 'Philippines',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -37116,9 +36958,9 @@ export const borders = {
             ]
         ]
     },
-    "MY": {
-        name: "Malaysia",
-        type: "MultiPolygon",
+    MY: {
+        name: 'Malaysia',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -37374,9 +37216,9 @@ export const borders = {
             ]
         ]
     },
-    "BN": {
-        name: "Brunei",
-        type: "Polygon",
+    BN: {
+        name: 'Brunei',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 115.45071048386981,
@@ -37412,9 +37254,9 @@ export const borders = {
             }
         ]
     },
-    "SI": {
-        name: "Slovenia",
-        type: "Polygon",
+    SI: {
+        name: 'Slovenia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 13.806475457421527,
@@ -37490,9 +37332,9 @@ export const borders = {
             }
         ]
     },
-    "FI": {
-        name: "Finland",
-        type: "Polygon",
+    FI: {
+        name: 'Finland',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 28.591929559043194,
@@ -37656,9 +37498,9 @@ export const borders = {
             }
         ]
     },
-    "SK": {
-        name: "Slovak Republic",
-        type: "Polygon",
+    SK: {
+        name: 'Slovak Republic',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 22.558137648211755,
@@ -37794,9 +37636,9 @@ export const borders = {
             }
         ]
     },
-    "CZ": {
-        name: "Czechia",
-        type: "Polygon",
+    CZ: {
+        name: 'Czechia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 15.01699588385867,
@@ -37940,9 +37782,9 @@ export const borders = {
             }
         ]
     },
-    "ER": {
-        name: "Eritrea",
-        type: "Polygon",
+    ER: {
+        name: 'Eritrea',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 36.42951,
@@ -38058,9 +37900,9 @@ export const borders = {
             }
         ]
     },
-    "JP": {
-        name: "Japan",
-        type: "MultiPolygon",
+    JP: {
+        name: 'Japan',
+        type: 'MultiPolygon',
         coordinates: [
             [
                 {
@@ -38330,9 +38172,9 @@ export const borders = {
             ]
         ]
     },
-    "PY": {
-        name: "Paraguay",
-        type: "Polygon",
+    PY: {
+        name: 'Paraguay',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -58.166392381408045,
@@ -38468,9 +38310,9 @@ export const borders = {
             }
         ]
     },
-    "YE": {
-        name: "Yemen, Rep.",
-        type: "Polygon",
+    YE: {
+        name: 'Yemen, Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 52.00000980002224,
@@ -38650,9 +38492,9 @@ export const borders = {
             }
         ]
     },
-    "SA": {
-        name: "Saudi Arabia",
-        type: "Polygon",
+    SA: {
+        name: 'Saudi Arabia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 34.95603722508426,
@@ -38960,11 +38802,10 @@ export const borders = {
             }
         ]
     },
-    
-    
-    "CY": {
-        name: "Cyprus",
-        type: "Polygon",
+
+    CY: {
+        name: 'Cyprus',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 32.73178022637745,
@@ -39028,9 +38869,9 @@ export const borders = {
             }
         ]
     },
-    "MA": {
-        name: "Morocco",
-        type: "Polygon",
+    MA: {
+        name: 'Morocco',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -2.169913702798624,
@@ -39286,9 +39127,9 @@ export const borders = {
             }
         ]
     },
-    "EG": {
-        name: "Egypt, Arab Rep.",
-        type: "Polygon",
+    EG: {
+        name: 'Egypt, Arab Rep.',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 36.86623,
@@ -39468,9 +39309,9 @@ export const borders = {
             }
         ]
     },
-    "LY": {
-        name: "Libya",
-        type: "Polygon",
+    LY: {
+        name: 'Libya',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 25,
@@ -39698,9 +39539,9 @@ export const borders = {
             }
         ]
     },
-    "ET": {
-        name: "Ethiopia",
-        type: "Polygon",
+    ET: {
+        name: 'Ethiopia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 47.78942,
@@ -39940,9 +39781,9 @@ export const borders = {
             }
         ]
     },
-    "DJ": {
-        name: "Djibouti",
-        type: "Polygon",
+    DJ: {
+        name: 'Djibouti',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 42.35156000000012,
@@ -40006,9 +39847,9 @@ export const borders = {
             }
         ]
     },
-    "UG": {
-        name: "Uganda",
-        type: "Polygon",
+    UG: {
+        name: 'Uganda',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 33.90371119710453,
@@ -40124,9 +39965,9 @@ export const borders = {
             }
         ]
     },
-    "RW": {
-        name: "Rwanda",
-        type: "Polygon",
+    RW: {
+        name: 'Rwanda',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 30.419104852019245,
@@ -40186,9 +40027,9 @@ export const borders = {
             }
         ]
     },
-    "BA": {
-        name: "Bosnia and Herzegovina",
-        type: "Polygon",
+    BA: {
+        name: 'Bosnia and Herzegovina',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 18.56,
@@ -40284,9 +40125,9 @@ export const borders = {
             }
         ]
     },
-    "MK": {
-        name: "Macedonia, FYR",
-        type: "Polygon",
+    MK: {
+        name: 'Macedonia, FYR',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 22.380525750424592,
@@ -40362,9 +40203,9 @@ export const borders = {
             }
         ]
     },
-    "RS": {
-        name: "Serbia",
-        type: "Polygon",
+    RS: {
+        name: 'Serbia',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 18.829824792873946,
@@ -40560,9 +40401,9 @@ export const borders = {
             }
         ]
     },
-    "ME": {
-        name: "Montenegro",
-        type: "Polygon",
+    ME: {
+        name: 'Montenegro',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 20.0707,
@@ -40638,9 +40479,9 @@ export const borders = {
             }
         ]
     },
-    "XK": {
-        name: "Kosovo",
-        type: "Polygon",
+    XK: {
+        name: 'Kosovo',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 20.590246546680227,
@@ -40728,9 +40569,9 @@ export const borders = {
             }
         ]
     },
-    "TT": {
-        name: "Trinidad and Tobago",
-        type: "Polygon",
+    TT: {
+        name: 'Trinidad and Tobago',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: -61.68,
@@ -40766,9 +40607,9 @@ export const borders = {
             }
         ]
     },
-    "SS": {
-        name: "South Sudan",
-        type: "Polygon",
+    SS: {
+        name: 'South Sudan',
+        type: 'Polygon',
         coordinates: [
             {
                 lng: 30.833852421715427,
@@ -41024,4 +40865,4 @@ export const borders = {
             }
         ]
     }
-}
+};
