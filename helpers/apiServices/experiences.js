@@ -8,15 +8,15 @@ export const getExperiences = () => {
     });
 };
 
-export const getExperienceById = (id) => {
-    return makeRequest({
-        url: `${API_URL}/publisheds`,
-        method: 'GET',
-        params: {
-            id
-        }
-    });
-};
+// export const getExperienceById = (id) => {
+//     return makeRequest({
+//         url: `${API_URL}/publisheds`,
+//         method: 'GET',
+//         params: {
+//             id
+//         }
+//     });
+// };
 
 export const getExperiencesByCreator = (id) => {
     const newRequest = makeRequest({
@@ -53,40 +53,80 @@ export const getExperiencesByCreator = (id) => {
     return newRequest;
 };
 
-// const getExperienceById = (id) => {
-//     const newRequest = makeRequest({
-//         url: `${API_URL}/graphql`,
-//         method: 'post',
-//         data: {
-//             query: `
-//                     query fetchExperienceById {
-//                         publisheds (where: {isPublished: true, id:${id}})
-//                         {
-//                             id,
-//                             experience_id,
-//                             isPublished,
-//                             short_content,
-//                             content,
-//                             type,
-//                             experience_price,
-//                             tags,
-//                             cats,
-//                             createdAt,
-//                             user {
-//                                 username,
-//                                 profile {
-//                                     first,
-//                                     last,
-//                                     avatar
-//                                 }
-//                             }
-//                         }
-//                     }`
-//         }
-//     });
+export const getExperienceById = (id) => {
+    const newRequest = makeRequest({
+        url: `${API_URL}/graphql`,
+        method: 'post',
+        data: {
+            query: `
+                    query fetchExperienceById {
+                        publisheds (where: {isPublished: true, id: "${id}"})
+                        {
+                            id,
+                            experience_id,
+                            isPublished,
+                            short_content,
+                            content,
+                            type,
+                            experience_price,
+                            tags,
+                            cats,
+                            createdAt,
+                            user {
+                                username,
+                                profile {
+                                    first,
+                                    last,
+                                    avatar
+                                }
+                            }
+                        }
+                    }`
+        }
+    });
 
-//     return newRequest;
-// };
+    return newRequest;
+};
+
+export const getArticleById = (id) => {
+    const newRequest = makeRequest({
+        url: `${API_URL}/graphql`,
+        method: 'post',
+        data: {
+            query: `
+                        query fetchHelpArticle {
+                            marketplaceHelps (where: { help_id: "${id}"}) {
+                            help_id
+                            order_id
+                            menu_name
+                            page_name
+                            content
+                            marketplace_topic {
+                                type
+                                topic_id
+                                menu_name
+                            }
+                            
+                            }
+                            
+                            marketplaceTopics (where: { type: "help"}, , sort: "order_id") {
+                            topic_id
+                            menu_name
+                            page_name
+                            child_pages (sort: "order_id"){
+                                help_id
+                                order_id
+                                menu_name
+                                page_name
+                            
+                            }
+                        }
+                    }`
+        }
+    });
+
+    return newRequest;
+};
 
 export const getLandingPage = () => {
     const newRequest = makeRequest({

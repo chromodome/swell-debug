@@ -26,7 +26,6 @@ export default function HomePage() {
             const newData = await getLandingPage();
             setDataLanding(newData.data);
             setDataLoading(false);
-            console.log('new data is', newData);
         };
         importData();
     }, []);

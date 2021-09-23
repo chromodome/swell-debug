@@ -147,8 +147,8 @@ export default function ExperienceDetail({ dataExperience }) {
         console.log('All images', images);
         return images;
     };
-
-    if (!dataExperience[0]) {
+    console.log('all data', dataExperience);
+    if (!dataExperience?.data?.publisheds) {
         return <div>Experience {router.query?.id} doesn't exist.</div>;
     }
 
@@ -165,12 +165,12 @@ export default function ExperienceDetail({ dataExperience }) {
         experience_id,
         user,
         user: { profile }
-    } = dataExperience[0];
+    } = dataExperience?.data?.publisheds[0];
 
     const EmptyData = <span className="w-20 bg-gray-300 rounded-full h-2" />;
     const ContentDays = days ? <span> {getDays(days)}</span> : EmptyData;
 
-    console.log('expereince data', dataExperience[0]);
+    console.log('experience data', dataExperience?.data?.publisheds[0]);
 
     useEffect(() => {
         setExpImages(buildGalleryImages(content));
@@ -417,58 +417,7 @@ export default function ExperienceDetail({ dataExperience }) {
 
                     <section className={`px-4 flex items-start`}>
                         <div className="w-full">
-                            <div>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Nobis rem tempora voluptatum
-                                cupiditate provident, nostrum, autem quod rerum
-                                recusandae similique eligendi molestiae
-                                doloremque itaque reiciendis enim fugit esse et
-                                tenetur facilis distinctio! Doloremque amet
-                                obcaecati aspernatur alias molestiae tenetur ut
-                                ex porro error corporis. Dolore minima autem aut
-                                vero expedita quia dicta porro fuga magni nam
-                                sit obcaecati, facere magnam accusantium?
-                                Obcaecati tempore quia porro minus ipsum facilis
-                                aliquid veniam, voluptatem iusto deleniti,
-                                distinctio exercitationem nemo, dolore quidem
-                                dolorem eos explicabo vero possimus culpa odio
-                                ullam voluptatum accusantium quibusdam?
-                                Reprehenderit veniam rerum dolorem odit
-                                accusamus voluptatibus? Laborum velit commodi
-                                perferendis repellat debitis cupiditate
-                                consequatur ipsa esse neque laudantium fuga
-                                tempora, sit vitae possimus facere aspernatur
-                                exercitationem dicta magni earum ea quia.
-                                Reiciendis, sint minus nesciunt doloribus
-                                repellat sit odio commodi soluta neque quidem
-                                eaque doloremque laudantium aliquam corrupti
-                                esse laboriosam ut repellendus amet aperiam,
-                                harum porro. Quibusdam nesciunt beatae fuga,
-                                iusto dolores pariatur odit quia eveniet. Minus
-                                ab omnis non commodi nemo hic fuga itaque
-                                dignissimos incidunt sit? Eaque laborum quam
-                                alias nihil voluptate similique officiis
-                                necessitatibus sed cumque, ad delectus deleniti
-                                velit voluptates, officia eum dolor? Consectetur
-                                dolorem, consequatur, illo dolor quibusdam,
-                                dolorum ad id culpa fugit incidunt asperiores
-                                distinctio dolore. Quasi rerum deleniti earum ea
-                                officiis ullam doloribus est quo perspiciatis,
-                                consectetur debitis cupiditate laboriosam
-                                accusantium libero iste, sed minima ipsa ratione
-                                vel id. Doloremque, dolorum ullam dignissimos
-                                commodi facere iure beatae, quasi, minima
-                                mollitia quo quia. Quos maiores, doloremque rem
-                                mollitia quia dignissimos harum at cumque libero
-                                inventore odio sint labore eligendi id, repellat
-                                neque. Ea sint id nulla velit magni praesentium
-                                ducimus sunt rerum modi quasi eius distinctio
-                                voluptatibus exercitationem explicabo
-                                perferendis et ut vel a officia qui facilis,
-                                quos quibusdam. Vero optio expedita amet quaerat
-                                error labore, ratione neque quam deleniti non,
-                                nesciunt modi accusantium?
-                            </div>
+                            <div>Itinerary Content goes below</div>
                         </div>
                     </section>
                 </div>

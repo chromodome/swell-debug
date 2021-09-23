@@ -156,6 +156,7 @@ export default function Layout() {
             <div className="hover:border-gray-50 hover:border-gray-100 hover:border-gray-200 hover:border-gray-300 hover:border-gray-400 hover:border-gray-500 hover:border-gray-600 hover:border-gray-700 hover:border-gray-800 hover:border-gray-900"></div>
             <div className="ring-gray-50 ring-gray-100 ring-gray-200 ring-gray-300 ring-gray-400 ring-gray-500 ring-gray-600 ring-gray-700 ring-gray-800 ring-gray-900"></div>
             <div className="hover:ring-gray-50 hover:ring-gray-100 hover:ring-gray-200 hover:ring-gray-300 hover:ring-gray-400 hover:ring-gray-500 hover:ring-gray-600 hover:ring-gray-700 hover:ring-gray-800 hover:ring-gray-900"></div>
+            <div className="transform duration-200 duration-300 duration-500 transform-gpu whitespace-nowrap out-expo group-scope-hover:opacity-100 group-scope-hover:opacity-0 group-scope group-scope-hover:translate-x-0 group-scope-hover:translate-x-2 group-scope-hover:translate-x-1 group-scope-hover:translate-x-4 group-scope-hover:translate-x-3 group-scope-hover:translate-x-3.5 group-scope-hover:translate-x-0.5"></div>
         </>
     );
 }
