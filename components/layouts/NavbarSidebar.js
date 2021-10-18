@@ -1,17 +1,19 @@
 import React from 'react';
-import { useContext } from 'react';
-import AuthContext from '@/context/AuthContext';
-import uiStruct from '@/constants/uiStruct';
-import translations from '@/constants/translations';
-import Icons from '@/blocks/Icon/Icons';
+
 import { handleRowReverse } from 'helpers/FEutils';
+import { toggleLang, toggleNav } from '@/store/actions/globalState';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Avatar from '@/specialty/Avatar';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
 
-const NavbarSidebar = ({ children }) => {
-    const { user, rtl, lang, navIsOpen, toggleNav, logout } =
-        useContext(AuthContext);
-
+const NavbarSidebar = ({
+    children,
+    toggleNav,
+    globalState: { rtl, lang, navIsOpen },
+    auth
+}) => {
     return (
         <>
             <div
@@ -51,16 +53,32 @@ const NavbarSidebar = ({ children }) => {
                             } justify-between items-center `}>
                             <div
                                 className={`${
-                                    handleRowReverse(rtl).ml
-                                }-12 flex items-center`}>
-                                {user ? (
-                                    <Avatar user={user} size={50} />
+                                    auth?.user ? 'ml-8' : 'ml-12'
+                                } flex items-center`}>
+                                {auth?.user?.profile ? (
+                                    <Avatar
+                                        profile={auth?.user?.profile}
+                                        size="w-12 h-12"
+                                    />
                                 ) : (
                                     <IconsLucide icon="User" />
                                 )}
 
                                 <div className="px-2">
-                                    {user ? user.handle : 'Guest'}
+                                    {auth?.user?.profile ? (
+                                        <>
+                                            <div>
+                                                {auth?.user?.profile
+                                                    ?.displayname ||
+                                                    auth?.user?.profile?.first}
+                                            </div>
+                                            <div className="text-xs font-semibold">
+                                                @{auth?.user?.username}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div>Guest</div>
+                                    )}
                                 </div>
                             </div>
                             <button
@@ -98,4 +116,19 @@ const NavbarSidebar = ({ children }) => {
     );
 };
 
-export default NavbarSidebar;
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            toggleLang,
+            toggleNav
+        },
+        dispatch
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarSidebar);

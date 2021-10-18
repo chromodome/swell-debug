@@ -1,6 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import {
+    toggleLang,
+    toggleNav,
+    toggleAuthModal,
+    setAuthPage
+} from '@/store/actions/globalState';
+import { logout } from '@/store/actions/auth';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Search from '@/components/blocks/Search/Search';
 import LangList from '@/blocks/LangList';
 import Avatar from '@/specialty/Avatar';
@@ -8,18 +17,23 @@ import NavbarSidebar from '@/layouts/NavbarSidebar';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
 import NavbarItem from '@/blocks/NavbarItem';
 
-import AuthContext from '@/context/AuthContext';
 import { handleRowReverse } from '@/helpers/FEutils';
 import translations from '@/constants/translations';
-import uiStruct from '@/constants/uiStruct';
+
 import { NEXT_URL } from '@/config/index';
 
 import debounce from '@/helpers/debounce';
+import ModalAuth from '../blocks/Modal/ModalAuth';
 
-const Header = () => {
-    const { user, lang, setLang, rtl, setRtl, navIsOpen, toggleNav, logout } =
-        useContext(AuthContext);
-
+const Header = ({
+    toggleLang,
+    toggleNav,
+    toggleAuthModal,
+    setAuthPage,
+    logout,
+    globalState: { rtl, lang, navIsOpen, authModalIsOpen, authComponent },
+    auth: { user, isAuthenticated, isProfile }
+}) => {
     const [scrollPos, setScrollPos] = useState(0);
     const [showHeader, setShowHeader] = useState(true);
 
@@ -49,13 +63,31 @@ const Header = () => {
         }
     };
 
+    const handleSignin = () => {
+        toggleNav(false);
+        setAuthPage('login');
+        toggleAuthModal(true);
+    };
+
+    const handleSignup = () => {
+        toggleNav(false);
+        setAuthPage('register');
+        toggleAuthModal(true);
+    };
+
+    const handleLogout = () => {
+        toggleNav(false);
+        toggleAuthModal(false);
+        logout();
+    };
+
     return (
         <>
             <header
                 style={{ zIndex: 300 }}
                 className={`${
                     handleRowReverse(rtl).rtl
-                } fixed bottom-0 md:top-0 inset-x-0 h-16 md:h-20 bg-white shadow-cards-top md:shadow-cards flex items-center transform-gpu duration-300 ${
+                } fixed bottom-0 md:top-0 w-full inset-x-0 h-16 md:h-20 bg-white shadow-cards-top md:shadow-cards flex items-center transform-gpu duration-300 ${
                     showHeader ? 'translate-y-0' : '-translate-y-24'
                 }`}>
                 <div className="flex flex-1 flex-row justify-between items-center h-full ">
@@ -79,11 +111,11 @@ const Header = () => {
                         <div className="hidden lg:flex items-center ">
                             <div className="hidden xl:block mx-4 text-sm">
                                 {user
-                                    ? `${translations[lang].messages.hello} ${user.firstname}`
+                                    ? `${translations[lang].messages.hello} ${user?.profile.first}`
                                     : `Guest`}
                             </div>
                             {user ? (
-                                <Avatar user={user} />
+                                <Avatar profile={user?.profile} />
                             ) : (
                                 <IconsLucide icon="User" />
                             )}
@@ -105,7 +137,7 @@ const Header = () => {
                 </div>
             </header>
             <NavbarSidebar>
-                {user ? (
+                {isAuthenticated ? (
                     <>
                         <NavbarItem
                             label={translations[lang].menu.messages.title}
@@ -146,9 +178,7 @@ const Header = () => {
                         <NavbarItem
                             label={translations[lang].menu.signout.title}
                             icon="LogOut"
-                            link="#"
-                            handleClick={() => console.log('hello')}
-                            handleClick={toggleNav}
+                            handleClick={handleLogout}
                             rtl={rtl}
                         />
                     </>
@@ -157,17 +187,13 @@ const Header = () => {
                         <NavbarItem
                             label={translations[lang].menu.signin.title}
                             icon="LogIn"
-                            link="#"
-                            handleClick={() => console.log('hello')}
-                            handleClick={toggleNav}
+                            handleClick={handleSignin}
                             rtl={rtl}
                         />
                         <NavbarItem
                             label={translations[lang].menu.signup.title}
                             icon="UserPlus"
-                            link="#"
-                            handleClick={() => console.log('hello')}
-                            handleClick={toggleNav}
+                            handleClick={handleSignup}
                             rtl={rtl}
                         />
                         <NavbarItem
@@ -181,8 +207,27 @@ const Header = () => {
                     </>
                 )}
             </NavbarSidebar>
+            <ModalAuth />
         </>
     );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            toggleLang,
+            toggleNav,
+            logout,
+            toggleAuthModal,
+            setAuthPage
+        },
+        dispatch
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -21,6 +21,7 @@ const ResultCard = ({ data, containerClass }) => {
         experience_price,
         lang = 'en',
         id,
+        experience_id,
         user,
         user: { profile },
         type,
@@ -53,7 +54,7 @@ const ResultCard = ({ data, containerClass }) => {
             <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
                 <KreatorBadge author={user} baseUrl={baseUrl} />
                 <div>
-                    <Link href={`${baseUrl.experiencePage}/${id}`}>
+                    <Link href={`${baseUrl.experiencePage}/${experience_id}`}>
                         <a>
                             {featured_image ? (
                                 <img

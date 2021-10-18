@@ -5,7 +5,6 @@ import TopBar from '@/blocks/TopBar';
 
 import { useState, useEffect } from 'react';
 import Router from 'next/router';
-import LayoutLoading from './LayoutLoading';
 
 export default function Layout({ title, keywords, description, children }) {
     const [loading, setLoading] = useState(false);
@@ -28,24 +27,27 @@ export default function Layout({ title, keywords, description, children }) {
         };
     }, []);
     return (
-        <div className="">
-            <Head>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                <meta name="keywords" content={keywords} />
-            </Head>
+        <>
+            <div id="root" className="">
+                <Head>
+                    <title>{title}</title>
+                    <meta name="description" content={description} />
+                    <meta name="keywords" content={keywords} />
+                </Head>
 
-            <Header />
-            <TopBar />
-            {/* {loading ? (
-                <LayoutLoading />
-            ) : ( */}
-            <div className="flex flex-col h-screen justify-between">
-                <div className="overflow-x2-hidden">{children}</div>
-                <Footer />
+                <Header />
+                <TopBar />
+                {/* {loading ? (
+                    <LayoutLoading />
+                ) : ( */}
+                <div className="flex flex-col h-screen justify-between">
+                    <div className="overflow-x2-hidden">{children}</div>
+                    <Footer />
+                </div>
+                {/* )} */}
             </div>
-            {/* )} */}
-        </div>
+            <div id="modal-root"></div>
+        </>
     );
 }
 

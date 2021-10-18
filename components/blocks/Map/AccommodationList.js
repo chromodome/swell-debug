@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import Accommodation from './Accommodation';
+import CircleListItem from './CircleListItem';
 import GenericBtn from './GenericBtn';
 
 // Amine
@@ -27,11 +28,24 @@ function AccommodationList({ lang = 'en', locations, edit = false }) {
     const [dayListMode, setDayListMode] = useState('initial');
 
     const buildPreviewDay = (dest, index = null, isEdit = false) => {
-        return (
+        const { type } = dest;
+
+        return type !== 'circle' ? (
             <Accommodation
                 index={index}
                 byDay={dayListMode}
                 edit={edit}
+                accommInfo={dest}
+                label={'text'}
+                rtl={rtl}
+                icon="CHECK"
+                bullet="TRAIN"
+            />
+        ) : (
+            <CircleListItem
+                index={index}
+                byDay={dayListMode}
+                edit={isEdit}
                 accommInfo={dest}
                 label={'text'}
                 rtl={rtl}
@@ -111,7 +125,7 @@ function AccommodationList({ lang = 'en', locations, edit = false }) {
         return locations.map((obj, index) => {
             const key = `dest${index}`;
 
-            return buildPreviewDay(obj, index, edit);
+            return <div key={key}>{buildPreviewDay(obj, index, edit)}</div>;
         });
     };
 

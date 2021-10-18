@@ -3,7 +3,7 @@ import Link from 'next/link';
 const ButtonLink = ({
     label,
     color,
-    width,
+    width = 'w-72',
     height,
     isLoading = false,
     handleClick,
@@ -12,9 +12,9 @@ const ButtonLink = ({
 }) => {
     const btnJSX = (
         <a
-            href={`https://kreator.viakonnect.com/experience/${expId}/0`}
+            href={`${process.env.NEXT_PUBLIC_KREATOR_BASE_URL}/experience/${expId}/0`}
             target="_blank"
-            className={`relative overflow-hidden h-12 w-60 rounded-lg flex items-center justify-center ${
+            className={`relative overflow-hidden h-12 ${width} rounded-lg flex items-center justify-center ${
                 isLoading
                     ? 'bg-gray-900 text-white'
                     : 'bg-gradient-to-r from-green-300 via-green-400 to-green-500 shadow-2xl-green-500 hover:shadow-none font-bold text-green-800 hover:bg-gray-900 transition-all hover:text-white'

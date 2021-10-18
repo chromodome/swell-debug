@@ -29,7 +29,7 @@ const tmpTopBar = {
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(tmpUser2);
+    const [user, setUser] = useState(tmpUser1);
     const [error, setError] = useState(null);
     const [lang, setLang] = useState('en');
     const [rtl, setRtl] = useState(false);

@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import AuthContext from '@/context/AuthContext';
 const tmpTopBar = {
     pill: {
         bgColor: 'bg-white',

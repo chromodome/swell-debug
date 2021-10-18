@@ -23,7 +23,7 @@ const SliderExperiences = ({ sectionTitles, data, dataLoading }) => {
                     data.map((item, index) => {
                         return (
                             <ResultCard
-                                key={`exp_${item.id}_${index}`}
+                                key={`exp_${item.experience_id}_${index}`}
                                 data={item}
                                 containerClass="embla__slide x2 md:x3 lg:x4 xl:x5"
                             />

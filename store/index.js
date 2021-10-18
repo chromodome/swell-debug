@@ -1,33 +1,31 @@
-import { createContext, useMemo, useReducer } from 'react';
-import { initStateSearch, search } from './search.reducer';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
+import rootReducer from './reducers';
+import { loadState, saveState } from './localStorage';
+import throttle from 'lodash.throttle';
 
-const combineReducers = (slices) => (state, action) =>
-    Object.keys(slices).reduce(
-        (acc, prop) => ({
-            ...acc,
-            [prop]: slices[prop](acc[prop], action)
-        }),
-        state
-    );
+const persistedState = {
+   // ...loadState(),
+   // globalState: {lang: "ar"}
+}
 
-const initState = { search: initStateSearch };
+const middleware = process.env.NODE_ENV === 'development'
+    ? [thunk, createLogger(), promise]
+    : [thunk, promise];
 
-const rootReducer = combineReducers({
-    search
-});
+const store = createStore(
+    rootReducer,
+    persistedState,
+    composeWithDevTools(applyMiddleware( ...middleware))
+);
 
-const StoreProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(rootReducer, initState);
+store.subscribe(throttle(() => {
+    saveState({
+        experienceDetails: store.getState().experienceDetails
+    });
+}, 1000));
 
-    const store = useMemo(() => [state, dispatch], [state]);
-
-    //console.log(store[0].search);
-
-    return (
-        <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-    );
-};
-
-const StoreContext = createContext(initState);
-
-export { StoreContext, StoreProvider };
+export default store;

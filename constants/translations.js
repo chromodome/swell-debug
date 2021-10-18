@@ -141,6 +141,17 @@ const langData = {
                 ACC_FAMILY: 'Family Friendly',
                 ACC_CORPORATE: 'Corporate'
             }
+        },
+        errors: {
+            'Auth.form.error.invalid': 'Invalid email or password',
+            'Auth.form.error.email.taken':
+                'The Email or username are already taken',
+            DEFAULTERROR: "Oops. Something went wrong. That's all we know",
+            NETWORKERROR: 'The server is bugging. Sorry about that',
+            LOGIN_SUCCESS: 'Hello Kreator!',
+            REGISTER_SUCCESS: 'Welcome Kreator!',
+            PROFILE_SUCCESS: 'Profile Saved',
+            FORBIDDEN: "Hmm...it seems you're not allowed to make that request"
         }
     },
     ar: {

@@ -60,17 +60,28 @@ export const getExperienceById = (id) => {
         data: {
             query: `
                     query fetchExperienceById {
-                        publisheds (where: {isPublished: true, id: "${id}"})
+                        publisheds (where: {isPublished: true, experience_id: "${id}"})
                         {
                             id,
                             experience_id,
                             isPublished,
                             short_content,
                             content,
+                            content_marketing
+                            budget_min
+                            budget_max
                             type,
                             experience_price,
                             tags,
                             cats,
+                            cats_list {
+                                name
+                            },
+                            places_lists {
+                                name
+                                code
+                            },
+                            days
                             createdAt,
                             user {
                                 username,
@@ -79,7 +90,14 @@ export const getExperienceById = (id) => {
                                     last,
                                     avatar
                                 }
-                            }
+                            },
+                            skus {
+                                id,
+                                booking_date,
+                                price,
+                                capacity
+                                inventory
+                              }
                         }
                     }`
         }
@@ -174,6 +192,7 @@ export const getLandingPage = () => {
                   tags
                   cats
                   id
+                  experience_id
                   createdAt
                   isPublished
                   user {
@@ -244,6 +263,7 @@ export const getLandingPage = () => {
                   tags
                   cats
                   id
+                  experience_id
                   createdAt
                   isPublished
                   user {

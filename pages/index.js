@@ -1,6 +1,7 @@
 import Layout from '@/layouts/Layout';
-import { useContext, useState, useEffect } from 'react';
-import AuthContext from '@/context/AuthContext';
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/components/sections/SliderExperiences';
 import SliderInterests from '@/sections/SliderInterests';
@@ -8,16 +9,11 @@ import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-import { API_URL, API_URL_MOCK } from '@/config/index';
-import {
-    getExperiences,
-    getLatestExperiences,
-    getLandingPage
-} from '@/helpers/apiServices/experiences';
+
+import { getLandingPage } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
 
-export default function HomePage() {
-    const { lang } = useContext(AuthContext);
+const LandingPage = ({ globalState: { lang } }) => {
     const [dataLanding, setDataLanding] = useState(null);
     const [dataLoading, setDataLoading] = useState(true);
 
@@ -84,7 +80,18 @@ export default function HomePage() {
             </>
         </Layout>
     );
+};
+
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch);
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
 
 // export async function getServerSideProps() {
 //     const { data: dataLanding } = await getLandingPage();

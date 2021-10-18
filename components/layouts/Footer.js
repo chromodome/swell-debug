@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import FooterMenuLink from '../blocks/FooterMenuLink';
 const Footer = () => {
-    console.log('footer');
+    // console.log('footer');
     return (
         <footer className="">
             <div className="bg-gray-800 py-16 mt-16">

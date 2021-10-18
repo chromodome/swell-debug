@@ -31,7 +31,7 @@ export default function BookingPickerBlock({ persons, days, onBuy, price }) {
 
     return (
         <div
-            class="flex justify-center items-center
+            className="flex justify-center items-center
                 flex-col py-6 px-4 max-w-xs	">
             <div className="mb-4 w-full">
                 <label className="block mb-2">

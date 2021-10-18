@@ -69,3 +69,43 @@ export const findLowestPrice = (experience_price, type) => {
         } else return emptyString;
     } else return emptyString;
 };
+
+export const xrate = (arrayNb, fromCur, toCur) => {
+    const rate = 1.5;
+    return {
+        values: arrayNb.map((nb) => {
+            return nb * rate;
+        }),
+        currency: {
+            name: currenciesObject[toCur].name_plural,
+            code: toCur,
+            symbol: currenciesObject[toCur].symbol
+        }
+    };
+};
+
+// Create our number formatter.
+export const formatPrice = (
+    value,
+    currency,
+    locale,
+    options,
+    style = 'decimal'
+) => {
+    let rounding;
+    if (!options) rounding = currenciesObject[currency].budget_rounding;
+    else {
+        if (options.rounding) rounding = options.rounding;
+        else rounding = 1;
+    }
+
+    const formatter = new Intl.NumberFormat(locale, {
+        style,
+        currency: currency
+    });
+    return formatter.format(Math.round(value / rounding) * rounding);
+};
+
+export const getBrowserLocale = () => {
+    return typeof window !== 'undefined' ? window.navigator.language : 'en-US';
+};

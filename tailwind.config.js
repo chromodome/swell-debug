@@ -9,6 +9,12 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        groupLevel: 10,
+
+        groupScope: 'scope',
+
+        groupVariants: ['hover', 'focus'],
+
         borderRadius: {
             none: '0',
 
@@ -92,16 +98,16 @@ module.exports = {
             '2xl-green-500': '0 11px 20px -6px rgba(30, 208, 151,  0.5)',
             '2xl-green-400': '0 25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600': '0 25px 30px -12px rgba(0, 128, 87,  0.4)',
+            '6xl-green-center': '0 0 30px 0 rgba(0, 128, 87,  0.4)',
             '2xl-top': '0 -25px 50px -12px rgba(0, 0, 0, 0.25)',
             '3xl-top': '0 -35px 60px -15px rgba(0, 0, 0, 0.3)',
             '2xl-green-top': '0 -25px 50px -12px rgba(30, 208, 151,  0.14)',
             '2xl-green-500-top': '0 -11px 20px -6px rgba(30, 208, 151,  0.5)',
             '2xl-green-400-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600-top': '0 -25px 30px -12px rgba(0, 128, 87,  0.4)',
-            '6xl-green-center': '0 15px 50px 0 rgba(0, 128, 87,  0.6)',
-            'xl-green': '0 6px 20px  rgba(0, 128, 87,  0.4)',
+            '2xl-green-600-rev': '0 -25px 30px -12px rgba(0, 128, 87,  0.14)',
+            double: '0 25px 50px 0 rgba(0, 128, 87, 0.14), 0 15px 30px 0 rgba(0, 128, 87, 0.2)',
             cards: '0 25px 50px -12px rgba(0, 128, 87,  0.14)',
-            'cards-blue': '0 25px 50px -12px rgba(0, 85, 128,  0.14)',
             images: '0 25px 40px -12px rgba(70, 128, 87,  0.4)',
             'cards-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.14)',
             'images-top': '0 -25px 40px -12px rgba(70, 128, 87,  0.4)',
@@ -113,6 +119,15 @@ module.exports = {
             none: 'none'
         },
         extend: {
+            transitionProperty: {
+                height: 'height',
+                width: 'width'
+            },
+            transitionTimingFunction: {
+                'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+                'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                'out-expo-hard': 'cubic-bezier(0.07, 0.53, 0.25, 1)'
+            },
             screens: {
                 touch: { raw: '(hover: none)' }
                 // => @media (orientation: portrait) { ... }
@@ -122,6 +137,7 @@ module.exports = {
                 'kn-primary-25': '#ecfdf540',
                 'kn-primary-50': '#ecfdf580',
                 'kn-primary-75': '#ecfdf5',
+                'kn-gray-100': '#F6F6F6',
                 'kn-primary-100': '#F2F9F8',
                 'kn-primary-200': '#E4F2F0',
                 'kn-primary-300': '#C4E6E2',
@@ -141,10 +157,9 @@ module.exports = {
                 'glass-50': '#ffffff88',
                 'glass-75': '#ffffffBB',
                 'modal-100': '#D5DCD9',
-                'glass-100': '#E4FBF4',
 
                 cyan: colors.cyan,
-                'light-blue': colors.sky,
+                'light-blue': colors.lightBlue,
                 teal: colors.teal
             },
             maxHeight: {
@@ -189,6 +204,7 @@ module.exports = {
             },
             height: {
                 128: '32rem',
+                126: '30rem',
                 160: '40rem',
                 192: '49rem',
                 256: '64rem',
@@ -245,12 +261,17 @@ module.exports = {
             opacity: ['disabled'],
             ringColor: ['group-hover', 'hover', 'active'],
             ringOpacity: ['group-hover', 'hover', 'active'],
+            display: ['group-hover', 'hover'],
             margin: ['last'],
-            padding: ['last']
+            padding: ['last', 'group-hover'],
+            inset: ['group-hover', 'hover', 'focus'],
+            justifyContent: ['hover', 'focus', 'group-hover'],
+            borderRadius: ['hover', 'focus', 'focus-within']
         }
     },
     plugins: [
         require('tailwind-scrollbar'),
-        require('tailwindcss-nested-groups')
+        require('tailwindcss-nested-groups'),
+        require('@tailwindcss/line-clamp')
     ]
 };

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import AuthContext from '@/context/AuthContext';
-import { StoreContext } from 'store';
+import { StoreContext } from 'store-context';
 import Layout from '@/layouts/Layout';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/sections/SliderExperiences';

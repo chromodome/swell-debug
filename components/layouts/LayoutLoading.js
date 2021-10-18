@@ -20,7 +20,7 @@ function LayoutLoading({
                         <PageSpinner size="64" strokeWidth="20" />
                     </span>
                     {showMessage && (
-                        <div className="mt-6 text-sm uppercase tracking-wide text-gray-600">
+                        <div className="mt-6 text-sm uppercase text-center tracking-wide text-gray-600">
                             {message ? message : randomItem(loadingMessages)}
                         </div>
                     )}

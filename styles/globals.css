@@ -267,3 +267,25 @@
     border-radius: 10px;
     box-shadow: inset 7px 10px 12px #fcfcfc;
 }
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+    color: #059669 !important;
+    background: #fff !important;
+}
+
+.Toastify__toast {
+    margin-bottom: 1rem;
+    padding: 8px;
+    border-radius: 8px !important;
+    box-shadow: 0 25px 50px 0 rgb(0 128 87 / 14%),
+        0 15px 30px 0 rgb(0 128 87 / 20%) !important;
+    overflow: hidden;
+    font-family: inherit !important;
+    cursor: pointer;
+    direction: ltr;
+}
+
+.Toastify__close-button {
+    color: #111827 !important;
+    opacity: 0.3 !important;
+}

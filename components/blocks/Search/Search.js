@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import translations from '@/constants/translations';
 import { handleRowReverse } from '@/helpers/FEutils';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
-import { StoreContext } from '../../../store';
+import { StoreContext } from '../../../store-context';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import Autocomplete from './Autocomplete';
 import { SearchPackage } from '@/helpers/fuseSearch';

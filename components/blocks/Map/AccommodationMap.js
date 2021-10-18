@@ -51,11 +51,12 @@ const options = {
 };
 
 const AccommodationMap = ({
-    locations,
+    destinations: { locations },
+    destinations,
     showCountryLayer = true,
-    showCircleLayer = true,
-    circles = []
+    showCircleLayer = true
 }) => {
+    console.log('desinations', destinations);
     const rtl = false;
 
     const { isLoaded, loadError } = useLoadScript({
@@ -80,6 +81,7 @@ const AccommodationMap = ({
     const buildMarkers = () => {
         const overlays = drawCircles();
         return locations
+            .filter((loc) => loc.type !== 'circle')
             .map((obj, index) => {
                 const {
                     location: { lat, lng }
@@ -109,24 +111,36 @@ const AccommodationMap = ({
         if (!mapReady) return;
         const overlayArray = [];
         const circlesArr = [];
+        locations
+            .filter((loc) => loc.type === 'circle')
+            .forEach((obj, index) => {
+                const {
+                    circle: { location, radius },
+                    label
+                } = obj;
+                const key = `${location.lat}${index}`;
 
-        circles.forEach((obj, index) => {
-            const { location, radius } = obj;
-            const key = `${location.lat}${index}`;
+                circlesArr.push(
+                    <Circle
+                        options={{ ...circleOptions }}
+                        key={`circle_${key}`}
+                        center={location}
+                        radius={radius}
+                    />
+                );
 
-            circlesArr.push(
-                <Circle
-                    options={{ ...circleOptions }}
-                    key={`circle_${key}`}
-                    center={location}
-                    radius={radius}
-                />
-            );
-        });
+                overlayArray.push(
+                    <OverlayView
+                        key={key}
+                        position={location}
+                        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
+                        <div style={{ background: 'white' }}>{label}</div>
+                    </OverlayView>
+                );
+            });
 
         return overlayArray.concat(circlesArr);
     };
-
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
         setMapReady(true);
@@ -140,31 +154,43 @@ const AccommodationMap = ({
         if (mapReady) {
             const bounds = new window.google.maps.LatLngBounds();
 
-            circles.forEach((obj, index) => {
-                const { bounds: circleBounds } = obj;
-                bounds.union(circleBounds);
-            });
-            locations.forEach((obj) => {
-                const {
-                    data: { location }
-                } = obj;
+            locations
+                .filter((loc) => loc.type === 'circle')
+                .forEach((obj, index) => {
+                    const { bounds: circleBounds } = obj.circle;
+                    bounds.union(circleBounds);
+                });
+            locations
+                .filter((loc) => loc.type !== 'circle')
+                .forEach((obj) => {
+                    const {
+                        data: { location }
+                    } = obj;
 
-                bounds.extend(location);
-            });
+                    bounds.extend(location);
+                });
 
-            if (!locations.length && !circles.length) {
+            if (!locations.length) {
                 mapRef.current.setZoom(1);
                 mapRef.current.setCenter({
                     lat: 0,
                     lng: 0
                 });
             } else {
-                if (locations.length == 1 && !circles.length) {
-                    mapRef.current.setZoom(18);
-                    mapRef.current.setCenter({
-                        lat: locations[0].data.location.lat,
-                        lng: locations[0].data.location.lng
-                    });
+                if (locations.length === 1) {
+                    if (locations[0].type === 'circle') {
+                        mapRef.current.setCenter({
+                            lat: locations[0].circle.location.lat,
+                            lng: locations[0].circle.location.lng
+                        });
+                        mapRef.current.fitBounds(bounds);
+                    } else {
+                        mapRef.current.setCenter({
+                            lat: locations[0].data.location.lat,
+                            lng: locations[0].data.location.lng
+                        });
+                        mapRef.current.setZoom(18);
+                    }
                 } else mapRef.current.fitBounds(bounds);
             }
         }
