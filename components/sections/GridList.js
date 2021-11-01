@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import ResultCard from '../blocks/Card/ResultCard';
 import SectionTitle from '@/blocks/Title/SectionTitle';
 import ButtonLoad from '@/blocks/Button/ButtonLoad';
+import ResultCardSkeleton from '@/blocks/Card/ResultCardSkeleton';
 
-const GridList = ({ sectionTitles, data }) => {
+const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const GridList = ({
+    sectionTitles,
+    data,
+    btnLabel = 'Load More',
+    btnAction = 'url',
+    btnUrl,
+    dataLoading
+}) => {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const handleClick = () => {
+    const handleLoad = () => {
         setIsLoading(!isLoading);
+    };
+    const handleClick = (e) => {
+        e.preventDefault();
+        router.push(btnUrl);
     };
 
     return (
@@ -18,16 +34,39 @@ const GridList = ({ sectionTitles, data }) => {
                 {sectionTitles && (
                     <SectionTitle section={sectionTitles} className="mb-8" />
                 )}
-                <div className="flex flex-wrap -mx-1 lg:-mx-4">
-                    {data.map((item) => {
-                        return <ResultCard key={item.id} data={item} />;
-                    })}
-                </div>
-                <ButtonLoad
-                    handleClick={handleClick}
-                    isLoading={isLoading}
-                    label="Load More"
-                />
+                {!dataLoading ? (
+                    <>
+                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                            {data.map((item) => {
+                                return <ResultCard key={item.id} data={item} />;
+                            })}
+                        </div>
+                        {btnAction === 'url' && (
+                            <ButtonLoad
+                                handleClick={handleClick}
+                                isLoading={isLoading}
+                                label={btnLabel}
+                            />
+                        )}
+                        {btnAction === 'load' && data.length > 0 && (
+                            <ButtonLoad
+                                handleClick={handleLoad}
+                                isLoading={isLoading}
+                                label={btnLabel}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                            {skeletonArray.map((item, index) => {
+                                return (
+                                    <ResultCardSkeleton key={`sk_${index}`} />
+                                );
+                            })}
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

@@ -209,6 +209,7 @@ const Button = ({
     children,
     iconClasses,
     wrapperClasses,
+    handleClick,
     rounded = 'none',
     type = 'default'
 }) => {
@@ -230,6 +231,7 @@ const Button = ({
 
     return (
         <button
+            onClick={handleClick}
             className={`transition-colors duration-300 ${wrapperClasses} ${roundedClasses[rounded]}  ${typeClasses[type]}`}>
             {children}
             {icon ? (

@@ -1,0 +1,29 @@
+.rc-slider-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    margin-top: -5px;
+    cursor: grab;
+    border-radius: 50%;
+    border: solid 2px #34d399 !important;
+    background-color: #fff;
+    touch-action: pan-x;
+}
+
+.rc-slider-handle-dragging {
+    box-shadow: 0 0 0 5px #34d39988 !important;
+}
+
+.rc-slider-disabled {
+    background-color: transparent !important;
+}
+
+@media (max-width: 640px) {
+    .rc-slider-mark-text {
+        /* transform: rotate(90deg) !important; */
+        /* margin-left: -5px; */
+        font-size: 0.6rem;
+    }
+}

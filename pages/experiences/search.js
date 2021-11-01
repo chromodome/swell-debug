@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthContext from '@/context/AuthContext';
+import { StoreContext } from 'store-context';
 import Layout from '@/layouts/Layout';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/sections/SliderExperiences';
@@ -8,11 +9,14 @@ import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-import { API_URL_MOCK } from '@/config/index';
+import { API_URL, API_URL_MOCK } from '@/config/index';
 import ButtonsRow from '@/blocks/Button/ButtonsRow';
 import Row from '@/sections/Row';
-import { getExperiences } from '../../helpers/apiServices/experiences';
-//import { getAllTags } from '@/apiServices/tags';
+import {
+    getExperiences,
+    getLatestExperiences
+} from '../../helpers/apiServices/experiences';
+import { getAllTags } from '../../helpers/apiServices/tags';
 
 export default function SearchPage({
     dataNewThisMonth,
@@ -20,11 +24,36 @@ export default function SearchPage({
     dataDestinations,
     dataFeatured,
     dataCollections,
+    dataExperiences,
     dataTrending,
-    dataExperinces
+    tags
 }) {
     const { lang } = useContext(AuthContext);
-    console.log(dataExperinces);
+
+    const [{ search }, dispatch] = useContext(StoreContext);
+
+    const { selectedTags, filteredExperiences } = search;
+
+    const removeSelectedTag = async (id) => {
+        await dispatch({ type: 'removeSelectedTag', payload: id });
+
+        if (selectedTags.length !== 1) {
+            await dispatch({ type: 'searchExperiences' });
+        }
+    };
+
+    useEffect(() => {
+        if (search.tags.length === 0) {
+            dispatch({ type: 'addAllTags', payload: tags });
+        }
+        if (search.experiences.length === 0) {
+            dispatch({ type: 'addAllExperiences', payload: dataExperiences });
+        }
+    }, [search.tags, search.experiences]);
+
+    useEffect(() => {
+        console.log('axios', dataTrending.data.experiences);
+    }, []);
     return (
         <Layout>
             <Row classes="mt-20">
@@ -35,17 +64,20 @@ export default function SearchPage({
             </Row>
             <Row classes="mt-10">
                 <h3 className="text-3xl">
-                    {dataExperinces.length > 0
-                        ? `We found ${dataExperinces.length} experiences`
-                        : `We didn't found any experience. `}
+                    {filteredExperiences.length > 0
+                        ? `We found ${filteredExperiences.length} experience${
+                              filteredExperiences.length > 1 ? 's' : ''
+                          }`
+                        : `We didn't find any experience. `}
                 </h3>
                 <ButtonsRow
                     type="exception"
-                    items={['France', 'Freestyle trekking', '7 days']}
+                    items={selectedTags}
+                    handleClick={removeSelectedTag}
                 />
             </Row>
 
-            <GridList data={dataExperinces} />
+            <GridList data={filteredExperiences} />
             <SliderInterests
                 sectionTitles={translations[lang].sections.wanderByInterest}
                 data={dataInterests}
@@ -69,14 +101,14 @@ export default function SearchPage({
             />
             <SliderExperiences
                 sectionTitles={translations[lang].sections.trendingThisWeek}
-                data={dataNewThisMonth}
+                data={dataTrending.data.experiences}
             />
         </Layout>
     );
 }
 
 export async function getServerSideProps() {
-    const res1 = await fetch(`${API_URL_MOCK}/api/experiences`);
+    const res1 = await fetch(`${API_URL}/experiences`);
     const dataNewThisMonth = await res1.json();
 
     const res2 = await fetch(`${API_URL_MOCK}/api/interests`);
@@ -91,8 +123,11 @@ export async function getServerSideProps() {
     const res5 = await fetch(`${API_URL_MOCK}/api/collections`);
     const dataCollections = await res5.json();
 
-    const { data } = await getExperiences();
-    const experiences = await data;
+    const { data: experiences } = await getExperiences();
+
+    const { data: dataTrending } = await getLatestExperiences();
+
+    const { data: tags } = await getAllTags();
 
     return {
         props: {
@@ -101,8 +136,9 @@ export async function getServerSideProps() {
             dataDestinations,
             dataFeatured,
             dataCollections,
-            dataTrending: experiences,
-            dataExperinces: experiences
+            dataExperiences: experiences,
+            dataTrending,
+            tags
         }
     };
 }

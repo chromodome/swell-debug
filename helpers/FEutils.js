@@ -1,5 +1,15 @@
 // Returns true if text is longer than count or if it has any of the words in findWords
 
+export const randomNumber = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const randomItem = (array) => {
+    return array[randomNumber(0, array.length - 1)];
+};
+
 export const checkMultiLine = (str, count) => {
     const findWords = [, '<br>', '<br/>', '\r', '\n'];
     let result = false;
@@ -42,7 +52,7 @@ export const handleRowReverse = (rtl) => {
         justifyreverse: rtl ? 'justify-start' : 'justify-end',
         smText: rtl ? '' : '',
         neg: rtl ? '-' : '',
-        negReverse: rtl ? '' : '-',
+        negReverse: rtl ? '' : '-'
     };
 };
 
@@ -65,4 +75,97 @@ export const testValidUrl = (str) => {
         /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
     return regexp.test(str);
+};
+
+export const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+};
+
+export const kreatorName = (profile) => {
+    return profile?.displayname || profile?.first;
+};
+
+export const getDays = (days) => {
+    return `${days}  ${days > 1 ? 'Days' : 'Day'}`;
+};
+
+export const pluralize = (nb, str) => {
+    return nb > 1 ? `${nb} ${str}s` : `${nb} ${str}`;
+};
+
+export const calculateCheckout = (data, query) => {
+    const { coupons } = data;
+    const qty = Number(query?.guests) || 1;
+    const unitPrice = Number(data.price);
+    const subTotal = unitPrice * qty;
+    const discountArr = coupons
+        .map((coupon) => {
+            return validateCoupon(coupon, subTotal);
+        })
+        .filter((elm) => elm);
+    const reducer = (previous, current) => {
+        const newVal = previous.discount + current.discount;
+        console.log('new val', newVal);
+        return newVal;
+    };
+    const discountTotal = discountArr.length
+        ? discountArr.length > 1
+            ? discountArr.reduce(reducer)
+            : discountArr[0].discount
+        : 0;
+
+    const taxRate = 0;
+    const tax = taxRate * (subTotal + discountTotal);
+    const total = subTotal + discountTotal + tax;
+
+    return {
+        unitPrice,
+        qty,
+        subTotal,
+        discountTotal,
+        discountArr,
+        taxRate,
+        tax,
+        total
+    };
+};
+
+export const validateCoupon = (coupon, price) => {
+    const {
+        code,
+        description,
+        type,
+        value,
+        start_date,
+        end_date,
+        is_active,
+        timeless,
+        site_wide
+    } = coupon;
+    let discount = 0;
+
+    if (type == 'percent') discount = (value * price) / 100;
+    // value is in %
+    else if (type == 'fixed') discount = value;
+    // in cents
+    else discount = 0;
+    if (
+        is_active &&
+        (timeless || isDateBetween(new Date(Date.now()), start_date, end_date))
+    ) {
+        return {
+            code,
+            discount,
+            description
+        };
+    } else return null;
+};
+
+export const isDateBetween = (dateStr, startDateStr, endDateStr) => {
+    const checkDate = new Date(dateStr).getTime();
+    const startDate = new Date(startDateStr).getTime();
+    const endDate = new Date(endDateStr).getTime();
+
+    if (checkDate >= startDate && checkDate <= endDate) return true;
+    else return false;
 };

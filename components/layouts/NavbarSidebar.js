@@ -1,16 +1,28 @@
 import React from 'react';
-import { useContext } from 'react';
-import AuthContext from '@/context/AuthContext';
-import uiStruct from '@/constants/uiStruct';
-import translations from '@/constants/translations';
-import Icons from '@/blocks/Icon/Icons';
+
 import { handleRowReverse } from 'helpers/FEutils';
+import { toggleLang, toggleNav } from '@/store/actions/globalState';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Avatar from '@/specialty/Avatar';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
 
-const NavbarSidebar = ({ children }) => {
-    const { user, rtl, lang, navIsOpen, toggleNav, logout } =
-        useContext(AuthContext);
+const NavbarSidebar = ({
+    children,
+    toggleNav,
+    globalState: { rtl, lang, navIsOpen },
+    auth
+}) => {
+    const getName = () => {
+        const showName =
+            auth?.user?.profile?.displayname || auth?.user?.profile?.first;
+        const theClass = showName.length > 20 ? 'text-sm' : '';
+        return {
+            string: showName,
+            strClass: theClass
+        };
+    };
 
     return (
         <>
@@ -30,7 +42,7 @@ const NavbarSidebar = ({ children }) => {
                         : handleRowReverse(rtl).menuTranslateReverse +
                           ' pointer-events-none'
                 }`}>
-                <nav className=" flex flex-col relative flex-1 pt-28">
+                <nav className=" flex flex-col relative flex-1 pt-40 md:pt-28">
                     <div className="md:hidden fixed inset-x-0 top-6">
                         <div
                             className={`flex  items-center ml-8 gap-3 ${
@@ -44,38 +56,55 @@ const NavbarSidebar = ({ children }) => {
                         </div>
                     </div>
 
-                    <div className="fixed inset-x-0 bottom-3 md:bottom-full md:top-6">
+                    <div className="fixed inset-x-0 bottom-full top-6">
                         <div
-                            className={`flex ${
-                                handleRowReverse(rtl).rtl
-                            } justify-between items-center `}>
+                            className={`flex gap-4 md:gap-0 flex-col-reverse md:flex-row  md:justify-between md:items-center `}>
                             <div
                                 className={`${
-                                    handleRowReverse(rtl).ml
-                                }-12 flex items-center`}>
-                                {user ? (
-                                    <Avatar user={user} size={50} />
+                                    auth?.user ? 'ml-8' : 'ml-12'
+                                } flex items-center`}>
+                                {auth?.user?.profile ? (
+                                    <Avatar
+                                        profile={auth?.user?.profile}
+                                        size="w-12 h-12"
+                                    />
                                 ) : (
                                     <IconsLucide icon="User" />
                                 )}
 
                                 <div className="px-2">
-                                    {user ? user.handle : 'Guest'}
+                                    {auth?.user?.profile ? (
+                                        <>
+                                            <div
+                                                className={`${
+                                                    getName().strClass
+                                                }`}>
+                                                {getName().string}
+                                            </div>
+                                            <div className="text-xs font-semibold">
+                                                @{auth?.user?.username}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div>Guest</div>
+                                    )}
                                 </div>
                             </div>
-                            <button
-                                onClick={() => toggleNav(!navIsOpen)}
-                                className={`focus:outline-none w-20 h-12
-                                   flex  items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
-                                       rtl ? 'rounded-r-lg' : 'rounded-l-lg'
-                                   }`}>
-                                <i
-                                    className={`${
-                                        rtl
-                                            ? 'las la-arrow-left'
-                                            : 'las la-arrow-right'
-                                    }`}></i>
-                            </button>
+                            <div className="flex justify-end md:justify-start ">
+                                <button
+                                    onClick={() => toggleNav(!navIsOpen)}
+                                    className={`focus:outline-none w-20 h-12
+                                       flex  items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
+                                           rtl ? 'rounded-r-lg' : 'rounded-l-lg'
+                                       }`}>
+                                    <i
+                                        className={`${
+                                            rtl
+                                                ? 'las la-arrow-left'
+                                                : 'las la-arrow-right'
+                                        }`}></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -98,4 +127,19 @@ const NavbarSidebar = ({ children }) => {
     );
 };
 
-export default NavbarSidebar;
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            toggleLang,
+            toggleNav
+        },
+        dispatch
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarSidebar);

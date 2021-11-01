@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1464" height="786" viewBox="0 0 1464 786">
+  <g id="landing_bg_01" transform="translate(-228 -1024)">
+    <g id="Rectangle_972" data-name="Rectangle 972" transform="translate(1421 1214)" fill="none" stroke="#00cc97" stroke-width="2">
+      <rect width="246" height="564" rx="123" stroke="none"/>
+      <rect x="1" y="1" width="244" height="562" rx="122" fill="none"/>
+    </g>
+    <rect id="Rectangle_969" data-name="Rectangle 969" width="167" height="378" rx="83.5" transform="translate(915 1250) rotate(-90)" fill="#00cc97"/>
+    <rect id="Rectangle_973" data-name="Rectangle 973" width="168" height="24" rx="12" transform="translate(1069 1644)" fill="#c0e8dc"/>
+    <rect id="Rectangle_981" data-name="Rectangle 981" width="168" height="24" rx="12" transform="translate(1163 1380)" fill="#c0e8dc"/>
+    <rect id="Rectangle_975" data-name="Rectangle 975" width="107" height="24" rx="12" transform="translate(1106 1686)" fill="#c0e8dc"/>
+    <rect id="Rectangle_983" data-name="Rectangle 983" width="107" height="24" rx="12" transform="translate(1200 1422)" fill="#c0e8dc"/>
+    <rect id="Rectangle_976" data-name="Rectangle 976" width="76" height="24" rx="12" transform="translate(1512 1686)" fill="#c0e8dc"/>
+    <rect id="Rectangle_985" data-name="Rectangle 985" width="76" height="24" rx="12" transform="translate(1263 1464)" fill="#c0e8dc"/>
+    <rect id="Rectangle_974" data-name="Rectangle 974" width="75" height="24" rx="12" transform="translate(1256 1644)" fill="#c0e8dc"/>
+    <rect id="Rectangle_982" data-name="Rectangle 982" width="75" height="24" rx="12" transform="translate(1359 1464)" fill="#c0e8dc"/>
+    <rect id="Rectangle_977" data-name="Rectangle 977" width="257" height="24" rx="12" transform="translate(1234 1686)" fill="#c0e8dc"/>
+    <rect id="Rectangle_984" data-name="Rectangle 984" width="169" height="24" rx="12" transform="translate(1328 1422)" fill="#c0e8dc"/>
+    <rect id="Rectangle_986" data-name="Rectangle 986" width="1464" height="786" transform="translate(228 1024)" fill="none"/>
+  </g>
+</svg>

@@ -1,21 +1,30 @@
 import { Pill__Logo, Pill__Experience } from '@/blocks/Pills';
 
 import ButtonCard from '@/blocks/Button/ButtonCard';
+import { randomItem } from '@/helpers/FEutils';
+import Avatar from 'components/specialty/Avatar';
+import Link from 'next/link';
+import KreatorBadgeStatic from '../blocks/KreatorBadgeStatic';
 
-const Showcase = ({ data, children, pill }) => {
-    const {
-        collection,
-        label,
-        title,
-        subtitle,
-        description,
-        author,
-        btn,
-        bgImage,
-        darkMode
-    } = data;
+const Showcase = ({
+    data,
+    children,
+    pill,
+    dataLoading,
+    collection = 'experience'
+}) => {
+    // const {
+    //     label,
+    //     title,
+    //     subtitle,
+    //     description,
+    //     author,
+    //     btn,
+    //     bgImage,
+    //     darkMode
+    // } = data;
 
-    const dark = !!darkMode;
+    const dark = !!data?.dark_theme;
     const blur =
         collection != 'showcase' ? 'filter blur-2xl transform scale-110' : '';
     const overlay =
@@ -26,13 +35,13 @@ const Showcase = ({ data, children, pill }) => {
                     dark ? 'bg-gray-600 opacity-50' : 'bg-glass-100 opacity-50'
                 }`}></div>
         ) : null;
-    return (
+    return !dataLoading ? (
         <div className={`w-full h-128 relative pt-1`}>
             <div
                 style={{ zIndex: '-50' }}
-                className="z-1 absolute inset-0 overflow-hidden bg-cyan-100 opacity-100">
+                className="z-1 absolute inset-0 overflow-hidden bg-gray-200">
                 <img
-                    data-blink-src={bgImage}
+                    data-blink-src={data.image}
                     className={`object-cover w-full h-full ${
                         dark ? 'brightness-50' : ''
                     } ${blur} `}
@@ -47,7 +56,7 @@ const Showcase = ({ data, children, pill }) => {
                         <img
                             alt="Placeholder"
                             className="object-cover w-full h-full  transform scale-75 -translate-x-1/4"
-                            src={bgImage}
+                            src={data.image}
                         />
                     </div>
                 </div>
@@ -63,64 +72,58 @@ const Showcase = ({ data, children, pill }) => {
                     <Pill__Logo />
                 </div>
             ) : null}
-            {collection == 'experience' && (
+            {collection == 'experience' && data.blackPill && (
                 <div
                     className={`absolute z-100 bottom-0 translate-y-1/2                           
                     left-1/2 transform -translate-x-1/2`}>
-                    <Pill__Experience label={label} />
+                    <Pill__Experience label={data.blackPillTxt} />
                 </div>
             )}
             <div
                 className={`z-100 mb-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40`}>
                 <div className={`z-100 px-4 mt-20`}>
-                    {author && (
-                        <div
-                            className={`${
-                                dark ? 'text-white' : 'text-gray-800'
-                            } text-base mb-8 flex items-center `}>
-                            <div className="rounded-full bg-green-400 h-8 flex items-center text-gray-900 text-xs font-bold shadow-2xl-green-500">
-                                <img
-                                    src={author.avatar}
-                                    className="object-cover rounded-full w-8 h-8 -mr-3"
-                                    alt=""
-                                />
-
-                                <span className="px-6">@{author.handle}</span>
-                            </div>
-                        </div>
+                    {data.username && (
+                        <>
+                            <KreatorBadgeStatic author={data?.user_id} />
+                        </>
                     )}
                     <div
                         className={`inline-flex ${
                             dark ? 'text-green-400' : 'text-green-500'
                         } font-bold text-3xl tracking-tight  leading-none flex-shrink-0 flex-initial mb-2`}>
-                        {title}
+                        {data.title}
                     </div>
                     <div
                         className={`${
                             dark ? 'text-white' : 'text-gray-800'
                         } mt-2 text-4xl font-bold w-128 leading-none mb-8`}>
-                        {subtitle}
+                        {data.headline}
                     </div>
-                    {description && (
+                    {data.description && (
                         <div
                             className={`${
                                 dark ? 'text-white' : 'text-gray-800'
-                            } text-base w-128  mb-8`}>
-                            {description}
-                        </div>
+                            } text-base w-128  mb-8`}
+                            dangerouslySetInnerHTML={{
+                                __html: data.description
+                            }}
+                        />
                     )}
 
-                    {btn && (
+                    {data.button && (
                         <ButtonCard
-                            url={btn.url}
-                            icon={btn.icon}
-                            label={btn.label}
+                            url={data.url}
+                            icon={'las la-arrow-right'}
+                            label={data.label}
                             darkMode={dark}
                         />
                     )}
                 </div>
             </div>
         </div>
+    ) : (
+        <div
+            className={`w-full h-128 relative pt-1 bg-gray-300 animate-pulse`}></div>
     );
 };
 

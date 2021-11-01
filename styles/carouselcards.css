@@ -1,40 +1,39 @@
 .embla {
     position: relative;
     padding: 0px;
-    width: 100%
-   
-  }
-  
-  .embla__viewport {
+    width: 100%;
+}
+
+.embla__viewport {
     /* overflow: hidden; */
     width: 100%;
-  }
-  
-  .embla__viewport.is-draggable {
+}
+
+.embla__viewport.is-draggable {
     cursor: move;
     cursor: grab;
-  }
-  
-  .embla__viewport.is-dragging {
+}
+
+.embla__viewport.is-dragging {
     cursor: grabbing;
-  }
-  
-  .embla__container {
+}
+
+.embla__container {
     display: flex;
     user-select: none;
     -webkit-touch-callout: none;
     -khtml-user-select: none;
     -webkit-tap-highlight-color: transparent;
-    
-  }
-  
-  /* .embla__slide {
-    position: relative; 
-    flex: 0 0 14.2%; 
-    margin-right: 0px;
-   
-  }
+}
 
+.embla__slide_gallery {
+    position: relative;
+    padding-left: 10px;
+    /* flex: 0 0 25%;
+    margin-right: 0px; */
+    min-width: 25%;
+}
+/* 
   .x4.embla__slide {
     position: relative; 
     flex: 0 0 25%; 
@@ -56,14 +55,13 @@
    
   } */
 
-  
-  .embla__slide__inner {
+.embla__slide__inner {
     position: relative;
     overflow: hidden;
-    height: 190px;
-  }
-  
-  .embla__slide__img {
+    height: 400px;
+}
+
+.embla__slide__img {
     position: absolute;
     display: block;
     top: 50%;
@@ -73,9 +71,9 @@
     min-width: 100%;
     max-width: none;
     transform: translate(-50%, -50%);
-  }
-  
-  .embla__button {
+}
+
+.embla__button {
     /* outline: 0; */
     cursor: pointer;
     /* background-color: transparent; */
@@ -91,23 +89,22 @@
     align-items: center;
     fill: #1bcacd;
     padding: 0; */
-  }
-  
-  .embla__button:disabled {
+}
+
+.embla__button:disabled {
     cursor: default;
     opacity: 0.3;
-  }
-  
-  .embla__button__svg {
+}
+
+.embla__button__svg {
     width: 100%;
     height: 100%;
-  }
-  
-  .embla__button--prev {
+}
+
+.embla__button--prev {
     /* left: 27px; */
-  }
-  
-  .embla__button--next {
+}
+
+.embla__button--next {
     /* right: 27px; */
-  }
-  
+}

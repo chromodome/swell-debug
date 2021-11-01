@@ -11,7 +11,7 @@ const BlockTitle = ({ text, classes, component = 1 }) => {
 
     return (
         <TitleComponent
-            className={`text-kn-primary font-semibold	text-2xl	${classes}`}>
+            className={`text-kn-primary font-semibold text-xl	${classes}`}>
             {text}
         </TitleComponent>
     );

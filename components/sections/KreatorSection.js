@@ -7,7 +7,7 @@ export default function KreatorSection({ author }) {
     return (
         <div className="flex w-full h-full items-center	">
             <div className="flex w-1/3 h-full ">
-                <img className="rounded-xl w-full" src={author.avatar} />
+                <img className="rounded-xl w-full" src={author?.avatar} />
             </div>
             <div className="relative w-2/3 px-8">
                 <BlockTitle

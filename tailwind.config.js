@@ -9,6 +9,12 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        groupLevel: 10,
+
+        groupScope: 'scope',
+
+        groupVariants: ['hover', 'focus'],
+
         borderRadius: {
             none: '0',
 
@@ -92,14 +98,15 @@ module.exports = {
             '2xl-green-500': '0 11px 20px -6px rgba(30, 208, 151,  0.5)',
             '2xl-green-400': '0 25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600': '0 25px 30px -12px rgba(0, 128, 87,  0.4)',
+            '6xl-green-center': '0 0 30px 0 rgba(0, 128, 87,  0.4)',
             '2xl-top': '0 -25px 50px -12px rgba(0, 0, 0, 0.25)',
             '3xl-top': '0 -35px 60px -15px rgba(0, 0, 0, 0.3)',
             '2xl-green-top': '0 -25px 50px -12px rgba(30, 208, 151,  0.14)',
             '2xl-green-500-top': '0 -11px 20px -6px rgba(30, 208, 151,  0.5)',
             '2xl-green-400-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.25)',
             '2xl-green-600-top': '0 -25px 30px -12px rgba(0, 128, 87,  0.4)',
-            '6xl-green-center': '0 15px 50px 0 rgba(0, 128, 87,  0.6)',
-            'xl-green': '0 6px 20px  rgba(0, 128, 87,  0.4)',
+            '2xl-green-600-rev': '0 -25px 30px -12px rgba(0, 128, 87,  0.14)',
+            double: '0 25px 50px 0 rgba(0, 128, 87, 0.14), 0 15px 30px 0 rgba(0, 128, 87, 0.2)',
             cards: '0 25px 50px -12px rgba(0, 128, 87,  0.14)',
             images: '0 25px 40px -12px rgba(70, 128, 87,  0.4)',
             'cards-top': '0 -25px 50px -12px rgba(0, 128, 87,  0.14)',
@@ -112,8 +119,19 @@ module.exports = {
             none: 'none'
         },
         extend: {
+            transitionProperty: {
+                height: 'height',
+                width: 'width'
+            },
+            transitionTimingFunction: {
+                'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+                'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                'out-expo-hard': 'cubic-bezier(0.07, 0.53, 0.25, 1)'
+            },
+
             screens: {
-                touch: { raw: '(hover: none)' }
+                touch: { raw: '(hover: none)' },
+                portrait: { raw: '(orientation: portrait)' }
                 // => @media (orientation: portrait) { ... }
             },
             colors: {
@@ -121,6 +139,7 @@ module.exports = {
                 'kn-primary-25': '#ecfdf540',
                 'kn-primary-50': '#ecfdf580',
                 'kn-primary-75': '#ecfdf5',
+                'kn-gray-100': '#F6F6F6',
                 'kn-primary-100': '#F2F9F8',
                 'kn-primary-200': '#E4F2F0',
                 'kn-primary-300': '#C4E6E2',
@@ -140,10 +159,9 @@ module.exports = {
                 'glass-50': '#ffffff88',
                 'glass-75': '#ffffffBB',
                 'modal-100': '#D5DCD9',
-                'glass-100': '#E4FBF4',
 
                 cyan: colors.cyan,
-                'light-blue': colors.sky,
+                'light-blue': colors.lightBlue,
                 teal: colors.teal
             },
             maxHeight: {
@@ -188,6 +206,7 @@ module.exports = {
             },
             height: {
                 128: '32rem',
+                126: '30rem',
                 160: '40rem',
                 192: '49rem',
                 256: '64rem',
@@ -234,6 +253,131 @@ module.exports = {
                 'screen-100': '100vw',
                 'parent-120': '120%',
                 'parent-150': '150%'
+            },
+            scale: {
+                10: '0.1',
+                20: '0.2',
+                25: '0.25',
+                30: '0.3',
+                40: '0.4',
+                60: '0.6',
+                65: '0.65',
+                70: '0.7',
+                80: '0.8',
+                85: '0.85',
+                115: '1.15',
+                120: '1.2',
+                130: '1.3',
+                135: '1.35',
+                140: '1.4',
+                145: '1.45',
+                175: '1.75',
+                225: '2.25',
+                250: '2.5',
+                275: '2.75',
+                300: '3'
+            },
+            lineClamp: {
+                7: '7',
+                8: '8',
+                9: '9',
+                10: '10'
+            },
+            minHeight: {
+                8: '2rem',
+                9: '2.25rem',
+                10: '2.5rem',
+                11: '2.75rem',
+                12: '3rem',
+                14: '3.5rem',
+                16: '4rem',
+                20: '5rem',
+                24: '6rem',
+                28: '7rem',
+                32: '8rem',
+                36: '9rem',
+                40: '10rem',
+                44: '11rem',
+                48: '12rem',
+                52: '13rem',
+                56: '14rem',
+                60: '15rem',
+                64: '16rem',
+                72: '18rem',
+                80: '20rem',
+                96: '24rem'
+            },
+            minWidth: {
+                8: '2rem',
+                9: '2.25rem',
+                10: '2.5rem',
+                11: '2.75rem',
+                12: '3rem',
+                14: '3.5rem',
+                16: '4rem',
+                20: '5rem',
+                24: '6rem',
+                28: '7rem',
+                32: '8rem',
+                36: '9rem',
+                40: '10rem',
+                44: '11rem',
+                48: '12rem',
+                52: '13rem',
+                56: '14rem',
+                60: '15rem',
+                64: '16rem',
+                72: '18rem',
+                80: '20rem',
+                96: '24rem'
+            },
+            maxHeight: {
+                8: '2rem',
+                9: '2.25rem',
+                10: '2.5rem',
+                11: '2.75rem',
+                12: '3rem',
+                14: '3.5rem',
+                16: '4rem',
+                20: '5rem',
+                24: '6rem',
+                28: '7rem',
+                32: '8rem',
+                36: '9rem',
+                40: '10rem',
+                44: '11rem',
+                48: '12rem',
+                52: '13rem',
+                56: '14rem',
+                60: '15rem',
+                64: '16rem',
+                72: '18rem',
+                80: '20rem',
+                96: '24rem'
+            },
+            maxWidth: {
+                8: '2rem',
+                9: '2.25rem',
+                10: '2.5rem',
+                11: '2.75rem',
+                12: '3rem',
+                14: '3.5rem',
+                16: '4rem',
+                20: '5rem',
+                24: '6rem',
+                28: '7rem',
+                32: '8rem',
+                36: '9rem',
+                40: '10rem',
+                44: '11rem',
+                48: '12rem',
+                52: '13rem',
+                56: '14rem',
+                60: '15rem',
+                64: '16rem',
+                72: '18rem',
+                80: '20rem',
+                96: '24rem'
             }
         }
     },
@@ -244,9 +388,17 @@ module.exports = {
             opacity: ['disabled'],
             ringColor: ['group-hover', 'hover', 'active'],
             ringOpacity: ['group-hover', 'hover', 'active'],
+            display: ['group-hover', 'hover'],
             margin: ['last'],
-            padding: ['last']
+            padding: ['last', 'group-hover'],
+            inset: ['group-hover', 'hover', 'focus'],
+            justifyContent: ['hover', 'focus', 'group-hover'],
+            borderRadius: ['hover', 'focus', 'focus-within']
         }
     },
-    plugins: [require('tailwind-scrollbar')]
+    plugins: [
+        require('tailwind-scrollbar'),
+        require('tailwindcss-nested-groups'),
+        require('@tailwindcss/line-clamp')
+    ]
 };

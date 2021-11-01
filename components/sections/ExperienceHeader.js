@@ -19,7 +19,7 @@ const ExperienceHeader = ({
     sectionTitles = { title: '', subTitle: '' },
     days,
     type,
-    authorId
+    user
 }) => {
     return (
         <>
@@ -39,9 +39,9 @@ const ExperienceHeader = ({
             </div>
             <div className="relative px-4 flex items-center">
                 <div className="mr-4">
-                    <Avatar url={authorId.avatar} />
+                    <Avatar url={user?.avatar} />
                 </div>
-                <div>by {`${authorId?.first_name} ${authorId?.last_name}`}</div>
+                <div>by {`${user?.first_name} ${user?.last_name}`}</div>
             </div>
         </>
     );

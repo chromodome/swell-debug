@@ -1,0 +1,108 @@
+.gallery-sm .embla {
+    /* position: relative; */
+    background-color: red;
+    /* padding: 20px;
+    max-width: 670px;
+    margin-left: auto;
+    margin-right: auto; */
+}
+
+.gallery-sm .embla__viewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+.gallery-sm .embla__viewport.is-draggable {
+    cursor: move;
+    cursor: grab;
+}
+
+.gallery-sm .embla__viewport.is-dragging {
+    cursor: grabbing;
+}
+
+.gallery-sm .embla__container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    /* margin-left: -10px; */
+}
+
+.gallery-sm .embla__slide_gallery {
+    position: relative;
+    padding-left: 10px;
+    /* flex: 0 0 25%;
+    margin-right: 0px; */
+    min-width: 25%;
+}
+
+/* .embla__slide {
+    position: relative;
+    min-width: 150px;
+    padding-left: 10px;
+} */
+
+.gallery-sm .embla__slide {
+    /* flex: 0 0 auto; 
+    max-width: 100%; 
+    margin-right: 10px; */
+    /* flex: 0 0 auto;  */
+    max-width: 100%; /* Prevent from growing larger than viewport */
+    margin-right: 10px;
+}
+
+.gallery-sm .embla__slide__inner {
+    position: relative;
+    overflow: hidden;
+    height: unset;
+}
+
+.gallery-sm .embla__slide__img {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    min-height: 100%;
+    min-width: 100%;
+    max-width: none;
+    transform: translate(-50%, -50%);
+}
+
+.gallery-sm .embla__button {
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    touch-action: manipulation;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    fill: #1bcacd;
+    padding: 0;
+}
+
+.gallery-sm .embla__button:disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.gallery-sm .embla__button__svg {
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-sm .embla__button--prev {
+    left: 27px;
+}
+
+.gallery-sm .embla__button--next {
+    right: 27px;
+}
