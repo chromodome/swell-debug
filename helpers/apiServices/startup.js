@@ -38,3 +38,17 @@ export const fetchStartupData = (params) => {
                 return { error };
             });
 };
+
+export const fetchIpData = (params) => {
+    return (dispatch) =>
+        dispatch({
+            type: types.GET_IP_DATA,
+            payload: axios.get(`http://ip-api.com/json`)
+        })
+            .then((res) => res)
+            .catch((error) => {
+                // console.log(error);
+                // serverErrors(error);
+                // return { error };
+            });
+};

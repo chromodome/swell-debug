@@ -14,6 +14,16 @@ const NavbarSidebar = ({
     globalState: { rtl, lang, navIsOpen },
     auth
 }) => {
+    const getName = () => {
+        const showName =
+            auth?.user?.profile?.displayname || auth?.user?.profile?.first;
+        const theClass = showName.length > 20 ? 'text-sm' : '';
+        return {
+            string: showName,
+            strClass: theClass
+        };
+    };
+
     return (
         <>
             <div
@@ -32,7 +42,7 @@ const NavbarSidebar = ({
                         : handleRowReverse(rtl).menuTranslateReverse +
                           ' pointer-events-none'
                 }`}>
-                <nav className=" flex flex-col relative flex-1 pt-28">
+                <nav className=" flex flex-col relative flex-1 pt-40 md:pt-28">
                     <div className="md:hidden fixed inset-x-0 top-6">
                         <div
                             className={`flex  items-center ml-8 gap-3 ${
@@ -46,11 +56,9 @@ const NavbarSidebar = ({
                         </div>
                     </div>
 
-                    <div className="fixed inset-x-0 bottom-3 md:bottom-full md:top-6">
+                    <div className="fixed inset-x-0 bottom-full top-6">
                         <div
-                            className={`flex ${
-                                handleRowReverse(rtl).rtl
-                            } justify-between items-center `}>
+                            className={`flex gap-4 md:gap-0 flex-col-reverse md:flex-row  md:justify-between md:items-center `}>
                             <div
                                 className={`${
                                     auth?.user ? 'ml-8' : 'ml-12'
@@ -67,10 +75,11 @@ const NavbarSidebar = ({
                                 <div className="px-2">
                                     {auth?.user?.profile ? (
                                         <>
-                                            <div>
-                                                {auth?.user?.profile
-                                                    ?.displayname ||
-                                                    auth?.user?.profile?.first}
+                                            <div
+                                                className={`${
+                                                    getName().strClass
+                                                }`}>
+                                                {getName().string}
                                             </div>
                                             <div className="text-xs font-semibold">
                                                 @{auth?.user?.username}
@@ -81,19 +90,21 @@ const NavbarSidebar = ({
                                     )}
                                 </div>
                             </div>
-                            <button
-                                onClick={() => toggleNav(!navIsOpen)}
-                                className={`focus:outline-none w-20 h-12
-                                   flex  items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
-                                       rtl ? 'rounded-r-lg' : 'rounded-l-lg'
-                                   }`}>
-                                <i
-                                    className={`${
-                                        rtl
-                                            ? 'las la-arrow-left'
-                                            : 'las la-arrow-right'
-                                    }`}></i>
-                            </button>
+                            <div className="flex justify-end md:justify-start ">
+                                <button
+                                    onClick={() => toggleNav(!navIsOpen)}
+                                    className={`focus:outline-none w-20 h-12
+                                       flex  items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
+                                           rtl ? 'rounded-r-lg' : 'rounded-l-lg'
+                                       }`}>
+                                    <i
+                                        className={`${
+                                            rtl
+                                                ? 'las la-arrow-left'
+                                                : 'las la-arrow-right'
+                                        }`}></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div

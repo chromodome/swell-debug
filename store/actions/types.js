@@ -1,10 +1,13 @@
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS';
+export const SUBMIT_FAIL = 'SUBMIT_FAIL';
 export const USER_LOADED = 'USER_LOADED';
 export const USER_PROFILE_MISSING = 'USER_PROFILE_MISSING';
 export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
 export const USER_PROFILE_FAIL = 'USER_PROFILE_FAIL';
 export const AUTH_LOADING = 'AUTH_LOADING';
+export const GENERAL_LOADING = 'GENERAL_LOADING';
 export const AUTH_SWITCHING = 'AUTH_SWITCHING';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const SWITCH_ERROR = 'SWITCH_ERROR';
@@ -36,6 +39,7 @@ export const SET_AUTH_PAGE = 'SET_AUTH_PAGE';
 // startup
 /*----------*/
 export const GET_STARTUP_DATA = 'GET_STARTUP_DATA';
+export const GET_IP_DATA = 'GET_IP_DATA';
 
 /*----------*/
 // filters

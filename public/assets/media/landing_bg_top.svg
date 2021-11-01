@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="896" viewBox="0 0 1920 896">
+    <defs>
+        <style>.a,.af,.c,.d,.e,.f,.g,.h,.i,.j,.m,.p,.r,.t{fill:none;}.a,.r{stroke:#707070;}.b{clip-path:url(#a);}.c{stroke:#dce9e3;}.c,.d,.e,.f,.g,.h,.i{stroke-miterlimit:10;}.ae,.af,.c,.d,.e,.f,.g,.h,.i,.m,.n,.s{stroke-width:2px;}.d{stroke:#c6e5d5;}.e{stroke:#b4d6c8;}.f{stroke:#a6d1bd;}.g{stroke:#cbecdd;}.h{stroke:#cdeedf;}.i{stroke:#a4cebb;}.ae,.k,.n,.u{fill:#fff;}.l,.y{fill:#00cc97;}.m{stroke:#fff;}.af,.m,.p,.r,.t{stroke-linecap:round;}.n{stroke:#e4e5e4;}.o{fill:url(#h);}.p{stroke:#e5e5e5;}.p,.t{stroke-width:7px;}.q{fill:#e5e5e5;}.r{stroke-width:3px;}.s{fill:#e4fffa;}.ae,.af,.s,.t,.u{stroke:#00cc97;}.v{fill:url(#k);}.w{fill:url(#l);}.x{fill:url(#m);}.y{opacity:0.17;}.z{fill:url(#n);}.aa{fill:url(#o);}.ab{fill:url(#p);}.ac{fill:url(#q);}.ad{fill:#c0e8dc;}.ag{fill:#008ac8;}.ah{stroke:none;}.ai{filter:url(#t);}.aj{filter:url(#r);}.ak{filter:url(#i);}.al{filter:url(#f);}.am{filter:url(#d);}.an{filter:url(#b);}</style>
+        <clipPath id="a">
+            <rect class="a" width="1920" height="896"/>
+        </clipPath>
+        <filter id="b" x="1021" y="155" width="594" height="486" filterUnits="userSpaceOnUse">
+            <feOffset dy="15" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="c"/>
+            <feFlood flood-color="#2d977b" flood-opacity="0.227"/>
+            <feComposite operator="in" in2="c"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="d" x="1021" y="155" width="209" height="486" filterUnits="userSpaceOnUse">
+            <feOffset dy="15" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="e"/>
+            <feFlood flood-color="#2d977b" flood-opacity="0.227"/>
+            <feComposite operator="in" in2="e"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="f" x="1294.474" y="191.819" width="115.806" height="127.394" filterUnits="userSpaceOnUse">
+            <feOffset dy="8" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="g"/>
+            <feFlood flood-color="#00bc8b" flood-opacity="0.302"/>
+            <feComposite operator="in" in2="g"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <pattern id="h" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 5472 3648">
+            <image width="5472" height="3648" xlink:href="E:/04_Projects/Konnect/kreators_images/login/kalen-emsley-kGSapVfg8Kw-unsplash.jpg"/>
+        </pattern>
+        <filter id="i" x="1021" y="269" width="209" height="351" filterUnits="userSpaceOnUse">
+            <feOffset dy="-6" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="j"/>
+            <feFlood flood-color="#2d977b" flood-opacity="0.102"/>
+            <feComposite operator="in" in2="j"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <linearGradient id="k" x1="0.982" y1="0.381" x2="0.035" y2="0.69" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#00cc97"/>
+            <stop offset="1" stop-color="#008dcc"/>
+        </linearGradient>
+        <pattern id="l" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_02.jpg"/>
+        </pattern>
+        <pattern id="m" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_03.jpg"/>
+        </pattern>
+        <pattern id="n" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_10.jpg"/>
+        </pattern>
+        <pattern id="o" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_08.jpg"/>
+        </pattern>
+        <pattern id="p" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_05.jpg"/>
+        </pattern>
+        <pattern id="q" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 1024 1024">
+            <image width="1024" height="1024" xlink:href="E:/04_Projects/Konnect/kreators_images/login/gan_13.jpg"/>
+        </pattern>
+        <filter id="r" x="1444" y="635" width="245" height="187" filterUnits="userSpaceOnUse">
+            <feOffset dy="15" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="s"/>
+            <feFlood flood-color="#2d977b" flood-opacity="0.149"/>
+            <feComposite operator="in" in2="s"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="t" x="1113" y="658" width="245" height="145" filterUnits="userSpaceOnUse">
+            <feOffset dy="15" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="15" result="u"/>
+            <feFlood flood-color="#2d977b" flood-opacity="0.149"/>
+            <feComposite operator="in" in2="u"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g class="b">
+        <path class="c" d="M1511.677,1C1283.668,140,957.5,238.033,716.693,348.351c-115.38,52.858-215.952,115.62-345.84,123.624C247.359,479.589,120.723,457.578.5,488.184" transform="translate(-0.5 -304.625)"/>
+        <path class="d" d="M1920.5,39c-198.823,52.027-389.853,233.211-537.47,268.32C1298.666,327.38,1212.1,336.9,1130.5,367.631c-86.445,32.557-165.276,81.582-249.67,118.712C601.443,609.187,277.424,553.438.5,678.7" transform="translate(-0.5 -304.605)"/>
+        <path class="e" d="M1920.5,416.549c-104.6-16.949-213.541-31.406-315.744,4.933-77.75,27.644-436.984,340.2-582.233,371.854-179.093,39.02-363.949,1.361-544.484,25.783C309.441,841.941,165.086,940.712.5,976.3" transform="translate(-0.5 -304.417)"/>
+        <path class="f" d="M1919.9,512.18c-35.879,16.719-72.037,32.727-108.817,47.465-90.187,36.2-186.977,58.34-272.8,104.8-154.871,83.834-315.164,307.96-391.2,535.889" transform="translate(0.097 -304.358)"/>
+        <path class="g" d="M982.4,4.34c-78.111,59.461-148.968,91.438-205,110-75.759,25.063-139.463,30.556-256,79.972-90.757,38.48-142.935,73.658-176,91.968-70.9,39.26-177.793,69.7-344.9,50.556" transform="translate(-0.5 -304.623)"/>
+        <path class="h" d="M1023.948,1200.118c48.245-72.648,66.094-139.072,41.672-179.944-34.218-57.32-142.484-49.566-276-40.021-176.252,12.637-317.165,56.449-411.994,91.968a1853.517,1853.517,0,0,0-271.871,128" transform="translate(-0.446 -304.118)"/>
+        <path class="i" d="M1919.684,644.73c-109.057,48.915-170.168,110.558-206.828,163.655-49.716,72.037-57.79,133.069-147.077,391.884" transform="translate(0.316 -304.289)"/>
+    </g>
+    <rect class="j" width="1920" height="896"/>
+    <g class="an" transform="matrix(1, 0, 0, 1, 0, 0)">
+        <rect class="k" width="504" height="396" transform="translate(1066 185)"/>
+    </g>
+    <g class="am" transform="matrix(1, 0, 0, 1, 0, 0)">
+        <rect class="k" width="119" height="396" transform="translate(1066 185)"/>
+    </g>
+    <g transform="translate(1339.474 228.819)">
+        <g class="al" transform="matrix(1, 0, 0, 1, -1339.47, -228.82)">
+            <path class="l" d="M64.6,62A12.925,12.925,0,0,0,51.7,74.9V86.491a12.9,12.9,0,0,0,25.806,0V74.9A12.925,12.925,0,0,0,64.6,62" transform="translate(1287.77 166.82)"/>
+        </g>
+        <path class="m" d="M77.1,102.2,69.6,95.72a1.219,1.219,0,0,1-.39-.876,1.14,1.14,0,0,1,.39-.876l7.5-6.476" transform="translate(-60.306 -74.735)"/>
+        <path class="m" d="M17102.492-593.65l-3.709-3.319" transform="translate(-17085.688 617.351)"/>
+        <path class="m" d="M17101.273-611.094l-8.115,6.975" transform="translate(-17084.73 619.756)"/>
+    </g>
+    <g class="n" transform="translate(1080 219)">
+        <rect class="ah" width="91" height="57" rx="9"/>
+        <rect class="j" x="1" y="1" width="89" height="55" rx="8"/>
+    </g>
+    <rect class="o" width="241" height="112" rx="9" transform="translate(1234 282)"/>
+    <line class="p" x2="66.237" transform="translate(1083.989 291.387)"/>
+    <line class="p" x2="66.237" transform="translate(1236.247 411.817)"/>
+    <line class="p" x2="66.237" transform="translate(1236.247 432.462)"/>
+    <line class="p" x2="230.968" transform="translate(1236.247 432.462)"/>
+    <line class="p" x2="230.968" transform="translate(1236.247 450.097)"/>
+    <g class="ak" transform="matrix(1, 0, 0, 1, 0, 0)">
+        <path class="k" d="M15,0h89a15,15,0,0,1,15,15V261a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V15A15,15,0,0,1,15,0Z" transform="translate(1066 320)"/>
+    </g>
+    <g transform="translate(1336.032 482.785)">
+        <circle class="q" cx="24" cy="24" r="24" transform="translate(-0.032 0.215)"/>
+        <g transform="translate(16.057 15.197)">
+            <line class="r" y2="17.061" transform="translate(8.531)"/>
+            <line class="r" y2="17.061" transform="translate(17.061 8.531) rotate(90)"/>
+        </g>
+    </g>
+    <g class="s" transform="translate(1080 394)">
+        <rect class="ah" width="91" height="24" rx="11"/>
+        <rect class="j" x="1" y="1" width="89" height="22" rx="10"/>
+    </g>
+    <line class="t" x2="66.237" transform="translate(1092.161 406.226)"/>
+    <g transform="translate(1079.688 435.473)">
+        <g class="u" transform="translate(0.312 -0.473)">
+            <rect class="ah" width="91" height="25" rx="11"/>
+            <rect class="j" x="0.5" y="0.5" width="90" height="24" rx="10.5"/>
+        </g>
+        <line class="p" x2="66.237" transform="translate(12.473 12.043)"/>
+    </g>
+    <g transform="translate(1079.688 476.763)">
+        <g class="u" transform="translate(0.312 0.237)">
+            <rect class="ah" width="91" height="24" rx="11"/>
+            <rect class="j" x="0.5" y="0.5" width="90" height="23" rx="10.5"/>
+        </g>
+        <line class="p" x2="66.237" transform="translate(12.473 12.043)"/>
+    </g>
+    <rect class="v" width="65" height="12" rx="6" transform="translate(1084 366)"/>
+    <g transform="translate(1114.957 235.903)">
+        <path class="j" d="M0,0H20.645V20.645H0Z"/>
+        <path d="M18.344,13.323V15.9h2.581v1.72H18.344V20.2h-1.72V17.624H14.043V15.9h2.581V13.323ZM18.351,3a.854.854,0,0,1,.853.854V11.6h-1.72V4.72H3.72V16.763l8.6-8.6L14.9,10.742v2.434l-2.581-2.581-6.17,6.169h6.17v1.72H2.853A.854.854,0,0,1,2,17.63V3.854A.86.86,0,0,1,2.853,3ZM7.161,6.441a1.72,1.72,0,1,1-1.72,1.72A1.72,1.72,0,0,1,7.161,6.441Z" transform="translate(-0.28 -0.419)"/>
+    </g>
+    <line class="p" y2="100.645" transform="translate(1562.699 201.925)"/>
+    <circle class="w" cx="52.5" cy="52.5" r="52.5" transform="translate(1604 288)"/>
+    <circle class="x" cx="44" cy="44" r="44" transform="translate(1551 89)"/>
+    <circle class="y" cx="7" cy="7" r="7" transform="translate(1364 133)"/>
+    <circle class="z" cx="27" cy="27" r="27" transform="translate(1080 691)"/>
+    <circle class="aa" cx="28" cy="28" r="28" transform="translate(1080 762)"/>
+    <circle class="ab" cx="35" cy="35" r="35" transform="translate(1663 685)"/>
+    <circle class="ac" cx="27" cy="27" r="27" transform="translate(1381 623)"/>
+    <g transform="translate(-5151 100)">
+        <rect class="k" width="155" height="55" rx="7" transform="translate(6312 662)"/>
+        <rect class="ad" width="66" height="9" rx="4.5" transform="translate(6327 677)"/>
+        <rect class="ad" width="76" height="9" rx="4.5" transform="translate(6334 694)"/>
+        <rect class="ad" width="30" height="9" rx="4.5" transform="translate(6401 677)"/>
+        <rect class="ad" width="30" height="9" rx="4.5" transform="translate(6418 694)"/>
+    </g>
+    <g transform="translate(-4896 -69)">
+        <g class="aj" transform="matrix(1, 0, 0, 1, 4896, 69)">
+            <rect class="k" width="155" height="97" rx="10" transform="translate(1489 665)"/>
+        </g>
+        <g transform="translate(5331 -4906)">
+            <rect class="ad" width="66" height="9" rx="4.5" transform="translate(1069 5655)"/>
+            <rect class="ad" width="42" height="9" rx="4.5" transform="translate(1084 5672)"/>
+            <rect class="ad" width="30" height="9" rx="4.5" transform="translate(1143 5655)"/>
+            <rect class="ad" width="56" height="9" rx="4.5" transform="translate(1134 5672)"/>
+        </g>
+        <rect class="ad" width="79" height="9" rx="4.5" transform="translate(6400 785)"/>
+        <rect class="ad" width="29" height="9" rx="4.5" transform="translate(6415 802)"/>
+        <rect class="ad" width="27" height="9" rx="4.5" transform="translate(6488 785)"/>
+        <rect class="ad" width="66" height="9" rx="4.5" transform="translate(6455 802)"/>
+    </g>
+    <g transform="translate(-5069 106)">
+        <rect class="k" width="155" height="39" rx="7" transform="translate(6279 524)"/>
+        <rect class="ad" width="66" height="9" rx="4.5" transform="translate(6294 540)"/>
+        <rect class="ad" width="30" height="9" rx="4.5" transform="translate(6368 540)"/>
+    </g>
+    <g transform="translate(-5072 103)">
+        <g class="ai" transform="matrix(1, 0, 0, 1, 5072, -103)">
+            <rect class="k" width="155" height="55" rx="10" transform="translate(1158 688)"/>
+        </g>
+        <g transform="translate(5176 -5055)">
+            <rect class="ad" width="66" height="9" rx="4.5" transform="translate(1069 5655)"/>
+            <rect class="ad" width="42" height="9" rx="4.5" transform="translate(1084 5672)"/>
+            <rect class="ad" width="30" height="9" rx="4.5" transform="translate(1143 5655)"/>
+            <rect class="ad" width="56" height="9" rx="4.5" transform="translate(1134 5672)"/>
+        </g>
+    </g>
+    <g transform="translate(281 -4860)">
+        <rect class="l" width="75" height="42" rx="21" transform="translate(1353 5410)"/>
+        <g class="ae" transform="translate(1344 5401)">
+            <rect class="ah" width="75" height="42" rx="21"/>
+            <rect class="j" x="1" y="1" width="73" height="40" rx="20"/>
+        </g>
+        <g transform="translate(-69.5 2833)">
+            <line class="af" y2="13" transform="translate(1451 2582.5)"/>
+            <line class="af" y2="13" transform="translate(1457.5 2589) rotate(90)"/>
+        </g>
+    </g>
+    <path class="ag" d="M-1957.472,44.625h0a13.533,13.533,0,0,0-3.888-8.21,13.522,13.522,0,0,0-8.225-3.889,13.528,13.528,0,0,0,8.225-3.89,13.527,13.527,0,0,0,3.889-8.219,13.517,13.517,0,0,0,3.89,8.219,13.527,13.527,0,0,0,8.224,3.89,13.521,13.521,0,0,0-8.224,3.889A13.524,13.524,0,0,0-1957.472,44.625Z" transform="translate(3540.359 590.478)"/>
+</svg>

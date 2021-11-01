@@ -88,7 +88,8 @@ export const getExperienceById = (id) => {
                                 profile {
                                     first,
                                     last,
-                                    avatar
+                                    avatar,
+                                    displayname
                                 }
                             },
                             skus {

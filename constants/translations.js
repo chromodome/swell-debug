@@ -151,7 +151,9 @@ const langData = {
             LOGIN_SUCCESS: 'Hello Kreator!',
             REGISTER_SUCCESS: 'Welcome Kreator!',
             PROFILE_SUCCESS: 'Profile Saved',
-            FORBIDDEN: "Hmm...it seems you're not allowed to make that request"
+            FORBIDDEN: "Hmm...it seems you're not allowed to make that request",
+            REJECTED: 'Submission rejected',
+            NOTFOUND: 'Submission page not found'
         }
     },
     ar: {

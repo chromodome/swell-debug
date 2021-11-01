@@ -56,7 +56,6 @@ const AccommodationMap = ({
     showCountryLayer = true,
     showCircleLayer = true
 }) => {
-    console.log('desinations', destinations);
     const rtl = false;
 
     const { isLoaded, loadError } = useLoadScript({

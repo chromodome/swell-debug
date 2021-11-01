@@ -10,7 +10,8 @@ const ButtonLoad = ({
     nowrap,
     type = 'button',
     form,
-    disabled = false
+    disabled = false,
+    margins = 'mt-8'
 }) => {
     const btnJSX = (
         <button
@@ -46,7 +47,7 @@ const ButtonLoad = ({
     return nowrap ? (
         btnJSX
     ) : (
-        <div className={`${width} flex items-center justify-center mt-8`}>
+        <div className={`${width} flex items-center justify-center ${margins}`}>
             {btnJSX}
         </div>
     );

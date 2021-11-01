@@ -3,6 +3,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .tour-highlight-1 {
+        @apply border-4 border-green-400;
+    }
+    .marketing-title {
+        @apply text-green-400 font-bold text-2xl tracking-tight leading-none;
+    }
+}
+
+@layer base {
+    .block-html ul,
+    .block-html ol {
+        @apply ml-4 text-xs mb-8;
+    }
+    .block-html ul li {
+        @apply list-disc;
+    }
+    .block-html ol li {
+        @apply list-decimal;
+    }
+    .block-html li:not(:last-child) {
+        @apply mb-1;
+    }
+    .block-html a {
+        @apply text-green-500 underline;
+    }
+    .block-html a:hover {
+        @apply text-green-900;
+    }
+    .block-html p {
+        @apply mb-4;
+    }
+
+    .block-html h1 {
+        @apply md:-ml-4 w-min whitespace-nowrap font-semibold text-sm md:text-base px-3 py-1 rounded-lg bg-green-100 text-green-600 mb-4;
+    }
+    .block-html h2 {
+        @apply w-min whitespace-nowrap font-semibold tracking-wide text-xs px-3 py-1 rounded-lg uppercase bg-blue-100 text-blue-600 mb-4;
+    }
+}
+
 @layer utilities {
     @variants responsive {
         /* Chrome, Safari and Opera */
@@ -249,6 +290,48 @@
     .ckeditor table td {
         padding: 1rem;
     }
+
+    .rainbow-gradient {
+        background-image: linear-gradient(
+            74deg,
+            rgba(196, 181, 253, 1) 0%,
+            rgba(147, 197, 253, 1) 19%,
+            rgba(110, 231, 183, 1) 43%,
+            rgba(255, 243, 65, 1) 65%,
+            rgba(252, 211, 77, 1) 79%,
+            rgba(252, 165, 165, 1) 92%
+        );
+    }
+    .landing-gradient {
+        background: rgb(178, 212, 197);
+        background-image: linear-gradient(
+            0deg,
+            rgba(178, 212, 197, 1) 0%,
+            rgba(236, 253, 245, 1) 100%
+        );
+    }
+
+    .landing-gradient-dark {
+        background: rgb(54, 90, 84);
+        background-image: linear-gradient(
+            0deg,
+            rgba(54, 90, 84, 1) 0%,
+            rgba(52, 85, 80, 1) 83%,
+            rgba(41, 70, 65, 1) 100%
+        );
+    }
+
+    .underline-thick-current {
+        text-decoration-color: currentColor !important;
+        text-decoration: underline;
+        text-decoration-thickness: 7px;
+    }
+
+    .underline-thick {
+        text-decoration-color: #00cc97 !important;
+        text-decoration: underline;
+        text-decoration-thickness: 7px;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -288,4 +371,8 @@
 .Toastify__close-button {
     color: #111827 !important;
     opacity: 0.3 !important;
+}
+
+html {
+    scroll-behavior: smooth;
 }

@@ -1,6 +1,17 @@
 export const currenciesObject = {
+    '000': {
+        symbol: '$',
+        name: 'US Dollar',
+        symbol_native: '$',
+        decimal_digits: 2,
+        rounding: 0,
+        code: 'USD',
+        name_plural: 'US dollars',
+        budget_rounding: 50
+    },
+
     USD: {
-        symbol: 'US$',
+        symbol: '$',
         name: 'US Dollar',
         symbol_native: '$',
         decimal_digits: 2,
@@ -37,7 +48,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'AED',
         name_plural: 'UAE dirhams',
-        budget_rounding: 100
+        budget_rounding: 50
     },
     AFN: {
         symbol: 'Af',
@@ -47,7 +58,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'AFN',
         name_plural: 'Afghan Afghanis',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     ALL: {
         symbol: 'ALL',
@@ -57,7 +68,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'ALL',
         name_plural: 'Albanian lekë',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     AMD: {
         symbol: 'AMD',
@@ -67,7 +78,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'AMD',
         name_plural: 'Armenian drams',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     ARS: {
         symbol: 'AR$',
@@ -77,7 +88,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'ARS',
         name_plural: 'Argentine pesos',
-        budget_rounding: 1000
+        budget_rounding: 5000
     },
     AUD: {
         symbol: 'AU$',
@@ -97,7 +108,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'AZN',
         name_plural: 'Azerbaijani manats',
-        budget_rounding: 1
+        budget_rounding: 10
     },
     BAM: {
         symbol: 'KM',
@@ -107,7 +118,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BAM',
         name_plural: 'Bosnia-Herzegovina convertible marks',
-        budget_rounding: 1
+        budget_rounding: 10
     },
     BDT: {
         symbol: 'Tk',
@@ -117,7 +128,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BDT',
         name_plural: 'Bangladeshi takas',
-        budget_rounding: 1
+        budget_rounding: 500
     },
     BGN: {
         symbol: 'BGN',
@@ -127,7 +138,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BGN',
         name_plural: 'Bulgarian leva',
-        budget_rounding: 1
+        budget_rounding: 10
     },
     BHD: {
         symbol: 'BD',
@@ -137,7 +148,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BHD',
         name_plural: 'Bahraini dinars',
-        budget_rounding: 25
+        budget_rounding: 20
     },
     BIF: {
         symbol: 'FBu',
@@ -147,7 +158,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BIF',
         name_plural: 'Burundian francs',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     BND: {
         symbol: 'BN$',
@@ -157,7 +168,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BND',
         name_plural: 'Brunei dollars',
-        budget_rounding: 1
+        budget_rounding: 50
     },
     BOB: {
         symbol: 'Bs',
@@ -167,7 +178,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BOB',
         name_plural: 'Bolivian bolivianos',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     BRL: {
         symbol: 'R$',
@@ -187,7 +198,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BWP',
         name_plural: 'Botswanan pulas',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     BYN: {
         symbol: 'Br',
@@ -197,7 +208,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BYN',
         name_plural: 'Belarusian rubles',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     BZD: {
         symbol: 'BZ$',
@@ -207,7 +218,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'BZD',
         name_plural: 'Belize dollars',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     CDF: {
         symbol: 'CDF',
@@ -217,7 +228,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'CDF',
         name_plural: 'Congolese francs',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     CHF: {
         symbol: 'CHF',
@@ -237,7 +248,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'CLP',
         name_plural: 'Chilean pesos',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     CNY: {
         symbol: 'CN¥',
@@ -257,7 +268,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'COP',
         name_plural: 'Colombian pesos',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     CRC: {
         symbol: '₡',
@@ -267,7 +278,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'CRC',
         name_plural: 'Costa Rican colóns',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     CVE: {
         symbol: 'CV$',
@@ -277,7 +288,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'CVE',
         name_plural: 'Cape Verdean escudos',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     CZK: {
         symbol: 'Kč',
@@ -297,7 +308,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'DJF',
         name_plural: 'Djiboutian francs',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     DKK: {
         symbol: 'Dkr',
@@ -317,7 +328,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'DOP',
         name_plural: 'Dominican pesos',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     DZD: {
         symbol: 'DA',
@@ -327,7 +338,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'DZD',
         name_plural: 'Algerian dinars',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     EEK: {
         symbol: 'Ekr',
@@ -347,7 +358,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'EGP',
         name_plural: 'Egyptian pounds',
-        budget_rounding: 500
+        budget_rounding: 100
     },
     ERN: {
         symbol: 'Nfk',
@@ -357,7 +368,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'ERN',
         name_plural: 'Eritrean nakfas',
-        budget_rounding: 1
+        budget_rounding: 500
     },
     ETB: {
         symbol: 'Br',
@@ -367,7 +378,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'ETB',
         name_plural: 'Ethiopian birrs',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     GBP: {
         symbol: '£',
@@ -387,7 +398,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'GEL',
         name_plural: 'Georgian laris',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     GHS: {
         symbol: 'GH₵',
@@ -397,7 +408,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'GHS',
         name_plural: 'Ghanaian cedis',
-        budget_rounding: 1
+        budget_rounding: 250
     },
     GNF: {
         symbol: 'FG',
@@ -407,7 +418,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'GNF',
         name_plural: 'Guinean francs',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     GTQ: {
         symbol: 'GTQ',
@@ -417,7 +428,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'GTQ',
         name_plural: 'Guatemalan quetzals',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     HKD: {
         symbol: 'HK$',
@@ -427,7 +438,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'HKD',
         name_plural: 'Hong Kong dollars',
-        budget_rounding: 500
+        budget_rounding: 250
     },
     HNL: {
         symbol: 'HNL',
@@ -437,7 +448,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'HNL',
         name_plural: 'Honduran lempiras',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     HRK: {
         symbol: 'kn',
@@ -487,7 +498,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'INR',
         name_plural: 'Indian rupees',
-        budget_rounding: 2500
+        budget_rounding: 2000
     },
     IQD: {
         symbol: 'IQD',
@@ -527,7 +538,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'JMD',
         name_plural: 'Jamaican dollars',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     JOD: {
         symbol: 'JD',
@@ -557,7 +568,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'KES',
         name_plural: 'Kenyan shillings',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     KHR: {
         symbol: 'KHR',
@@ -567,7 +578,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'KHR',
         name_plural: 'Cambodian riels',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     KMF: {
         symbol: 'CF',
@@ -577,7 +588,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'KMF',
         name_plural: 'Comorian francs',
-        budget_rounding: 1
+        budget_rounding: 25000
     },
     KRW: {
         symbol: '₩',
@@ -597,7 +608,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'KWD',
         name_plural: 'Kuwaiti dinars',
-        budget_rounding: 10
+        budget_rounding: 25
     },
     KZT: {
         symbol: 'KZT',
@@ -607,7 +618,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'KZT',
         name_plural: 'Kazakhstani tenges',
-        budget_rounding: 1
+        budget_rounding: 20000
     },
     LBP: {
         symbol: 'L.L.',
@@ -617,7 +628,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'LBP',
         name_plural: 'Lebanese pounds',
-        budget_rounding: 500000
+        budget_rounding: 100000
     },
     LKR: {
         symbol: 'SLRs',
@@ -627,7 +638,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'LKR',
         name_plural: 'Sri Lankan rupees',
-        budget_rounding: 10000
+        budget_rounding: 5000
     },
     LTL: {
         symbol: 'Lt',
@@ -637,7 +648,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'LTL',
         name_plural: 'Lithuanian litai',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     LVL: {
         symbol: 'Ls',
@@ -647,7 +658,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'LVL',
         name_plural: 'Latvian lati',
-        budget_rounding: 1
+        budget_rounding: 20
     },
     LYD: {
         symbol: 'LD',
@@ -657,7 +668,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'LYD',
         name_plural: 'Libyan dinars',
-        budget_rounding: 1
+        budget_rounding: 250
     },
     MAD: {
         symbol: 'MAD',
@@ -667,7 +678,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MAD',
         name_plural: 'Moroccan dirhams',
-        budget_rounding: 1
+        budget_rounding: 250
     },
     MDL: {
         symbol: 'MDL',
@@ -677,7 +688,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MDL',
         name_plural: 'Moldovan lei',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     MGA: {
         symbol: 'MGA',
@@ -687,7 +698,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MGA',
         name_plural: 'Malagasy Ariaries',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     MKD: {
         symbol: 'MKD',
@@ -697,7 +708,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MKD',
         name_plural: 'Macedonian denari',
-        budget_rounding: 1
+        budget_rounding: 2000
     },
     MMK: {
         symbol: 'MMK',
@@ -707,7 +718,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MMK',
         name_plural: 'Myanma kyats',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     MOP: {
         symbol: 'MOP$',
@@ -717,7 +728,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MOP',
         name_plural: 'Macanese patacas',
-        budget_rounding: 1
+        budget_rounding: 250
     },
     MUR: {
         symbol: 'MURs',
@@ -727,7 +738,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MUR',
         name_plural: 'Mauritian rupees',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     MXN: {
         symbol: 'MX$',
@@ -737,7 +748,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MXN',
         name_plural: 'Mexican pesos',
-        budget_rounding: 1000
+        budget_rounding: 500
     },
     MYR: {
         symbol: 'RM',
@@ -747,7 +758,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MYR',
         name_plural: 'Malaysian ringgits',
-        budget_rounding: 250
+        budget_rounding: 100
     },
     MZN: {
         symbol: 'MTn',
@@ -757,7 +768,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'MZN',
         name_plural: 'Mozambican meticals',
-        budget_rounding: 1
+        budget_rounding: 2000
     },
     NAD: {
         symbol: 'N$',
@@ -767,7 +778,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'NAD',
         name_plural: 'Namibian dollars',
-        budget_rounding: 1
+        budget_rounding: 250
     },
     NGN: {
         symbol: '₦',
@@ -777,7 +788,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'NGN',
         name_plural: 'Nigerian nairas',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     NIO: {
         symbol: 'C$',
@@ -787,7 +798,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'NIO',
         name_plural: 'Nicaraguan córdobas',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     NOK: {
         symbol: 'Nkr',
@@ -806,7 +817,8 @@ export const currenciesObject = {
         decimal_digits: 2,
         rounding: 0,
         code: 'NPR',
-        name_plural: 'Nepalese rupees'
+        name_plural: 'Nepalese rupees',
+        budget_rounding: 5000
     },
     NZD: {
         symbol: 'NZ$',
@@ -836,7 +848,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PAB',
         name_plural: 'Panamanian balboas',
-        budget_rounding: 1
+        budget_rounding: 50
     },
     PEN: {
         symbol: 'S/.',
@@ -846,7 +858,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PEN',
         name_plural: 'Peruvian nuevos soles',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     PHP: {
         symbol: '₱',
@@ -856,7 +868,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PHP',
         name_plural: 'Philippine pesos',
-        budget_rounding: 1
+        budget_rounding: 2000
     },
     PKR: {
         symbol: 'PKRs',
@@ -866,7 +878,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PKR',
         name_plural: 'Pakistani rupees',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     PLN: {
         symbol: 'zł',
@@ -876,7 +888,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PLN',
         name_plural: 'Polish zlotys',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     PYG: {
         symbol: '₲',
@@ -886,7 +898,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'PYG',
         name_plural: 'Paraguayan guaranis',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     QAR: {
         symbol: 'QR',
@@ -896,7 +908,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'QAR',
         name_plural: 'Qatari rials',
-        budget_rounding: 200
+        budget_rounding: 100
     },
     RON: {
         symbol: 'RON',
@@ -906,7 +918,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'RON',
         name_plural: 'Romanian lei',
-        budget_rounding: 1
+        budget_rounding: 200
     },
     RSD: {
         symbol: 'din.',
@@ -916,7 +928,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'RSD',
         name_plural: 'Serbian dinars',
-        budget_rounding: 1
+        budget_rounding: 5000
     },
     RUB: {
         symbol: 'RUB',
@@ -926,7 +938,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'RUB',
         name_plural: 'Russian rubles',
-        budget_rounding: 2500
+        budget_rounding: 2000
     },
     RWF: {
         symbol: 'RWF',
@@ -936,7 +948,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'RWF',
         name_plural: 'Rwandan francs',
-        budget_rounding: 1
+        budget_rounding: 50000
     },
     SAR: {
         symbol: 'SR',
@@ -956,7 +968,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'SDG',
         name_plural: 'Sudanese pounds',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     SEK: {
         symbol: 'Skr',
@@ -986,7 +998,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'SOS',
         name_plural: 'Somali shillings',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     SYP: {
         symbol: 'SY£',
@@ -996,7 +1008,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'SYP',
         name_plural: 'Syrian pounds',
-        budget_rounding: 1
+        budget_rounding: 50000
     },
     THB: {
         symbol: '฿',
@@ -1006,7 +1018,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'THB',
         name_plural: 'Thai baht',
-        budget_rounding: 1
+        budget_rounding: 1000
     },
     TND: {
         symbol: 'DT',
@@ -1016,7 +1028,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TND',
         name_plural: 'Tunisian dinars',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     TOP: {
         symbol: 'T$',
@@ -1026,7 +1038,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TOP',
         name_plural: 'Tongan paʻanga',
-        budget_rounding: 1
+        budget_rounding: 100
     },
     TRY: {
         symbol: 'TL',
@@ -1036,7 +1048,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TRY',
         name_plural: 'Turkish Lira',
-        budget_rounding: 500
+        budget_rounding: 100
     },
     TTD: {
         symbol: 'TT$',
@@ -1046,7 +1058,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TTD',
         name_plural: 'Trinidad and Tobago dollars',
-        budget_rounding: 1
+        budget_rounding: 200
     },
     TWD: {
         symbol: 'NT$',
@@ -1056,7 +1068,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TWD',
         name_plural: 'New Taiwan dollars',
-        budget_rounding: 10000
+        budget_rounding: 1000
     },
     TZS: {
         symbol: 'TSh',
@@ -1066,7 +1078,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'TZS',
         name_plural: 'Tanzanian shillings',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     UAH: {
         symbol: '₴',
@@ -1086,7 +1098,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'UGX',
         name_plural: 'Ugandan shillings',
-        budget_rounding: 1
+        budget_rounding: 100000
     },
     UYU: {
         symbol: '$U',
@@ -1096,7 +1108,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'UYU',
         name_plural: 'Uruguayan pesos',
-        budget_rounding: 1
+        budget_rounding: 2000
     },
     UZS: {
         symbol: 'UZS',
@@ -1106,7 +1118,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'UZS',
         name_plural: 'Uzbekistan som',
-        budget_rounding: 1
+        budget_rounding: 500000
     },
     VEF: {
         symbol: 'Bs.F.',
@@ -1136,7 +1148,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'XAF',
         name_plural: 'CFA francs BEAC',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     XOF: {
         symbol: 'CFA',
@@ -1146,7 +1158,7 @@ export const currenciesObject = {
         rounding: 0,
         code: 'XOF',
         name_plural: 'CFA francs BCEAO',
-        budget_rounding: 1
+        budget_rounding: 10000
     },
     YER: {
         symbol: 'YR',
@@ -1174,9 +1186,9 @@ export const currenciesObject = {
         symbol_native: 'ZK',
         decimal_digits: 0,
         rounding: 0,
-        code: 'ZMK',
+        code: 'ZMW',
         name_plural: 'Zambian kwachas',
-        budget_rounding: 1
+        budget_rounding: 500
     },
     ZWL: {
         symbol: 'ZWL$',
@@ -1186,6 +1198,6 @@ export const currenciesObject = {
         rounding: 0,
         code: 'ZWL',
         name_plural: 'Zimbabwean Dollar',
-        budget_rounding: 1
+        budget_rounding: 50000
     }
 };

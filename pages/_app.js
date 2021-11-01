@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { Slide, Bounce, ToastContainer } from 'react-toastify';
 import '@/styles/globals.css';
 import '@/styles/carouselcards.css';
+import '@/styles/gallerySmall.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-lightbox-pack/dist/index.css';
 import { StoreProvider } from 'store-context';
@@ -20,7 +21,7 @@ import LayoutLoading from '@/components/layouts/LayoutLoading';
 import { Provider } from 'react-redux';
 import store from 'store';
 import { loadUser } from '@/store/actions/auth';
-import { fetchStartupData } from '@/helpers/apiServices/startup';
+import { fetchStartupData, fetchIpData } from '@/helpers/apiServices/startup';
 
 const contextClass = {
     success: 'bg-green-400 text-green-600',
@@ -49,6 +50,7 @@ function MyApp({ Component, pageProps }) {
 
         store.dispatch(loadUser());
         store.dispatch(fetchStartupData());
+        store.dispatch(fetchIpData());
 
         return () => {
             Router.events.off('routeChangeStart', start);

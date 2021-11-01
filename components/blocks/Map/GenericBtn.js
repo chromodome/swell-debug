@@ -1,6 +1,11 @@
 const GenericBtn = ({
     handleActionBtn,
-    className = 'focus:outline-none outline-none text-sm rounded-full bg-green-100 text-green-900 hover:bg-gray-900 hover:text-white py-2 px-6',
+    className = '',
+    padding = 'py-2 px-6',
+    bgColor = 'bg-green-100 hover:bg-gray-900',
+    textColor = 'text-green-900  hover:text-white',
+    rounded = 'rounded-full',
+    textSize = 'text-sm',
     children,
     params = [],
     style = {},
@@ -11,7 +16,10 @@ const GenericBtn = ({
     };
 
     return (
-        <button className={className} onClick={handleClick} style={style}>
+        <button
+            className={`focus:outline-none outline-none ${padding} ${bgColor} ${textColor} ${rounded} ${textSize} ${className}`}
+            onClick={handleClick}
+            style={style}>
             {children}
         </button>
     );

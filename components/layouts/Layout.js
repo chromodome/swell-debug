@@ -6,7 +6,37 @@ import TopBar from '@/blocks/TopBar';
 import { useState, useEffect } from 'react';
 import Router from 'next/router';
 
-export default function Layout({ title, keywords, description, children }) {
+export default function Layout({
+    title,
+    keywords,
+    description,
+    children,
+    options = {
+        isHeader: {
+            visible: true,
+            options: {
+                isLogo: true,
+                isSearch: true,
+                isAvatar: true,
+                isMenu: true,
+                isCustom: null
+            }
+        },
+        isTopBar: {
+            visible: true
+        },
+        isFooter: {
+            visible: true,
+            body: {
+                isVisible: true
+            },
+            bottomBar: {
+                isVisible: true
+            }
+        }
+    }
+}) {
+    const { isHeader, isTopBar, isFooter } = options;
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const start = () => {
@@ -35,14 +65,27 @@ export default function Layout({ title, keywords, description, children }) {
                     <meta name="keywords" content={keywords} />
                 </Head>
 
-                <Header />
-                <TopBar />
+                {isHeader.visible && (
+                    <Header
+                        isLogo={isHeader.options.isLogo}
+                        isSearch={isHeader.options.isSearch}
+                        isAvatar={isHeader.options.isAvatar}
+                        isMenu={isHeader.options.isMenu}
+                        isCustom={isHeader.options.isCustom}
+                    />
+                )}
+                {isTopBar.visible && <TopBar />}
                 {/* {loading ? (
                     <LayoutLoading />
                 ) : ( */}
                 <div className="flex flex-col h-screen justify-between">
-                    <div className="overflow-x2-hidden">{children}</div>
-                    <Footer />
+                    <div className="">{children}</div>
+                    {isFooter.visible && (
+                        <Footer
+                            isBody={isFooter.body.isVisible}
+                            isBottomBar={isFooter.bottomBar.isVisible}
+                        />
+                    )}
                 </div>
                 {/* )} */}
             </div>

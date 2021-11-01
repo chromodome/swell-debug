@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Range } from 'rc-slider';
 import translations from '@/constants/translations';
+import PanelMarketing from '@/components/experiencepage/PanelMarketing';
 
 function BestTimeToGoRanges({ timeRange }) {
     const lang = 'en';
@@ -49,39 +50,31 @@ function BestTimeToGoRanges({ timeRange }) {
     };
 
     return (
-        <div className="mt-16 mb-8 bg-gray-50 shadow-cards rounded-2xl py-6 relative px-4">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-min italic whitespace-nowrap mb-3 sm:mb-0 font-bold tracking-tight flex flex-none justify-center items-center bg-green-100 rounded-full px-6 text-green-700 h-8">
-                Best Time to go
-            </div>
-
-            <div className="px-24 py-12">
-                <Range
-                    trackStyle={[
-                        { background: isReverse ? '#A7F3D0' : '#34D399' }
-                    ]}
-                    railStyle={{
-                        background: !isReverse ? '#A7F3D0' : '#34D399'
-                    }}
-                    activeDotStyle={{
-                        borderColor: isReverse ? '#A7F3D0' : '#34D399'
-                    }}
-                    dotStyle={{
-                        borderColor: !isReverse ? '#A7F3D0' : '#34D399'
-                    }}
-                    handleStyle={[{}]}
-                    disabled={true}
-                    step={1}
-                    min={1}
-                    max={365}
-                    defaultValue={localRange}
-                    marks={marks}
-                    allowCross={true}
-                    onAfterChange={(data) => {
-                        console.log('changed');
-                    }}
-                />
-            </div>
-        </div>
+        <PanelMarketing title={' Best Time to go'}>
+            <Range
+                trackStyle={[{ background: isReverse ? '#A7F3D0' : '#34D399' }]}
+                railStyle={{
+                    background: !isReverse ? '#A7F3D0' : '#34D399'
+                }}
+                activeDotStyle={{
+                    borderColor: isReverse ? '#A7F3D0' : '#34D399'
+                }}
+                dotStyle={{
+                    borderColor: !isReverse ? '#A7F3D0' : '#34D399'
+                }}
+                handleStyle={[{}]}
+                disabled={true}
+                step={1}
+                min={1}
+                max={365}
+                defaultValue={localRange}
+                marks={marks}
+                allowCross={true}
+                onAfterChange={(data) => {
+                    console.log('changed');
+                }}
+            />
+        </PanelMarketing>
     );
 }
 

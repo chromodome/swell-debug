@@ -2,11 +2,14 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    SUBMIT_SUCCESS,
+    SUBMIT_FAIL,
     USER_LOADED,
     USER_PROFILE_MISSING,
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
     AUTH_ERROR,
+    GENERAL_LOADING,
     AUTH_LOADING,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -33,6 +36,7 @@ export default function (state = initialState, action) {
     switch (type) {
         case `${UPDATE_PROFILE}_PENDING`:
         case `${CREATE_PROFILE}_PENDING`:
+        case GENERAL_LOADING:
         case AUTH_LOADING:
             return {
                 ...state,
@@ -71,6 +75,19 @@ export default function (state = initialState, action) {
                 isProfile: false,
                 loading: true,
                 error: null
+            };
+
+        case SUBMIT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null
+            };
+        case SUBMIT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload
             };
 
         case REGISTER_FAIL:

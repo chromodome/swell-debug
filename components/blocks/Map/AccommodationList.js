@@ -78,7 +78,7 @@ function AccommodationList({ lang = 'en', locations, edit = false }) {
                 .forEach((daykey, i) => {
                     jsxView = [
                         ...jsxView,
-                        <div className="bg-gray-50 shadow-cards-blue rounded-2xl p-8 mb-16 relative">
+                        <div className="bg-white shadow-cards rounded-2xl p-8 mb-16 relative">
                             <h2
                                 key={`day_name${daykey}`}
                                 className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-blue-700 text-sm inline-flex items-center px-6 py-1 bg-blue-100 rounded-full gap-2 mb-2">
@@ -137,14 +137,16 @@ function AccommodationList({ lang = 'en', locations, edit = false }) {
         }
     };
     return (
-        <div className="mb-16">
-            <div className="mb-8">
+        <div className="mt-20 mb-16">
+            <div className="mb-12  flex justify-center">
                 <GenericBtn
+                    bgColor="bg-green-400 hover:bg-gray-900"
+                    className="font-semibold"
                     params={[]}
                     handleActionBtn={changeDayListPreviewMode}>
                     {dayListMode === 'initial'
-                        ? 'Order by day'
-                        : 'Order by place'}
+                        ? 'Organize by day'
+                        : 'Organize by place'}
                 </GenericBtn>
             </div>
             <div>{locations.length ? buildTipSingle() : null}</div>

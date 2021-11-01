@@ -58,7 +58,7 @@ const ModalStruct = ({
 const Buttons__Close = ({ rtl = false, handleClose, type = 'normal' }) => {
     const posClass = {
         normal: {
-            pos: `top-3 right-4 `,
+            pos: `top-6 md:top-3 right-4 `,
             btn: 'p-1 text-gray-900 opacity-30 hover:opacity-100'
         }
     };

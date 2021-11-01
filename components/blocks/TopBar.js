@@ -10,7 +10,7 @@ const tmpTopBar = {
     bar: {
         bgColor: 'bg-green-400',
         textColor: 'text-green-900',
-        text: 'Find out about our COVID 19 response'
+        text: 'Our COVID 19 response'
     },
     link: '/help/article/5001'
 };
@@ -25,7 +25,7 @@ const TopBar = () => {
 
     return topBar ? (
         <div
-            className={`w-full mt-20 ${bgColor} ${topBar.bar.textColor} text-sm flex items-center justify-center`}>
+            className={`w-full mt-16 md:mt-20 ${bgColor} ${topBar.bar.textColor} text-sm flex items-center justify-center`}>
             <div className="flex items-center gap-4 px-4 max-w-6xl w-full justify-center h-12">
                 <Link href={tmpTopBar.link}>
                     <a
@@ -37,7 +37,7 @@ const TopBar = () => {
             </div>
         </div>
     ) : (
-        <div className="mt-20" />
+        <div className="mt-16 md:mt-20" />
     );
 };
 

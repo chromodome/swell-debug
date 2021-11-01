@@ -1,5 +1,7 @@
 import { countries } from '@/constants/countries';
 import { countriesTranslations } from '@/constants/countriesTranslations';
+import { currenciesObject } from '@/constants/currenciesObject';
+
 // import { LOGIN_SUCCESS } from '../store/actions/types';
 
 export const country = (lang, iso2country) => {
@@ -88,7 +90,7 @@ export const xrate = (arrayNb, fromCur, toCur) => {
 export const formatPrice = (
     value,
     currency,
-    locale,
+    locale = 'en-US',
     options,
     style = 'decimal'
 ) => {

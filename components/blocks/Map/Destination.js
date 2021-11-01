@@ -10,7 +10,7 @@ function Destination({ destInf }) {
 
     return (
         <div
-            className={`w-full justify-between bg-gray-50 shadow-cards hover:bg-white transition-colors ease-in-out duration-300 rounded-2xl px-4 md:px-8 py-2 flex flex-col md:${
+            className={`w-full justify-between bg-white shadow-cards rounded-2xl px-4 md:px-8 py-2 flex flex-col md:${
                 handleRowReverse(rtl).flex
             } flex-wrap md:flex-nowrap  mb-4`}>
             <div

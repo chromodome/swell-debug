@@ -31,6 +31,7 @@ import CountryList from '@/components/blocks/CountryList';
 import { submitPayment, clearPaymentErrors } from '@/store/actions/payment';
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 import FormIkPayment from '@/components/forms/FormIkPayment';
+import { CardAmex, CardMastercard, CardVisa } from '@/components/svg/BankCards';
 
 // book/experiences/:id?sku=123&guests=3&isPrivate=false
 
@@ -307,6 +308,16 @@ const Checkout = ({
                                                 <Form id="paymentForm">
                                                     <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
                                                         <div className="md:w-1/2 lg:w-full flex-1 flex flex-col">
+                                                            <div className="flex items-center justify-end gap-6 mb-2 mr-4">
+                                                                <span className="text-xs">
+                                                                    We accept
+                                                                </span>
+                                                                <div className="flex items-center gap-4 ">
+                                                                    <CardAmex />
+                                                                    <CardVisa />
+                                                                    <CardMastercard />
+                                                                </div>
+                                                            </div>
                                                             <div className="w-full flex flex-col rounded-xl border-gray-3001 gap-1 relative mb-8 ">
                                                                 <FormIkPayment
                                                                     name="ccName"

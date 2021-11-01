@@ -82,14 +82,10 @@ function Accommodation({ byDay = 'initial', lang = 'en', accommInfo, index }) {
     };
     return (
         <div
-            className={`relative  transition-colors ease-in-out duration-500 rounded-2xl px-4 md:px-8 py-4 flex flex-col md:flex-row md:${
-                handleRowReverse(rtl).flex
-            } ${handleRowReverse(rtl).rtl} ${
-                handleRowReverse(rtl).justify
-            } flex-wrap md:flex-nowrap mb-4  hover:transparent mt-2 bg-blue-100 shadow-cards2-blue`}>
-            <div className="">
+            className={`relative  transition-colors ease-in-out duration-500 rounded-2xl px-4 md:px-8 py-4 flex flex-col mb-4 mt-2 bg-blue-100 shadow-cards2-blue`}>
+            <div className="flex flex-col md:flex-row md:items-center2 gap-4 md:gap-0">
                 <div className="flex items-center ">
-                    <span className="px-4 py-1 bg-blue-300 text-blue-900 text-sm rounded-full font-bold italic mr-4">
+                    <span className="px-4 py-1 bg-blue-300 text-blue-900 text-sm whitespace-nowrap rounded-full font-bold italic mr-4">
                         {translations[lang].components.hotelInfo[hotelType]}
                     </span>
                     <span className="mr-4">
@@ -98,13 +94,16 @@ function Accommodation({ byDay = 'initial', lang = 'en', accommInfo, index }) {
                             index
                         )}
                     </span>
+                </div>
+                <div className="px-2 flex items-center">
                     <span className="mr-4">{googleMapLink} </span>
                     <span>
                         <i className="ri-map-pin-line text-xl text-blue-600"></i>
                     </span>
                 </div>
-                {makeDays()}
             </div>
+
+            <div>{makeDays()}</div>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { handleRowReverse } from '@/helpers/FEutils';
 import { useField } from 'formik';
 import PopoverBlock from '@/components/forms/PopoverBlock';
 import Cleave from 'cleave.js/react';
-import { CardAmex, CardMastercard, CardVisa } from '../svg/BankCards';
+import { CardAmex, CardMastercard, CardVisa } from '@/components/svg/BankCards';
 
 const cssError = {
     touchedError:
@@ -164,9 +164,7 @@ const FormIkPayment = ({
                 {cardMode && validIcon && (
                     <div
                         className={`pointer-events-none origin-right absolute top-1/2 -translate-y-1/2 transform right-12`}>
-                        <div className="flex items-center gap-2 text-gray-400  w-8 h-8">
-                            {validIcon}
-                        </div>
+                        {validIcon}
                     </div>
                 )}
                 <div className={`w-full flex`}>

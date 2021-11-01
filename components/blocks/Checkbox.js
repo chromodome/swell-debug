@@ -47,7 +47,7 @@ const Checkbox = ({ isChecked, setIsChecked, ...props }) => {
                         </svg>
                     )}
                 </div>
-                <div for="A3-yes" className="text-xs text-gray-400">
+                <div htmlFor="A3-yes" className="text-xs text-gray-400">
                     <span className="mr-1">
                         By signing up and creating an account, you agree to the
                     </span>
