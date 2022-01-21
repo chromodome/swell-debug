@@ -10,6 +10,8 @@ const SliderList = ({
     breakPoints,
     boxed,
     classes,
+    padding = 'px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40',
+    margins = 'mt-24 mb-12',
     dataLoading
 }) => {
     const [slidesPerBp, setSlidesPerBp] = useState(getSlidesPerBp(breakPoints));
@@ -29,9 +31,7 @@ const SliderList = ({
     return (
         <>
             <div
-                className={`overflow-x-hidden z-100 mb-12 ${
-                    boxed ? 'mt-12' : 'mt-24'
-                } mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${classes}`}>
+                className={`overflow-x-hidden z-100  ${margins} mx-auto ${padding} ${classes}`}>
                 {section && <SectionTitle section={section} />}
                 {!dataLoading ? (
                     <div>

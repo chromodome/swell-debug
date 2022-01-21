@@ -284,6 +284,47 @@ export const getLandingPage = () => {
     return newRequest;
 };
 
+export const getTempLandingPage = () => {
+    const gql = String.raw;
+    const newRequest = makeRequest({
+        url: `${API_URL}/graphql`,
+        method: 'post',
+        data: {
+            query: gql`
+                query fetchTempLandingPage {
+                    kreators: landingCreators(
+                        where: { visible: true }
+                        sort: "order:asc"
+                    ) {
+                        id
+                        name
+                        image
+                        description
+                        order
+                        lives_in
+                        url
+                    }
+                    kollabs: landingCollabs(
+                        where: { visible: true }
+                        sort: "order:asc"
+                    ) {
+                        id
+                        title
+                        subtitle
+                        description
+                        image
+                        avatar
+                        url
+                        order
+                    }
+                }
+            `
+        }
+    });
+
+    return newRequest;
+};
+
 export const getLatestExperiences = (qty) => {
     const newRequest = makeRequest({
         url: `${API_URL}/graphql`,

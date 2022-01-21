@@ -10,7 +10,8 @@ const Button = ({
     as = 'button',
     type = 'button',
     form,
-    animation = true
+    animation = true,
+    fontSize = 'text-base'
 }) => {
     const btnJSX = (
         <div
@@ -21,12 +22,14 @@ const Button = ({
                  animation ? 'hover:-translate-y-2' : ''
              } ease-in-out `}>
             <span className="absolute left-1/2 top-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 ">
-                <span className="whitespace-nowrap">{label}</span>
+                <span className={`whitespace-nowrap ${fontSize}`}>{label}</span>
             </span>
 
             <span className="absolute inset-0 font-semibold text-white bg-gray-900 transition-opacity duration-200 hover:opacity-100 opacity-0">
                 <span className="absolute left-1/2 top-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 ">
-                    <span className="whitespace-nowrap">{label}</span>
+                    <span className={`whitespace-nowrap ${fontSize}`}>
+                        {label}
+                    </span>
                 </span>
             </span>
         </div>

@@ -1,12 +1,17 @@
-import { useState } from 'react';
 import { Pill__Logo } from 'components/blocks/Pills';
 import Link from 'next/link';
 import Button from '@/components/blocks/Button/Button';
 // import Image from 'next/image';
-
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Layout from '@/components/layouts/Layout';
 import GradientTitle from '@/components/blocks/Title/GradientTitle';
 import LandingCapture from './LandingCapture';
+import SliderCreators from '@/sections/SliderCreators';
+import SliderCollabs from '@/sections/SliderCollabs';
+import translations from '@/constants/translations';
+import { getTempLandingPage } from '@/helpers/apiServices/experiences';
 
 const list1 = [
     {
@@ -27,7 +32,19 @@ const list1 = [
     }
 ];
 
-const LayoutLanding = () => {
+const LayoutLanding = ({ globalState: { lang } }) => {
+    const [dataLanding, setDataLanding] = useState(null);
+    const [dataLoading, setDataLoading] = useState(true);
+
+    useEffect(() => {
+        const importData = async () => {
+            const newData = await getTempLandingPage();
+            setDataLanding(newData.data);
+            setDataLoading(false);
+        };
+        importData();
+    }, []);
+
     const LayoutOptions = {
         isHeader: {
             visible: true,
@@ -40,10 +57,10 @@ const LayoutLanding = () => {
                     <div className="mr-8 md:flex items-center hidden">
                         <Button
                             animation={false}
-                            as="link"
-                            label="Join the list"
-                            link="#join"
-                            width="w-48"
+                            as="url"
+                            label="Become a Kreator"
+                            url="https://kreator.viakonnect.com/accounts/signup"
+                            width="w-64"
                         />
                     </div>
                 )
@@ -105,9 +122,9 @@ const LayoutLanding = () => {
                             </div>
                             <Button
                                 // animation={false}
-                                as="link"
-                                label="Join the list"
-                                link="#join"
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
                                 width="md:w-96"
                             />
                         </div>
@@ -220,6 +237,97 @@ const LayoutLanding = () => {
                     </div>
                 </div>
             </div>
+            <div
+                className="w-full bg-white pb-8 "
+                // style={{
+                //     backgroundImage: 'url("/assets/media/wood.svg")',
+                //     backgroundSize: 'cover'
+                // }}
+            >
+                <div
+                    className={`relative 
+                          mx-auto pt-16 md:pt-32 w-full`}>
+                    <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                        <Pill__Logo />
+                    </div>
+                    <div className="w-full flex flex-col px-0">
+                        <GradientTitle
+                            label="Our Kreators"
+                            textSize="text-3xl md:text-6xl"
+                            justify="justify-center"
+                        />
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto text-green-900 text-base md:text-lg xl:text-2xl font-normal mb-8 px-12 md:px-28 lg:px-48 xl:px-0">
+                            Meet our Kreators. The ones that make all of this
+                            possible. They're the ones who meticulously craft
+                            their own experiences, go over them dozens of times
+                            to make sure nothing is left to chance.
+                        </div>
+                        <div className="w-full overflow-hidden ">
+                            <SliderCreators
+                                sectionTitles={
+                                    translations[lang].sections
+                                        .wanderByDestination
+                                }
+                                data={dataLanding?.data?.kreators}
+                                dataLoading={dataLoading}
+                            />
+                        </div>
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto mb-16 px-12">
+                            <Button
+                                animation={true}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="w-80 md:w-96"
+                                fontSize="text-xl"
+                                height="h-16"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full bg-gray-100 pb-8">
+                <div
+                    className={`relative 
+                          mx-auto pt-16 md:pt-32 w-full`}>
+                    <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                        <Pill__Logo />
+                    </div>
+                    <div className="w-full flex flex-col px-0">
+                        <GradientTitle
+                            label="Our Kollabs"
+                            textSize="text-3xl md:text-6xl"
+                            justify="justify-center"
+                        />
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto text-green-900 text-base md:text-lg xl:text-2xl font-normal mb-8 px-12 md:px-28 lg:px-48 xl:px-0">
+                            We're starting off by doing exclusive collaborations
+                            with the best content kreators on some leading
+                            destinations in Saudi Arabia. Check them out.
+                        </div>
+                        <div className="w-full overflow-hidden ">
+                            <SliderCollabs
+                                sectionTitles={
+                                    translations[lang].sections
+                                        .wanderByDestination
+                                }
+                                data={dataLanding?.data?.kollabs}
+                                dataLoading={dataLoading}
+                            />
+                        </div>
+                        {/* <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto mb-16">
+                            <Button
+                                animation={true}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="w-96"
+                                fontSize="text-xl"
+                                height="h-16"
+                            />
+                        </div> */}
+                    </div>
+                </div>
+            </div>
             <div className="relative w-full bg-white pb-20 pt-16" id="join">
                 <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                     <Pill__Logo />
@@ -251,4 +359,13 @@ const OptionCard = ({ title, children, image }) => {
     );
 };
 
-export default LayoutLanding;
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutLanding);

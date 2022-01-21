@@ -81,7 +81,7 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
             {isBottomBar && (
                 <div className="bg-gray-900 py-2">
                     <div className="mx-auto max-w-6xl text-white text-xs justify-center flex items-center">
-                        © Copyright 2021 Viakonnect. All rights reserved.
+                        © Copyright 2022 Viakonnect. All rights reserved.
                     </div>
                 </div>
             )}
