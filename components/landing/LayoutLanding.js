@@ -33,17 +33,17 @@ const list1 = [
 ];
 
 const LayoutLanding = ({ globalState: { lang } }) => {
-    const [dataLanding, setDataLanding] = useState(null);
-    const [dataLoading, setDataLoading] = useState(true);
+    // const [dataLanding, setDataLanding] = useState(null);
+    // const [dataLoading, setDataLoading] = useState(true);
 
-    useEffect(() => {
-        const importData = async () => {
-            const newData = await getTempLandingPage();
-            setDataLanding(newData.data);
-            setDataLoading(false);
-        };
-        importData();
-    }, []);
+    // useEffect(() => {
+    //     const importData = async () => {
+    //         const newData = await getTempLandingPage();
+    //         setDataLanding(newData.data);
+    //         setDataLoading(false);
+    //     };
+    //     importData();
+    // }, []);
 
     const LayoutOptions = {
         isHeader: {
@@ -135,7 +135,7 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                 </div>
             </div>
 
-            <div className="w-full bg-gray-100 pb-8">
+            <div className="w-full bg-white pb-8">
                 <div
                     className={`relative 
                           md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center pt-16 md:pt-32 px-0 lg:px-8 w-80 md:w-full`}>
@@ -169,7 +169,7 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                                 For Kreators
                             </div>
                         </div>
-                        <div className="w-full rounded-3xl bg-gray-100 overflow-hidden">
+                        <div className="w-full rounded-3xl bg-white overflow-hidden">
                             <div
                                 className={`p-4 xl:p-16 flex flex-nowrap gap-8 md:gap-8 lg:gap-8 xl:gap-32 transform-gpu transition-all duration-500 ease-in-out-expo-hard ${
                                     tab === 'travel'
@@ -237,12 +237,9 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                     </div>
                 </div>
             </div>
-            <div
+            {/* <div
                 className="w-full bg-white pb-8 "
-                // style={{
-                //     backgroundImage: 'url("/assets/media/wood.svg")',
-                //     backgroundSize: 'cover'
-                // }}
+               
             >
                 <div
                     className={`relative 
@@ -285,8 +282,8 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="w-full bg-gray-100 pb-8">
+            </div> */}
+            {/* <div className="w-full bg-gray-100 pb-8">
                 <div
                     className={`relative 
                           mx-auto pt-16 md:pt-32 w-full`}>
@@ -314,17 +311,66 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                                 dataLoading={dataLoading}
                             />
                         </div>
-                        {/* <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto mb-16">
+                        
+                    </div>
+                </div>
+            </div> */}
+            <div
+                className="w-full mt-161 md:mt-201 py-8 lg:py-16 landing-gradient2 bg-gray-100 "
+                // style={{
+                //     backgroundImage: 'url("/assets/media/wood.svg")'
+                // }}
+            >
+                <div
+                    className={`relative 
+                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-0 xl:py-32 px-4 xl:px-16 2xl:px-0`}>
+                    <div className="flex flex-col-reverse lg:flex-row justify-between items-center mb-8 md:px-16 lg:px-0 md:gap-16 ">
+                        <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
+                            {/* <div className="uppercase tracking-widest text-green-400 text-xl md:text-3xl lg:text-2xl xl:text-3xl font-normal leading-tight mb-4">
+                                via Konnect
+                            </div> */}
+                            <GradientTitle
+                                label="A Community"
+                                textSize="text-4xl md:text-6xl"
+                                justify=""
+                                containerClass=""
+                            />
+                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                                Join our community of growing kreators
+                            </div>
+                            <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
+                                Join{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="https://www.instagram.com/mariaronnn/">
+                                    Maria
+                                </a>
+                                ,{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="https://www.instagram.com/arabiantrails">
+                                    Turki
+                                </a>
+                                ,{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="http://instagram.com/jasonbillamtravel">
+                                    Jason
+                                </a>{' '}
+                                and a growing list of amazing Kreators and
+                                influencers from all around the world.
+                            </div>
                             <Button
-                                animation={true}
+                                // animation={false}
                                 as="url"
                                 label="Become a Kreator"
                                 url="https://kreator.viakonnect.com/accounts/signup"
-                                width="w-96"
-                                fontSize="text-xl"
-                                height="h-16"
+                                width="md:w-96"
                             />
-                        </div> */}
+                        </div>
+                        <div className="px-4 md:px-0">
+                            <img src="/assets/media/community.png" />
+                        </div>
                     </div>
                 </div>
             </div>

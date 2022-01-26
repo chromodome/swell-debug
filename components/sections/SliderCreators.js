@@ -22,7 +22,7 @@ const SliderCreators = ({ data, dataLoading }) => {
                 // section={sectionTitles}
                 dataLoading={dataLoading}>
                 {!dataLoading ? (
-                    data.map((item, index) => {
+                    data?.map((item, index) => {
                         return (
                             <CreatorCard
                                 key={`creator_${item.id}_${index}`}

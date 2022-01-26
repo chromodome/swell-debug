@@ -22,7 +22,7 @@ const SliderCollabs = ({ data, dataLoading }) => {
                 // section={sectionTitles}
                 dataLoading={dataLoading}>
                 {!dataLoading ? (
-                    data.map((item, index) => {
+                    data?.map((item, index) => {
                         return (
                             <CollabCard
                                 key={`collab_${item.id}_${index}`}
