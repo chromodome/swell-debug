@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Header from '@/layouts/Header';
 import Footer from '@/layouts/Footer';
+import Footer2 from '@/layouts/Footer2';
 import TopBar from '@/blocks/TopBar';
 
 import { useState, useEffect } from 'react';
@@ -29,6 +30,9 @@ export default function Layout({
             visible: true,
             body: {
                 isVisible: true
+            },
+            body2: {
+                isVisible: false
             },
             bottomBar: {
                 isVisible: true
@@ -80,9 +84,15 @@ export default function Layout({
                 ) : ( */}
                 <div className="flex flex-col h-screen justify-between">
                     <div className="">{children}</div>
-                    {isFooter.visible && (
+                    {isFooter.body.isVisible && (
                         <Footer
                             isBody={isFooter.body.isVisible}
+                            isBottomBar={isFooter.bottomBar.isVisible}
+                        />
+                    )}
+                    {isFooter.body2.isVisible && (
+                        <Footer2
+                            isBody={isFooter.body2.isVisible}
                             isBottomBar={isFooter.bottomBar.isVisible}
                         />
                     )}
