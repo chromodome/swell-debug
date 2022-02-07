@@ -74,12 +74,15 @@ const LayoutLanding = ({ globalState: { lang } }) => {
             body: {
                 isVisible: false
             },
+            body2: {
+                isVisible: true
+            },
             bottomBar: {
                 isVisible: true
             }
         }
     };
-    const [tab, setTab] = useState('travel');
+    const [tab, setTab] = useState('kreate');
     const tabClasses = {
         on: 'border-green-400',
         off: 'text-gray-400 border-transparent hover:border-gray-200'
@@ -134,11 +137,61 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                     </div>
                 </div>
             </div>
-
-            <div className="w-full bg-white pb-8">
+            <div
+                className="w-full mt-161 md:mt-201 py-0 landing-gradient2 bg-gray-100 "
+                // style={{
+                //     backgroundImage: 'url("/assets/media/wood.svg")'
+                // }}
+            >
                 <div
                     className={`relative 
-                          md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center pt-16 md:pt-32 px-0 lg:px-8 w-80 md:w-full`}>
+                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-16 xl:py-32 px-4 xl:px-16 2xl:px-0`}>
+                    <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center mb-8 md:px-16 lg:px-0 md:gap-16">
+                        <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
+                            <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                                <Pill__Logo />
+                            </div>
+                            <GradientTitle
+                                label="We're in Beta"
+                                textSize="text-4xl md:text-6xl"
+                                justify=""
+                                containerClass=""
+                            />
+                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                                Build Digital Guides or Guided tours. It's up to
+                                you.
+                            </div>
+                            <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
+                                We're open to take in travel experience creators
+                                who would like to experience our platform and
+                                the tools we've built. You'll be able to build
+                                try, suggest and shape the future of the
+                                platform starting today. Build Digital Guides or
+                                Guided tours where you're the host. It's up to
+                                you.
+                            </div>
+                            <Button
+                                // animation={false}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="md:w-96"
+                            />
+                        </div>
+                        <div className="px-4 md:px-0 mb-8 lg:w-1/2 overflow-hidden rounded-xl shadow-2xl-green">
+                            <video controls autoPlay muted loop preload>
+                                <source
+                                    src="https://ucarecdn.com/951788ce-0e8c-4656-8a87-8b92087da93c/"
+                                    type="video/mp4"></source>
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full bg-white pb-0">
+                <div
+                    className={`relative 
+                          md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center pt-16 md:pt-16 px-0 lg:px-8 w-80 md:w-full`}>
                     <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                         <Pill__Logo />
                     </div>
@@ -316,7 +369,7 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                 </div>
             </div> */}
             <div
-                className="w-full mt-161 md:mt-201 py-8 lg:py-16 landing-gradient2 bg-gray-100 "
+                className="w-full mt-161 md:mt-201 py-16 lg:py-0 landing-gradient2 bg-gray-100 "
                 // style={{
                 //     backgroundImage: 'url("/assets/media/wood.svg")'
                 // }}
@@ -368,8 +421,8 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                                 width="md:w-96"
                             />
                         </div>
-                        <div className="px-4 md:px-0">
-                            <img src="/assets/media/community.png" />
+                        <div className="px-4 md:px-0 mb-8">
+                            <img src="/assets/media/community_2.png" />
                         </div>
                     </div>
                 </div>
@@ -390,7 +443,7 @@ const LayoutLanding = ({ globalState: { lang } }) => {
 
 const OptionCard = ({ title, children, image }) => {
     return (
-        <div className="w-full lg:w-72 xl:w-80 mb-8  flex flex-col md:flex-row lg:flex-col md:gap-8 lg:gap-0">
+        <div className="w-full lg:w-72 xl:w-80 mb-16 md:mb-0  flex flex-col md:flex-row lg:flex-col md:gap-8 lg:gap-0">
             <div className="w-72 md:w-80 lg:w-72 md:h-96 flex items-center justify-center">
                 <img src={image} className="" />
             </div>
