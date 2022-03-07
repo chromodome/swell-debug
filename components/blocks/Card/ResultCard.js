@@ -25,11 +25,14 @@ const ResultCard = ({ data, containerClass }) => {
         user,
         user: { profile },
         type,
+        days,
         short_content,
-        short_content: { destination, days, featured_image, title }
+        places_lists,
+        featured_image,
+        title
     } = data;
 
-    // console.log(data);
+    console.log(data);
 
     if (!short_content) return false;
 
@@ -97,13 +100,17 @@ const ResultCard = ({ data, containerClass }) => {
                                 <MapPin size={18} />
                             </span>
                             <span className="flex flex-wrap items-center">
-                                {destination?.length > 0 ? (
-                                    destination.map(
+                                {places_lists?.length > 0 ? (
+                                    places_lists.map(
                                         (item, index, itemArray) => {
                                             return (
-                                                <span key={`${item}_${index}`}>
+                                                <span
+                                                    key={`${item.code}_${index}`}>
                                                     <span className="whitespace-nowrap">
-                                                        {country('en', item)}
+                                                        {country(
+                                                            'en',
+                                                            item.code
+                                                        )}
                                                     </span>
                                                     {index <
                                                         itemArray.length -

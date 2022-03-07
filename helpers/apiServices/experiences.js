@@ -188,6 +188,13 @@ export const getLandingPage = () => {
                   sort: "createdAt:desc"
                 ) {
                   short_content
+                  days
+                  featured_image
+                  title
+                  places_lists {
+                      name
+                      code
+                  }
                   type
                   experience_price
                   tags
@@ -259,6 +266,13 @@ export const getLandingPage = () => {
                   sort: "createdAt:desc"
                 ) {
                   short_content
+                  days
+                  featured_image
+                  title
+                  places_lists {
+                      name
+                      code
+                  }
                   type
                   experience_price
                   tags

@@ -11,13 +11,16 @@ const Button = ({
     type = 'button',
     form,
     animation = true,
-    fontSize = 'text-base'
+    fontSize = 'text-base',
+    className
 }) => {
+    const defaultStyle = `overflow-hidden rounded-lg bg-gradient-to-r from-green-300 via-green-400 to-green-500 shadow-2xl-green-500 hover:shadow-none font-bold text-green-800 hover:bg-gray-900 hover:text-white`;
+
     const btnJSX = (
         <div
             target="_blank"
-            className={`relative overflow-hidden h-12 ${width} ${height} rounded-lg flex items-center justify-center 
-                   bg-gradient-to-r from-green-300 via-green-400 to-green-500 shadow-2xl-green-500 hover:shadow-none font-bold text-green-800 hover:bg-gray-900 transition-all hover:text-white'
+            className={`overflow-hidden rounded-lg relative  h-12 ${width} ${height} flex items-center justify-center 
+                    transition-all ${className ?? defaultStyle}
              transform-gpu duration-300 ${
                  animation ? 'hover:-translate-y-2' : ''
              } ease-in-out `}>

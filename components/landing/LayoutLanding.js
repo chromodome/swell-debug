@@ -54,7 +54,15 @@ const LayoutLanding = ({ globalState: { lang } }) => {
                 isLang: false,
                 isMenu: false,
                 isCustom: (
-                    <div className="mr-8 md:flex items-center hidden">
+                    <div className="mr-8 md:flex items-center hidden gap-2">
+                        <Button
+                            className="text-green-600"
+                            animation={false}
+                            as="url"
+                            label="Sign in"
+                            url="https://kreator.viakonnect.com/accounts/login"
+                            width="w-32"
+                        />
                         <Button
                             animation={false}
                             as="url"
