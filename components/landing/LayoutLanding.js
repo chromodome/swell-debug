@@ -1,12 +1,17 @@
-import { useState } from 'react';
 import { Pill__Logo } from 'components/blocks/Pills';
 import Link from 'next/link';
 import Button from '@/components/blocks/Button/Button';
 // import Image from 'next/image';
-
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Layout from '@/components/layouts/Layout';
 import GradientTitle from '@/components/blocks/Title/GradientTitle';
 import LandingCapture from './LandingCapture';
+import SliderCreators from '@/sections/SliderCreators';
+import SliderCollabs from '@/sections/SliderCollabs';
+import translations from '@/constants/translations';
+import { getTempLandingPage } from '@/helpers/apiServices/experiences';
 
 const list1 = [
     {
@@ -27,7 +32,19 @@ const list1 = [
     }
 ];
 
-const LayoutLanding = () => {
+const LayoutLanding = ({ globalState: { lang } }) => {
+    // const [dataLanding, setDataLanding] = useState(null);
+    // const [dataLoading, setDataLoading] = useState(true);
+
+    // useEffect(() => {
+    //     const importData = async () => {
+    //         const newData = await getTempLandingPage();
+    //         setDataLanding(newData.data);
+    //         setDataLoading(false);
+    //     };
+    //     importData();
+    // }, []);
+
     const LayoutOptions = {
         isHeader: {
             visible: true,
@@ -37,13 +54,21 @@ const LayoutLanding = () => {
                 isLang: false,
                 isMenu: false,
                 isCustom: (
-                    <div className="mr-8 md:flex items-center hidden">
+                    <div className="mr-8 md:flex items-center hidden gap-2">
+                        <Button
+                            className="text-green-600"
+                            animation={false}
+                            as="url"
+                            label="Sign in"
+                            url="https://kreator.viakonnect.com/accounts/login"
+                            width="w-32"
+                        />
                         <Button
                             animation={false}
-                            as="link"
-                            label="Join the list"
-                            link="#join"
-                            width="w-48"
+                            as="url"
+                            label="Become a Kreator"
+                            url="https://kreator.viakonnect.com/accounts/signup"
+                            width="w-64"
                         />
                     </div>
                 )
@@ -57,12 +82,15 @@ const LayoutLanding = () => {
             body: {
                 isVisible: false
             },
+            body2: {
+                isVisible: true
+            },
             bottomBar: {
                 isVisible: true
             }
         }
     };
-    const [tab, setTab] = useState('travel');
+    const [tab, setTab] = useState('kreate');
     const tabClasses = {
         on: 'border-green-400',
         off: 'text-gray-400 border-transparent hover:border-gray-200'
@@ -105,9 +133,9 @@ const LayoutLanding = () => {
                             </div>
                             <Button
                                 // animation={false}
-                                as="link"
-                                label="Join the list"
-                                link="#join"
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
                                 width="md:w-96"
                             />
                         </div>
@@ -117,11 +145,61 @@ const LayoutLanding = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="w-full bg-gray-100 pb-8">
+            <div
+                className="w-full mt-161 md:mt-201 py-0 landing-gradient2 bg-gray-100 "
+                // style={{
+                //     backgroundImage: 'url("/assets/media/wood.svg")'
+                // }}
+            >
                 <div
                     className={`relative 
-                          md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center pt-16 md:pt-32 px-0 lg:px-8 w-80 md:w-full`}>
+                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-16 xl:py-32 px-4 xl:px-16 2xl:px-0`}>
+                    <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center mb-8 md:px-16 lg:px-0 md:gap-16">
+                        <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
+                            <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                                <Pill__Logo />
+                            </div>
+                            <GradientTitle
+                                label="We're in Beta"
+                                textSize="text-4xl md:text-6xl"
+                                justify=""
+                                containerClass=""
+                            />
+                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                                Build Digital Guides or Guided tours. It's up to
+                                you.
+                            </div>
+                            <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
+                                We're open to take in travel experience creators
+                                who would like to experience our platform and
+                                the tools we've built. You'll be able to build
+                                try, suggest and shape the future of the
+                                platform starting today. Build Digital Guides or
+                                Guided tours where you're the host. It's up to
+                                you.
+                            </div>
+                            <Button
+                                // animation={false}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="md:w-96"
+                            />
+                        </div>
+                        <div className="px-4 md:px-0 mb-8 lg:w-1/2 overflow-hidden rounded-xl shadow-2xl-green">
+                            <video controls autoPlay muted loop preload>
+                                <source
+                                    src="https://ucarecdn.com/951788ce-0e8c-4656-8a87-8b92087da93c/"
+                                    type="video/mp4"></source>
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full bg-white pb-0">
+                <div
+                    className={`relative 
+                          md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center pt-16 md:pt-16 px-0 lg:px-8 w-80 md:w-full`}>
                     <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                         <Pill__Logo />
                     </div>
@@ -152,7 +230,7 @@ const LayoutLanding = () => {
                                 For Kreators
                             </div>
                         </div>
-                        <div className="w-full rounded-3xl bg-gray-100 overflow-hidden">
+                        <div className="w-full rounded-3xl bg-white overflow-hidden">
                             <div
                                 className={`p-4 xl:p-16 flex flex-nowrap gap-8 md:gap-8 lg:gap-8 xl:gap-32 transform-gpu transition-all duration-500 ease-in-out-expo-hard ${
                                     tab === 'travel'
@@ -220,6 +298,143 @@ const LayoutLanding = () => {
                     </div>
                 </div>
             </div>
+            {/* <div
+                className="w-full bg-white pb-8 "
+               
+            >
+                <div
+                    className={`relative 
+                          mx-auto pt-16 md:pt-32 w-full`}>
+                    <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                        <Pill__Logo />
+                    </div>
+                    <div className="w-full flex flex-col px-0">
+                        <GradientTitle
+                            label="Our Kreators"
+                            textSize="text-3xl md:text-6xl"
+                            justify="justify-center"
+                        />
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto text-green-900 text-base md:text-lg xl:text-2xl font-normal mb-8 px-12 md:px-28 lg:px-48 xl:px-0">
+                            Meet our Kreators. The ones that make all of this
+                            possible. They're the ones who meticulously craft
+                            their own experiences, go over them dozens of times
+                            to make sure nothing is left to chance.
+                        </div>
+                        <div className="w-full overflow-hidden ">
+                            <SliderCreators
+                                sectionTitles={
+                                    translations[lang].sections
+                                        .wanderByDestination
+                                }
+                                data={dataLanding?.data?.kreators}
+                                dataLoading={dataLoading}
+                            />
+                        </div>
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto mb-16 px-12">
+                            <Button
+                                animation={true}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="w-80 md:w-96"
+                                fontSize="text-xl"
+                                height="h-16"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div> */}
+            {/* <div className="w-full bg-gray-100 pb-8">
+                <div
+                    className={`relative 
+                          mx-auto pt-16 md:pt-32 w-full`}>
+                    <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                        <Pill__Logo />
+                    </div>
+                    <div className="w-full flex flex-col px-0">
+                        <GradientTitle
+                            label="Our Kollabs"
+                            textSize="text-3xl md:text-6xl"
+                            justify="justify-center"
+                        />
+                        <div className="md:max-w-3xl lg:max-w-5xl xl:max-w-3xl mx-auto text-green-900 text-base md:text-lg xl:text-2xl font-normal mb-8 px-12 md:px-28 lg:px-48 xl:px-0">
+                            We're starting off by doing exclusive collaborations
+                            with the best content kreators on some leading
+                            destinations in Saudi Arabia. Check them out.
+                        </div>
+                        <div className="w-full overflow-hidden ">
+                            <SliderCollabs
+                                sectionTitles={
+                                    translations[lang].sections
+                                        .wanderByDestination
+                                }
+                                data={dataLanding?.data?.kollabs}
+                                dataLoading={dataLoading}
+                            />
+                        </div>
+                        
+                    </div>
+                </div>
+            </div> */}
+            <div
+                className="w-full mt-161 md:mt-201 py-16 lg:py-0 landing-gradient2 bg-gray-100 "
+                // style={{
+                //     backgroundImage: 'url("/assets/media/wood.svg")'
+                // }}
+            >
+                <div
+                    className={`relative 
+                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-0 xl:py-32 px-4 xl:px-16 2xl:px-0`}>
+                    <div className="flex flex-col-reverse lg:flex-row justify-between items-center mb-8 md:px-16 lg:px-0 md:gap-16 ">
+                        <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
+                            {/* <div className="uppercase tracking-widest text-green-400 text-xl md:text-3xl lg:text-2xl xl:text-3xl font-normal leading-tight mb-4">
+                                via Konnect
+                            </div> */}
+                            <GradientTitle
+                                label="A Community"
+                                textSize="text-4xl md:text-6xl"
+                                justify=""
+                                containerClass=""
+                            />
+                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                                Join our community of growing kreators
+                            </div>
+                            <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
+                                Join{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="https://www.instagram.com/mariaronnn/">
+                                    Maria
+                                </a>
+                                ,{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="https://www.instagram.com/arabiantrails">
+                                    Turki
+                                </a>
+                                ,{' '}
+                                <a
+                                    className="text-green-400 font-bold"
+                                    href="http://instagram.com/jasonbillamtravel">
+                                    Jason
+                                </a>{' '}
+                                and a growing list of amazing Kreators and
+                                influencers from all around the world.
+                            </div>
+                            <Button
+                                // animation={false}
+                                as="url"
+                                label="Become a Kreator"
+                                url="https://kreator.viakonnect.com/accounts/signup"
+                                width="md:w-96"
+                            />
+                        </div>
+                        <div className="px-4 md:px-0 mb-8">
+                            <img src="/assets/media/community_2.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="relative w-full bg-white pb-20 pt-16" id="join">
                 <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                     <Pill__Logo />
@@ -236,7 +451,7 @@ const LayoutLanding = () => {
 
 const OptionCard = ({ title, children, image }) => {
     return (
-        <div className="w-full lg:w-72 xl:w-80 mb-8  flex flex-col md:flex-row lg:flex-col md:gap-8 lg:gap-0">
+        <div className="w-full lg:w-72 xl:w-80 mb-16 md:mb-0  flex flex-col md:flex-row lg:flex-col md:gap-8 lg:gap-0">
             <div className="w-72 md:w-80 lg:w-72 md:h-96 flex items-center justify-center">
                 <img src={image} className="" />
             </div>
@@ -251,4 +466,13 @@ const OptionCard = ({ title, children, image }) => {
     );
 };
 
-export default LayoutLanding;
+const mapStateToProps = (state) => ({
+    globalState: state.globalState,
+    auth: state.auth
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutLanding);

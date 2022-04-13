@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import FooterMenuLink from '../blocks/FooterMenuLink';
-const Footer = ({ isBody = true, isBottomBar = true }) => {
+const Footer2 = ({ isBody = true, isBottomBar = true }) => {
     // console.log('footer');
     return (
         <footer className="">
             {isBody && (
-                <div className="bg-gray-800 py-16 mt-16">
-                    <div className="mx-auto max-w-6xl grid grid-cols-5 h-48 min-h-full text-white">
-                        <section> Konnect</section>
+                <div className="bg-gray-800 py-16">
+                    <div className="mx-auto grid-rows-3 gap-8 px-16 max-w-2xl md:max-w-3xl lg:max-w-4xl grid md:grid-cols-3 md:h-32 min-h-full text-white">
                         <section>
                             <h3 className="text-green-400 mb-4">About</h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
@@ -25,35 +24,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                 />
                             </nav>
                         </section>
-                        <section>
-                            <h3 className="text-green-400 mb-4">Discover</h3>
-                            <nav className="flex flex-col gap-2 text-xs font-light">
-                                <FooterMenuLink
-                                    url="/experiences/search"
-                                    label="Find an experience"
-                                />
-                                <FooterMenuLink
-                                    url="/experiences/collections"
-                                    label="Curated collections"
-                                />
-                                <FooterMenuLink
-                                    url="/experiences/featured"
-                                    label="Featured experiences"
-                                />
-                                <FooterMenuLink
-                                    url="/kreators/featured"
-                                    label="Featured creators"
-                                />
-                            </nav>
-                        </section>
+
                         <section>
                             <h3 className="text-green-400 mb-4">Support</h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
-                                <FooterMenuLink
-                                    url="/help/article/5001"
-                                    label="Updates for Covid-19"
-                                />
-                                <FooterMenuLink url="" label="Help Center" />
                                 <FooterMenuLink
                                     url="/help/article/4001"
                                     label="Terms of Service"
@@ -73,7 +47,18 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                             <h3 className="text-green-400 mb-4">
                                 Stay in touch
                             </h3>
-                            <nav className="flex flex-col gap-2 text-xs font-light"></nav>
+                            <nav className="flex gap-2 text-2xl ">
+                                <a
+                                    href="https://instagram.com/viakonnect"
+                                    target="_blank">
+                                    <i className="ri-instagram-line hover:text-green-400"></i>
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/channel/UCrv_eGOq3Almjhved39LR6Q"
+                                    target="_blank">
+                                    <i className="ri-youtube-line hover:text-green-400"></i>
+                                </a>
+                            </nav>
                         </section>
                     </div>
                 </div>
@@ -89,4 +74,4 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
     );
 };
 
-export default Footer;
+export default Footer2;
