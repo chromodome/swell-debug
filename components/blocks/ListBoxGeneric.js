@@ -5,12 +5,8 @@ import {
     SelectorIcon,
     ChevronDownIcon
 } from '@heroicons/react/solid';
-import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-
-import Icons from 'components/blocks/Icons';
-
 import { handleRowReverse } from 'helpers/FEutils';
 import translations from 'constants/translations';
 import uiStruct from 'constants/uiStruct';

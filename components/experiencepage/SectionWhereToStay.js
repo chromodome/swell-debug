@@ -13,13 +13,9 @@ import AccommodationList from '@/components/blocks/Map/AccommodationList';
 
 function SectionWhereToStay(props) {
     const {
-        experienceDetails: {
-            content: { accommodation },
-            content_marketing: {
-                whereToStay: { title, subtitle, desc, gallery: images, tips }
-            }
-        },
 
+        accommodation={},
+        whereToStay: { title, subtitle, desc, gallery: images, tips },
         globalState: { lang }
     } = props;
 
@@ -41,16 +37,21 @@ function SectionWhereToStay(props) {
                         )}
                     </div>
                 </div>
-
-                <AccommodationList locations={accommodation.locations} />
-
-                <div className="-mx-5 md:mx-0">
-                    <AccommodationMap
-                        destinations={accommodation}
-                        showCountryLayer={false}
-                        showCircleLayer={false}
-                    />
-                </div>
+                {
+                    Object.keys(accommodation).length
+                    ? <>
+                        <AccommodationList locations={accommodation.locations} />
+                        <div className="-mx-5 md:mx-0">
+                            <AccommodationMap
+                                destinations={accommodation}
+                                showCountryLayer={false}
+                                showCircleLayer={false}
+                            />
+                        </div>
+                    </>
+                    : null
+                }
+                
 
                 {/* <TipList
                     actionType={actionType}

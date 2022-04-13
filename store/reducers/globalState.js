@@ -8,6 +8,7 @@ const initialState = {
     lang: 'en',
     rtl: false,
     navIsOpen: false,
+    cartIsOpen: false,
     authModalIsOpen: false,
     authComponent: 'login',
     pageLoading: true,
@@ -16,6 +17,7 @@ const initialState = {
         tags: [],
         placesLists: [],
         categories: [],
+        destinations: [],
         settings: {
             whatsIncluded: {},
             xchangeRates: {}
@@ -51,6 +53,15 @@ const toggleNav = (draft, action) => {
     };
 };
 
+const toggleCart = (draft, action) => {
+    const { cartIsOpen } = action;
+
+    return {
+        ...draft,
+        cartIsOpen
+    };
+};
+
 const toggleAuthModal = (draft, action) => {
     const { authModalIsOpen } = action;
 
@@ -77,7 +88,8 @@ const setStartUpData = (draft, action) => {
                     tags,
                     categories,
                     setting: { whatsIncluded, xchangeRates },
-                    placesLists
+                    placesLists,
+                    destinations
                 }
             }
         }
@@ -85,6 +97,7 @@ const setStartUpData = (draft, action) => {
 
     draft.siteData.loading = false;
     draft.siteData.placesLists = placesLists;
+    draft.siteData.destinationList = destinations;
     draft.siteData.categories = categories;
     draft.siteData.tags = tags.filter((tag) => tag.type === 'general');
     draft.siteData.settings.whatsIncluded = whatsIncluded;
@@ -95,6 +108,7 @@ const setStartUpData = (draft, action) => {
 export default createReducer(initialState, {
     [types.TOGGLE_LANG]: toggleLang,
     [types.TOGGLE_NAV]: toggleNav,
+    [types.TOGGLE_CART]: toggleCart,
     [types.TOGGLE_AUTH_MODAL]: toggleAuthModal,
     [types.SET_AUTH_PAGE]: setAuthPage,
 

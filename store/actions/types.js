@@ -32,6 +32,7 @@ export const PAYMENT_CLEAR_ERRORS = 'PAYMENT_CLEAR_ERRORS';
 // site specific
 /*----------*/
 export const TOGGLE_NAV = 'TOGGLE_NAV';
+export const TOGGLE_CART = 'TOGGLE_CART';
 export const TOGGLE_AUTH_MODAL = 'TOGGLE_AUTH_MODAL';
 export const SET_AUTH_PAGE = 'SET_AUTH_PAGE';
 
@@ -54,3 +55,12 @@ export const CREATE_PROFILE = 'CREATE_PROFILE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const DELETE_PROFILE = 'DELETE_PROFILE';
 export const UPDATE_USER_BY_ID = 'UPDATE_USER_BY_ID';
+
+
+/*----------*/
+// Cart
+/*----------*/
+export const GET_CART = 'GET_CART';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const UPDATE_CART = 'UPDATE_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';

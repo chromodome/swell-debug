@@ -13,12 +13,16 @@ const GridList = ({
     btnLabel = 'Load More',
     btnAction = 'url',
     btnUrl,
-    dataLoading
+    dataLoading=false,
+    showButton=true,
+    handleLoadClick
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleLoad = () => {
-        setIsLoading(!isLoading);
+        //setIsLoading(!isLoading);
+        handleLoadClick();
+
     };
     const handleClick = (e) => {
         e.preventDefault();
@@ -48,7 +52,7 @@ const GridList = ({
                                 label={btnLabel}
                             />
                         )}
-                        {btnAction === 'load' && data.length > 0 && (
+                        {btnAction === 'load' && showButton && data.length > 0 && (
                             <ButtonLoad
                                 handleClick={handleLoad}
                                 isLoading={isLoading}

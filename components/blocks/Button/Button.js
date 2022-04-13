@@ -10,7 +10,8 @@ const Button = ({
     as = 'button',
     type = 'button',
     form,
-    animation = true
+    animation = true,
+    disabled=false
 }) => {
     const btnJSX = (
         <div
@@ -42,6 +43,8 @@ const Button = ({
         </a>
     ) : (
         <button
+            style={{opacity: disabled ? 0.2 : 1}}
+            disabled={disabled}
             form={form}
             type={type}
             className={`focus:outline-none outline-none ${width}`}

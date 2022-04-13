@@ -16,13 +16,8 @@ import CarouselWithLightbox from './CarouselWithLightbox';
 
 function SectionWhatToDo(props) {
     const {
-        experienceDetails: {
-            content: { destination },
-            content_marketing: {
-                whatToDo: { title, subtitle, desc, gallery: images, tips }
-            }
-        },
-
+        whatToDo: { desc, gallery: images },
+        destination={},
         globalState: { lang, edit }
     } = props;
 
@@ -55,11 +50,18 @@ function SectionWhatToDo(props) {
                         )}
                     </div>
                 </div>
-                <DestinationList destinations={destination.locations} />
+                {
+                    Object.keys(destination).length
+                    ? <>
+                        <DestinationList destinations={destination.locations} />
 
-                <div className="-mx-5 md:mx-0">
-                    <DestinationMap destinations={destination.locations} />
-                </div>
+                        <div className="-mx-5 md:mx-0">
+                            <DestinationMap destinations={destination.locations} />
+                        </div>
+                    </>
+                    : null
+                }
+                
 
                 {/* <TipList
                     actionType={actionType}

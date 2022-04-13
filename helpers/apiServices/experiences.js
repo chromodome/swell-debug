@@ -98,7 +98,7 @@ export const getExperienceById = (id) => {
                                 price,
                                 capacity
                                 inventory
-                              }
+                            }
                         }
                     }`
         }
@@ -154,7 +154,6 @@ export const getLandingPage = () => {
         data: {
             query: `
             query fetchLandingPage {
-                
                 landing: features(where: { isLive: true, isLanding: true }) {
                     id
                     title
@@ -169,115 +168,64 @@ export const getLandingPage = () => {
                     image
                     dark_theme
                     user_id {
-                      id
-                      username
-                      profile {
-                        first
-                        last
-                        avatar
-                        displayname,
-                      }
+                        id
+                        username
+                        profile {
+                            first
+                            last
+                            avatar
+                            displayname,
+                        }
                     }
-                  }
-                
-                
-                exp_latest: publisheds(
-                  where: { isPublished: true }
-                  limit: 12
-                  start: 0
-                  sort: "createdAt:desc"
-                ) {
-                  short_content
-                  type
-                  experience_price
-                  tags
-                  cats
-                  id
-                  experience_id
-                  createdAt
-                  isPublished
-                  user {
-                    username
-                    profile {
-                        first
-                        last
-                        avatar
-                        displayname,
-                    }
-                  }
                 }
                 interests: categories(where: { visible: true }, sort: "order_index:asc") {
-                  id
-                  name
-                  image
-                  description
-                  order_index
+                    id
+                    name
+                    image
+                    description
+                    order_index,
+                    swell_id
                 }
                 destinations: destinations(where: { visible: true }, sort: "order_index:asc") {
-                  id
-                  name
-                  image
-                  description
-                  country_list
-                  order_index
+                    id
+                    name
+                    image
+                    description
+                    country_list
+                    order_index
                 }
                 features(where: { isLive: true, isLanding_ne: true }) {
-                  id
-                  title
-                  headline
-                  description
-                  button
-                  label
-                  url
-                  blackPill
-                  blackPillTxt
-                  username
-                  image
-                  dark_theme
-                  user_id {
                     id
+                    title
+                    headline
+                    description
+                    button
+                    label
+                    url
+                    blackPill
+                    blackPillTxt
                     username
-                    profile {
-                        first
-                        last
-                        avatar
-                        displayname,
+                    image
+                    dark_theme
+                    user_id {
+                        id
+                        username
+                        profile {
+                            first
+                            last
+                            avatar
+                            displayname,
+                        }
                     }
-                  }
                 }
                 curated: collections(where: { live: true }, sort: "order_index:asc") {
-                  id
-                  thumb
-                  title
-                  subheadline
-                  order_index
+                    id
+                    thumb
+                    title
+                    subheadline
+                    order_index
                 }
-                exp_trending: publisheds(
-                  where: { isPublished: true }
-                  limit: 45
-                  start: 0
-                  sort: "createdAt:desc"
-                ) {
-                  short_content
-                  type
-                  experience_price
-                  tags
-                  cats
-                  id
-                  experience_id
-                  createdAt
-                  isPublished
-                  user {
-                    username
-                    profile {
-                        first
-                        last
-                        avatar
-                        displayname,
-                    }
-                  }
-                }
-              }`
+            }`
         }
     });
 

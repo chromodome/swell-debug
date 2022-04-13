@@ -9,6 +9,15 @@ export function toggleNav(navIsOpen) {
     };
 }
 
+export function toggleCart(cartIsOpen) {
+    return (dispatch) => {
+        dispatch({
+            type: types.TOGGLE_CART,
+            cartIsOpen
+        });
+    };
+}
+
 export function toggleLang(lang) {
     return (dispatch) => {
         dispatch({

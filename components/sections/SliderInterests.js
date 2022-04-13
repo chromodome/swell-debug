@@ -12,7 +12,8 @@ const breakPoints = {
 
 const skeletonArray = [1, 2, 3, 4, 5, 6];
 
-const SliderInterests = ({ sectionTitles, data, dataLoading }) => {
+const SliderInterests = ({ sectionTitles, data, dataLoading=false, path }) => {
+    console.log('interests', data)
     return (
         <>
             <SliderList
@@ -26,7 +27,7 @@ const SliderInterests = ({ sectionTitles, data, dataLoading }) => {
                                 key={`int_${item.id}_${index}`}
                                 data={item}
                                 containerClass="embla__slide x2 md:x4 lg:x5 xl:x7"
-                                type=""
+                                path={path}
                             />
                         );
                     })

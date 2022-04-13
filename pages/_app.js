@@ -13,13 +13,15 @@ import 'react-dates/lib/css/_datepicker.css';
 import '@/styles/datepicker.custom.css';
 import '@/styles/rcSlider.css';
 import 'rc-slider/assets/index.css';
+import 'react-nice-dates/build/style.css'
+import '@/styles/calendar.css';
 
 import Head from 'next/head';
 import SimpleReactLightbox from 'simple-react-lightbox';
 import LayoutLoading from '@/components/layouts/LayoutLoading';
 
 import { Provider } from 'react-redux';
-import store from 'store';
+import store from '../store';
 import { loadUser } from '@/store/actions/auth';
 import { fetchStartupData, fetchIpData } from '@/helpers/apiServices/startup';
 

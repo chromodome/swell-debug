@@ -10,7 +10,7 @@ const Showcase = ({
     data,
     children,
     pill,
-    dataLoading,
+    dataLoading=false,
     collection = 'experience'
 }) => {
     // const {
@@ -41,7 +41,8 @@ const Showcase = ({
                 style={{ zIndex: '-50' }}
                 className="z-1 absolute inset-0 overflow-hidden bg-gray-200">
                 <img
-                    data-blink-src={data.image}
+                    src={data.image}
+                  //  src={`${data.image}-/preview/300x300/`}
                     className={`object-cover w-full h-full ${
                         dark ? 'brightness-50' : ''
                     } ${blur} `}

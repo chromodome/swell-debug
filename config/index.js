@@ -1,10 +1,8 @@
-const API_URL =
-    process.env.NEXT_PUBLIC_API_URL || 'https://api-viakonnect.ngrok.io';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api-viakonnect.ngrok.io';
 
 const API_URL_MOCK = 'http://localhost:3005';
 
-const NEXT_URL =
-    process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3005';
+const NEXT_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3005';
 
 const PER_PAGE = 5;
 

@@ -18,6 +18,14 @@ export const fetchStartupData = (params) => {
                                 id,
                                 code
                             } ,
+                            destinations: destinations(where: { visible: true }, sort: "order_index:asc") {
+                                id
+                                name
+                                image
+                                description
+                                country_list
+                                order_index
+                            },
                             categories {
                                 id,
                                 name,
