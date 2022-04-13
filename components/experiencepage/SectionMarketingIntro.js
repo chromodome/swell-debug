@@ -9,22 +9,19 @@ import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
 
 function SectionMarketingIntro(props) {
     const {
-        experienceDetails: {
-            content_marketing: {
-                intro: { title, subtitle, desc }
-            },
-            content: {
-                best_time_to_go: { time_range = false }
-            },
-            type,
-            budget_min,
-            budget_max,
-            budget_currency = 'USD',
-            user: author,
-            user: { profile }
-        },
+        type='',
+        desc='',
+        budget_min=0,
+        budget_max=0,
+        budget_currency = 'USD',
         // auth: { user },
-        globalState: { siteData }
+        user: author,
+        user: { profile },
+        globalState: { siteData },
+        bestTimeToGo: {
+            time_range=false,
+            isVisible
+        }
     } = props;
 
     // const preferredCurrency = user?.profile?.currency || 'USD';
@@ -74,7 +71,7 @@ function SectionMarketingIntro(props) {
                         budget_currency
                     }}
                 />
-                {time_range && <BestTimeToGoRanges timeRange={time_range} />}
+                {isVisible && <BestTimeToGoRanges timeRange={time_range} />}
             </ExpSubsection>
         </>
     );

@@ -17,26 +17,30 @@ const currencyPrefix = '$US';
 
 const ResultCard = ({ data, containerClass }) => {
     const {
-        content,
-        experience_price,
-        lang = 'en',
-        id,
-        experience_id,
-        user,
-        user: { profile },
-        type,
-        days,
-        short_content,
-        places_lists,
-        featured_image,
-        title
+        // content,
+        // experience_price,
+        // lang = 'en',
+        // id,
+        // experience_id,
+        // user,
+        // user: { profile },
+        // type,
+        // short_content={ destination: '', days:1, featured_image: '', title: '' },
+        name: title,
+        price,
+        content: {
+            experience_id,
+            featured_image,
+            type,
+            days,
+            destinations
+        },
+        user
     } = data;
 
-    console.log(data);
+    // const { destination, days, featured_image, title } = short_content?.destination ? short_content : { destination: '', days:1, featured_image: '', title: '' };
 
-    if (!short_content) return false;
-
-    const EmptyData = <span className="w-20 bg-gray-300 rounded-full h-2" />;
+    // const EmptyData = <span className="w-20 bg-gray-300 rounded-full h-2" />;
     const ContentDays = days ? (
         <span> {`${days}  ${days > 1 ? 'Days' : 'Day'}`}</span>
     ) : (
@@ -63,7 +67,8 @@ const ResultCard = ({ data, containerClass }) => {
                                 <img
                                     alt="Placeholder"
                                     className="rounded-xl object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
-                                    data-blink-src={featured_image || ''}
+                                    // data-blink-src={featured_image || ''}
+                                    src={featured_image || ''}
                                 />
                             ) : (
                                 <div className="rounded-xl bg-gray-200 w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96">
@@ -82,7 +87,7 @@ const ResultCard = ({ data, containerClass }) => {
                         {type}
                     </div>
                 </div>
-                <div className="p-2 sm:p-4">
+               <div className="p-2 sm:p-4">
                     <div className="flex items-center justify-between leading-tight text-black font-sans text-xs md:text-sm">
                         <span className="flex">
                             {title ? (
@@ -100,17 +105,13 @@ const ResultCard = ({ data, containerClass }) => {
                                 <MapPin size={18} />
                             </span>
                             <span className="flex flex-wrap items-center">
-                                {places_lists?.length > 0 ? (
-                                    places_lists.map(
+                                {destinations?.length > 0 ? (
+                                    destinations.map(
                                         (item, index, itemArray) => {
                                             return (
-                                                <span
-                                                    key={`${item.code}_${index}`}>
+                                                <span key={`${item}_${index}`}>
                                                     <span className="whitespace-nowrap">
-                                                        {country(
-                                                            'en',
-                                                            item.code
-                                                        )}
+                                                        {item}
                                                     </span>
                                                     {index <
                                                         itemArray.length -
@@ -137,13 +138,13 @@ const ResultCard = ({ data, containerClass }) => {
                     </div>
                     <div className="transition-colors duration-300 group-hover:bg-kn-primary flex justify-center items-center mt-6 w-full rounded-lg border-2 border-kn-primary h-10 text-black text-sm font-bold tracking-tight group-hover:text-white">
                         <span className="mr-2 font-normal uppercase text-xs tracking-wide">
-                            {type === 'DIGITAL' ? 'get if for' : 'starting'}
+                            {type.toUpperCase() === 'DIGITAL' ? 'get if for' : 'starting'}
                         </span>
                         <span>
                             {`${currencyPrefix} `}
-                            {findLowestPrice(experience_price, type)}
+                            {price}
                         </span>
-                        {type === 'DIGITAL' ? (
+                        {type.toUpperCase() === 'DIGITAL' ? (
                             ''
                         ) : (
                             <span className="ml-1 flex gap-1 text-xs font-medium">

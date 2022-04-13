@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button__Selectable } from '@/blocks/Button/Buttons';
 
 /**
@@ -7,9 +7,15 @@ import { Button__Selectable } from '@/blocks/Button/Buttons';
  *
  * @returns
  */
-const Selectable = ({ items = [] }) => {
-    const [selected, setSelected] = useState(items[0] || '');
+const Selectable = ({ items = [], handleClick, startItem }) => {
+    const [selected, setSelected] = useState(startItem || items[0] || '');
 
+    useEffect(() => {
+        if(handleClick) {
+            handleClick(selected)
+        }
+    }, [selected])
+    
     return (
         <>
             {items.map((value) => (

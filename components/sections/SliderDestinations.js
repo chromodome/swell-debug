@@ -12,7 +12,8 @@ const breakPoints = {
 
 const skeletonArray = [1, 2, 3, 4, 5, 6];
 
-const SliderDestinations = ({ sectionTitles, data, dataLoading }) => {
+const SliderDestinations = ({ sectionTitles, data, dataLoading=false }) => {
+    console.log('destination', data)
     return (
         <>
             <SliderList

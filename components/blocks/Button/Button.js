@@ -11,6 +11,7 @@ const Button = ({
     type = 'button',
     form,
     animation = true,
+    disabled=false,
     fontSize = 'text-base',
     className
 }) => {
@@ -48,6 +49,8 @@ const Button = ({
         </a>
     ) : (
         <button
+            style={{opacity: disabled ? 0.2 : 1}}
+            disabled={disabled}
             form={form}
             type={type}
             className={`focus:outline-none outline-none ${width}`}

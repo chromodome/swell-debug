@@ -10,7 +10,7 @@ const breakPoints = {
     xl: { width: 1280, slides: 3 }
 };
 
-const SliderCollections = ({ sectionTitles, data }) => {
+const SliderCollections = ({ sectionTitles, data, boxed=false }) => {
     return (
         <div className={`w-full relative pt-1`}>
             <div
@@ -30,7 +30,7 @@ const SliderCollections = ({ sectionTitles, data }) => {
                 <Pill__Logo />
             </div>
 
-            <SliderList breakPoints={breakPoints} section={sectionTitles} boxed>
+            <SliderList breakPoints={breakPoints} section={sectionTitles} boxed={boxed}>
                 {data.map((item, index) => {
                     return (
                         <CollectionCard

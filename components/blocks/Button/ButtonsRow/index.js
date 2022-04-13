@@ -14,7 +14,8 @@ const ButtonsRow = ({
     items = [],
     type = 'exception',
     classes,
-    handleClick
+    handleClick,
+    startItem
 }) => {
     if (!type) return null;
 
@@ -24,7 +25,7 @@ const ButtonsRow = ({
                 {type === 'exception' ? (
                     <Exception items={items} handleClick={handleClick} />
                 ) : (
-                    <Selectable items={items} handleClick={handleClick} />
+                    <Selectable startItem={startItem} items={items} handleClick={handleClick} />
                 )}
             </div>
         </>

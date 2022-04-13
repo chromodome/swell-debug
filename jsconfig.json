@@ -3,6 +3,7 @@
         
         "baseUrl": ".",
         "paths": {
+            "@/swell/*": ["swell/*"],
             "@/components/*": ["components/*"],
             "@/blocks/*": ["components/blocks/*"],
             "@/sections/*": ["components/sections/*"],

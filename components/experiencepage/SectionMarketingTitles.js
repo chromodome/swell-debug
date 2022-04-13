@@ -7,21 +7,16 @@ import { bindActionCreators } from 'redux';
 
 const SectionMarketingTitles = (props) => {
     const {
-        experienceDetails: {
-            short_content: { title },
-            days,
-            cats_list: tmpCats,
-            places_lists: tmpPlaces
-        },
+        title='',
+        days=0,
+        tags=[],
+        categories=[],
+        destinations=[],
         globalState: { siteData }
     } = props;
 
-    const places_lists = tmpPlaces.map((place) => {
-        // const found = siteData.placesLists.find((elm) => elm.id == place);
-        return place;
-    });
 
-    const cats_list = tmpCats.map((cat) => {
+    const cats_list = categories.map((cat) => {
         // const found = siteData.categories.find((elm) => elm.id == cat);
         return cat.name;
     });
@@ -41,14 +36,13 @@ const SectionMarketingTitles = (props) => {
                         <span className="text-green-400 mr-2">
                             <MapPin size={18} />
                         </span>
-
                         <span className="flex flex-wrap items-center">
-                            {places_lists?.length > 0 ? (
-                                places_lists.map((item, index, itemArray) => {
+                            {destinations?.length > 0 ? (
+                                destinations.map((item, index, itemArray) => {
                                     return (
                                         <span key={`${item}_${index}`}>
                                             <span className="whitespace-nowrap">
-                                                {country('en', item.code)}
+                                                {item}
                                             </span>
                                             {index < itemArray.length - 1 && (
                                                 <span className="px-1">.</span>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { fetchCartAction } from '@/store/actions/swell/cart';
 import Link from 'next/link';
 import {
     toggleLang,
     toggleNav,
+    toggleCart,
     toggleAuthModal,
     setAuthPage
 } from '@/store/actions/globalState';
@@ -14,6 +16,7 @@ import Search from '@/components/blocks/Search/Search';
 import LangList from '@/blocks/LangList';
 import Avatar from '@/specialty/Avatar';
 import NavbarSidebar from '@/layouts/NavbarSidebar';
+import NavbarSidebarCart from '@/layouts/NavbarSidebarCart';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
 import NavbarItem from '@/blocks/NavbarItem';
 
@@ -26,12 +29,14 @@ import debounce from '@/helpers/debounce';
 import ModalAuth from '../blocks/Modal/ModalAuth';
 
 const Header = ({
+    fetchCartAction,
     toggleLang,
     toggleNav,
+    toggleCart,
     toggleAuthModal,
     setAuthPage,
     logout,
-    globalState: { rtl, lang, navIsOpen, authModalIsOpen, authComponent },
+    globalState: { rtl, lang, navIsOpen, cartIsOpen, authModalIsOpen, authComponent },
     auth: { user, isAuthenticated, isProfile },
 
     isLogo = true,
@@ -60,6 +65,7 @@ const Header = ({
         return () => {
             window.removeEventListener('scroll', debouncedHandleScroll);
         };
+        
     }, [scrollPos]);
 
     const handleScroll = () => {
@@ -89,6 +95,10 @@ const Header = ({
         toggleAuthModal(false);
         logout();
     };
+
+    useEffect(() => {
+        fetchCartAction()
+    }, []);
 
     return (
         <>
@@ -137,6 +147,20 @@ const Header = ({
                         {isLang && <LangList />}
 
                         {isMenu && (
+                            <>
+                                <button
+                                onClick={() => toggleCart(!cartIsOpen)}
+                                className={`focus:outline-none w-20 
+                                flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-green-400 transition-all duration-200 hover:bg-gray-900 hover:text-white ${
+                                    rtl ? 'rounded-r-lg' : 'rounded-l-lg'
+                                }`}>
+                                <i
+                                    className={`${
+                                        rtl
+                                            ? 'ri-menu-2-line'
+                                            : 'ri-menu-3-line'
+                                    }`}></i>
+                            </button>
                             <button
                                 onClick={() => toggleNav(!navIsOpen)}
                                 className={`focus:outline-none w-20 
@@ -150,11 +174,13 @@ const Header = ({
                                             : 'ri-menu-3-line'
                                     }`}></i>
                             </button>
+                            </>
                         )}
                         {isCustom}
                     </div>
                 </div>
             </header>
+            <NavbarSidebarCart>kjh</NavbarSidebarCart>
             {isMenu && (
                 <NavbarSidebar>
                     {isAuthenticated ? (
@@ -247,9 +273,11 @@ function mapDispatchToProps(dispatch) {
         {
             toggleLang,
             toggleNav,
+            toggleCart,
             logout,
             toggleAuthModal,
-            setAuthPage
+            setAuthPage,
+            fetchCartAction
         },
         dispatch
     );

@@ -7,11 +7,9 @@ import { lightBoxOptions } from '@/constants/lightboxOptions';
 import ImageHover from '@/components/blocks/Card/ImageHover';
 import ButtonGeneric from '@/components/blocks/Button/ButtonGeneric';
 
-function GalleryMarketing({
-    experienceDetails: {
-        type,
-        content_marketing: { gallery: images }
-    },
+function SectionMarketingGallery({
+    type='',
+    images=[],
     globalState: { lang, edit, siteData }
 }) {
     const { openLightbox, closeLightbox } = useLightbox();
@@ -139,4 +137,4 @@ const mapStateToProps = (state) => ({
     globalState: state.globalState
 });
 
-export default connect(mapStateToProps, null)(GalleryMarketing);
+export default connect(mapStateToProps, null)(SectionMarketingGallery);

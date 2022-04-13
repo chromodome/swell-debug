@@ -1,7 +1,9 @@
+
 import Layout from '@/layouts/Layout';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { SwellController } from '@/swell/api/swellNode';
 import Showcase from '@/sections/Showcase';
 import SliderExperiences from '@/components/sections/SliderExperiences';
 import SliderInterests from '@/sections/SliderInterests';
@@ -9,73 +11,66 @@ import SliderDestinations from '@/sections/SliderDestinations';
 import SliderCollections from '@/sections/SliderCollections';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-
 import { getLandingPage } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
 
-const LandingPage = ({ globalState: { lang } }) => {
-    const [dataLanding, setDataLanding] = useState(null);
-    const [dataLoading, setDataLoading] = useState(true);
 
-    useEffect(() => {
-        const importData = async () => {
-            const newData = await getLandingPage();
-            setDataLanding(newData.data);
-            setDataLoading(false);
-        };
-        importData();
-    }, []);
+
+const LandingPage = ({
+    globalState: {
+        lang,
+        siteData: {
+            destinationList
+        }
+    },
+    latest: { results: latestList },
+    landingData,
+    trending: { results: trendingList },
+}) => {
+  //  const [dataLanding, setDataLanding] = useState(null);
+    const dataLanding = JSON.parse(landingData);
+    const [date, setDate] = useState()
+console.log('dataLanding', dataLanding)
     return (
         <Layout>
             <Showcase
                 pill="bottom"
-                data={
-                    dataLoading ? null : randomItem(dataLanding?.data?.landing)
-                }
-                dataLoading={dataLoading}
+                data={randomItem(dataLanding?.data?.landing)}
                 collection="showcase"
             />
 
             <>
                 <SliderExperiences
                     sectionTitles={translations[lang].sections.newThisMonth}
-                    data={dataLanding?.data?.exp_latest}
-                    dataLoading={dataLoading}
+                    latestList={latestList}
                 />
                 <SliderInterests
                     sectionTitles={translations[lang].sections.wanderByInterest}
-                    data={dataLanding?.data?.interests}
-                    dataLoading={dataLoading}
+                    data={dataLanding?.data?.interests || []}
+                    path={'/experiences/interest/'}
                 />
 
                 <Showcase
                     pill="top"
-                    data={
-                        dataLoading
-                            ? null
-                            : randomItem(dataLanding?.data?.features)
-                    }
-                    dataLoading={dataLoading}
+                    data={ randomItem(dataLanding?.data?.features)  }
                 />
                 <SliderDestinations
                     sectionTitles={
                         translations[lang].sections.wanderByDestination
                     }
-                    data={dataLanding?.data?.destinations}
-                    dataLoading={dataLoading}
+                    data={destinationList || []}
                 />
                 {/* <SliderCollections
                     sectionTitles={translations[lang].sections.curatedCollections}
-                    data={dataCollections}
+                    data={dataLanding?.data?.curated || []}
                     boxed
                 /> */}
                 <GridList
                     sectionTitles={translations[lang].sections.trendingThisWeek}
-                    data={dataLanding?.data?.exp_trending}
+                    data={trendingList}
                     btnLabel="Explore all experiences"
                     btnAction="url"
-                    btnUrl="/experiences/search"
-                    dataLoading={dataLoading}
+                    btnUrl="/experiences/search/all"
                 />
             </>
         </Layout>
@@ -93,19 +88,30 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
 
-// export async function getServerSideProps() {
-//     const { data: dataLanding } = await getLandingPage();
-//     const res1 = await fetch(`${API_URL}/experiences`);
-//     const dataNewThisMonth = await res1.json();
-//     const res4 = await fetch(`${API_URL_MOCK}/api/featured`);
-//     const dataFeatured = await res4.json();
-//     const res5 = await fetch(`${API_URL_MOCK}/api/collections`);
-//     const dataCollections = await res5.json();
-//     return {
-//         props: {
-//             dataLanding,
-//             dataFeatured,
-//             dataCollections
-//         }
-//     };
-// }
+export async function getStaticProps({ params }) {
+    let latest = null;
+    let landingData = null;
+    let trending = null;
+
+    try {
+        latest =  await SwellController.getLatestExperiences(3);
+        trending = await  SwellController.trending(3);
+        landingData = await getLandingPage();
+
+    } catch (error) {
+        console.log(error)
+        return {
+            props: {},
+            notFound: true
+        };
+    }
+
+    return { 
+        props: {
+            trending,
+            latest,
+            landingData:  JSON.stringify( landingData?.data)
+        }
+    }
+
+}

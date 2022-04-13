@@ -12,7 +12,12 @@ const breakPoints = {
 
 const skeletonArray = [1, 2, 3, 4, 5];
 
-const SliderExperiences = ({ sectionTitles, data, dataLoading }) => {
+const SliderExperiences = ({
+        sectionTitles,
+        latestList,
+        dataLoading=false
+    }) => {
+
     return (
         <>
             <SliderList
@@ -20,10 +25,15 @@ const SliderExperiences = ({ sectionTitles, data, dataLoading }) => {
                 section={sectionTitles}
                 dataLoading={dataLoading}>
                 {!dataLoading ? (
-                    data.map((item, index) => {
+                    latestList.map((item, index) => {
+                        
+                        if(!item.user) {
+                            return null;
+                        }
+
                         return (
                             <ResultCard
-                                key={`exp_${item.experience_id}_${index}`}
+                                key={`exp_${item.content.experience_id}_${index}`}
                                 data={item}
                                 containerClass="embla__slide x2 md:x3 lg:x4 xl:x5"
                             />

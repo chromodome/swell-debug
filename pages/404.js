@@ -1,3 +1,5 @@
+import DefaultErrorPage from 'next/error'
+
 export default function Page404() {
-    return <h1>404 - Page Not Found</h1>;
+    return <DefaultErrorPage statusCode={404} />;
 }

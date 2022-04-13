@@ -1,0 +1,13 @@
+.has-booking {
+    color: red;
+    border: 2px solid red;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.date_used_already {
+    color: orange!important;
+}

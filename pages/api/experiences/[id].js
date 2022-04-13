@@ -14,6 +14,7 @@ export default async (req, res) => {
     //         message: `Method ${req.method} is not allowed`
     //     });
     // }
+
     try {
         const response = await getExperienceById(req.query.id);
 
