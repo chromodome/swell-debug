@@ -97,7 +97,7 @@ const ExperienceDetail = ({
             }
         }
     } = contentfulExperience;
-
+console.log('categories', categories)
 
     // if (!dataExperience?.data?.publisheds) {
     //     return <DefaultErrorPage statusCode={404} >Experience {router.query?.id} doesn't exist.</DefaultErrorPage>
@@ -241,7 +241,7 @@ export async function getStaticProps({ params }) {
     let contentfulExperience = null;
 
     try {
-        contentfulExperience = await getMarketingExperience(params.id);
+        contentfulExperience = await getMarketingExperience(params?.id ? params?.id.toLowerCase(): '');
     } catch (error) {
         return {
             props: {},

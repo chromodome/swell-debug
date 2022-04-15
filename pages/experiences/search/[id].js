@@ -6,12 +6,7 @@ import router, { useRouter } from "next/router";
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
-import Row from '@/sections/Row';
-import ButtonsRow from '@/blocks/Button/ButtonsRow';
-import ResultCardSkeleton from '@/blocks/Card/ResultCardSkeleton';
-
-const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+import ExperienceFilter from '@/blocks/ExperienceFilter';
 
 const LandingPage = ({
     globalState: {
@@ -27,7 +22,7 @@ const LandingPage = ({
     const totalPages = useRef(1);
     const currentType = useRef('all');
     const loadLimit = useRef(10)
-    
+
     const getExps =  async (type, page=1)=> {
         const response = await fetch(`/api/search/${type}?limit=${loadLimit.current}&page=${page}`);
         const data = await response.json();
@@ -53,39 +48,6 @@ const LandingPage = ({
         loadExperiences(currentType.current, currentPage.current + 1 )
     }
 
-    const handleExpTypeClick = (data) => {
-        let type = '';
-
-        if(isReady) {
-            switch (data.toLowerCase()) {
-                case 'all types':
-                    type='all';
-                    break;
-                default:
-                    type= data.toLowerCase();
-                    break;
-            }
-
-            if(type !==  query.id.toLowerCase()) {
-                router.push(type);
-            }
-        }
-    }
-
-    const setType = () => {
-        const type = query.id.toLowerCase();
-
-        if(type === 'all') {
-            return 'All Types';
-        } else if(type === 'digital') {
-            return 'Digital';
-        } else if(type === 'guided') {
-            return 'Guided';
-        }
-
-        return 'All Types';
-    }
-
     useEffect(() => {
         if(isReady) {
             let type = query.id.toLowerCase();
@@ -99,15 +61,10 @@ const LandingPage = ({
 
     return (
         <Layout>
-        {  isReady &&  <>  
-                <Row classes="mt-20">
-                    <ButtonsRow
-                        handleClick={handleExpTypeClick}
-                        type="selectable"
-                        startItem={setType()}
-                        items={['All Types', 'Guided', 'Digital']}
-                    />
-                </Row>
+        {  isReady &&  <>
+                <ExperienceFilter
+                    query={query}
+                />  
                 <GridList
                     sectionTitles={translations[lang].sections.trendingThisWeek}
                     data={expList}

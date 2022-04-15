@@ -148,7 +148,7 @@ const Header = ({
 
                         {isMenu && (
                             <>
-                                <button
+                                {/* <button
                                 onClick={() => toggleCart(!cartIsOpen)}
                                 className={`focus:outline-none w-20 
                                 flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-green-400 transition-all duration-200 hover:bg-gray-900 hover:text-white ${
@@ -160,7 +160,7 @@ const Header = ({
                                             ? 'ri-menu-2-line'
                                             : 'ri-menu-3-line'
                                     }`}></i>
-                            </button>
+                            </button> */}
                             <button
                                 onClick={() => toggleNav(!navIsOpen)}
                                 className={`focus:outline-none w-20 
@@ -180,7 +180,7 @@ const Header = ({
                     </div>
                 </div>
             </header>
-            <NavbarSidebarCart>kjh</NavbarSidebarCart>
+            {/* <NavbarSidebarCart>kjh</NavbarSidebarCart> */}
             {isMenu && (
                 <NavbarSidebar>
                     {isAuthenticated ? (

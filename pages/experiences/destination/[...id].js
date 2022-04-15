@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import router, { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { countriesArray } from '@/helpers/countriesArray';
 import ListBoxGeneric from '@/components/blocks/ListBoxGeneric';
+import ExperienceFilter from '@/blocks/ExperienceFilter';
 
 
 const LandingPage = ({
@@ -18,6 +19,8 @@ const LandingPage = ({
         }
     },
 }) => {
+    const accepedTypes = ['all', 'digital', 'guided'];
+    const filyerType = useRef('all');
     const { query, isReady } = useRouter();
     const [dataLoading, setDataLoading] = useState(true);
     const [expList, setExpList] = useState([]);
@@ -25,35 +28,37 @@ const LandingPage = ({
         code: 'n/a',
         name: 'Choose Country...'
     }, ...countriesArray].map((country) => {
-        const { code: id, name } = country;
+        const { code: id, name, slug } = country;
 
         return {
             id,
             name,
+            slug,
             unavailable: false
         };
     }));
     const [selectedDate, setSelectedDate] = useState({});
-    const getExps =  async (countryIds)=> {
-        const response = await fetch(`/api/destinations/${countryIds}`);
+    const getExps =  async (countryIds, type)=> {
+        const response = await fetch(`/api/destinations/${countryIds}/${type}`);
         const data = await response.json();
 
         return data;
     }
 
     const countrySelect = (country) => {
-        console.log(country)
-        router.push(`${country.name}`);
+        router.push(`${country.slug}/${filyerType.current}`);
     }
+
 
     useEffect(() => {
         if(isReady) {
-            let found = destinationList.find(element => element.name == query.id);
+            let type = 'all';
+            let found = destinationList.find(element => element.slug.toLowerCase() == query.id[0].toLowerCase());
             setSelectedDate(guideDates[0]);
             if(destinationList.length) {
                 let findParams = '';
                 if(!found) {
-                    found = countriesArray.find(element => element.name == query.id);
+                    found = countriesArray.find(element => element.slug.toLowerCase() == query.id[0].toLowerCase());
 
                     if(found) {
                         findParams =  found.code;
@@ -63,11 +68,15 @@ const LandingPage = ({
                 } else {
                     findParams = found.country_list.join('-')
                 }
+
+                if(query.id.length > 1) {
+                    type = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
+                }
+                filyerType.current = type;
                 if(findParams.length) {
-                    getExps(findParams).then((data) => {
+                    getExps(findParams, type).then((data) => {
                         setExpList(data.results);
                         setDataLoading(false);
-                        console.log(data)
                     })
                 }
             }
@@ -77,7 +86,10 @@ const LandingPage = ({
 
     return (
         <Layout>
-            <>  
+            {isReady && <>  
+                <ExperienceFilter
+                    query={query}
+                />  
                 <ListBoxGeneric
                     listData={guideDates}
                     val={selectedDate}
@@ -89,10 +101,10 @@ const LandingPage = ({
                     data={expList}
                     btnLabel="Explore all experiences"
                     btnAction="url"
-                    btnUrl="/experiences/search"
+                    btnUrl="/experiences/search/all"
                     dataLoading={dataLoading}
                 />
-            </>
+            </>}
         </Layout>
     );
 };

@@ -3,12 +3,13 @@ import { SwellController } from '@/swell/api/swellNode';
 
 export default async (req, res) => {
     if(req.method === 'GET') {
-        const category = req?.query?.id || '';
+        const dest = req?.query?.id[0] || '';
+        const type = req?.query?.id[1] || 'all'
 
         try {
             let response = null;
             
-            response = await SwellController.byCategory(category);
+            response = await SwellController.byDestination(dest, type);
 
             res.status(200).json(response);
 

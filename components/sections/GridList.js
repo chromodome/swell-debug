@@ -9,7 +9,7 @@ const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const GridList = ({
     sectionTitles,
-    data,
+    data=[],
     btnLabel = 'Load More',
     btnAction = 'url',
     btnUrl,
@@ -26,7 +26,7 @@ const GridList = ({
     };
     const handleClick = (e) => {
         e.preventDefault();
-        router.push(btnUrl);
+        router.push(btnUrl, null, { shallow: true });
     };
 
     return (
