@@ -26,7 +26,7 @@ const GridList = ({
     };
     const handleClick = (e) => {
         e.preventDefault();
-        router.push(btnUrl, null, { shallow: true });
+        router.push(btnUrl);
     };
 
     return (
