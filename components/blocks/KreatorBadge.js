@@ -23,7 +23,7 @@ const KreatorBadge = ({
         <div
             className={` absolute flex top-4 left-4 w-max overflow-hidden rounded-full h-8`}>
             {!nolink ? (
-                <Link href={`/experiences/user/${username}`}>
+                <Link href={`/experiences/user/${username}/all`}>
                     <a className="h-8 flex items-center no-underline text-white">
                         <Avatar
                             profile={profile}

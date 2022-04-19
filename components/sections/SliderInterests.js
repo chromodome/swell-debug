@@ -28,6 +28,7 @@ const SliderInterests = ({ sectionTitles, data, dataLoading=false, path }) => {
                                 data={item}
                                 containerClass="embla__slide x2 md:x4 lg:x5 xl:x7"
                                 path={path}
+                                linkName="slug"
                             />
                         );
                     })

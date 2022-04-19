@@ -184,11 +184,13 @@ export const getLandingPage = () => {
                     image
                     description
                     order_index,
-                    swell_id
+                    swell_id,
+                    slug
                 }
                 destinations: destinations(where: { visible: true }, sort: "order_index:asc") {
                     id
                     name
+                    slug
                     image
                     description
                     country_list

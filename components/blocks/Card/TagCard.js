@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-const TagCard = ({ data, containerClass, path='/experiences/destination/' }) => {
+const TagCard = ({ data, linkName="name", containerClass, path='/experiences/destination/' }) => {
     return (
         <div className={`my-3 pb-16 px-2 lg:my-4 lg:px-2 ${containerClass} `}>
             <div className="overflow-hidden rounded-xl group relative border-transparent hover:border-green ring-2 ring-transparent hover:ring-green-400 hover:shadow-2xl-green-600 ring-offset-2 transition-all duration-300 ease-in-out ">
-                <Link href={`${path}${data.name}`}>
+                <Link href={`${path}${data[linkName]}/all`}>
                     <div>
                     <img
                         alt="Placeholder"

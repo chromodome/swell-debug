@@ -13,6 +13,7 @@ import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { getLandingPage } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
+import { NEXT_PUBLIC_LATEST_PER_PAGE, NEXT_PUBLIC_TRENDING_PER_PAGE } from '@/constants/public';
 
 
 
@@ -94,8 +95,8 @@ export async function getStaticProps({ params }) {
     let trending = null;
 
     try {
-        latest =  await SwellController.getLatestExperiences(3);
-        trending = await  SwellController.trending(3);
+        latest =  await SwellController.getLatestExperiences(NEXT_PUBLIC_LATEST_PER_PAGE);
+        trending = await  SwellController.trending(NEXT_PUBLIC_TRENDING_PER_PAGE);
         landingData = await getLandingPage();
 
     } catch (error) {

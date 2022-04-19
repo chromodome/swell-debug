@@ -23,6 +23,7 @@ export const fetchStartupData = (params) => {
                                 name
                                 image
                                 description
+                                slug
                                 country_list
                                 order_index
                             },

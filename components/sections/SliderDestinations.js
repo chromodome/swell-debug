@@ -13,7 +13,6 @@ const breakPoints = {
 const skeletonArray = [1, 2, 3, 4, 5, 6];
 
 const SliderDestinations = ({ sectionTitles, data, dataLoading=false }) => {
-    console.log('destination', data)
     return (
         <>
             <SliderList
@@ -28,6 +27,7 @@ const SliderDestinations = ({ sectionTitles, data, dataLoading=false }) => {
                                 data={item}
                                 containerClass="embla__slide x2 md:x4 lg:x5 xl:x7"
                                 type=""
+                                linkName="slug"
                             />
                         );
                     })

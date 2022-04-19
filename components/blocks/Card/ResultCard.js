@@ -28,6 +28,7 @@ const ResultCard = ({ data, containerClass }) => {
         // short_content={ destination: '', days:1, featured_image: '', title: '' },
         name: title,
         price,
+        slug,
         content: {
             experience_id,
             featured_image,
@@ -61,7 +62,7 @@ const ResultCard = ({ data, containerClass }) => {
             <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
                 <KreatorBadge author={user} baseUrl={baseUrl} />
                 <div>
-                    <Link href={`${baseUrl.experiencePage}/${experience_id}`}>
+                    <Link href={`${baseUrl.experiencePage}/${slug}`}>
                         <a>
                             {featured_image ? (
                                 <img

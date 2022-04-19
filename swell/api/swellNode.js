@@ -24,6 +24,7 @@ class SwellController {
 
         return trending;
     }
+
     bySearch = async (type, limit, page) => {
         let queryObj = {};
         if(type !== 'all') {
@@ -39,23 +40,44 @@ class SwellController {
 
         return response;
     }
-    byUser = async (username) => {
+
+    byUser = async (username, type, limit, page) => {
+        const queryObj = {};
+
+        if(type !== 'all') {
+            queryObj["content.type"] = type
+        }
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
+            ...queryObj,
             "user.username": username
         });
 
         return response;
     }
-    byCategory = async (category) => {
+
+    byCategory = async (category, type, limit, page) => {
+        const queryObj = {};
+
+        if(type !== 'all') {
+            queryObj["content.type"] = type
+        }
+
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
+            ...queryObj,
             category
         });
 
         return response;
     }
-    byDestination= async (dest) => {
+
+    byDestination= async (dest, type, limit, page) => {
+        const queryObj = {};
         const destArray = dest.split('-') || [];
         const destOrArray = destArray.reduce((prev, next) => {
             const foundCountry = countriesArray.find( elm => elm.code === next);
@@ -65,9 +87,16 @@ class SwellController {
 
             return prev;
         }, []);
-        
+
+        if(type !== 'all') {
+            queryObj["content.type"] = type
+        }
+
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
+            ...queryObj,
             "where": {
                 "$or": destOrArray
             }

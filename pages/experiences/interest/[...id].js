@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
@@ -12,28 +12,30 @@ import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
 
 const LandingPage = ({
     globalState: {
-        lang,
+        lang
     },
 }) => {
     const { query, isReady } = useRouter();
-    const accepedTypes = ['all', 'digital', 'guided'];
     const [dataLoading, setDataLoading] = useState(true);
-    const [loadMoreData, setLoadMoreData ] = useState(false)
+    const [loadMoreData, setLoadMoreData ] = useState(false);
     const [expList, setExpList] = useState([]);
+    const accepedTypes = ['all', 'digital', 'guided'];
     const currentPage = useRef(1);
     const totalPages = useRef(1);
     const filterType = useRef('all');
+    const interest = useRef(null);
     const [pageIsReady, setPageIsReady] = useState(false);
 
-    const getExps =  async (type, page=1)=> {
-        const response = await fetch(`/api/search/${type}?limit=${NEXT_PUBLIC_ITEMS_PER_PAGE}&page=${page}`);
+    const getExps =  async (category, type, page=1)=> {
+        const response = await fetch(`/api/interests/${category}/${type}?limit=${NEXT_PUBLIC_ITEMS_PER_PAGE}&page=${page}`);
         const data = await response.json();
 
+        console.log('responsev', data)
         return data;
     }
 
-    const loadExperiences = (type, page=1) => {
-        getExps(type, page).then((data) => {
+    const loadExperiences = (category, type, page=1) => {
+        getExps(category, type, page).then((data) => {
             const { page, pages, results } = data;
 
             currentPage.current = page;
@@ -47,26 +49,32 @@ const LandingPage = ({
 
     const handleLoadClick = () => {
         setLoadMoreData(true);
-        loadExperiences(filterType.current, currentPage.current + 1 )
+        loadExperiences(interest.current, filterType.current, currentPage.current + 1 )
     }
 
     useEffect(() => {
         if(isReady) {
-            let type = query.id.toLowerCase();
-    
-            type = accepedTypes.includes(type) ? type : 'all';
-            filterType.current = type;
-            loadExperiences(type);
+            if(query.id.length > 1) {
+                interest.current = query.id[0].toLowerCase();
+                filterType.current = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
+            } else if(query.id.length === 1) {
+                interest.current = query.id[0].toLowerCase();
+            } else {
+                // 404
+            }
+            loadExperiences(interest.current, filterType.current);
             setPageIsReady(true);
         }
+        
     }, []);
+    
 
     return (
         <Layout>
-        {pageIsReady &&  <>
+            {pageIsReady && <>
                 <ExperienceFilter
                     query={query}
-                />  
+                />
                 <GridList
                     sectionTitles={translations[lang].sections.trendingThisWeek}
                     data={expList}
@@ -77,7 +85,6 @@ const LandingPage = ({
                     handleLoadClick={handleLoadClick}
                     showButton={currentPage.current !== totalPages.current || loadMoreData}
                 />
-
             </>}
             <LoadMore loadMoreData={loadMoreData} />
         </Layout>
