@@ -9,6 +9,8 @@ import translations from '@/constants/translations';
 import { countriesArray } from '@/helpers/countriesArray';
 import ListBoxGeneric from '@/components/blocks/ListBoxGeneric';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
+import LoadMore from '@/blocks/LoadMore';
+import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
 
 
 const LandingPage = ({
@@ -20,9 +22,9 @@ const LandingPage = ({
     },
 }) => {
     const accepedTypes = ['all', 'digital', 'guided'];
-    const filyerType = useRef('all');
     const { query, isReady } = useRouter();
     const [dataLoading, setDataLoading] = useState(true);
+    const [loadMoreData, setLoadMoreData ] = useState(false);
     const [expList, setExpList] = useState([]);
     const [guideDates, setGuideDates] = useState([{
         code: 'n/a',
@@ -38,55 +40,76 @@ const LandingPage = ({
         };
     }));
     const [selectedDate, setSelectedDate] = useState({});
-    const getExps =  async (countryIds, type)=> {
-        const response = await fetch(`/api/destinations/${countryIds}/${type}`);
+    const currentPage = useRef(1);
+    const totalPages = useRef(1);
+    const filterType = useRef('all');
+    const findParams = useRef([]);
+    const [pageIsReady, setPageIsReady] = useState(false);
+
+    const getExps =  async (countryIds, type, page=1)=> {
+        const response = await fetch(`/api/destinations/${countryIds}/${type}?limit=${NEXT_PUBLIC_ITEMS_PER_PAGE}&page=${page}`);
         const data = await response.json();
 
         return data;
     }
 
     const countrySelect = (country) => {
-        router.push(`${country.slug}/${filyerType.current}`);
+        router.push(`${country.slug}/${filterType.current}`);
     }
 
+    const loadExperiences = (countryIds, type, page=1) => {
+        getExps(countryIds, type, page).then((data) => {
+            const { page, pages, results } = data;
+
+            currentPage.current = page;
+            totalPages.current = pages ? Object.keys(pages).length : 1;
+
+            setExpList([...expList, ...results]);
+            setDataLoading(false);
+            setLoadMoreData(false);
+        })
+    }
+    const handleLoadClick = () => {
+        setLoadMoreData(true);
+        loadExperiences(findParams.current, filterType.current, currentPage.current + 1 );
+    }
 
     useEffect(() => {
         if(isReady) {
-            let type = 'all';
             let found = destinationList.find(element => element.slug.toLowerCase() == query.id[0].toLowerCase());
             setSelectedDate(guideDates[0]);
+
             if(destinationList.length) {
-                let findParams = '';
                 if(!found) {
                     found = countriesArray.find(element => element.slug.toLowerCase() == query.id[0].toLowerCase());
 
                     if(found) {
-                        findParams =  found.code;
+                        findParams.current =  found.code;
                     } else {
                         setDataLoading(false);
                     }
                 } else {
-                    findParams = found.country_list.join('-')
+                    findParams.current = found.country_list.join('-')
                 }
 
                 if(query.id.length > 1) {
-                    type = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
+                    filterType.current = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
                 }
-                filyerType.current = type;
-                if(findParams.length) {
-                    getExps(findParams, type).then((data) => {
-                        setExpList(data.results);
-                        setDataLoading(false);
-                    })
+
+                
+                
+                if(findParams.current.length) {
+                    loadExperiences(findParams.current, filterType.current);
                 }
             }
+            setPageIsReady(true);
         }
     }, [destinationList]);
     
 
     return (
         <Layout>
-            {isReady && <>  
+            {pageIsReady && <>  
                 <ExperienceFilter
                     query={query}
                 />  
@@ -99,12 +122,15 @@ const LandingPage = ({
                 <GridList
                     sectionTitles={translations[lang].sections.trendingThisWeek}
                     data={expList}
-                    btnLabel="Explore all experiences"
-                    btnAction="url"
-                    btnUrl="/experiences/search/all"
+                    btnLabel="Load More"
+                    btnAction="load"
+                    btnUrl="/experiences/search"
                     dataLoading={dataLoading}
+                    handleLoadClick={handleLoadClick}
+                    showButton={currentPage.current !== totalPages.current || loadMoreData}
                 />
             </>}
+            <LoadMore loadMoreData={loadMoreData} />
         </Layout>
     );
 };

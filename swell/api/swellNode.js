@@ -41,16 +41,24 @@ class SwellController {
         return response;
     }
 
-    byUser = async (username) => {
+    byUser = async (username, type, limit, page) => {
+        const queryObj = {};
+
+        if(type !== 'all') {
+            queryObj["content.type"] = type
+        }
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
+            ...queryObj,
             "user.username": username
         });
 
         return response;
     }
 
-    byCategory = async (category, type) => {
+    byCategory = async (category, type, limit, page) => {
         const queryObj = {};
 
         if(type !== 'all') {
@@ -59,6 +67,8 @@ class SwellController {
 
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
             ...queryObj,
             category
         });
@@ -66,7 +76,7 @@ class SwellController {
         return response;
     }
 
-    byDestination= async (dest, type) => {
+    byDestination= async (dest, type, limit, page) => {
         const queryObj = {};
         const destArray = dest.split('-') || [];
         const destOrArray = destArray.reduce((prev, next) => {
@@ -84,6 +94,8 @@ class SwellController {
 
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
+            limit,
+            page,
             ...queryObj,
             "where": {
                 "$or": destOrArray

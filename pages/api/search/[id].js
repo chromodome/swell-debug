@@ -4,7 +4,7 @@ import { SwellController } from '@/swell/api/swellNode';
 export default async (req, res) => {
     if(req.method === 'GET') {
         const type = req?.query?.id || 'all';
-        const limit = req?.query?.limit || 2;
+        const limit = req?.query?.limit || 10;
         const page = req?.query?.page || 1;
 
         try {
