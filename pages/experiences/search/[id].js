@@ -9,6 +9,7 @@ import translations from '@/constants/translations';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
 import LoadMore from '@/blocks/LoadMore';
 import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
+import { pageCount } from '@/helpers/FEutils';
 
 const LandingPage = ({
     globalState: {
@@ -34,10 +35,10 @@ const LandingPage = ({
 
     const loadExperiences = (type, page=1) => {
         getExps(type, page).then((data) => {
-            const { page, pages, results } = data;
+            const { count, page, pages, results } = data;
 
             currentPage.current = page;
-            totalPages.current = pages ? Object.keys(pages).length : 1;
+            totalPages.current = pageCount(count, NEXT_PUBLIC_ITEMS_PER_PAGE);
 
             setExpList([...expList, ...results]);
             setDataLoading(false);

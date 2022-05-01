@@ -60,6 +60,7 @@ function MyApp({ Component, pageProps }) {
             Router.events.off('routeChangeError', end);
         };
     }, []);
+    store.getState
     return (
         <>
             {loading ? (

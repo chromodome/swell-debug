@@ -33,6 +33,9 @@ export const updateCart = (draft, action) => {
                 error: false,
                 ...cart
             }
+            const serializedState = JSON.stringify(cart);
+
+            window.localStorage.setItem('xxx', serializedState);
 
         return draft;
     }

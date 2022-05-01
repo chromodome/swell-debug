@@ -6,7 +6,6 @@ import { toggleAuthModal, setAuthPage } from '@/store/actions/globalState';
 import { login, clearLoginErrors } from '@/store/actions/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 
 import FormIkInput from '@/components/forms/FormIkInput';
@@ -22,7 +21,6 @@ const AuthLogin = ({
     toggleAuthModal,
     setAuthPage,
     auth,
-
     ...props
 }) => {
     const router = useRouter();
@@ -34,7 +32,7 @@ const AuthLogin = ({
     if (auth.isAuthenticated == null) {
         return <LayoutLoading showMessage={false} />;
     }
-
+    
     return (
         <>
             <div className="">

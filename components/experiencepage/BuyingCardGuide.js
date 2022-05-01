@@ -8,7 +8,10 @@ import useXchangeRate from 'helpers/useXchangeRate2';
 import { formatPrice } from 'helpers/LocaleHelper';
 import { currenciesObject } from 'constants/currenciesObject';
 import { Block__InputSingle } from '@/components/blocks/Blocks';
-import { parseVariantDates } from '@/helpers/calander';
+import {
+    parseVariantDates,
+    convertVariantNameDateToIso
+} from '@/helpers/calander';
 
 import { isSameDay, isBefore } from 'date-fns';
 import { enGB } from 'date-fns/locale'
@@ -56,7 +59,6 @@ const BuyingCardGuide = ({
     const dateVariantIdLookup = useRef({});
     const  currentVariant = variants[selectedDate];
 
-
     // Funcsconsole.log()
     const removeExpFromCart = () => {
         removeFromCart(productCartId.current);
@@ -79,7 +81,6 @@ const BuyingCardGuide = ({
 
     const changeVariant = (date) => {
         setDate(date);
-        console.log('complicated shit',dateVariantIdLookup.current[new Date(date).toISOString()])
         setSelectedDate(dateVariantIdLookup.current[new Date(date).toISOString()]) 
     }
 
@@ -93,16 +94,11 @@ const BuyingCardGuide = ({
             if(!currentVariant.quantity) {
                 removeFromCart(cartId);
             } else {
-              //  updateCart(productData.id, variantId, currentVariant.quantity)
                 updateCart(cartId, { quantity: currentVariant.quantity })
-                console.log('update',currentVariant.quantity);
             }
                 
 
         } else {
-            console.log('add',currentVariant.quantity, currentVariant);
-            console.log(productData)
-
             addToCart(productData.id, variantId, currentVariant.quantity);
         }
         setVariantsReady(false);
@@ -110,7 +106,7 @@ const BuyingCardGuide = ({
 
     const generateFormAttrs = (loading) => {
         const btnData = {
-            btnLabel: 'Add To Cart',
+            btnLabel: 'Buy Now',
             btnDisabled: false,
             cost: 0
         }
@@ -149,10 +145,8 @@ const BuyingCardGuide = ({
                 }
             });
         }
-
-        // console.log(e.target.value, selectedDate?.id, quantity, stockLevel)
     }
-console.log('variants', variants, currentVariant)
+
     useEffect(() => {
         if(!loading && currentDate) {
             const { id } = productData;
@@ -173,7 +167,7 @@ console.log('variants', variants, currentVariant)
 
             dateVariantIdLookup.current = productData?.variants?.results.reduce((prev, next) => {
                 const { id, name } = next;
-                const dateKey = new Date(`${name.slice(0,2)}-${name.slice(2,4)}-${name.slice(4)}`).toISOString();
+                const dateKey = convertVariantNameDateToIso(name);
 
                 return  { ...prev, [dateKey]: id }
 
@@ -197,7 +191,7 @@ console.log('variants', variants, currentVariant)
         })
     }, [])
     
-console.log('currentDate', currentDate)
+
     const modifiersClassNames = {
         highlight: 'has-booking',
         disabledColor: 'date_used_already'
@@ -226,7 +220,7 @@ console.log('currentDate', currentDate)
         <div
             className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
             { !loading  
-            ? Object.keys(variants).length && date ? <>
+            ? Object.keys(variants).length && !isNaN(date.getTime()) ? <>
                 <DatePicker
                     date={date}
                     onDateChange={changeVariant}
@@ -250,7 +244,7 @@ console.log('currentDate', currentDate)
                     <div className="flex items-center gap-2 text-2xl font-semibold uppercase  ">
                         <span className="relative">
                             {formatPrice(
-                                currentVariant.price,
+                                currentVariant?.price,
                                 preferredCurrency,
                                 window.navigator.language,
                                 currencyOptions

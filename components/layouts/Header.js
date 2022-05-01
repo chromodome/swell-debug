@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { fetchCartAction } from '@/store/actions/swell/cart';
+//import { fetchCartAction } from '@/store/actions/swell/cart';
 import Link from 'next/link';
 import {
     toggleLang,
@@ -29,7 +29,7 @@ import debounce from '@/helpers/debounce';
 import ModalAuth from '../blocks/Modal/ModalAuth';
 
 const Header = ({
-    fetchCartAction,
+  //  fetchCartAction,
     toggleLang,
     toggleNav,
     toggleCart,
@@ -96,9 +96,9 @@ const Header = ({
         logout();
     };
 
-    useEffect(() => {
-        fetchCartAction()
-    }, []);
+    // useEffect(() => {
+    //     fetchCartAction()
+    // }, []);
 
     return (
         <>
@@ -197,7 +197,7 @@ const Header = ({
                                     translations[lang].menu.myPurchases.title
                                 }
                                 icon="LayoutGrid"
-                                link={`${NEXT_URL}/experiences`}
+                                link={`${NEXT_URL}/experiences/purchased`}
                                 handleClick={toggleNav}
                                 rtl={rtl}
                             />
@@ -277,7 +277,7 @@ function mapDispatchToProps(dispatch) {
             logout,
             toggleAuthModal,
             setAuthPage,
-            fetchCartAction
+           // fetchCartAction
         },
         dispatch
     );

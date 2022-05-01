@@ -1,4 +1,7 @@
 // Returns true if text is longer than count or if it has any of the words in findWords
+export const pageCount = (count, itemsPerPage) => {
+    return Math.ceil(count / itemsPerPage);
+};
 
 export const randomNumber = (min, max) => {
     min = Math.ceil(min);

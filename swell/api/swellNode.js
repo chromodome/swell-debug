@@ -11,7 +11,7 @@ class SwellController {
         const recents =  await swellServer.get('/products/?sort=date_created+desc', {
             active: true,
             limit,
-    });
+        });
 
         return recents;
     }
