@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import Button from '@/components/blocks/Button/Button';
-import Layout from '@/components/layouts/Layout';
+import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useRouter } from 'next/router';
+import Layout from '@/components/layouts/Layout';
+import {fetchCartAction, updateCartAction} from '@/store/actions/swell/cart';
+import {
+    convertVariantNameDateToIso
+} from '@/helpers/calander';
 import ExpSubsection from '@/components/sections/ExpSubsection';
 import { currenciesObject } from '@/constants/currenciesObject';
 import { getCheckoutData } from '@/helpers/apiServices/checkout';
@@ -32,6 +36,8 @@ import { submitPayment, clearPaymentErrors } from '@/store/actions/payment';
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 import FormIkPayment from '@/components/forms/FormIkPayment';
 import { CardAmex, CardMastercard, CardVisa } from '@/components/svg/BankCards';
+import Spinner from '@/components/blocks/Spinner';
+import { postPurchase } from '@/helpers/apiServices/purchases';
 
 // book/experiences/:id?sku=123&guests=3&isPrivate=false
 
@@ -46,105 +52,230 @@ const Checkout = ({
     globalState: { loading },
     checkoutTotals,
     checkoutData: { skus },
-    auth
+    auth,
+    fetchCartAction,
+    cart,
+    user,
+    siteLoading,
+    postPurchase
 }) => {
+    const [loadingCart, setLoadingCart] = useState(true);
+    const router = useRouter();
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
-
-    const {
-        booking_date,
-        capacity,
-        id: sku_id,
-        inventory,
-        price,
-        product: {
-            days,
-            experience_id,
+    
+    const parseCart = () => {
+        const { digital, guided } = cart;
+        const type = Object.keys(digital).length ? 'DIGITAL' :  Object.keys(guided).length ? 'GUIDED' : null;
+        const product = {
             type,
-            places_lists,
-            short_content,
-            user: { username, profile }
+            title: '',
+            description: '',
+            featured_image: "",
+            destinations: [],
+            days: 0,
+            username: '',
+            first: '',
+            price: 0,
+            totalPrice: 0,
+            quantity: 0,
+            travel_date: '',
+            publish_id: '',
+            experience_id: '',
+            //
         }
-    } = skus[0];
+        // convertVariantNameDateToIso
+        if(!type) {
+            return { type };
+        }
+        if(type === 'GUIDED') {
+            const guidedItems =  guided[Object.keys(guided)[0]];
+            const item = guidedItems[Object.keys(guidedItems)[0]]
+
+            const {
+                price=0,
+                price_total: totalPrice=0,
+                quantity=0,
+                variant: {
+                    name
+                },
+                product:
+                    {
+                        name: title='',
+                        description='',
+                        content: {
+                            featured_image="",
+                            destinations=[],
+                            days=0,
+                            username='',
+                            first='',
+                            publish_id,
+                            experience_id,
+                        }
+                }
+            } = item;
+
+            product['featured_image'] = featured_image;
+            product['destinations'] = destinations;
+            product['days'] = days;
+            product['title'] = title;
+            product['username'] = username;
+            product['first'] = first;
+            product['description'] = description;
+            product['price'] = price;
+            product['totalPrice'] = totalPrice;
+            product['quantity'] = quantity;
+            product['publish_id'] = publish_id;
+            product['experience_id'] = experience_id;
+            product['travel_date'] = convertVariantNameDateToIso(name)
+        }
+
+        if(type === 'DIGITAL') {
+            const { 
+                price=0,
+                price_total: totalPrice=0,
+                quantity=0,
+                product:
+                    {
+                        name: title='',
+                        description='',
+                        content: {
+                            featured_image="",
+                            destinations=[],
+                            days=0,
+                            username='',
+                            first='',
+                            publish_id,
+                            experience_id,
+                        }
+                }
+            } =  digital[Object.keys(digital)[0]];
+
+            product['featured_image'] = featured_image;
+            product['destinations'] = destinations;
+            product['days'] = days;
+            product['title'] = title;
+            product['username'] = username;
+            product['first'] = first;
+            product['description'] = description;
+            product['price'] = price;
+            product['totalPrice'] = totalPrice;
+            product['publish_id'] = publish_id;
+            product['experience_id'] = experience_id;
+            product['quantity'] = 1;
+        }
+
+        return product;
+    }
+    const {
+        type,
+        featured_image,
+        destinations,
+        days,
+        title,
+        username,
+        first,
+        description,
+        price,
+        totalPrice,
+        quantity,
+        travel_date,
+        publish_id,
+        experience_id,
+    } = parseCart();
+
+    // const {
+    //   //  travel_date='2022-04-20T08:54:18.147Z',
+    //     capacity=2,
+    //     id= "xxx",
+    //     inventory=3,
+    //    // price=100,
+    //     product: {
+    //         experience_id="www",
+    //         // type="DIGITAL",
+    //         places_lists=['fr'],
+    //         short_content=null,
+    //     }
+    // } = { product: { user: {}}};
 
     const {
-        unitPrice,
-        qty,
-        subTotal,
-        discountTotal,
-        discountArr,
-        taxRate,
-        tax,
-        total
-    } = checkoutTotals;
+        unitPrice=1,
+        qty=1,
+        subTotal=1,
+        discountTotal=1,
+        discountArr=[],
+        taxRate=1,
+        tax=1,
+        total=1
+    } = {};
 
     const { rate } = useXchangeRate({ from: 'USD', to: preferredCurrency });
 
     // start of some JSX needed consts
 
-    const lineItemJSX = {
-        lineItem: `${formatPrice(
-            (unitPrice * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )} ${
-            type == 'GUIDED'
-                ? ` x ${pluralize(qty, 'guest')}`
-                : ' (Digital Access)'
-        }`,
-        amount: `${formatPrice(
-            (subTotal * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )}`
-    };
+    // const lineItemJSX = {
+    //     lineItem: `${formatPrice(
+    //         (unitPrice * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )} ${
+    //         type == 'GUIDED'
+    //             ? ` x ${pluralize(qty, 'guest')}`
+    //             : ' (Digital Access)'
+    //     }`,
+    //     amount: `${formatPrice(
+    //         (subTotal * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )}`
+    // };
 
-    const subtotalJSX = {
-        lineItem: `Subtotal (${preferredCurrency})`,
-        amount: `${formatPrice(
-            (subTotal * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )}`
-    };
+    // const subtotalJSX = {
+    //     lineItem: `Subtotal (${preferredCurrency})`,
+    //     amount: `${formatPrice(
+    //         (subTotal * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )}`
+    // };
 
-    const discountTotalJSX = {
-        lineItem: `Discount (${preferredCurrency})`,
-        amount: `${formatPrice(
-            (discountTotal * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )}`
-    };
+    // const discountTotalJSX = {
+    //     lineItem: `Discount (${preferredCurrency})`,
+    //     amount: `${formatPrice(
+    //         (discountTotal * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )}`
+    // };
 
-    const taxJSX = {
-        lineItem: `Tax (${taxRate.toFixed(2)})%`,
-        amount: `${formatPrice(
-            (tax * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )}`
-    };
+    // const taxJSX = {
+    //     lineItem: `Tax (${taxRate.toFixed(2)})%`,
+    //     amount: `${formatPrice(
+    //         (tax * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )}`
+    // };
 
-    const totalJSX = {
-        lineItem: `Total (${preferredCurrency})`,
-        amount: `${formatPrice(
-            (total * rate) / 100,
-            preferredCurrency,
-            getBrowserLocale(),
-            currencyOptions,
-            'currency'
-        )}`
-    };
+    // const totalJSX = {
+    //     lineItem: `Total (${preferredCurrency})`,
+    //     amount: `${formatPrice(
+    //         (total * rate) / 100,
+    //         preferredCurrency,
+    //         getBrowserLocale(),
+    //         currencyOptions,
+    //         'currency'
+    //     )}`
+    // };
 
     // end of JSX
 
@@ -156,27 +287,86 @@ const Checkout = ({
         // console.log('profile', profileDataObj);
     };
 
+    const [postingOrder, setPostingOrder] = useState(false);
     const handleSubmit = (values, actions) => {
-        submitPayment({ ...values, ccCountry: selectedCountry });
-        console.log('values =', { ...values, ccCountry: selectedCountry });
-        actions.setSubmitting(false);
+        const guidedData = {}
+
+        if(type == 'GUIDED') {
+            guidedData.people = quantity;
+            guidedData.travel_date = travel_date;
+        }
+        setPostingOrder(true);
+        postPurchase({
+            ...guidedData,
+            user: auth.user.id,
+            experience_id,
+            experience: publish_id,
+        }).then(() => {
+            setTimeout(() => {
+                updateCartAction([]);
+                router.replace('/experiences/purchased');
+            }, 2000)
+            
+        })
+
+
+        //  console.log('userId',auth.user.id,'\nquantity', quantity,'\npublish_id',publish_id, "\nexperience_id", experience_id, '\ntravel_date', travel_date )
+        // submitPayment({ ...values, ccCountry: selectedCountry });
+        // console.log('values =', { ...values, ccCountry: selectedCountry });
+        //actions.setSubmitting(true);
     };
+    const reloadCartTimeoutId = useRef(null)
+    const reloadCart =  () => {
+        // When local storage changes, dump the list to
+        // It means cart updated reload cart
+        clearTimeout(reloadCartTimeoutId.current)
+        if(window.localStorage.getItem('xx') !== JSON.stringify(cart) && !loadingCart) {
+            reloadCartTimeoutId.current = setTimeout(() => {
+                setLoadingCart(true);
+                fetchCartAction().then(() => {
+                    setLoadingCart(false);
+                });
+            }, 1000)
+        }
+      //  console.log(JSON.parse(window.localStorage.getItem('xx')));
+    }
 
     // end form submission
+    useEffect(() => {
+        let cartListener = null;
+        fetchCartAction().then(() => {
+            setLoadingCart(false);
+            cartListener = window.addEventListener('storage', reloadCart);
+        });
 
+        return  () => window.removeEventListener('storage', cartListener);
+    }, []);
+
+    useEffect(() => {
+        if(!siteLoading) {
+            if(!auth.isAuthenticated) {
+                updateCartAction([]); // reset cart and leave page
+                router.replace('/landing')
+            }
+        }
+        
+    }, [siteLoading]);
+console.log('postingOrder', postingOrder)
     return (
         <>
             <Layout>
-                <div
+
+                {!loadingCart && type && !postingOrder
+                ? <div
                     className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
                     <div className={``}>
                         <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
                             Checkout
                         </div>
                     </div>
-
                     <main className={`flex items-start lg:gap-16 xl:gap-24 `}>
                         <section className="w-96 lg:w-3/5 mb-24">
+                        
                             {type == 'GUIDED' && (
                                 <>
                                     <ExpSubsection
@@ -192,16 +382,16 @@ const Checkout = ({
                                                 </div>
                                                 <div>
                                                     {moment(
-                                                        booking_date
+                                                        travel_date
                                                     ).format('MMMM Do YYYY')}
                                                 </div>
                                             </div>
-                                            <div className="flex flex-col">
+                                            {/* <div className="flex flex-col">
                                                 <div className="font-bold">
                                                     Guests
                                                 </div>
                                                 <div>Dropdown here</div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </ExpSubsection>
 
@@ -225,21 +415,7 @@ const Checkout = ({
                                 <div className="text-green-400 text-2xl font-bold mb-4">
                                     Summary
                                 </div>
-                                <div>
-                                    Lorem ipsum, dolor sit amet consectetur
-                                    adipisicing elit. Cumque culpa ipsam ducimus
-                                    ullam consequatur exercitationem, atque
-                                    ratione officia autem temporibus. Lorem
-                                    ipsum, dolor sit amet consectetur
-                                    adipisicing elit. Cumque culpa ipsam ducimus
-                                    ullam consequatur exercitationem, atque
-                                    ratione officia autem temporibus. Lorem
-                                    ipsum, dolor sit amet consectetur
-                                    adipisicing elit. Cumque culpa ipsam ducimus
-                                    ullam consequatur exercitationem, atque
-                                    ratione officia autem temporibus. Lorem
-                                    ipsum, dolor sit amet consectetur
-                                </div>
+                                <div dangerouslySetInnerHTML={{__html: description}} />
                             </ExpSubsection>
                             <ExpSubsection padding="pb-8" margins="mb-8">
                                 <div className="text-green-400 text-2xl font-bold mb-4">
@@ -435,15 +611,13 @@ const Checkout = ({
                                         <img
                                             alt=""
                                             className="object-cover object-center w-full h-full"
-                                            data-blink-src={
-                                                short_content.featured_image
-                                            }
+                                            data-blink-src={featured_image}
                                         />
                                     </div>
                                     <div>
                                         <div className="border-b border-green-600 border-opacity-20 pb-2">
                                             <div className="text-sm">
-                                                {short_content.title}
+                                                {title}
                                             </div>
                                             <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
                                                 <div className="flex  mr-8 py-1">
@@ -452,9 +626,9 @@ const Checkout = ({
                                                     </span>
 
                                                     <span className="flex flex-wrap items-center">
-                                                        {places_lists?.length >
+                                                        {destinations?.length >
                                                         0 ? (
-                                                            places_lists.map(
+                                                            destinations.map(
                                                                 (
                                                                     item,
                                                                     index,
@@ -464,10 +638,11 @@ const Checkout = ({
                                                                         <span
                                                                             key={`${item}_${index}`}>
                                                                             <span className="whitespace-nowrap">
-                                                                                {country(
+                                                                                { item
+                                                                                /* {country(
                                                                                     'en',
                                                                                     item.code
-                                                                                )}
+                                                                                )} */}
                                                                             </span>
                                                                             {index <
                                                                                 itemArray.length -
@@ -500,7 +675,7 @@ const Checkout = ({
                                                 )} Experience by`}
                                             </span>
                                             <span className="underline font-semibold text-green-700">
-                                                {`${kreatorName(profile)}`}
+                                                {`${kreatorName({username, first})}`}
                                             </span>
                                         </div>
                                     </div>
@@ -513,39 +688,39 @@ const Checkout = ({
                                         <div className="flex flex-col gap-2">
                                             <div className="flex text-xs items-center justify-between border-b-2 pb-2 border-gray-300 border-dotted">
                                                 <span className="relative">
-                                                    {lineItemJSX.lineItem}
+                                                    Price
                                                 </span>
                                                 <span className="relative">
-                                                    {lineItemJSX.amount}
+                                                    {price}
                                                 </span>
                                             </div>
 
                                             <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
                                                 <div className="flex text-xs items-center justify-between ">
                                                     <span className="relative">
-                                                        {subtotalJSX.lineItem}
+                                                        Quantity
                                                     </span>
                                                     <span className="relative">
-                                                        {subtotalJSX.amount}
+                                                        {quantity}
                                                     </span>
                                                 </div>
                                                 {false && (
                                                     <div className="flex text-xs items-center justify-between">
                                                         <span className="flex items-center gap-2">
                                                             <span className="relative">
-                                                                {
+                                                                {eee/* {
                                                                     discountTotalJSX.lineItem
-                                                                }
+                                                                } */}
                                                             </span>
                                                         </span>
                                                         <span className="relative">
-                                                            {
+                                                            {ffff/* {
                                                                 discountTotalJSX.amount
-                                                            }
+                                                            } */}
                                                         </span>
                                                     </div>
                                                 )}
-                                                {discountArr.length > 0 &&
+                                                {/* {discountArr.length > 0 &&
                                                     discountArr.map(
                                                         (single, index) => {
                                                             return (
@@ -586,31 +761,29 @@ const Checkout = ({
                                                             {taxJSX.amount}
                                                         </span>
                                                     </div>
-                                                )}
+                                                )} */}
                                             </div>
                                             <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
                                                 <span className="flex">
-                                                    <span className="relative">
-                                                        {totalJSX.lineItem}
-                                                    </span>
-                                                    {preferredCurrency !=
+                                                    <span className="relative">Total</span>
+                                                    {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             *
                                                         </span>
-                                                    )}
+                                                    )} */}
                                                 </span>
                                                 <span className="flex">
                                                     <span className="relative">
-                                                        {totalJSX.amount}
+                                                        {totalPrice}
                                                     </span>
-                                                    {preferredCurrency !=
+                                                    {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             **
                                                         </span>
-                                                    )}
-                                                </span>
+                                                    )}*/}
+                                                </span> 
                                             </div>
                                         </div>
                                     </div>
@@ -622,15 +795,15 @@ const Checkout = ({
                                                     * 1 USD ~{' '}
                                                 </div>
                                                 <span>
-                                                    {formatPrice(
+                                                    {/* {formatPrice(
                                                         rate,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
-                                                    )}
+                                                    )} */}
                                                 </span>
                                                 <div className="">
-                                                    {preferredCurrency}
+                                                    {/* {preferredCurrency} */}
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-1 text-xs">
@@ -639,18 +812,18 @@ const Checkout = ({
                                                 </div>
                                                 <div className="">$US</div>
                                                 <span>
-                                                    {formatPrice(
+                                                    {/* {formatPrice(
                                                         total / 100,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
-                                                    )}
+                                                    )} */}
                                                 </span>
                                             </div>
                                         </div>
                                     )}
                                     <div className="px-2 mt-4 text-xs">
-                                        Charges will appear as Amazon Payment
+                                        Charges will appear as Stripe Payment
                                         Services
                                     </div>
                                 </div>
@@ -682,22 +855,30 @@ const Checkout = ({
                         </aside>
                     </main>
                 </div>
+                : postingOrder
+                ? <div> <Spinner size={100}/> Processing order you will be redirected to purchase page. Please stay on this page until redirected </div>
+                : <div>Loading....</div>}
             </Layout>
         </>
     );
 };
 
 const mapStateToProps = (state) => ({
+    siteLoading: state.globalState.siteData.loading,
     globalState: state.globalState,
     payment: state.payment,
-    auth: state.auth
+    auth: state.auth,
+    cart: state.cart,
+    user: state.user
 });
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
             submitPayment,
-            clearPaymentErrors
+            clearPaymentErrors,
+            fetchCartAction,
+            postPurchase
         },
         dispatch
     );
@@ -706,18 +887,18 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
 
 export async function getServerSideProps({ query }) {
-    const {
-        data: { data: checkoutData }
-    } = await getCheckoutData(query);
+    // const {
+    //     data: { data: checkoutData }
+    // } = await getCheckoutData(query);
 
-    console.log('data is', query);
-    const checkoutTotals = calculateCheckout(checkoutData.skus[0], query);
+    // console.log('data is', query);
+    // const checkoutTotals = calculateCheckout(checkoutData.skus[0], query);
 
     // const checkoutTotals = {};
     return {
         props: {
-            checkoutData,
-            checkoutTotals
+            checkoutData: {},
+            checkoutTotals:{}
         }
     };
 }

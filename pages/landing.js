@@ -13,7 +13,7 @@ import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { getLandingPage } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
-import { NEXT_PUBLIC_LATEST_PER_PAGE, NEXT_PUBLIC_TRENDING_PER_PAGE } from '@/constants/public';
+import {NEXT_PUBLIC_LATEST_PER_PAGE, NEXT_PUBLIC_TRENDING_PER_PAGE } from '@/constants/public';
 
 
 
@@ -31,7 +31,7 @@ const LandingPage = ({
   //  const [dataLanding, setDataLanding] = useState(null);
     const dataLanding = JSON.parse(landingData);
     const [date, setDate] = useState()
-console.log('dataLanding', dataLanding)
+
     return (
         <Layout>
             <Showcase
@@ -112,7 +112,9 @@ export async function getStaticProps({ params }) {
             trending,
             latest,
             landingData:  JSON.stringify( landingData?.data)
-        }
+        },
+
+        revalidate: process.env.NEXT_REVALIDATE_PERIOD
     }
 
 }

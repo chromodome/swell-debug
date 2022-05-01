@@ -11,6 +11,7 @@ import ListBoxGeneric from '@/components/blocks/ListBoxGeneric';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
 import LoadMore from '@/blocks/LoadMore';
 import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
+import { pageCount } from '@/helpers/FEutils';
 
 
 const LandingPage = ({
@@ -59,10 +60,10 @@ const LandingPage = ({
 
     const loadExperiences = (countryIds, type, page=1) => {
         getExps(countryIds, type, page).then((data) => {
-            const { page, pages, results } = data;
+            const { count, page, pages, results } = data;
 
             currentPage.current = page;
-            totalPages.current = pages ? Object.keys(pages).length : 1;
+            totalPages.current = pageCount(count, NEXT_PUBLIC_ITEMS_PER_PAGE);
 
             setExpList([...expList, ...results]);
             setDataLoading(false);

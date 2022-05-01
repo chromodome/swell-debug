@@ -1,7 +1,16 @@
 import  { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCartAction,
+import { useRouter } from 'next/router';
+import {
+    // toggleLang,
+    // toggleNav,
+    // toggleCart,
+    toggleAuthModal,
+    setAuthPage
+} from '@/store/actions/globalState';
+import {
+    fetchCartAction,
     postCartAction,
     updateCartAction,
     removeFromCartAction,
@@ -15,15 +24,19 @@ function SectionPricingBooking({
     type,
     expId,
     globalState: { lang, edit },
+    auth,
     fetchCartAction,
     postCartAction,
     updateCartAction,
     removeFromCartAction,
-    updateItemCartAction
+    updateItemCartAction,
+    setAuthPage,
+    toggleAuthModal
 }) {
     const rtl = !!translations[lang].rtl;
     const [productData, setProductData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     // const getCart = async (type) => {
     //     const response = await fetch(`/api/cart/`, {
@@ -74,27 +87,54 @@ function SectionPricingBooking({
 
     const removeProdFromCart = (cartId) => {
         setLoading(true);
-        removeFromCartAction(cartId).then(() => {
+        updateCartAction([]).then((dd) => {
+            console.log('dddd', dd);
             setLoading(false);
-        });
+        })
+        // removeFromCartAction(cartId).then(() => {
+        //     setLoading(false);
+        // });
     }
 
     const addDigitalProdToCart = (prodId) => {
-        setLoading(true);
-        postCartAction({product_id: prodId, quantity: 1 }).then(() => {
-            setLoading(false);
-        });
+
+        if(!auth.isAuthenticated) {
+          //  setAuthPage('login');
+            toggleAuthModal(true);
+        } else {
+            setLoading(true);
+            updateCartAction([]).then((dd) => {
+                postCartAction({product_id: prodId, quantity: 1 }).then(() => {
+                    setLoading(false);
+                    router.push('/checkout');
+                });
+            })
+        }
+        // setLoading(true);
+        // postCartAction({product_id: prodId, quantity: 1 }).then(() => {
+        //     setLoading(false);
+        // });
     }
 
     const addGuidedProdToCart = (prodId, variantId, quantity) => {
-        setLoading(true);
-        postCartAction({
-            product_id: prodId,
-            variant_id: variantId,
-            quantity
-        }).then(() => {
-            setLoading(false);
-        });
+
+        if(!auth.isAuthenticated) {
+            //  setAuthPage('login');
+                toggleAuthModal(true);
+            } else {
+            setLoading(true);
+            updateCartAction([]).then((dd) => {
+                postCartAction({
+                    product_id: prodId,
+                    variant_id: variantId,
+                    quantity
+                }).then(() => {
+                    setLoading(false);
+                    router.push('/checkout');
+                });
+            })
+        }
+        
     }
 
     const updateGuidedProdToCart = (cartId, quantity) => {
@@ -105,6 +145,7 @@ function SectionPricingBooking({
     }
 
     useEffect(() => {
+        updateCartAction([]);
         getPrice(type);
       //  getCart()
     }, []);
@@ -155,6 +196,7 @@ function SectionPricingBooking({
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     globalState: state.globalState,
     cart: state.cart
 });
@@ -165,7 +207,9 @@ function mapDispatchToProps(dispatch) {
         postCartAction,
         updateCartAction,
         removeFromCartAction,
-        updateItemCartAction
+        updateItemCartAction,
+        setAuthPage,
+        toggleAuthModal
     }, dispatch);
 }
 

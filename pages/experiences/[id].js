@@ -30,6 +30,7 @@ import SectionMarketingItinerary from '@/components/experiencepage/SectionMarket
 import SectionPricingBooking from '@/components/experiencepage/SectionPricingBooking';
 
 
+
 const lang = 'en-US';
 const ExperienceDetail = ({
     data,
@@ -97,7 +98,7 @@ const ExperienceDetail = ({
             }
         }
     } = contentfulExperience;
-console.log('categories', categories)
+
 
     // if (!dataExperience?.data?.publisheds) {
     //     return <DefaultErrorPage statusCode={404} >Experience {router.query?.id} doesn't exist.</DefaultErrorPage>
@@ -254,7 +255,9 @@ export async function getStaticProps({ params }) {
     return {
         props: {
             contentfulExperience: {...contentfulExperience.fields, swellExp: contentfulExperience.swellExp }
-        }
+        },
+
+        revalidate: process.env.NEXT_REVALIDATE_PERIOD
     };
 }
 

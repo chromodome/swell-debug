@@ -15,7 +15,8 @@ const GridList = ({
     btnUrl,
     dataLoading=false,
     showButton=true,
-    handleLoadClick
+    handleLoadClick,
+    purchasedView=false
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -42,17 +43,21 @@ const GridList = ({
                     <>
                         <div className="flex flex-wrap -mx-1 lg:-mx-4">
                             {data.map((item) => {
-                                return <ResultCard key={item.id} data={item} />;
+                                return <ResultCard
+                                            purchasedView={purchasedView}
+                                            key={item.id}
+                                            data={item}
+                                        />;
                             })}
                         </div>
-                        {btnAction === 'url' && (
+                        {btnAction === 'url' && !purchasedView && (
                             <ButtonLoad
                                 handleClick={handleClick}
                                 isLoading={isLoading}
                                 label={btnLabel}
                             />
                         )}
-                        {btnAction === 'load' && showButton && data.length > 0 && (
+                        {btnAction === 'load' && showButton && data.length > 0 && !purchasedView && (
                             <ButtonLoad
                                 handleClick={handleLoad}
                                 isLoading={isLoading}
