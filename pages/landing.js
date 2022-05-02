@@ -114,7 +114,7 @@ export async function getStaticProps({ params }) {
             landingData:  JSON.stringify( landingData?.data)
         },
 
-        revalidate: process.env.NEXT_REVALIDATE_PERIOD
+        revalidate: Number(process.env.NEXT_REVALIDATE_PERIOD)
     }
 
 }
