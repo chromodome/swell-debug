@@ -257,7 +257,7 @@ export async function getStaticProps({ params }) {
             contentfulExperience: {...contentfulExperience.fields, swellExp: contentfulExperience.swellExp }
         },
 
-        revalidate: process.env.NEXT_REVALIDATE_PERIOD
+        revalidate: Number(process.env.NEXT_REVALIDATE_PERIOD)
     };
 }
 
