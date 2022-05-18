@@ -33,7 +33,7 @@ const SliderExperiences = ({
 
                         return (
                             <ResultCard
-                                key={`exp_${item.content.experience_id}_${index}`}
+                                myKey={`exp_${item.content.experience_id}_${index}`}
                                 data={item}
                                 containerClass="embla__slide x2 md:x3 lg:x4 xl:x5"
                             />

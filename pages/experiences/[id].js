@@ -1,48 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import getMarketingExperience from '@/swell/api/getMarketingExperience';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
-import Row from '@/sections/Row';
-import { Buttons__NextPrev, Button } from '@/blocks/Button/Buttons';
-import BookingCard from '@/blocks/Card/BookingCard';
-import BuyingCard from '@/blocks/Card/BuyingCard';
-import ListWithIcon from '@/blocks/ListWithIcon';
-import { getExperienceById } from '@/helpers/apiServices/experiences';
-//import { BookingPickerModal } from '@/components/blocks/BookingPicker';
-import DestinationMap from '@/components/blocks/Map/DestinationMap';
+import { Button } from '@/blocks/Button/Buttons';
 import ExpSubsection from '@/components/sections/ExpSubsection';
-import DestinationList from '@/components/blocks/Map/DestinationList';
-import AccommodationMap from '@/components/blocks/Map/AccommodationMap';
-import AccommodationList from '@/components/blocks/Map/AccommodationList';
-import ItineraryCard from '@/components/blocks/Card/ItineraryCard';
-import ButtonLink from '@/components/blocks/Button/ButtonLink';
-import { toggleAuthModal, setAuthPage } from '@/store/actions/globalState';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import SectionMarketingTitles from '@/components/experiencepage/SectionMarketingTitles';
 import SectionMarketingGallery from '@/components/experiencepage/SectionMarketingGallery';
 import SectionMarketingIntro from '@/components/experiencepage/SectionMarketingIntro';
 import SectionWhatToDo from '@/components/experiencepage/SectionWhatToDo';
 import SectionWhereToStay from '@/components/experiencepage/SectionWhereToStay';
 import SectionMarketingItinerary from '@/components/experiencepage/SectionMarketingItinerary';
-// import SectionWhatsIncluded from '@/components/experiencepage/SectionWhatsIncluded';
 import SectionPricingBooking from '@/components/experiencepage/SectionPricingBooking';
-
-
 
 const lang = 'en-US';
 const ExperienceDetail = ({
-    data,
-   // dataExperience,
-    auth,
-    toggleAuthModal,
-    setAuthPage,
-    globalState,
-    globalState: { authModalIsOpen, authComponent, siteData },
+    globalState: { siteData },
     contentfulExperience = {}
 }) => {
-    const { query, isReady } = useRouter();
+    const { isReady } = useRouter();
     const {
         content_marketing: {
             [lang]: {
@@ -99,27 +77,8 @@ const ExperienceDetail = ({
         }
     } = contentfulExperience;
 
+console.log(contentfulExperience)
 
-    // if (!dataExperience?.data?.publisheds) {
-    //     return <DefaultErrorPage statusCode={404} >Experience {router.query?.id} doesn't exist.</DefaultErrorPage>
-    //   //  return <div>Experience {router.query?.id} doesn't exist.</div>;
-    // }
-
-    const tryExperience = () => {
-        toggleAuthModal(true);
-        setAuthPage('register');
-    };
-
-
-    //const experienceDetails = dataExperience?.data?.publisheds[0];
-
-    const EmptyData = <span className="w-20 bg-gray-300 rounded-full h-2" />;
-  //  const itineraryData = content.itinerary.trip_days;
-
-    const openBookingModal = (e) => {
-        e.preventDefault();
-        setOpened(true);
-    };
     const updateViews =  async (swellExpId, views)=> {
         const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
             method: 'PUT',
@@ -181,6 +140,7 @@ const ExperienceDetail = ({
                                 <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 ">
                                     <SectionPricingBooking
                                         expId={experience_id}
+                                        swellExpId={swellExpId}
                                         type={type}
                                     />
                                 </aside>
@@ -199,13 +159,6 @@ const ExperienceDetail = ({
                                     <Button type="outlined" rounded="lg">
                                         Konnect with us
                                     </Button>
-                                </div>
-                                <div className="mt-16">
-                                    <ButtonLink
-                                        label="Try out this Experience"
-                                        expId={experience_id}
-                                        width="w-96"
-                                    />
                                 </div>
                             </ExpSubsection>
                         </div>
@@ -229,8 +182,8 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            toggleAuthModal,
-            setAuthPage
+            // toggleAuthModal,
+            // setAuthPage
         },
         dispatch
     );
@@ -249,9 +202,7 @@ export async function getStaticProps({ params }) {
             notFound: true
         };
     }
-// const { data: dataExperience } = await getExperienceById(
-    //     '61e93f491df3e98893a2664c'
-    // );
+
     return {
         props: {
             contentfulExperience: {...contentfulExperience.fields, swellExp: contentfulExperience.swellExp }

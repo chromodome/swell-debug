@@ -18,7 +18,8 @@ const currencyPrefix = '$US';
 const ResultCard = ({
         purchasedView=false,
         data,
-        containerClass
+        containerClass,
+        myKey
     }) => {
     const {
         name: title,
@@ -100,6 +101,7 @@ const ResultCard = ({
 
     return (
         <div
+            key={myKey}
             className={`my-3 px-2 w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 lg:my-4 lg:px-2 ${containerClass}`}>
             <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
                 <KreatorBadge author={user} baseUrl={baseUrl} />

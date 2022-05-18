@@ -45,7 +45,7 @@ const GridList = ({
                             {data.map((item) => {
                                 return <ResultCard
                                             purchasedView={purchasedView}
-                                            key={item.id}
+                                            myKey={item.id}
                                             data={item}
                                         />;
                             })}

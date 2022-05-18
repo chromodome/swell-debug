@@ -2,12 +2,12 @@ import React from 'react';
 import Avatar from 'components/specialty/Avatar';
 import Link from 'next/link';
 
-const KreatorBadgeStatic = ({ author, avatarOnly = false, card = true }) => {
+const KreatorBadgeStatic = ({ author, author:{ username }, avatarOnly = false, card = true }) => {
     return (
         <>
             {author && (
                 <Link
-                    href={`${process.env.NEXT_PUBLIC_KREATOR_ROUTE}/${author.id}`}>
+                    href={`/experiences/user/${username}/all`}>
                     {avatarOnly ? (
                         <a className="">
                             <Avatar

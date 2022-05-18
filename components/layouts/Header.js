@@ -134,7 +134,7 @@ const Header = ({
                                 }`}>
                                 <div className="hidden xl:block mx-4 text-sm">
                                     {user
-                                        ? `${translations[lang].messages.hello} ${user?.profile.first}`
+                                        ? `${translations[lang].messages.hello} ${user?.profile?.first}`
                                         : `Guest`}
                                 </div>
                                 {user ? (
@@ -221,7 +221,7 @@ const Header = ({
                                 label={translations[lang].menu.helpCenter.title}
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
-                                handleClick={() => console.log('hello')}
+                                // handleClick={() => console.log('hello')}
                                 handleClick={toggleNav}
                                 rtl={rtl}
                             />
@@ -250,7 +250,6 @@ const Header = ({
                                 label={translations[lang].menu.helpCenter.title}
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
-                                handleClick={() => console.log('hello')}
                                 handleClick={toggleNav}
                                 rtl={rtl}
                             />

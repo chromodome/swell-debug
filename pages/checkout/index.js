@@ -84,9 +84,11 @@ const Checkout = ({
             //
         }
         // convertVariantNameDateToIso
+        console.log('typetype', type, cart)
         if(!type) {
             return { type };
         }
+       
         if(type === 'GUIDED') {
             const guidedItems =  guided[Object.keys(guided)[0]];
             const item = guidedItems[Object.keys(guidedItems)[0]]
@@ -351,7 +353,7 @@ const Checkout = ({
         }
         
     }, [siteLoading]);
-console.log('postingOrder', postingOrder)
+console.log('postingOrder', loadingCart ,type ,postingOrder)
     return (
         <>
             <Layout>
@@ -708,7 +710,7 @@ console.log('postingOrder', postingOrder)
                                                     <div className="flex text-xs items-center justify-between">
                                                         <span className="flex items-center gap-2">
                                                             <span className="relative">
-                                                                {eee/* {
+                                                                {/* {
                                                                     discountTotalJSX.lineItem
                                                                 } */}
                                                             </span>

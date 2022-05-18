@@ -1,6 +1,8 @@
 import swell from './swelljs'
 
 const fetchApi = async (query='get', method='list', variables={}, queryStr) => {
+console.log(query, queryStr, {...variables})
+
     if(query === 'get') {
         return await swell[query](queryStr, {...variables});
     } 

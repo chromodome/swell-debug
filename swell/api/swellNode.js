@@ -7,6 +7,17 @@ class SwellController {
         
     }
 
+    getLatestExpVariants = async (swellExpId) => {
+        console.log('swellExpIdswellExpIdswellExpIdswellExpIdswellExpIdswellExpId')
+        const recents =  await swellServer.get('/products:variants/', {
+            "parent_id": swellExpId,
+            "active": true,
+            "archived": false,
+        });
+console.log(recents)
+        return recents;
+    }
+
     getLatestExperiences = async (limit = 12) => {
         const recents =  await swellServer.get('/products/?sort=date_created+desc', {
             active: true,
@@ -52,7 +63,7 @@ class SwellController {
             limit,
             page,
             ...queryObj,
-            "user.username": username
+            "content.username": username
         });
 
         return response;

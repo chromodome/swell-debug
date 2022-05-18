@@ -116,25 +116,28 @@ export const updateUserAdmin = (id, profileId, data) => {
                         }
                     ) {
                         user {
+                            id,
+                            _id,
                             username,
                             email,
                             confirmed,
                             blocked,
-                            role {
-                                id,
-                                name
-                            },
                             profile {
-                                first,
-                                last,
-                                displayname,
-                                country,
-                                city,
-                                currency,
-                                bio,
                                 avatar,
+                                bio,
+                                city,
+                                country,
+                                createdAt,
+                                currency,
+                                displayname,
+                                first,
+                                id,
+                                last,
+                                published_at,
                                 settings,
-                                social
+                                social,
+                                updatedAt,
+                                _id
                             }
                         }
                     },

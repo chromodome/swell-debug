@@ -12,7 +12,6 @@ import {
     parseVariantDates,
     convertVariantNameDateToIso
 } from '@/helpers/calander';
-
 import { isSameDay, isBefore } from 'date-fns';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
@@ -57,7 +56,11 @@ const BuyingCardGuide = ({
     const [variantsReady, setVariantsReady] = useState(false);
     const [currentDate, setCurrentDate] = useState(null);
     const dateVariantIdLookup = useRef({});
-    const  currentVariant = variants[selectedDate];
+    const  [currentVariant, setCurrentVariant] = useState(null);
+    const modifiersClassNames = {
+        highlight: 'has-booking',
+        disabledColor: 'date_used_already'
+    };
 
     // Funcsconsole.log()
     const removeExpFromCart = () => {
@@ -86,6 +89,7 @@ const BuyingCardGuide = ({
 
     const addExpToCart = () => {
         const { id: variantId } = currentVariant;
+        console.log('currentVariant', currentVariant)
         const { guided } = cart;
 
         if(guided[expId] && guided[expId][variantId]) {
@@ -99,7 +103,7 @@ const BuyingCardGuide = ({
                 
 
         } else {
-            addToCart(productData.id, variantId, currentVariant.quantity);
+            addToCart(productId.current, variantId, currentVariant.quantity);
         }
         setVariantsReady(false);
     }
@@ -147,25 +151,20 @@ const BuyingCardGuide = ({
         }
     }
 
+
     useEffect(() => {
+        console.log('productDataproductData',productData)
         if(!loading && currentDate) {
-            const { id } = productData;
-            productId.current = id;
+
+            productId.current = productData.length ?  productData[0].parent_id : null;
+
             // this will check if in cart but if already bought 
             // do that check first
-            setVariants(parseVariants(productData.variants.results));
+            setVariants(parseVariants(productData));
             setVariantsReady(true);
-            
-            
-
-
-            const bookableDates = parseVariantDates(productData?.variants?.results, currentDate);
-
+            const bookableDates = parseVariantDates(productData, currentDate);
             setDate(new Date(bookableDates[0]));
-
-            
-
-            dateVariantIdLookup.current = productData?.variants?.results.reduce((prev, next) => {
+            dateVariantIdLookup.current = productData.reduce((prev, next) => {
                 const { id, name } = next;
                 const dateKey = convertVariantNameDateToIso(name);
 
@@ -190,12 +189,6 @@ const BuyingCardGuide = ({
             }
         })
     }, [])
-    
-
-    const modifiersClassNames = {
-        highlight: 'has-booking',
-        disabledColor: 'date_used_already'
-    };
 
     useEffect(() => {
         const { loading: cartLoading } = cart;
@@ -216,10 +209,16 @@ const BuyingCardGuide = ({
 
     const {cost, btnLabel, btnDisabled} = generateFormAttrs(loading);
 
+    useEffect(() => {
+        console.log(variants[selectedDate])
+        setCurrentVariant(variants[selectedDate])
+    }, [selectedDate, variants])
+    
+
     return (
         <div
             className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
-            { !loading  
+            { !loading  && currentVariant
             ? Object.keys(variants).length && !isNaN(date.getTime()) ? <>
                 <DatePicker
                     date={date}

@@ -28,7 +28,6 @@ const AuthRegister = ({
     toggleAuthModal,
     setAuthPage,
     auth,
-
     ...props
 }) => {
     const router = useRouter();
@@ -36,26 +35,28 @@ const AuthRegister = ({
     const handleSubmit = (values, actions) => {
         props
             .createDataAdmin(types.CREATE_PROFILE, 'profiles', defaultProfile)
-            .then((res) => {
-                if (!res.error) {
-                    props
-                        .register({
-                            ...values,
-                            username: values.username.toLowerCase(),
-                            email: values.email.toLowerCase(),
-                            profile: res.value.data._id
-                        })
-                        .then((regResolution) => {
-                            if (regResolution?.response?.data?.error) {
-                                props.deleteDataAdmin(
-                                    types.DELETE_PROFILE,
-                                    'profiles',
-                                    res.value.data._id
-                                );
-                            }
-                        });
-                }
-            });
+                .then((res) => {
+                    if (!res.error) {
+                        props
+                            .register({
+                                ...values,
+                                username: values.username.toLowerCase(),
+                                email: values.email.toLowerCase(),
+                                profile: res.value.data._id
+                            })
+                            .then((regResolution) => {
+                                if (regResolution?.response?.data?.error) {
+                                    props.deleteDataAdmin(
+                                        types.DELETE_PROFILE,
+                                        'profiles',
+                                        res.value.data._id
+                                    );
+                                } else {
+                                    setAuthPage('profile');
+                                }
+                            });
+                    }
+                });
         actions.setSubmitting(false);
     };
 

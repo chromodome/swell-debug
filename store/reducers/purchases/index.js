@@ -48,6 +48,10 @@ export const purchasesRejected = (draft, action) => {
 export const updatePurchasesIds = (draft, action) => {
     const { payload } = action;
 
+    draft.purchasedIds = [];
+    draft.updateIds = false;
+    draft.loadingIds = false;
+    
     if(payload?.data?.data?.purchasesByUser) {
         const { purchasesByUser=[] } = payload.data.data;
         draft.purchasedIds = purchasesByUser.map((purObj) => {
@@ -60,15 +64,42 @@ export const updatePurchasesIds = (draft, action) => {
 
     return draft;
 }
+
+// {
+//     updateIds: true,
+//     loading: true,
+//     error: false,
+//     purchasedIds:[],
+//     guided: [],
+//     digital: []
+// }
+
+
+
 export const fetchingPurchasesIds = (draft, action) => {
-    
+    draft.loadingIds = true;
     
     return draft;
 }
 export const purchasesRejectedIds = (draft, action) => {
-    // draft.loading = false;
-    // draft.error = true;
+    draft.purchasedIds = [];
+    draft.updateIds = false;
+    draft.loadingIds = false;
     
+    return draft;
+}
+
+
+export const resetPurchases = (draft) => {
+        draft.loading = true;
+        draft.error = false;
+        draft.guided = [];
+        draft.digital = [];
+        // just the ids
+        draft.loadingIds = false;
+        draft.updateIds = true;
+        draft.purchasedIds =[];
+
     return draft;
 }
 
