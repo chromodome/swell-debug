@@ -94,6 +94,7 @@ export const formatPrice = (
     options,
     style = 'decimal'
 ) => {
+    console.log(value)
     let rounding;
     if (!options) rounding = currenciesObject[currency].budget_rounding;
     else {

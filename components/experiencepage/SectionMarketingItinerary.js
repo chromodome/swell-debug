@@ -9,13 +9,7 @@ import ItineraryCard from '@/components/blocks/Card/ItineraryCard';
 
 function SectionMarketingItinerary(props) {
     const {
-        // experienceDetails: {
-        //     content: {
-        //         itinerary: { trip_days: ItineraryDaysList }
-        //     }
-        // },
-        itinerary: { trip_days: ItineraryDaysList = [] },
-        globalState: { lang, edit }
+        itinerary: { trip_days: ItineraryDaysList = [] }
     } = props;
 
     return (
@@ -24,7 +18,6 @@ function SectionMarketingItinerary(props) {
 
             <div className="w-full">
                 {ItineraryDaysList.map((dayContent, index) => {
-                    console.log('day content', dayContent);
                     return (
                         <ItineraryCard
                             key={`itin_${index}`}

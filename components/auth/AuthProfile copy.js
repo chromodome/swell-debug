@@ -6,8 +6,8 @@ import translations from 'constants/translations';
 import uiStruct from 'constants/uiStruct';
 
 import { handleRowReverse } from 'helpers/FEutils';
-import { ReactComponent as KLogoIcon } from 'components/svg/kn_logoicon.svg';
-import { ReactComponent as KLogoText } from 'components/svg/kn_logotext.svg';
+import { ReactComponent as KLogoIcon } from '@/components/svg/kn_logoicon.svg';
+import { ReactComponent as KLogoText } from '@/components/svg/kn_logotext.svg';
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 import { animateIn } from 'helpers/FEutils';
 import { buildCountryData } from 'helpers/LocaleHelper';
@@ -71,32 +71,25 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
             // <Redirect to='/c' />
             <div>helo </div>
         ) : (
-            <div 
-                // className='relative kn-slide h-screen bg-white'
-            >
-                {/* <div 
-                    // className=' relative px-12 py-12 lg:fixed w-full lg:w-7/12 lg:min-h-screen inset-0 lg:px-16 xl:px-32 2xl:px-48 lg:py-32'
-                >
+            <div className='relative kn-slide h-screen bg-white'>
+                <div className=' relative px-12 py-12 lg:fixed w-full lg:w-7/12 lg:min-h-screen inset-0 lg:px-16 xl:px-32 2xl:px-48 lg:py-32'>
                     <img
                         data-blink-src='https://ucarecdn.com/a0a2306c-88da-49cd-b08b-f1ef913d1864/kalenemsleykGSapVfg8Kwunsplash.jpg'
                         className='object-cover w-full h-80 lg:h-full rounded-3xl overflow-hidden shadow-3xl '
                     />
-                </div> */}
-                <div 
-                    // className='w-full lg:w-5/12 ml-auto rounded-3xl lg:rounded-none bg-white shadow-2xl-green-600-rev lg:shadow-2xl-green-600'
-                    style={{width: '100%'}}
-                >
+                </div>
+                 <div className='w-full lg:w-5/12 ml-auto rounded-3xl lg:rounded-none bg-white shadow-2xl-green-600-rev lg:shadow-2xl-green-600'>
                     <div
-                        // className={`flex flex-col px-12 lg:px-16 xl:px-24 2xl:px-32  lg:h-screen  overflow-y-scroll`}
+                        className={`flex flex-col px-12 lg:px-16 xl:px-24 2xl:px-32 py-16 lg:h-screen  overflow-y-scroll`}
                     >
                         <div
                             className={`flex items-center gap-3 ${
                                 handleRowReverse(rtl).flex
                             }`}
                         >
-                            {/* <KLogoIcon /> */}
-                            {/* <KLogoText /> */}
-                            {/* <span className='text-xs mt-1'>(for Kreators)</span> */}
+                            <KLogoIcon />
+                            <KLogoText />
+                            <span className='text-xs mt-1'>(for Kreators)</span>
                         </div>
                         <div className='flex'>
                             <div className='flex-shrink-0 text-transparent bg-clip-text bg-gradient-to-tl from-gray-900 via-blue-500 to-green-400 text-2xl font-bold tracking-tighter mt-10 '>

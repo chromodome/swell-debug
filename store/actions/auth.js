@@ -34,11 +34,12 @@ export const loadUser = () => async (dispatch) => {
                     type: USER_LOADED,
                     payload: res.data
                 });
-            } else
+            } else {
                 dispatch({
                     type: USER_PROFILE_MISSING,
                     payload: res.data
                 });
+            }
         } catch (err) {
             dispatch({
                 type: AUTH_ERROR,

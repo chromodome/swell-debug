@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { Slide, Bounce, ToastContainer } from 'react-toastify';
+
 import '@/styles/globals.css';
 import '@/styles/carouselcards.css';
 import '@/styles/gallerySmall.css';
+import '@/styles/uploadCare.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-lightbox-pack/dist/index.css';
 import { StoreProvider } from 'store-context';
@@ -15,6 +17,7 @@ import '@/styles/rcSlider.css';
 import 'rc-slider/assets/index.css';
 import 'react-nice-dates/build/style.css'
 import '@/styles/calendar.css';
+import '@/styles/editor.css';
 
 import Head from 'next/head';
 import SimpleReactLightbox from 'simple-react-lightbox';
@@ -60,7 +63,7 @@ function MyApp({ Component, pageProps }) {
             Router.events.off('routeChangeError', end);
         };
     }, []);
-    store.getState
+
     return (
         <>
             {loading ? (
@@ -75,6 +78,7 @@ function MyApp({ Component, pageProps }) {
                         />
                     </Head>
                     <Provider store={store}>
+                        
                         <ToastContainer
                             className="mt-36"
                             // toastClassName={({ type }) =>

@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import ExpSubsection from '@/components/sections/ExpSubsection';
-import { capitalize, getDays, kreatorName } from 'helpers/FEutils';
+import { capitalize, kreatorName } from 'helpers/FEutils';
 import KreatorBadgeStatic from '@/components/blocks/KreatorBadgeStatic';
 import MarketingBudget from './MarketingBudget';
 import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
@@ -14,7 +13,6 @@ function SectionMarketingIntro(props) {
         budget_min=0,
         budget_max=0,
         budget_currency = 'USD',
-        // auth: { user },
         user: author,
         user: { profile },
         globalState: { siteData },
@@ -24,9 +22,6 @@ function SectionMarketingIntro(props) {
         }
     } = props;
 
-    // const preferredCurrency = user?.profile?.currency || 'USD';
-
-    // const rtl = !!translations[lang].rtl;
     return (
         <>
             <ExpSubsection padding="pb-6" margins="mb-8">

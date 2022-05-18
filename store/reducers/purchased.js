@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 import { produce } from 'immer';
-
 import * as types from 'store/actions/types';
-import {GET_PURCHASES} from '../actions/types';
+
 import {
     updatePurchases,
     purchasesRejected,
@@ -11,14 +10,18 @@ import {
     updatePurchasesIds,
     fetchingPurchasesIds,
     purchasesRejectedIds,
+    resetPurchases
 } from './purchases/'
 
 const initialState = {
     loading: true,
     error: false,
-    purchasedIds:[],
     guided: [],
-    digital: []
+    digital: [],
+    // just the ids
+    loadingIds: false,
+    updateIds: true,
+    purchasedIds:[],
 };
 
 function createReducer(initialState, handlers) {
@@ -38,5 +41,7 @@ export default createReducer(initialState, {
     [`${types.GET_PURCHASE_IDS}_FULFILLED`]: updatePurchasesIds,
     [`${types.GET_PURCHASE_IDS}_PENDING`]: fetchingPurchasesIds,
     [`${types.GET_PURCHASE_IDS}_REJECTED`]: purchasesRejectedIds,
+
+    [`${types.RESET_PURCHASES}`]: resetPurchases,
 
 });

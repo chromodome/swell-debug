@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as types from '@/store/actions/types';
 import { serverErrors } from '@/helpers/serverErrors';
-import {POST_PURCHASE} from '../../store/actions/types';
+
 
 export const fetchPurchasedAll = () => {
     const gql = String.raw;
@@ -95,4 +95,21 @@ export const postPurchase = (postData) => {
 
             return { error };
         });
+}
+
+
+export function resetPurchase() {
+    return (dispatch) => {
+        dispatch({
+            type: types.RESET_PURCHASES
+        });
+    };
+}
+
+export function setPurchaseIdsChangedFlag() {
+    return (dispatch) => {
+        dispatch({
+            type: types.SET_PURCHASEDIDS_FLAG
+        });
+    };
 }

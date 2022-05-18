@@ -4,6 +4,7 @@ import { toggleAuthModal, setAuthPage } from '@/store/actions/globalState';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthRegister from '@/components/auth/AuthRegister';
+import AuthProfile from '@/components/auth/AuthProfile';
 
 const ModalAuth = ({
     auth,
@@ -20,7 +21,7 @@ const ModalAuth = ({
                 auth={auth}>
                 {authComponent === 'login' && <AuthLogin />}
                 {authComponent === 'register' && <AuthRegister />}
-                {authComponent === 'profile' && <AuthLogin />}
+                {authComponent === 'profile' && <AuthProfile />}
             </ModalGeneric>
         )
     );

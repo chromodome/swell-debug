@@ -1,0 +1,704 @@
+{
+    "accountTypes": {
+        "team": {
+            "name": {
+                "en": "team member",
+                "fr": "membre d'équipe"
+            },
+            "users": "0"
+        },
+        "freelance": {
+            "name": {
+                "en": "freelance",
+                "fr": "freelance"
+            },
+            "users": "1"
+        },
+        "agency": {
+            "name": {
+                "en": "agency",
+                "fr": "agence"
+            },
+
+            "users": "10"
+        },
+        "business": {
+            "name": {
+                "en": "business",
+                "fr": "business"
+            },
+            "users": "3"
+        },
+        "enterprise": {
+            "name": {
+                "en": "enterprise",
+                "fr": "entreprise"
+            },
+            "users": "50"
+        }
+    },
+    "forms": {
+        "firstname": {
+            "en": "First Name",
+            "fr": "Prenom"
+        },
+        "lastname": {
+            "en": "Last Name",
+            "fr": "Nom"
+        },
+        "displayname": {
+            "en": "Display Name or Alias",
+            "fr": "Nom"
+        },
+        "email": {
+            "en": "E-mail address",
+            "fr": "Adresse E-mail"
+        },
+        "password": {
+            "en": "Password",
+            "fr": "Mot de passe"
+        },
+        "identifier": {
+            "en": "E-mail or username",
+            "fr": "Adresse E-mail"
+        }
+    },
+
+    "signIn": {
+        "title": {
+            "en": "Sign In",
+            "fr": "Se connecter"
+        },
+        "forgot": {
+            "en": "Forgot Password?",
+            "fr": "Mot de passe oublié?"
+        },
+        "btnEmail": {
+            "en": "Sign In",
+            "fr": "Se Connecter"
+        },
+        "or": {
+            "en": "or",
+            "fr": "ou"
+        },
+        "btnGoogle": {
+            "en": "Sign In with Google",
+            "fr": "Connection via Google"
+        },
+        "dontHave": {
+            "en": "Don't have an account?",
+            "fr": "Pas de compte?"
+        },
+        "signUp": {
+            "en": "Sign Up",
+            "fr": "S'inscrire"
+        }
+    },
+
+    "signUp": {
+        "title": {
+            "en": "Sign Up",
+            "fr": "S'inscrire"
+        },
+        "btnEmail": {
+            "en": "Sign Up",
+            "fr": "S'inscrire"
+        },
+        "or": {
+            "en": "or",
+            "fr": "ou"
+        },
+        "btnGoogle": {
+            "en": "Sign Up with Google",
+            "fr": "S'inscrire via Google"
+        },
+        "dontHave": {
+            "en": "Already have an account?",
+            "fr": "Vous avez un compte?"
+        },
+        "signIn": {
+            "en": "Sign In",
+            "fr": "Se connecter"
+        }
+    },
+
+    "validation": {
+        "short": {
+            "en": "Too short",
+            "fr": "Trop court"
+        },
+        "long": {
+            "en": "Too long",
+            "fr": "Trop long"
+        },
+        "email": {
+            "en": "Invalid Email Syntax",
+            "fr": "Email invalide"
+        },
+        "required": {
+            "en": "*",
+            "fr": "*"
+        },
+        "positive": {
+            "en": "Positive",
+            "fr": "Positif"
+        },
+        "integer": {
+            "en": "Integer",
+            "fr": "Nb Entier"
+        },
+        "wrongFormat": {
+            "en": "Wrong format",
+            "fr": "Mauvais format"
+        },
+        "mustBeString": {
+            "en": "Must be a string",
+            "fr": "Doit être une chaîne de caractères"
+        },
+        "lettersAllowed": {
+            "en": "Allowed: Letters - ' .",
+            "fr": "Permis: Lettres - ' ."
+        },
+        "lettersAllowedWhite": {
+            "en": "Whitespace at start, end or double white space not allowed",
+            "fr": "Permis: Lettres - ' ."
+        },
+        "passwordAllowed": {
+            "en": "Invalid chars used",
+            "fr": "Caractères non-autorisés"
+        },
+        "passwordSyntax": {
+            "en": "Min 8 chars. Min 1 Uppercase and 1 Lowercase. Min 1 number. Min 1 special character.",
+            "fr": "Caractères non-autorisés"
+        },
+        "passwordLength": {
+            "en": "Min 8 chars",
+            "fr": "Min 8 chars"
+        },
+        "username": {
+            "en": "Min 4 chars. a-z 0-9 and underscore allowed. All lowercase, no space. Should start with a letter.",
+            "fr": "Min 8 chars"
+        }
+    },
+    "errors": {
+        "invalidCredentials": {
+            "en": "Wrong email and/or password",
+            "fr": "e-mail ou mot de passe incorrect"
+        },
+        "userExists": {
+            "en": "Email already in use",
+            "fr": "Email déjà utilisé"
+        },
+        "inviteOnly": {
+            "en": "Registration by Invitation only",
+            "fr": "Inscription sur invitation uniquement"
+        },
+        "errorCode": {
+            "en": "Error Code",
+            "fr": "Code Erreur"
+        },
+        "somethingWrong": {
+            "en": "Something went wrong...",
+            "fr": "Il y'a un problème..."
+        },
+        "networkError": {
+            "en": "Error connecting to server",
+            "fr": "Problème de connection avec le serveur"
+        },
+
+        "page401": {
+            "body": {
+                "en": "You are not authorized to view this content.",
+                "fr": "Vous n'êtes pas autorisé à voir ce contenu."
+            }
+        },
+        "page404": {
+            "body": {
+                "en": "Nothing to see here. The page has either been removed or does not exist.",
+                "fr": "Rien à voir ici. La page a été supprimée ou n'existe pas."
+            }
+        },
+        "page500": {
+            "body": {
+                "en": "Internal server error.",
+                "fr": "Erreur Interne du Serveur."
+            }
+        },
+        "pagedefault": {
+            "body": {
+                "en": "Nothing to see here. The page has either been removed or does not exist.",
+                "fr": "Rien à voir ici. La page a été supprimée ou n'existe pas."
+            }
+        }
+    },
+    "modals": {
+        "deleteCampaign": {
+            "body": {
+                "en": "Are you sure you want to delete",
+                "fr": "Êtes-vous sur de vouloir supprimer"
+            },
+            "buttonCancel": {
+                "en": "Cancel",
+                "fr": "Annuler"
+            },
+            "buttonDelete": {
+                "en": "Delete",
+                "fr": "Supprimer"
+            }
+        }
+    },
+    "utils": {
+        "time": {
+            "hours": {
+                "full": {
+                    "en": "hours",
+                    "fr": "heures"
+                },
+                "compact": {
+                    "en": "hrs",
+                    "fr": "hrs"
+                }
+            },
+            "minutes": {
+                "full": {
+                    "en": "minutes",
+                    "fr": "minutes"
+                },
+                "compact": {
+                    "en": "mins",
+                    "fr": "mins"
+                }
+            },
+            "seconds": {
+                "full": {
+                    "en": "seconds",
+                    "fr": "secondes"
+                },
+                "compact": {
+                    "en": "secs",
+                    "fr": "secs"
+                }
+            }
+        },
+        "notAvailable": {
+            "full": {
+                "en": "Not Available",
+                "fr": "Non Disponible"
+            },
+            "compact": {
+                "en": "NA",
+                "fr": "ND"
+            }
+        },
+        "notAvailableNumber": {
+            "full": {
+                "en": "Not Available",
+                "fr": "Non Disponible"
+            },
+            "compact": {
+                "en": "-",
+                "fr": "-"
+            }
+        },
+        "megaByte": {
+            "full": {
+                "en": "Mega Bytes",
+                "fr": "Mega Octets"
+            },
+            "compact": {
+                "en": "MB",
+                "fr": "MO"
+            }
+        },
+        "megaBit": {
+            "full": {
+                "en": "Mega Bits",
+                "fr": "Mega Octets"
+            },
+            "compact": {
+                "en": "Mb",
+                "fr": "Mb"
+            }
+        },
+        "campaignActive": {
+            "en": "Active",
+            "fr": "Activée"
+        },
+
+        "campaignInactive": {
+            "en": "Inactive",
+            "fr": "Inactive"
+        }
+    },
+
+    "navTop": {
+        "dashboard": {
+            "en": "Dashboard",
+            "fr": "Tableau de Bord"
+        },
+        "projects": {
+            "en": "Campaigns",
+            "fr": "Campagnes"
+        },
+        "welcome": {
+            "en": "Hello",
+            "fr": "Bonjour"
+        }
+    },
+    "subnavTop": {
+        "profile": {
+            "en": "Profile",
+            "fr": "Profil"
+        },
+        "teamManage": {
+            "en": "Manage Team",
+            "fr": "Manage Equipe"
+        },
+        "integrations": {
+            "en": "Integrations",
+            "fr": "Integrations"
+        },
+        "notifications": {
+            "en": "Notifications",
+            "fr": "Notifications"
+        },
+        "storage": {
+            "en": "Storage",
+            "fr": "Storage"
+        },
+        "billing": {
+            "en": "Billing",
+            "fr": "Billing"
+        },
+        "upgrade": {
+            "en": "Upgrade",
+            "fr": "Upgrade"
+        }
+    },
+    "navSide": {
+        "switchTeams": {
+            "en": "Switch Teams",
+            "fr": "Changer d'équipe"
+        },
+        "accountSettings": {
+            "en": "Account Settings",
+            "fr": "Paramètres du compte"
+        },
+        "teams": {
+            "en": "Manage your Team",
+            "fr": "Gérez votre équipe"
+        },
+        "plansPricing": {
+            "en": "Plans & Pricing",
+            "fr": "Abonnements & tarifs"
+        },
+        "helpCenter": {
+            "en": "Help Center",
+            "fr": "Obternir de l'aide"
+        },
+        "videoTutorials": {
+            "en": "Video Tutorials",
+            "fr": "Tutoriels Vidéos"
+        },
+        "signOut": {
+            "en": "Sign out",
+            "fr": "Déconnexion"
+        }
+    },
+    "pageProjects": {
+        "headerTitle": {
+            "en": "Home",
+            "fr": "Acceuil"
+        },
+        "headerTitleTooltip": {
+            "en": "Dashboard analytics",
+            "fr": "Tableau de bord"
+        },
+        "settingsTooltip": {
+            "en": "Settings",
+            "fr": "Paramètres"
+        },
+        "subheaderTitle": {
+            "en": "My Campaigns",
+            "fr": "Mes Campagnes"
+        },
+        "subheaderButton": {
+            "text": {
+                "en": "New Campaign",
+                "fr": "Nouvelle Campagne"
+            },
+            "size": {
+                "en": "200",
+                "fr": "250"
+            }
+        },
+        "subheaderButtonTooltip": {
+            "en": "add a new campaign",
+            "fr": "ajouter une nouvelle campagne"
+        }
+    },
+    "pageProject": {
+        "headerTitle": {
+            "en": "Campaign Analytics",
+            "fr": "Analyse de la Campagne"
+        },
+        "headerTitleTooltip": {
+            "en": "Back to All Campaigns",
+            "fr": "Voir toutes les Campagnes"
+        },
+        "settingsTooltip": {
+            "en": "Settings",
+            "fr": "Paramètres"
+        },
+        "subheaderTitle": {
+            "en": "Campaign Ads",
+            "fr": "Pubs de la Campagne"
+        },
+        "subheaderButton": {
+            "text": {
+                "en": "New Ad",
+                "fr": "Nouvelle Pub"
+            },
+            "size": {
+                "en": "150",
+                "fr": "200"
+            }
+        },
+        "subheaderButtonTooltip": {
+            "en": "add a new ad",
+            "fr": "ajouter une nouvelle pub"
+        }
+    },
+    "pageCampaign": {
+        "headerTitle": {
+            "en": "Ad Analytics",
+            "fr": "Analyses de la Pub"
+        },
+        "headerTitleTooltip": {
+            "en": "Back to Campaign",
+            "fr": "Retour à la Campagne"
+        },
+        "settingsTooltip": {
+            "en": "Settings",
+            "fr": "Paramètres"
+        },
+        "subheaderTitle": {
+            "en": "Latest Rendered Videos",
+            "fr": "Rendus Récents"
+        },
+        "subheaderButton": {
+            "text": {
+                "en": "New Video",
+                "fr": "Nouvelle Vidéo"
+            },
+            "size": {
+                "en": "200",
+                "fr": "200"
+            }
+        },
+        "subheaderButtonTooltip": {
+            "en": "Create a new Video",
+            "fr": "Créer une nouvelle vidéo"
+        }
+    },
+    "pageSubmit": {
+        "headerTitle": {
+            "en": "Create Video",
+            "fr": "Créer une Vidéo"
+        },
+        "headerTitleTooltip": {
+            "en": "Back to Ad",
+            "fr": "Retour à la Pub"
+        },
+        "settingsTooltip": {
+            "en": "Edit Form",
+            "fr": "Modifier le Formulaire"
+        },
+
+        "submitButton": {
+            "en": "Create Video",
+            "fr": "Créer la Vidéo"
+        }
+    },
+    "modalCampaignAdd": {
+        "headerTitle": {
+            "en": "New Ad",
+            "fr": "Nouvelle Pub"
+        },
+
+        "closeTooltip": {
+            "en": "Cancel / Close",
+            "fr": "Annuler / Fermer"
+        },
+        "submitButton": {
+            "en": "Add Ad",
+            "fr": "Ajouter la Pub"
+        },
+        "pickCover": {
+            "en": "Pick Cover image (you can change this later)",
+            "fr": "Choisissez l'image de couverture (vous pouvez la modifier plus tard)"
+        },
+        "campaignTitle": {
+            "label": {
+                "en": "Ad Title",
+                "fr": "Titre de la Pub"
+            },
+            "placeholder": {
+                "en": "Covid-19 Insta En 30s",
+                "fr": "Covid-19 Insta Fr 30s"
+            }
+        },
+        "campaignDuration": {
+            "en": "Duration",
+            "fr": "Durée"
+        },
+        "aspectRatio": {
+            "en": "Aspect Ratio",
+            "fr": "Format Ecran"
+        },
+        "campaignDescription": {
+            "label": {
+                "en": "Description",
+                "fr": "Déscription"
+            },
+            "placeholder": {
+                "en": "Text that no one will ever read...",
+                "fr": "Texte que personne ne lira jamais..."
+            }
+        }
+    },
+    "modalProjectAdd": {
+        "headerTitle": {
+            "en": "New Campaign",
+            "fr": "Nouvelle Campagne"
+        },
+
+        "closeTooltip": {
+            "en": "Cancel / Close",
+            "fr": "Annuler / Fermer"
+        },
+        "submitButton": {
+            "en": "Add Campaign",
+            "fr": "Ajouter la Campagne"
+        },
+        "pickCover": {
+            "en": "Pick Cover image (you can change this later)",
+            "fr": "Choisissez l'image de couverture (vous pouvez la modifier plus tard)"
+        },
+        "projectTitle": {
+            "label": {
+                "en": "Campaign Title",
+                "fr": "Titre de la Campagne"
+            },
+            "placeholder": {
+                "en": "Covid-19 Insta En 30s",
+                "fr": "Covid-19 Insta Fr 30s"
+            }
+        },
+        "projectDescription": {
+            "label": {
+                "en": "Description",
+                "fr": "Déscription"
+            },
+            "placeholder": {
+                "en": "Text that no one will ever read...",
+                "fr": "Texte que personne ne lira jamais..."
+            }
+        }
+    },
+    "dashcards": {
+        "status": {
+            "en": "status",
+            "fr": "statut"
+        },
+        "totalProjects": {
+            "en": "Campaigns",
+            "fr": "Campagnes"
+        },
+        "totalCampaigns": {
+            "en": "Ads",
+            "fr": "Pubs"
+        },
+        "aspectRatio": {
+            "en": "Aspect Ratio",
+            "fr": "Format Ecran"
+        },
+        "duration": {
+            "en": "Duration",
+            "fr": "Durée"
+        },
+        "videosCreated": {
+            "en": "Videos Created",
+            "fr": "Vidéos créées"
+        },
+        "videosDay": {
+            "en": "Videos / Day",
+            "fr": "Vidéos / Jour"
+        },
+        "inputIntegrations": {
+            "en": "Pull Data from",
+            "fr": "Données Extraites de"
+        },
+        "outputIntegrations": {
+            "en": "Push Videos to",
+            "fr": "Poussez les vidéos vers"
+        },
+        "totalSeconds": {
+            "en": "Seconds of Video",
+            "fr": "Secondes de Vidéo"
+        },
+        "averageRender": {
+            "en": "Average Render Time",
+            "fr": "Temps de rendu moyen"
+        },
+        "averageSize": {
+            "en": "Average File Size",
+            "fr": "Taille moyenne du fichier"
+        },
+        "dateCreated": {
+            "en": "Created on",
+            "fr": "Crée le"
+        }
+    },
+    "itemMenu": {
+        "edit": {
+            "en": "Edit",
+            "fr": "Modifier"
+        },
+        "delete": {
+            "en": "Delete",
+            "fr": "Supprimer"
+        }
+    },
+
+    "itemCard": {
+        "campaigns": {
+            "en": "Ads",
+            "fr": "Pubs"
+        },
+        "duration": {
+            "en": "Duration",
+            "fr": "Durée"
+        },
+        "aspectRatio": {
+            "en": "Aspect Ratio",
+            "fr": "Format Ecran"
+        },
+        "inputIntegrations": {
+            "en": "Data",
+            "fr": "Données"
+        },
+        "outputIntegrations": {
+            "en": "Output",
+            "fr": "Sortie"
+        },
+        "videosCreated": {
+            "en": "Vids Created",
+            "fr": "Vidéos Créées"
+        },
+        "videosDay": {
+            "en": "Vids / Day",
+            "fr": "Vidéos / Jour"
+        }
+    }
+}

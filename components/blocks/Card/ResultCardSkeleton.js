@@ -1,8 +1,9 @@
 import React from 'react';
 
-const ResultCardSkeleton = ({ containerClass }) => {
+const ResultCardSkeleton = ({ containerClass, key }) => {
     return (
         <div
+            key={key}
             className={`my-3 px-2 w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 lg:my-4 lg:px-2 animate-pulse ${containerClass}`}>
             <div className="relative ">
                 <div>

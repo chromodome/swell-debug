@@ -23,6 +23,7 @@ import BuyingCardGuide from './BuyingCardGuide';
 function SectionPricingBooking({
     type,
     expId,
+    swellExpId,
     globalState: { lang, edit },
     auth,
     fetchCartAction,
@@ -49,7 +50,8 @@ function SectionPricingBooking({
     //     console.log('cart', data)
     // }
     const getPrice = async (type) => {
-        const response = await fetch(`/api/price/${expId}?type=${type}`, {
+        const isguided = type.toLowerCase()==='guided';
+        const response = await fetch(`/api/price/${isguided ? swellExpId : expId}?type=${type}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +59,7 @@ function SectionPricingBooking({
         });
         const data = await response.json();
 
-        setProductData(data.results[0]);
+        setProductData(isguided ? data.results : data.results[0]);
         setLoading(false);
     }
     
@@ -98,8 +100,12 @@ function SectionPricingBooking({
 
     const addDigitalProdToCart = (prodId) => {
 
-        if(!auth.isAuthenticated) {
-          //  setAuthPage('login');
+        if(!auth.isAuthenticated || !auth.isProfile) {
+            if(auth.isAuthenticated) {
+                setAuthPage('profile')
+            } else {
+                setAuthPage('login');
+            }
             toggleAuthModal(true);
         } else {
             setLoading(true);
@@ -119,7 +125,7 @@ function SectionPricingBooking({
     const addGuidedProdToCart = (prodId, variantId, quantity) => {
 
         if(!auth.isAuthenticated) {
-            //  setAuthPage('login');
+                setAuthPage('login');
                 toggleAuthModal(true);
             } else {
             setLoading(true);

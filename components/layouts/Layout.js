@@ -1,13 +1,21 @@
+
+import { useState, useEffect } from 'react';
+import Router from 'next/router';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Head from 'next/head';
 import Header from '@/layouts/Header';
 import Footer from '@/layouts/Footer';
 import Footer2 from '@/layouts/Footer2';
 import TopBar from '@/blocks/TopBar';
+import { fetchPurchasedIds, resetPurchase } from '@/helpers/apiServices/purchases';
 
-import { useState, useEffect } from 'react';
-import Router from 'next/router';
-
-export default function Layout({
+function Layout({
+    auth,
+    fetchPurchasedIds,
+    resetPurchase,
+    purchased,
     title,
     keywords,
     description,
@@ -60,6 +68,25 @@ export default function Layout({
             Router.events.off('routeChangeError', end);
         };
     }, []);
+
+    useEffect(() => {
+        const { 
+            purchasedIds,
+            updateIds,
+            loadingIds
+        } = purchased;
+
+        if(auth.isAuthenticated && !auth.loading && updateIds && !loadingIds) {
+            fetchPurchasedIds();
+        } else if(!auth.isAuthenticated && !auth.loading) {
+            if(purchasedIds.length || !updateIds) {
+                resetPurchase();
+            }
+        }
+
+
+    }, [auth, purchased])
+    
     return (
         <>
             <div id="root" className="">
@@ -110,3 +137,23 @@ Layout.defaultProps = {
     keywords: 'travel, experience, trip, build, stay, world, host, tour, guide',
     tags: []
 };
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            fetchPurchasedIds,
+            resetPurchase
+        },
+        dispatch
+    );
+}
+const mapStateToProps = (state) => ({
+    purchased: state.purchased,
+    globalState: state.globalState,
+    auth: state.auth,
+    cart: state.cart, // check what already in yhe cart
+
+    // also once logged in check if they already booked this product
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

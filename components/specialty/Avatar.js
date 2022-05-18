@@ -11,9 +11,7 @@ const Avatar = ({ profile, card, size = 'w-8 h-8' }) => {
                         className="object-cover w-full h-full"
                     />
                 ) : (
-                    `${profile?.first.charAt(0).toUpperCase()}${profile?.last
-                        .charAt(0)
-                        .toUpperCase()}`
+                    <p>dwdasd</p>
                 )}
             </div>
         </div>
@@ -21,3 +19,7 @@ const Avatar = ({ profile, card, size = 'w-8 h-8' }) => {
 };
 
 export default Avatar;
+
+// `${profile?.first?.charAt(0)?.toUpperCase()}${profile?.last
+//     .charAt(0)
+//     .toUpperCase()}`
