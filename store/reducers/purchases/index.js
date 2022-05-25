@@ -1,5 +1,4 @@
 export const fetchingPurchases = (draft, action) => {
-    
     draft.loading = true;
     draft.error = false;
 
@@ -13,28 +12,36 @@ export const updatePurchases = (draft, action) => {
 
     if(payload?.data?.data?.purchasesByUser) {
         const { purchasesByUser=[] } = payload.data.data;
+        const tmpTypes = {
+            digital:[],
+            guided: [],
+            missing: []
+        }
         const tmpIds = {}
 
-        draft.digital = purchasesByUser.filter((purObj) => {
-            const { experience: { type }, experience_id } = purObj;
-            
-            tmpIds[experience_id] = experience_id;
+        purchasesByUser.forEach(purObj => {
+            const { type, experience_id } = purObj;
 
-            return type.toLowerCase() === 'digital';
+            if(purObj.experience) {
+                tmpIds[experience_id] = experience_id;
+
+                if(type.toLowerCase() === 'digital') {
+                    tmpTypes.digital.push(purObj);
+                } else {
+                    tmpTypes.guided.push(purObj); 
+                }
+            } else {
+                tmpTypes.missing.push(purObj); 
+            }
         });
 
-        draft.guided = purchasesByUser.filter((purObj) => {
-            const { experience: { type }, experience_id } = purObj;
-            
-            tmpIds[experience_id] = experience_id;
-
-            return type.toLowerCase() === 'guided';
-        });
+        draft.digital = tmpTypes.digital;
+        draft.guided = tmpTypes.guided;
+        draft.missing = tmpTypes.missing;
 
         draft.purchasedIds = Object.keys(tmpIds);
     }
 
-    
     return draft;
 }
 
@@ -64,16 +71,6 @@ export const updatePurchasesIds = (draft, action) => {
 
     return draft;
 }
-
-// {
-//     updateIds: true,
-//     loading: true,
-//     error: false,
-//     purchasedIds:[],
-//     guided: [],
-//     digital: []
-// }
-
 
 
 export const fetchingPurchasesIds = (draft, action) => {

@@ -84,11 +84,11 @@ const Checkout = ({
             //
         }
         // convertVariantNameDateToIso
-        console.log('typetype', type, cart)
+
         if(!type) {
             return { type };
         }
-       
+
         if(type === 'GUIDED') {
             const guidedItems =  guided[Object.keys(guided)[0]];
             const item = guidedItems[Object.keys(guidedItems)[0]]
@@ -184,20 +184,6 @@ const Checkout = ({
         publish_id,
         experience_id,
     } = parseCart();
-
-    // const {
-    //   //  travel_date='2022-04-20T08:54:18.147Z',
-    //     capacity=2,
-    //     id= "xxx",
-    //     inventory=3,
-    //    // price=100,
-    //     product: {
-    //         experience_id="www",
-    //         // type="DIGITAL",
-    //         places_lists=['fr'],
-    //         short_content=null,
-    //     }
-    // } = { product: { user: {}}};
 
     const {
         unitPrice=1,
@@ -297,11 +283,14 @@ const Checkout = ({
             guidedData.people = quantity;
             guidedData.travel_date = travel_date;
         }
+
         setPostingOrder(true);
         postPurchase({
             ...guidedData,
             user: auth.user.id,
             experience_id,
+            type,
+            title,
             experience: publish_id,
         }).then(() => {
             setTimeout(() => {
@@ -348,12 +337,12 @@ const Checkout = ({
         if(!siteLoading) {
             if(!auth.isAuthenticated) {
                 updateCartAction([]); // reset cart and leave page
-                router.replace('/landing')
+                router.replace('/')
             }
         }
         
     }, [siteLoading]);
-console.log('postingOrder', loadingCart ,type ,postingOrder)
+
     return (
         <>
             <Layout>

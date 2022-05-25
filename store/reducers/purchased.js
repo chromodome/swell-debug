@@ -18,6 +18,7 @@ const initialState = {
     error: false,
     guided: [],
     digital: [],
+    missing: [],
     // just the ids
     loadingIds: false,
     updateIds: true,

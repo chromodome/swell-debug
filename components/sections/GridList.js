@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import ResultCard from '../blocks/Card/ResultCard';
+import ResultCard from '@/blocks/Card/ResultCard';
+import ResultCardMissing from '@/blocks/Card/ResultCardMissing';
 import SectionTitle from '@/blocks/Title/SectionTitle';
 import ButtonLoad from '@/blocks/Button/ButtonLoad';
 import ResultCardSkeleton from '@/blocks/Card/ResultCardSkeleton';
@@ -16,7 +17,8 @@ const GridList = ({
     dataLoading=false,
     showButton=true,
     handleLoadClick,
-    purchasedView=false
+    purchasedView=false,
+    missing=false
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +45,15 @@ const GridList = ({
                     <>
                         <div className="flex flex-wrap -mx-1 lg:-mx-4">
                             {data.map((item) => {
-                                return <ResultCard
+                                return  missing && purchasedView
+                                        ? <ResultCardMissing
+                                            missing={true}
+                                            purchasedView={purchasedView}
+                                            myKey={item.id}
+                                            data={item}
+                                        />
+                                        :<ResultCard
+                                            missing={true}
                                             purchasedView={purchasedView}
                                             myKey={item.id}
                                             data={item}

@@ -17,6 +17,8 @@ export const fetchPurchasedAll = () => {
                             experience_id
                             people
                             travel_date
+                            title
+                            type
                             experience {
                             title
                             experience_id

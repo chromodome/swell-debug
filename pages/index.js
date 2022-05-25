@@ -96,7 +96,6 @@ export async function getStaticProps({ params }) {
         landingData = await getLandingPage();
 
     } catch (error) {
-        console.log("errorv",  error )
         return {
             props: {},
             notFound: true

@@ -38,7 +38,7 @@ const ResultCard = ({
             last="",
             avatar="",
             displayname="",
-        },
+        }={},
 
     } = data;
     const user = {
@@ -54,7 +54,7 @@ const ResultCard = ({
     const ContentDays = days ? (
         <span> {`${days}  ${days > 1 ? 'Days' : 'Day'}`}</span>
     ) : (
-        EmptyData
+        <div>EmptyData</div>
     );
 
     // const ContentPrice = content?.price ? (
