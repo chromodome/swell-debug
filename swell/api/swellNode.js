@@ -1,45 +1,60 @@
-import swellServer from '../swell';
+import swellServer from '@/swell/swell';
 import { countriesArray } from '@/helpers/countriesArray';
+import { DIGITAL_ONLY } from '@/swell/const';
+
 
 class SwellController {
 
     constructor() {
-        
+
     }
 
     getLatestExpVariants = async (swellExpId) => {
-        console.log('swellExpIdswellExpIdswellExpIdswellExpIdswellExpIdswellExpId')
         const recents =  await swellServer.get('/products:variants/', {
             "parent_id": swellExpId,
             "active": true,
             "archived": false,
         });
-console.log(recents)
+
         return recents;
     }
 
     getLatestExperiences = async (limit = 12) => {
+        const queryObj = {};
+        if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital'
+        }
+
         const recents =  await swellServer.get('/products/?sort=date_created+desc', {
             active: true,
             limit,
+            ...queryObj
         });
 
         return recents;
     }
-// ?content.destinations=United Kingdom&content.destinations=Saudi Arabia
+
     trending = async (limit = 12) => {
+        const queryObj = {};
+        if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital'
+        }
+
         const trending =  await swellServer.get('/products/?sort=content.views+desc', {
             active: true,
             limit,
+            ...queryObj
         });
 
         return trending;
     }
 
     bySearch = async (type, limit, page) => {
-        let queryObj = {};
+        const queryObj = {};
         if(type !== 'all') {
-            queryObj["content.type"] = type
+            queryObj["content.type"] = DIGITAL_ONLY ? 'digital' : type;
+        } else if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital';
         }
 
         const response =  await swellServer.get('/products/?sort=name+asc', {
@@ -56,8 +71,11 @@ console.log(recents)
         const queryObj = {};
 
         if(type !== 'all') {
-            queryObj["content.type"] = type
+            queryObj["content.type"] = DIGITAL_ONLY ? 'digital' : type;
+        } else if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital';
         }
+
         const response =  await swellServer.get('/products/?sort=name+desc', {
             active: true,
             limit,
@@ -71,9 +89,10 @@ console.log(recents)
 
     byCategory = async (category, type, limit, page) => {
         const queryObj = {};
-
         if(type !== 'all') {
-            queryObj["content.type"] = type
+            queryObj["content.type"] = DIGITAL_ONLY ? 'digital' : type;
+        } else if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital';
         }
 
         const response =  await swellServer.get('/products/?sort=name+desc', {
@@ -89,6 +108,11 @@ console.log(recents)
 
     byDestination= async (dest, type, limit, page) => {
         const queryObj = {};
+        if(type !== 'all') {
+            queryObj["content.type"] = DIGITAL_ONLY ? 'digital' : type;
+        } else if(DIGITAL_ONLY) {
+            queryObj["content.type"] = 'digital';
+        }
         const destArray = dest.split('-') || [];
         const destOrArray = destArray.reduce((prev, next) => {
             const foundCountry = countriesArray.find( elm => elm.code === next);

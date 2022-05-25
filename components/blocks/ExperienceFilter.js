@@ -2,6 +2,7 @@
 import router from "next/router";
 import Row from '@/sections/Row';
 import ButtonsRow from '@/blocks/Button/ButtonsRow';
+import {  NEXT_PUBLIC_DIGITAL_ONLY } from '@/constants/public';
 
 const ExperienceFilter = ({
     query,
@@ -53,14 +54,20 @@ const ExperienceFilter = ({
     }
 
     return (
-        <Row classes="mt-20">
-            <ButtonsRow
-                handleClick={handleExpTypeClick}
-                type="selectable"
-                startItem={setType()}
-                items={['All Types', 'Guided', 'Digital']}
-            />
-        </Row>
+        <>
+        {
+            !NEXT_PUBLIC_DIGITAL_ONLY
+            && <Row classes="mt-20">
+                <ButtonsRow
+                    handleClick={handleExpTypeClick}
+                    type="selectable"
+                    startItem={setType()}
+                    items={['All Types', 'Guided', 'Digital']}
+                />
+            </Row>
+        }
+        </>
+        
     );
 };
 

@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
@@ -67,7 +67,7 @@ const LandingPage = ({
         {pageIsReady &&  <>
                 <ExperienceFilter
                     query={query}
-                />  
+                /> 
                 <GridList
                     sectionTitles={translations[lang].sections.trendingThisWeek}
                     data={expList}

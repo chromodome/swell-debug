@@ -22,6 +22,7 @@ const Purchased = ({
 }) => {
     const { query, isReady } = useRouter();
     const [pageIsReady, setPageIsReady] = useState(false);
+    const [missingList, setMissingList] = useState([]);
     const [digitalList, setDigitalList] = useState([]);
     const [guidedList, setguidedList] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
@@ -81,7 +82,7 @@ const Purchased = ({
     }, [auth]);
     
     useEffect(() => {
-        const { digital, guided } = purchasedExperiences;
+        const { digital, guided, missing } = purchasedExperiences;
 
         if(digital.length) {
             setDigitalList(parseExperienceData(digital))
@@ -89,25 +90,41 @@ const Purchased = ({
         if(guided.length) {
             setguidedList(parseExperienceData(guided))
         }
+        if(missing.length) {
+            setMissingList(missing)
+        }
 
     }, [purchasedExperiences]);
 
     return (
         <Layout>
             {pageIsReady && auth.isAuthenticated && <>
+                {/* Missing */}
+                { missingList.length
+                ? <GridList
+                    missing={true}
+                    sectionTitles={{ title: 'Missing', subTitle: '' }}
+                    data={missingList}
+                    purchasedView={true}
+                />
+                : null}
                 {/* Digital */}
-                <GridList
+                {digitalList.length
+                ? <GridList
                     sectionTitles={{ title: 'Digital', subTitle: '' }}
                     data={digitalList}
                     purchasedView={true}
                 />
+                : null}
 
                 {/* Guided */}
-                <GridList
+                {guidedList.length
+                ? <GridList
                     sectionTitles={{ title: 'Guided', subTitle: '' }}
                     data={guidedList}
                     purchasedView={true}
                 />
+                : null}
             </>}
             {!auth.isAuthenticated && 
                 <div>Log in to see this page</div>

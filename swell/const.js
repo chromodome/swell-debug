@@ -15,3 +15,5 @@ export const SWELL_PRIVATE_KEY = process.env.NEXT_PRIVATE_SWELL_PRIVATE_KEY;
 export const CONTENTFUL_PUBLIC_KEY = process.env.CONTENTFUL_API_CMA;
 
 export const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
+
+export const DIGITAL_ONLY = process.env.NEXT_PUBLIC_DIGITAL_ONLY.toLowerCase() === 'true' ? true : false;
