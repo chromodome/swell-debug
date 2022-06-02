@@ -29,18 +29,25 @@ import debounce from '@/helpers/debounce';
 import ModalAuth from '../blocks/Modal/ModalAuth';
 
 const Header = ({
-  //  fetchCartAction,
+    //  fetchCartAction,
     toggleLang,
     toggleNav,
     toggleCart,
     toggleAuthModal,
     setAuthPage,
     logout,
-    globalState: { rtl, lang, navIsOpen, cartIsOpen, authModalIsOpen, authComponent },
+    globalState: {
+        rtl,
+        lang,
+        navIsOpen,
+        cartIsOpen,
+        authModalIsOpen,
+        authComponent
+    },
     auth: { user, isAuthenticated, isProfile },
 
     isLogo = true,
-    isSearch = true,
+    isSearch = false,
     isAvatar = true,
     isLang = false,
     isMenu = true,
@@ -65,7 +72,6 @@ const Header = ({
         return () => {
             window.removeEventListener('scroll', debouncedHandleScroll);
         };
-        
     }, [scrollPos]);
 
     const handleScroll = () => {
@@ -161,19 +167,19 @@ const Header = ({
                                             : 'ri-menu-3-line'
                                     }`}></i>
                             </button> */}
-                            <button
-                                onClick={() => toggleNav(!navIsOpen)}
-                                className={`focus:outline-none w-20 
+                                <button
+                                    onClick={() => toggleNav(!navIsOpen)}
+                                    className={`focus:outline-none w-20 
                                flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-green-400 transition-all duration-200 hover:bg-gray-900 hover:text-white ${
                                    rtl ? 'rounded-r-lg' : 'rounded-l-lg'
                                }`}>
-                                <i
-                                    className={`${
-                                        rtl
-                                            ? 'ri-menu-2-line'
-                                            : 'ri-menu-3-line'
-                                    }`}></i>
-                            </button>
+                                    <i
+                                        className={`${
+                                            rtl
+                                                ? 'ri-menu-2-line'
+                                                : 'ri-menu-3-line'
+                                        }`}></i>
+                                </button>
                             </>
                         )}
                         {isCustom}
@@ -185,13 +191,13 @@ const Header = ({
                 <NavbarSidebar>
                     {isAuthenticated ? (
                         <>
-                            <NavbarItem
+                            {/* <NavbarItem
                                 label={translations[lang].menu.messages.title}
                                 icon="Inbox"
                                 link={`${NEXT_URL}/c/messages`}
                                 handleClick={toggleNav}
                                 rtl={rtl}
-                            />
+                            /> */}
                             <NavbarItem
                                 label={
                                     translations[lang].menu.myPurchases.title
@@ -201,7 +207,7 @@ const Header = ({
                                 handleClick={toggleNav}
                                 rtl={rtl}
                             />
-                            <NavbarItem
+                            {/* <NavbarItem
                                 label={
                                     translations[lang].menu.myFavourites.title
                                 }
@@ -209,7 +215,7 @@ const Header = ({
                                 link={`${NEXT_URL}/favourites`}
                                 handleClick={toggleNav}
                                 rtl={rtl}
-                            />
+                            /> */}
                             <NavbarItem
                                 label={translations[lang].menu.profile.title}
                                 icon="User"
@@ -217,14 +223,14 @@ const Header = ({
                                 handleClick={toggleNav}
                                 rtl={rtl}
                             />
-                            <NavbarItem
+                            {/* <NavbarItem
                                 label={translations[lang].menu.helpCenter.title}
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
                                 // handleClick={() => console.log('hello')}
                                 handleClick={toggleNav}
                                 rtl={rtl}
-                            />
+                            /> */}
                             <NavbarItem
                                 label={translations[lang].menu.signout.title}
                                 icon="LogOut"
@@ -275,8 +281,8 @@ function mapDispatchToProps(dispatch) {
             toggleCart,
             logout,
             toggleAuthModal,
-            setAuthPage,
-           // fetchCartAction
+            setAuthPage
+            // fetchCartAction
         },
         dispatch
     );

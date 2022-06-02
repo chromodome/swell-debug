@@ -5,27 +5,72 @@ import { capitalize, kreatorName } from 'helpers/FEutils';
 import KreatorBadgeStatic from '@/components/blocks/KreatorBadgeStatic';
 import MarketingBudget from './MarketingBudget';
 import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
+import RawCard from '@/blocks/Card/RawCard';
+import { areIntervalsOverlapping } from 'date-fns';
+import Link from 'next/link';
 
 function SectionMarketingIntro(props) {
     const {
-        type='',
-        desc='',
-        budget_min=0,
-        budget_max=0,
+        type = '',
+        desc = '',
+        budget_min = 0,
+        budget_max = 0,
         budget_currency = 'USD',
         user: author,
         user: { profile },
         globalState: { siteData },
-        bestTimeToGo: {
-            time_range=false,
-            isVisible
-        }
+        bestTimeToGo: { time_range = false, isVisible: bestTimeToGoVisible },
+        budgetVisible
     } = props;
+
+    console.log('props are', props);
 
     return (
         <>
-            <ExpSubsection padding="pb-6" margins="mb-8">
-                <div className="flex justify-between w-full items-center">
+            <ExpSubsection borders="" padding="pb-6" margins="mb-8">
+                <RawCard padding="p-8 md:p-8" margins="mt-4" bgColor="bg-white">
+                    <div className="flex flex-col md:flex-row gap-8 w-full">
+                        <div className="mx-auto md:mx-0">
+                            <KreatorBadgeStatic
+                                author={author}
+                                card={false}
+                                avatarOnly={true}
+                                size="w-36 h-36"
+                            />
+                        </div>
+                        <div>
+                            <div className="flex justify-between w-full items-center mb-4">
+                                <div className="flex-1">
+                                    <div className="text-green-400 flex flex-col lg:flex-row gap-2 font-bold lg:items-center text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-2  lg:mr-8 ">
+                                        <div className="mr-3 whitespace-nowrap">{`A ${capitalize(
+                                            type
+                                        )} Experience`}</div>
+                                        <div className="flex items-center">
+                                            <span className="mr-3 text-sm text-green-700">
+                                                by
+                                            </span>
+                                            <Link
+                                                href={`/experiences/user/${author.username}/all`}>
+                                                <a className=" underline text-base lg:text-lg text-green-700">{`${kreatorName(
+                                                    profile
+                                                )}`}</a>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                className={`block-html leading-6 ${
+                                    desc ? 'text-gray-800' : 'italic'
+                                } text-xs md:text-sm`}
+                                dangerouslySetInnerHTML={{
+                                    __html: profile.bio
+                                }}
+                            />
+                        </div>
+                    </div>
+                </RawCard>
+                {/* <div className="flex justify-between w-full items-center">
                     <div className="flex-1">
                         <div className="text-green-400 flex flex-col lg:flex-row gap-2 font-bold lg:items-center text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-2  lg:mr-8 ">
                             <div className="mr-3 whitespace-nowrap">{`A ${capitalize(
@@ -49,7 +94,7 @@ function SectionMarketingIntro(props) {
                             avatarOnly={true}
                         />
                     </div>
-                </div>
+                </div> */}
             </ExpSubsection>
 
             <ExpSubsection margins="mt-8 mb-14">
@@ -59,14 +104,18 @@ function SectionMarketingIntro(props) {
                         __html: desc || 'No content available'
                     }}
                 />
-                <MarketingBudget
-                    experienceDetails={{
-                        budget_min,
-                        budget_max,
-                        budget_currency
-                    }}
-                />
-                {isVisible && <BestTimeToGoRanges timeRange={time_range} />}
+                {budgetVisible && (
+                    <MarketingBudget
+                        experienceDetails={{
+                            budget_min,
+                            budget_max,
+                            budget_currency
+                        }}
+                    />
+                )}
+                {bestTimeToGoVisible && (
+                    <BestTimeToGoRanges timeRange={time_range} />
+                )}
             </ExpSubsection>
         </>
     );

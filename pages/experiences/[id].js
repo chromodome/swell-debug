@@ -14,8 +14,11 @@ import SectionWhatToDo from '@/components/experiencepage/SectionWhatToDo';
 import SectionWhereToStay from '@/components/experiencepage/SectionWhereToStay';
 import SectionMarketingItinerary from '@/components/experiencepage/SectionMarketingItinerary';
 import SectionPricingBooking from '@/components/experiencepage/SectionPricingBooking';
-import {updateCartAction} from '@/store/actions/swell/cart';
+import { updateCartAction } from '@/store/actions/swell/cart';
 import { NEXT_PUBLIC_DIGITAL_ONLY } from '@/constants/public';
+import SectionWhatsIncluded from '@/components/experiencepage/SectionWhatsIncluded';
+import SectionPolicies from '@/components/experiencepage/SectionPolicies';
+// import SectionPolicies from '@/components/experiencepage/SectionPolicies';
 
 const lang = 'en-US';
 const ExperienceDetail = ({
@@ -30,70 +33,49 @@ const ExperienceDetail = ({
                 whereToStay,
                 whatToDo,
                 gallery,
-                intro: {
-                    desc
-                }
-            },
+                intro: { desc },
+                policies,
+                whatsIncluded
+            }
         },
-        budget_currency: {
-            [lang]: budget_currency,
-        },
-        budget_min: {
-            [lang]: budget_min,
-        },
-        budget_max: {
-            [lang]: budget_max,
-        },
-        title: {
-            [lang]: title,
-        },
-        days: {
-            [lang]: days,
-        },
-        type: {
-            [lang]: type,
-        },
-        user: {
-            [lang]: user,
-        },
-        bestTimeToGo: {
-            [lang]: bestTimeToGo,
-        },
-        destination: {
-            [lang]: destination,
-        },
-        accommodation: {
-            [lang]: accommodation,
-        },
-        itinerary: {
-            [lang]: itinerary,
-        },
+        budgetVisible: { [lang]: budgetVisible },
+        budget_currency: { [lang]: budget_currency },
+        budget_min: { [lang]: budget_min },
+        budget_max: { [lang]: budget_max },
+        title: { [lang]: title },
+        days: { [lang]: days },
+        type: { [lang]: type },
+        user: { [lang]: user },
+        bestTimeToGo: { [lang]: bestTimeToGo },
+        destination: { [lang]: destination },
+        accommodation: { [lang]: accommodation },
+        itinerary: { [lang]: itinerary },
         swellExp: {
             id: swellExpId,
             categories,
             tags,
-            content: {
-                destinations,
-                experience_id,
-                views,
-            }
+            content: { destinations, experience_id, views }
         }
     } = contentfulExperience;
-console.log('type', type)
+    console.log('type', type);
+    console.log('experience', contentfulExperience);
 
-    const updateViews =  async (swellExpId, views)=> {
-        const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
-            method: 'PUT',
-            body: [],
-            headers: {
-                'Content-Type': 'application/json'
+    const updateViews = async (swellExpId, views) => {
+        const response = await fetch(
+            `/api/views/${swellExpId}?views=${views}`,
+            {
+                method: 'PUT',
+                body: [],
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        });
-    }
+        );
+    };
 
     useEffect(() => {
-        if(isReady) {
-            if(NEXT_PUBLIC_DIGITAL_ONLY && type.toLowerCase() ==='guided') {
+        if (isReady) {
+            if (NEXT_PUBLIC_DIGITAL_ONLY && type.toLowerCase() === 'guided') {
                 router.replace('/');
             } else {
                 updateViews(swellExpId, views + 1);
@@ -113,10 +95,7 @@ console.log('type', type)
                             categories={categories}
                             destinations={destinations}
                         />
-                        <SectionMarketingGallery
-                            type={type}
-                            images={gallery}
-                        />
+                        <SectionMarketingGallery type={type} images={gallery} />
                         <div
                             className={`mb-12 mt-16 md:mt-16 lg:mt-24 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                             <main className={` flex items-start`}>
@@ -129,18 +108,35 @@ console.log('type', type)
                                         budget_currency={budget_currency}
                                         user={user}
                                         bestTimeToGo={bestTimeToGo}
+                                        budgetVisible={budgetVisible}
+                                        // budget = {}: { isVisible: budgetVisible },
+                                        // best_time_to_go = {}: { isVisible: bestTimeToGoVisible },
                                     />
                                     <SectionWhatToDo
                                         destination={destination}
                                         whatToDo={whatToDo}
                                     />
-                                    <SectionWhereToStay
+                                    {/* <SectionWhereToStay
                                         whereToStay={whereToStay}
                                         accommodation={accommodation}
-                                    />
+                                    /> */}
+
                                     <SectionMarketingItinerary
                                         itinerary={itinerary}
                                     />
+                                    {type.toLowerCase() === 'guided' &&
+                                        whatsIncluded && (
+                                            <SectionWhatsIncluded
+                                                data={whatsIncluded}
+                                            />
+                                        )}
+                                    {type.toLowerCase() === 'guided' &&
+                                        (policies?.cancellation?.description ||
+                                            policies?.refund?.description) && (
+                                            <SectionPolicies
+                                                dataPolicies={policies}
+                                            />
+                                        )}
                                 </section>
 
                                 <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 ">
@@ -201,7 +197,9 @@ export async function getStaticProps({ params }) {
     let contentfulExperience = null;
 
     try {
-        contentfulExperience = await getMarketingExperience(params?.id ? params?.id.toLowerCase(): '');
+        contentfulExperience = await getMarketingExperience(
+            params?.id ? params?.id.toLowerCase() : ''
+        );
     } catch (error) {
         return {
             props: {},
@@ -211,7 +209,10 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            contentfulExperience: {...contentfulExperience.fields, swellExp: contentfulExperience.swellExp }
+            contentfulExperience: {
+                ...contentfulExperience.fields,
+                swellExp: contentfulExperience.swellExp
+            }
         },
 
         revalidate: Number(process.env.NEXT_REVALIDATE_PERIOD)

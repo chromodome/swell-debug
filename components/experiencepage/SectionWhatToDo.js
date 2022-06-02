@@ -17,7 +17,7 @@ import CarouselWithLightbox from './CarouselWithLightbox';
 function SectionWhatToDo(props) {
     const {
         whatToDo: { desc, gallery: images },
-        destination={},
+        destination = {},
         globalState: { lang, edit }
     } = props;
 
@@ -33,35 +33,34 @@ function SectionWhatToDo(props) {
     return (
         <>
             <ExpSubsection>
-                <div className="marketing-title mb-8">
-                    Where you'll go and what you'll do
-                </div>
+                <div className="marketing-title mb-8">The Destination</div>
 
-                <div
-                    className="block-html text-gray-800 leading-7 text-sm1 md:text-base"
-                    dangerouslySetInnerHTML={{
-                        __html: desc || 'No content available'
-                    }}
-                />
-                <div className="w-full ">
+                {desc && (
+                    <div
+                        className="block-html text-gray-800 leading-7 text-sm1 md:text-base"
+                        dangerouslySetInnerHTML={{
+                            __html: desc || ''
+                        }}
+                    />
+                )}
+                {/* <div className="w-full ">
                     <div className="relative">
                         {images && images.length > 0 && (
                             <CarouselWithLightbox slides={images} />
                         )}
                     </div>
-                </div>
-                {
-                    Object.keys(destination).length
-                    ? <>
+                </div> */}
+                {Object.keys(destination).length ? (
+                    <>
                         <DestinationList destinations={destination.locations} />
 
                         <div className="-mx-5 md:mx-0">
-                            <DestinationMap destinations={destination.locations} />
+                            <DestinationMap
+                                destinations={destination.locations}
+                            />
                         </div>
                     </>
-                    : null
-                }
-                
+                ) : null}
 
                 {/* <TipList
                     actionType={actionType}

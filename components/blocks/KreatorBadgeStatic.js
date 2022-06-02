@@ -2,18 +2,23 @@ import React from 'react';
 import Avatar from 'components/specialty/Avatar';
 import Link from 'next/link';
 
-const KreatorBadgeStatic = ({ author, author:{ username }, avatarOnly = false, card = true }) => {
+const KreatorBadgeStatic = ({
+    author,
+    author: { username },
+    avatarOnly = false,
+    card = true,
+    size = 'w-14 h-14'
+}) => {
     return (
         <>
             {author && (
-                <Link
-                    href={`/experiences/user/${username}/all`}>
+                <Link href={`/experiences/user/${username}/all`}>
                     {avatarOnly ? (
                         <a className="">
                             <Avatar
                                 profile={author?.profile}
                                 card={card}
-                                size={'w-14 h-14'}
+                                size={size}
                             />
                         </a>
                     ) : (

@@ -1,8 +1,7 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import router, { useRouter } from "next/router";
+import router, { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
@@ -11,14 +10,10 @@ import LoadMore from '@/blocks/LoadMore';
 import translations from '@/constants/translations';
 import { pageCount } from '@/helpers/FEutils';
 
-const LandingPage = ({
-    globalState: {
-        lang
-    },
-}) => {
+const LandingPage = ({ globalState: { lang } }) => {
     const { query, isReady } = useRouter();
     const [dataLoading, setDataLoading] = useState(true);
-    const [loadMoreData, setLoadMoreData ] = useState(false);
+    const [loadMoreData, setLoadMoreData] = useState(false);
     const [expList, setExpList] = useState([]);
     const accepedTypes = ['all', 'digital', 'guided'];
     const currentPage = useRef(1);
@@ -27,17 +22,23 @@ const LandingPage = ({
     const userName = useRef(null);
     const [pageIsReady, setPageIsReady] = useState(false);
 
-    const getExps =  async (user, type, page=1)=> {
-        const response = await fetch(`/api/user/${user}/${type}?limit=${NEXT_PUBLIC_ITEMS_PER_PAGE}&page=${page}`);
+    const getExps = async (user, type, page = 1) => {
+        const response = await fetch(
+            `/api/user/${user}/${type}?limit=${NEXT_PUBLIC_ITEMS_PER_PAGE}&page=${page}`
+        );
         const data = await response.json();
 
         return data;
-    }
+    };
     const handleLoadClick = () => {
         setLoadMoreData(true);
-        loadExperiences(userName.current, filterType.current, currentPage.current + 1 )
-    }
-    const loadExperiences = (user, type, page=1) => {
+        loadExperiences(
+            userName.current,
+            filterType.current,
+            currentPage.current + 1
+        );
+    };
+    const loadExperiences = (user, type, page = 1) => {
         getExps(user, type, page).then((data) => {
             const { count, page, pages, results } = data;
 
@@ -47,45 +48,52 @@ const LandingPage = ({
             setExpList([...expList, ...results]);
             setDataLoading(false);
             setLoadMoreData(false);
-        })
-    }
+        });
+    };
 
     useEffect(() => {
-        if(isReady) {
-
-            if(query.id.length > 1) {
+        if (isReady) {
+            if (query.id.length > 1) {
                 userName.current = query.id[0].toLowerCase();
-                filterType.current = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
-            } else if(query.id.length === 1) {
+                filterType.current = accepedTypes.includes(
+                    query.id[1].toLowerCase()
+                )
+                    ? query.id[1].toLowerCase()
+                    : 'all';
+            } else if (query.id.length === 1) {
                 userName.current = query.id[0].toLowerCase();
             } else {
                 // 404
             }
 
-            loadExperiences(userName.current, filterType.current)
+            loadExperiences(userName.current, filterType.current);
             setPageIsReady(true);
         }
-        
     }, []);
-    
 
     return (
         <Layout>
-            {pageIsReady && <>
-                <ExperienceFilter
-                    query={query}
-                />
-                <GridList
-                    sectionTitles={translations[lang].sections.trendingThisWeek}
-                    data={expList}
-                    btnLabel="Load More"
-                    btnAction="load"
-                    btnUrl="/experiences/search"
-                    dataLoading={dataLoading}
-                    handleLoadClick={handleLoadClick}
-                    showButton={currentPage.current !== totalPages.current || loadMoreData}
-                />
-            </>}
+            {pageIsReady && (
+                <>
+                    <ExperienceFilter query={query} />
+                    <GridList
+                        sectionTitles={
+                            translations[lang].sections.exploreByKreator
+                        }
+                        margins={'mt-12 mb-12'}
+                        data={expList}
+                        btnLabel="Load More"
+                        btnAction="load"
+                        btnUrl="/experiences/search"
+                        dataLoading={dataLoading}
+                        handleLoadClick={handleLoadClick}
+                        showButton={
+                            currentPage.current !== totalPages.current ||
+                            loadMoreData
+                        }
+                    />
+                </>
+            )}
             <LoadMore loadMoreData={loadMoreData} />
         </Layout>
     );
@@ -101,4 +109,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
-
