@@ -79,10 +79,11 @@ const Purchased = ({
         }
     }, [purchasedExperiences]);
 
-    if (!auth.isAuthenticated) router.push('/');
+    // if (!auth.isAuthenticated) router.push('/');
 
     return (
         <Layout>
+            {!auth.isAuthenticated && <div>Log in to view this page</div>}
             {pageIsReady && auth.isAuthenticated && (
                 <>
                     <div
