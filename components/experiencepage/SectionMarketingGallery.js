@@ -6,10 +6,12 @@ import { SRLWrapper } from 'simple-react-lightbox';
 import { lightBoxOptions } from '@/constants/lightboxOptions';
 import ImageHover from '@/components/blocks/Card/ImageHover';
 import ButtonGeneric from '@/components/blocks/Button/ButtonGeneric';
+import classNames from 'classnames';
+import PillType from '../blocks/Card/PillType';
 
 function SectionMarketingGallery({
-    type='',
-    images=[],
+    type = '',
+    images = [],
     globalState: { lang, edit, siteData }
 }) {
     const { openLightbox, closeLightbox } = useLightbox();
@@ -120,9 +122,16 @@ function SectionMarketingGallery({
 
                 <div
                     className={`absolute z-100 top-0 -translate-y-1/2 left-1/2 transform -translate-x-1/2`}>
-                    <div className="uppercase rounded-full h-8 w-24 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6">
+                    {/* <div
+                        className={classNames(
+                            type.toLowerCase() === 'digital'
+                                ? 'bg-gray-900 text-kn-primary'
+                                : 'bg-gradient-to-tr from-green-300 via-green-400 to-green-500 shadow-2xl-green-500 font-semibold text-green-900 mix-blend-multiply',
+                            'uppercase rounded-full h-8 flex justify-center items-center text-xxs tracking-widest px-6'
+                        )}>
                         {type}
-                    </div>
+                    </div> */}
+                    <PillType type={type} />
                 </div>
                 <div
                     className={`absolute z-100 bottom-0 translate-y-1/2 left-1/2 transform -translate-x-1/2`}>

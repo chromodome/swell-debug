@@ -116,7 +116,7 @@ const NavbarSidebar = ({
                     <div className="px-12 flex items-center mt-8">
                         <a
                             target="_blank"
-                            href="https://kreator.viakonnect.com"
+                            href={process.env.NEXT_PUBLIC_KREATOR_BASE_URL}
                             className="flex-1 py-3 px-4 rounded-full flex items-center justify-center border-2 border-green-400  hover:border-green-400 ring-4 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400">
                             Become a kreator
                         </a>

@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import Router from 'next/router';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Head from 'next/head';
@@ -9,7 +8,10 @@ import Header from '@/layouts/Header';
 import Footer from '@/layouts/Footer';
 import Footer2 from '@/layouts/Footer2';
 import TopBar from '@/blocks/TopBar';
-import { fetchPurchasedIds, resetPurchase } from '@/helpers/apiServices/purchases';
+import {
+    fetchPurchasedIds,
+    resetPurchase
+} from '@/helpers/apiServices/purchases';
 
 function Layout({
     auth,
@@ -70,23 +72,17 @@ function Layout({
     }, []);
 
     useEffect(() => {
-        const { 
-            purchasedIds,
-            updateIds,
-            loadingIds
-        } = purchased;
+        const { purchasedIds, updateIds, loadingIds } = purchased;
 
-        if(auth.isAuthenticated && !auth.loading && updateIds && !loadingIds) {
+        if (auth.isAuthenticated && !auth.loading && updateIds && !loadingIds) {
             fetchPurchasedIds();
-        } else if(!auth.isAuthenticated && !auth.loading) {
-            if(purchasedIds.length || !updateIds) {
+        } else if (!auth.isAuthenticated && !auth.loading) {
+            if (purchasedIds.length || !updateIds) {
                 resetPurchase();
             }
         }
+    }, [auth, purchased]);
 
-
-    }, [auth, purchased])
-    
     return (
         <>
             <div id="root" className="">
@@ -99,7 +95,7 @@ function Layout({
                 {isHeader.visible && (
                     <Header
                         isLogo={isHeader.options.isLogo}
-                        isSearch={isHeader.options.isSearch}
+                        // isSearch={isHeader.options.isSearch}
                         isAvatar={isHeader.options.isAvatar}
                         isMenu={isHeader.options.isMenu}
                         isCustom={isHeader.options.isCustom}
@@ -151,7 +147,7 @@ const mapStateToProps = (state) => ({
     purchased: state.purchased,
     globalState: state.globalState,
     auth: state.auth,
-    cart: state.cart, // check what already in yhe cart
+    cart: state.cart // check what already in yhe cart
 
     // also once logged in check if they already booked this product
 });

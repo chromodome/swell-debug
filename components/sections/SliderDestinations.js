@@ -12,13 +12,35 @@ const breakPoints = {
 
 const skeletonArray = [1, 2, 3, 4, 5, 6];
 
-const SliderDestinations = ({ sectionTitles, data, dataLoading=false }) => {
+const SliderDestinations = ({
+    sectionTitles,
+    data,
+    dataLoading = false,
+    classes,
+    margins = 'mt-20 mb-4 lg:mt-24 lg:mb-20',
+    tagMargins = 'mt-3 lg:mt-4 ',
+    tagPadding = 'px-2 lg:px-2 pb-12',
+    tagRatio = 'portrait',
+    world = true
+}) => {
     return (
         <>
             <SliderList
+                classes={classes}
+                margins={margins}
                 breakPoints={breakPoints}
                 section={sectionTitles}
                 dataLoading={dataLoading}>
+                {world && (
+                    <TagCard
+                        overrideData={{ linkName: 'world', name: 'The World' }}
+                        containerClass="embla__slide x2 md:x4 lg:x5 xl:x7"
+                        type=""
+                        padding={tagPadding}
+                        margins={tagMargins}
+                        preset={tagRatio}
+                    />
+                )}
                 {!dataLoading ? (
                     data.map((item, index) => {
                         return (
@@ -28,6 +50,9 @@ const SliderDestinations = ({ sectionTitles, data, dataLoading=false }) => {
                                 containerClass="embla__slide x2 md:x4 lg:x5 xl:x7"
                                 type=""
                                 linkName="slug"
+                                padding={tagPadding}
+                                margins={tagMargins}
+                                preset={tagRatio}
                             />
                         );
                     })
