@@ -1,15 +1,28 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import FooterMenuLink from '../blocks/FooterMenuLink';
 const Footer = ({ isBody = true, isBottomBar = true }) => {
     // console.log('footer');
     return (
         <footer className="">
             {isBody && (
-                <div className="bg-gray-800 py-16 mt-16">
-                    <div className="mx-auto max-w-6xl grid grid-cols-5 h-48 min-h-full text-white">
-                        <section> Konnect</section>
+                <div className="bg-gray-800 py-16 mt-16 px-8">
+                    <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 h-48a min-h-full text-white">
                         <section>
-                            <h3 className="text-green-400 mb-4">About</h3>
+                            <div className="flex items-center gap-3 -mt-2">
+                                <img
+                                    className="h-12"
+                                    src="/assets/media/kn_logoicon_white.svg"
+                                    // height={45}
+                                    // width={31}
+                                />
+                                <span className="">Konnect</span>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 className="text-xl md:text-base text-green-400 mb-2 md:mb-4">
+                                About
+                            </h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
                                 <FooterMenuLink
                                     url="/help/article/1001"
@@ -26,19 +39,21 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                             </nav>
                         </section>
                         <section>
-                            <h3 className="text-green-400 mb-4">Discover</h3>
+                            <h3 className="text-xl md:text-base text-green-400 mb-2 md:mb-4">
+                                Discover
+                            </h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
                                 <FooterMenuLink
-                                    url="/experiences/search"
-                                    label="Find an experience"
+                                    url="/experiences/search/all"
+                                    label="Explore all experiences"
                                 />
                                 <FooterMenuLink
-                                    url="/experiences/collections"
-                                    label="Curated collections"
+                                    url="/experiences/destination/world/all"
+                                    label="Wander by Destination"
                                 />
                                 <FooterMenuLink
-                                    url="/experiences/featured"
-                                    label="Featured experiences"
+                                    url="/experiences/interest/all/all"
+                                    label="Wander by Interest"
                                 />
                                 <FooterMenuLink
                                     url="/kreators/featured"
@@ -47,21 +62,26 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                             </nav>
                         </section>
                         <section>
-                            <h3 className="text-green-400 mb-4">Support</h3>
+                            <h3 className="text-xl md:text-base text-green-400 mb-2 md:mb-4">
+                                Support
+                            </h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
                                 <FooterMenuLink
                                     url="/help/article/5001"
                                     label="Updates for Covid-19"
                                 />
-                                <FooterMenuLink url="" label="Help Center" />
+                                <FooterMenuLink
+                                    url="/help/article/1001"
+                                    label="Help Center"
+                                />
                                 <FooterMenuLink
                                     url="/help/article/4001"
                                     label="Terms of Service"
                                 />
-                                <FooterMenuLink
+                                {/* <FooterMenuLink
                                     url="/help/article/4002"
                                     label="Cancellation and refunds"
-                                />
+                                /> */}
 
                                 <FooterMenuLink
                                     url="/help/article/4004"
@@ -70,9 +90,32 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                             </nav>
                         </section>
                         <section>
-                            <h3 className="text-green-400 mb-4">
+                            <h3 className="text-xl md:text-base text-green-400 mb-2 md:mb-4">
                                 Stay in touch
                             </h3>
+                            <nav className="flex gap-2 text-2xl font-light">
+                                <a
+                                    target="_blank"
+                                    noreferrer
+                                    href="https://www.instagram.com/viakonnect/"
+                                    className="hover:text-green-400">
+                                    <i className="ri-instagram-line"></i>
+                                </a>
+                                <a
+                                    target="_blank"
+                                    noreferrer
+                                    href="https://www.facebook.com/Viakonnect-115723371137514/"
+                                    className="hover:text-green-400">
+                                    <i className="ri-facebook-fill"></i>
+                                </a>
+                                <a
+                                    target="_blank"
+                                    noreferrer
+                                    href="https://www.youtube.com/channel/UCrv_eGOq3Almjhved39LR6Q"
+                                    className="hover:text-green-400">
+                                    <i className="ri-youtube-line"></i>
+                                </a>
+                            </nav>
                             <nav className="flex flex-col gap-2 text-xs font-light"></nav>
                         </section>
                     </div>

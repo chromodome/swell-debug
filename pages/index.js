@@ -1,4 +1,3 @@
-
 import Layout from '@/layouts/Layout';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -13,19 +12,19 @@ import GridList from '@/sections/GridList';
 import translations from '@/constants/translations';
 import { getLandingPage } from '@/helpers/apiServices/experiences';
 import { randomItem } from '@/helpers/FEutils';
-import {NEXT_PUBLIC_LATEST_PER_PAGE, NEXT_PUBLIC_TRENDING_PER_PAGE } from '@/constants/public';
+import {
+    NEXT_PUBLIC_LATEST_PER_PAGE,
+    NEXT_PUBLIC_TRENDING_PER_PAGE
+} from '@/constants/public';
 
 const LandingPage = ({
     globalState: {
         lang,
-        siteData: {
-            destinationList,
-            categories
-        }
+        siteData: { destinationList, categories }
     },
     latest: { results: latestList },
     landingData,
-    trending: { results: trendingList },
+    trending: { results: trendingList }
 }) => {
     const dataLanding = JSON.parse(landingData);
 
@@ -46,13 +45,16 @@ const LandingPage = ({
                     sectionTitles={translations[lang].sections.wanderByInterest}
                     data={categories || []}
                     path={'/experiences/interest/'}
+                    world={false}
                 />
 
                 <Showcase
                     pill="top"
-                    data={ randomItem(dataLanding?.data?.features)  }
+                    data={randomItem(dataLanding?.data?.features)}
                 />
+
                 <SliderDestinations
+                    world={false}
                     sectionTitles={
                         translations[lang].sections.wanderByDestination
                     }
@@ -69,6 +71,7 @@ const LandingPage = ({
                     btnLabel="Explore all experiences"
                     btnAction="url"
                     btnUrl="/experiences/search/all"
+                    margins="mt-4 mb-8 lg:mt-8 lg:mb-12"
                 />
             </>
         </Layout>
@@ -92,10 +95,13 @@ export async function getStaticProps({ params }) {
     let trending = null;
 
     try {
-        latest =  await SwellController.getLatestExperiences(NEXT_PUBLIC_LATEST_PER_PAGE);
-        trending = await  SwellController.trending(NEXT_PUBLIC_TRENDING_PER_PAGE);
+        latest = await SwellController.getLatestExperiences(
+            NEXT_PUBLIC_LATEST_PER_PAGE
+        );
+        trending = await SwellController.trending(
+            NEXT_PUBLIC_TRENDING_PER_PAGE
+        );
         landingData = await getLandingPage();
-
     } catch (error) {
         return {
             props: {},
@@ -103,14 +109,13 @@ export async function getStaticProps({ params }) {
         };
     }
 
-    return { 
+    return {
         props: {
             trending,
             latest,
-            landingData:  JSON.stringify( landingData?.data)
+            landingData: JSON.stringify(landingData?.data)
         },
 
         revalidate: Number(process.env.NEXT_REVALIDATE_PERIOD)
-    }
-
+    };
 }

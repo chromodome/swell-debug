@@ -11,7 +11,7 @@ const SliderList = ({
     boxed,
     classes,
     padding = 'px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40',
-    margins = 'mt-24 mb-12',
+    margins = 'mt-20 mb-4 md:mt-24 md:mb-4',
     dataLoading
 }) => {
     const [slidesPerBp, setSlidesPerBp] = useState(getSlidesPerBp(breakPoints));
@@ -32,7 +32,9 @@ const SliderList = ({
         <>
             <div
                 className={`overflow-x-hidden z-100  ${margins} mx-auto ${padding} ${classes}`}>
-                {section && <SectionTitle section={section} />}
+                {section && (
+                    <SectionTitle section={section} className="mb-4 md:mb-0" />
+                )}
                 {!dataLoading ? (
                     <div>
                         <CarouselCards scrollSlides={slidesPerBp}>

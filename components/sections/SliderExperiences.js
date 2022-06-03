@@ -13,11 +13,10 @@ const breakPoints = {
 const skeletonArray = [1, 2, 3, 4, 5];
 
 const SliderExperiences = ({
-        sectionTitles,
-        latestList,
-        dataLoading=false
-    }) => {
-
+    sectionTitles,
+    latestList,
+    dataLoading = false
+}) => {
     return (
         <>
             <SliderList

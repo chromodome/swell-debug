@@ -71,6 +71,14 @@ const langData = {
             trendingThisWeek: {
                 title: 'Trending this week',
                 subTitle: 'Check what other wanderers are looking for'
+            },
+            exploreEverything: {
+                title: 'Explore all experiences',
+                subTitle: 'Browse everything the world has to offer'
+            },
+            exploreByKreator: {
+                title: 'Explore by Kreator',
+                subTitle: 'Browse all experiences by your favorite Kreators'
             }
         },
         components: {
@@ -225,6 +233,10 @@ const langData = {
             trendingThisWeek: {
                 title: 'Trending this week',
                 subTitle: 'Check what other wanderers are looking for'
+            },
+            exploreEverything: {
+                title: 'Explore all experiences',
+                subTitle: 'Browse everything the world has to offer'
             }
         }
     }

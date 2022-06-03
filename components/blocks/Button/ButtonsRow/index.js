@@ -21,11 +21,16 @@ const ButtonsRow = ({
 
     return (
         <>
-            <div className={`flex flex-row flex-wrap mt-5 mb-5 ${classes}`}>
+            <div
+                className={`px-4 flex flex-row flex-wrap mt-5 mb-5 ${classes}`}>
                 {type === 'exception' ? (
                     <Exception items={items} handleClick={handleClick} />
                 ) : (
-                    <Selectable startItem={startItem} items={items} handleClick={handleClick} />
+                    <Selectable
+                        startItem={startItem}
+                        items={items}
+                        handleClick={handleClick}
+                    />
                 )}
             </div>
         </>

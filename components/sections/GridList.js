@@ -5,27 +5,31 @@ import ResultCardMissing from '@/blocks/Card/ResultCardMissing';
 import SectionTitle from '@/blocks/Title/SectionTitle';
 import ButtonLoad from '@/blocks/Button/ButtonLoad';
 import ResultCardSkeleton from '@/blocks/Card/ResultCardSkeleton';
+import Row from './Row';
 
 const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const GridList = ({
     sectionTitles,
-    data=[],
+    data = [],
     btnLabel = 'Load More',
     btnAction = 'url',
     btnUrl,
-    dataLoading=false,
-    showButton=true,
+    loadMoreData,
+    dataLoading = false,
+    showButton = true,
     handleLoadClick,
-    purchasedView=false,
-    missing=false
+    purchasedView = false,
+    missing = false,
+    margins,
+    titleClass = 'mb-8',
+    titleColor
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleLoad = () => {
         //setIsLoading(!isLoading);
         handleLoadClick();
-
     };
     const handleClick = (e) => {
         e.preventDefault();
@@ -35,49 +39,58 @@ const GridList = ({
     return (
         <>
             <div
-                className={`mb-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${
-                    sectionTitles ? 'mt-24 ' : ''
+                className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${
+                    margins ? margins : sectionTitles ? 'mt-24 mb-12' : 'mb-12'
                 }`}>
                 {sectionTitles && (
-                    <SectionTitle section={sectionTitles} className="mb-8" />
+                    <SectionTitle
+                        section={sectionTitles}
+                        className={titleClass}
+                        titleColor={titleColor}
+                    />
                 )}
                 {!dataLoading ? (
                     <>
-                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                        <div className="flex flex-wrap -mx-1a lg:-mx-4a">
                             {data.map((item) => {
-                                return  missing && purchasedView
-                                        ? <ResultCardMissing
-                                            missing={true}
-                                            purchasedView={purchasedView}
-                                            myKey={item.id}
-                                            data={item}
-                                        />
-                                        :<ResultCard
-                                            missing={true}
-                                            purchasedView={purchasedView}
-                                            myKey={item.id}
-                                            data={item}
-                                        />;
+                                return missing && purchasedView ? (
+                                    <ResultCardMissing
+                                        missing={true}
+                                        purchasedView={purchasedView}
+                                        myKey={item.id}
+                                        data={item}
+                                    />
+                                ) : (
+                                    <ResultCard
+                                        missing={true}
+                                        purchasedView={purchasedView}
+                                        myKey={item.id}
+                                        data={item}
+                                    />
+                                );
                             })}
                         </div>
                         {btnAction === 'url' && !purchasedView && (
                             <ButtonLoad
                                 handleClick={handleClick}
-                                isLoading={isLoading}
+                                isLoading={loadMoreData}
                                 label={btnLabel}
                             />
                         )}
-                        {btnAction === 'load' && showButton && data.length > 0 && !purchasedView && (
-                            <ButtonLoad
-                                handleClick={handleLoad}
-                                isLoading={isLoading}
-                                label={btnLabel}
-                            />
-                        )}
+                        {btnAction === 'load' &&
+                            showButton &&
+                            data.length > 0 &&
+                            !purchasedView && (
+                                <ButtonLoad
+                                    handleClick={handleLoad}
+                                    isLoading={loadMoreData}
+                                    label={btnLabel}
+                                />
+                            )}
                     </>
                 ) : (
                     <>
-                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                        <div className="flex flex-wrap -mx-1a lg:-mx-4a">
                             {skeletonArray.map((item, index) => {
                                 return (
                                     <ResultCardSkeleton key={`sk_${index}`} />
