@@ -5,6 +5,7 @@ import payment from './payment';
 import session from './session';
 import cart from './cart';
 import purchased from './purchased';
+import order from './order';
 
 export default combineReducers({
     auth,
@@ -12,5 +13,6 @@ export default combineReducers({
     session,
     payment,
     cart,
-    purchased
+    purchased,
+    order
 });

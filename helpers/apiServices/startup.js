@@ -28,14 +28,13 @@ export const fetchStartupData = (params) => {
                                 order_index
                             },
                             categories {
-                                id,
-                                name,
-                               image,
-                               description,
-                               order_index,
-                               swell_id,
-                               slug
-                   
+                                id
+                                name
+                                image
+                                description
+                                order_index,
+                                swell_id,
+                                slug
                             },
                             tags {
                                 id,

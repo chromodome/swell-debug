@@ -1,4 +1,3 @@
-const { experiences } = require('@/mockdata/experiences.json');
 import { getExperienceById } from '@/apiServices/experiences';
 
 export default async (req, res) => {

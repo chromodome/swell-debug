@@ -74,25 +74,13 @@ const LandingPage = ({
 
         return data;
     };
-
-    // const countrySelect = (slug) => {
-    //     // console.log('country', country);
-    //     let newQuery;
-    //     if (query.id[0] === 'world') newQuery = slug;
-    //     else newQuery = `${query.id[0].toLowerCase()}+${slug}`;
-    //     router.push(`${newQuery}/${filterType.current}`);
-    // };
-
     const countrySelect = (code) => {
         if (pillCountryList.find((item) => item === 'WORLD'))
             setPillCountryList([code]);
         else setPillCountryList((prev) => [...prev, code]);
 
-        // let newQuery;
-        // if (query.id[0] === 'world') newQuery = slug;
-        // else newQuery = `${query.id[0].toLowerCase()}+${slug}`;
-        // router.push(`${newQuery}/${filterType.current}`);
     };
+
 
     const loadExperiences = (countryIds, type, page = 1) => {
         getExps(countryIds, type, page).then((data) => {
@@ -207,7 +195,7 @@ const LandingPage = ({
                         : 'all';
                 }
 
-                if (findParams.current.length) {
+                if(findParams.current.length) {
                     loadExperiences(findParams.current, filterType.current);
                     const splitList = findParams.current.split('-');
                     setPillCountryList(splitList);

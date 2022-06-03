@@ -30,6 +30,7 @@ export const removeFromCartAction = (id) => {
             });
 };
 export const updateCartAction = (pData) => {
+    
     return (dispatch) =>
         dispatch({
             type: types.UPDATE_CART,

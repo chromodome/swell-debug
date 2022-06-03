@@ -44,7 +44,6 @@ const LandingPage = ({
                 <SliderInterests
                     sectionTitles={translations[lang].sections.wanderByInterest}
                     data={categories || []}
-                    // data={dataLanding?.data?.interests || []}
                     path={'/experiences/interest/'}
                     world={false}
                 />

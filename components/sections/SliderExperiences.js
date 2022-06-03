@@ -25,9 +25,6 @@ const SliderExperiences = ({
                 dataLoading={dataLoading}>
                 {!dataLoading ? (
                     latestList.map((item, index) => {
-                        // if(!item.user) {
-                        //     return null;
-                        // }
 
                         return (
                             <ResultCard

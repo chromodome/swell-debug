@@ -1,17 +1,16 @@
 import swell from './swelljs'
 
 const fetchApi = async (query='get', method='list', variables={}, queryStr) => {
-console.log(query, queryStr, {...variables})
-
     if(query === 'get') {
         return await swell[query](queryStr, {...variables});
     } 
     if(method === 'updateItem') {
         return await swell[query][method](queryStr, {...variables})
     }
+
     return await swell[query][method](typeof variables === 'string' ? variables : Array.isArray(variables) ? [...variables] : {...variables});
 }
-
+// , content: {cust_id: "60e1ff132fe7042f353d1b28"}
 export default fetchApi
 // console.log('query', query)
 

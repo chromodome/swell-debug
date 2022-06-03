@@ -14,7 +14,6 @@ import SectionWhatToDo from '@/components/experiencepage/SectionWhatToDo';
 import SectionWhereToStay from '@/components/experiencepage/SectionWhereToStay';
 import SectionMarketingItinerary from '@/components/experiencepage/SectionMarketingItinerary';
 import SectionPricingBooking from '@/components/experiencepage/SectionPricingBooking';
-import { updateCartAction } from '@/store/actions/swell/cart';
 import { NEXT_PUBLIC_DIGITAL_ONLY } from '@/constants/public';
 import SectionWhatsIncluded from '@/components/experiencepage/SectionWhatsIncluded';
 import SectionPolicies from '@/components/experiencepage/SectionPolicies';
@@ -57,18 +56,12 @@ const ExperienceDetail = ({
             content: { destinations, experience_id, views }
         }
     } = contentfulExperience;
-    console.log('type', type);
-    console.log('experience', contentfulExperience);
-
-    const updateViews = async (swellExpId, views) => {
-        const response = await fetch(
-            `/api/views/${swellExpId}?views=${views}`,
-            {
-                method: 'PUT',
-                body: [],
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+    const updateViews =  async (swellExpId, views)=> {
+        const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
+            method: 'PUT',
+            body: [],
+            headers: {
+                'Content-Type': 'application/json'
             }
         );
     };
