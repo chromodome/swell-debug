@@ -58,10 +58,11 @@ const ExperienceDetail = ({
     } = contentfulExperience;
     const updateViews =  async (swellExpId, views)=> {
         const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
-            method: 'PUT',
-            body: [],
-            headers: {
-                'Content-Type': 'application/json'
+                method: 'PUT',
+                body: [],
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
         );
     };
