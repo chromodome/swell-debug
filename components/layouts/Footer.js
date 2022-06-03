@@ -71,17 +71,17 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                     label="Updates for Covid-19"
                                 />
                                 <FooterMenuLink
-                                    url="help/article/1001"
+                                    url="/help/article/1001"
                                     label="Help Center"
                                 />
                                 <FooterMenuLink
                                     url="/help/article/4001"
                                     label="Terms of Service"
                                 />
-                                <FooterMenuLink
+                                {/* <FooterMenuLink
                                     url="/help/article/4002"
                                     label="Cancellation and refunds"
-                                />
+                                /> */}
 
                                 <FooterMenuLink
                                     url="/help/article/4004"
