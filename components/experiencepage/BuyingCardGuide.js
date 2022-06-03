@@ -18,17 +18,15 @@ import { DatePicker } from 'react-nice-dates';
 import PillType from '../blocks/Card/PillType';
 import classNames from 'classnames';
 import InputDate from '../blocks/InputDate';
+import SkeletonText from '../blocks/Card/SkeletonText';
+import SkeletonButton from '../blocks/Card/SkeletonButton';
 
 const currencyOptions = {
     rounding: 0.001
 };
 
 const BuyingCardGuide = ({
-    // auth: {
-    //     user: {
-    //         profile: { currency: preferredCurrency }
-    //     }
-    // },
+    mobile,
     auth,
     productData,
     loading = true,
@@ -230,16 +228,25 @@ const BuyingCardGuide = ({
 
     return (
         <div
-            className={`relative flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
+            className={classNames(
+                'relative flex flex-col px-4 xl:px-8 pt-8 pb-2 md:pb-4 xl:pb-8 xl:pt-8 bg-kn-white ',
+                mobile
+                    ? 'rounded-t-2xl shadow-cards-top'
+                    : 'rounded-2xl shadow-cards',
+                classes
+            )}>
             {!loading && currentVariant ? (
                 Object.keys(variants).length && !isNaN(date.getTime()) ? (
                     <>
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                             <PillType type="guided" label="Buying Options" />
                         </div>
-                        <div className="flex flex-col gap-4">
-                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                                <div className="flex items-center gap-2 text-2xl font-semibold uppercase  ">
+                        <div className="flex md:hidden lg:flex flex-col gap-4">
+                            <div
+                                className={classNames(
+                                    'flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4'
+                                )}>
+                                <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
                                     <div
                                         className={classNames(
                                             'flex items-center'
@@ -275,7 +282,7 @@ const BuyingCardGuide = ({
                                     )}
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-8">
+                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4 vk">
                                 <div className="flex items-center gap-2 ">
                                     <i className="ri-calendar-2-line text-xl text-green-500"></i>
                                     <div className="text-xs uppercase flex-none">
@@ -289,28 +296,6 @@ const BuyingCardGuide = ({
                                     modifiers={modifiers}
                                     modifiersClassNames={modifiersClassNames}>
                                     {({ inputProps, focused }) => (
-                                        // <InputDate
-                                        //     isDisabled={false}
-                                        //     normal
-                                        //     whiteBg
-                                        //     bgColor="#ffffff"
-                                        //     handleChange={updatePeople}
-                                        //     id="price"
-                                        //     iconText="Check-in"
-                                        //     iconClass="text-xs"
-                                        //     iconPadding="pl-36 pr-2"
-                                        //     width="w-full"
-                                        //     height="h-10"
-                                        //     margins=""
-                                        //     // value={currentVariant.quantity}
-                                        //     placeholder=""
-                                        //     //rtl={rtl}
-                                        //     type={'number'}
-                                        //     autoComplete={'off'}
-                                        //     {...inputProps}
-                                        //     focused={focused}
-                                        // />
-
                                         <div className="relative">
                                             <div className="ml-4 absolute left-0 top-1/2 transform -translate-y-1/2 text-xs text-gray-600 whitespace-nowrap">
                                                 Check-in
@@ -356,59 +341,168 @@ const BuyingCardGuide = ({
                                 width="w-full"
                             />
                         </div>
-                        <div className="flex flex-col mt-8 px-2 gap-4">
-                            <div className="flex flex-col text-sm">
-                                <div className="flex justify-between">
-                                    <div className="flex gap-1">
-                                        <span className="text-base">$</span>
-                                        <span className="">
-                                            {formatPrice(
-                                                currentVariant?.price,
-                                                'USD',
-                                                window.navigator.language,
-                                                currencyOptions
-                                            )}
-                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
-                                        </span>
-                                        <span>x</span>
-                                        <span>{currentVariant.quantity}</span>
-                                        <span>guests</span>
-                                    </div>
-                                    <div className="flex gap-1">
-                                        <span className="text-base">$</span>
-                                        <span className="">
-                                            {formatPrice(
-                                                cost,
-                                                'USD',
-                                                window.navigator.language,
-                                                currencyOptions
-                                            )}
-                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
-                                        </span>
+                        <div className="hidden md:flex lg:hidden gap-4 ">
+                            <div className="flex flex-col gap-2 w-1/2 justify-between h-max">
+                                <div
+                                    className={classNames(
+                                        'flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4'
+                                    )}>
+                                    <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
+                                        <div
+                                            className={classNames(
+                                                'flex items-center'
+                                            )}>
+                                            <span className="text-base">$</span>
+                                            <span className="">
+                                                {formatPrice(
+                                                    currentVariant?.price,
+                                                    'USD',
+                                                    window.navigator.language,
+                                                    currencyOptions
+                                                )}
+                                                {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                            </span>
+                                        </div>
+
+                                        {preferredCurrency !== 'USD' && (
+                                            <>
+                                                <i className="las la-equals text-green-500"></i>
+                                                <span className="relative">
+                                                    {`~${formatPrice(
+                                                        currentVariant?.price,
+                                                        preferredCurrency,
+                                                        window.navigator
+                                                            .language,
+                                                        currencyOptions
+                                                    )}`}
+                                                    {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                                </span>
+                                                <div className="text-sm">
+                                                    {currency.symbol}*
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
+                                <Button
+                                    disabled={btnDisabled}
+                                    label={btnLabel}
+                                    as="button"
+                                    handleClick={addExpToCart}
+                                    width="w-full"
+                                />
                             </div>
-                            <div className="border-t border-gray-300"></div>
-                            <div className="flex flex-col text-sm font-bold">
-                                <div className="flex justify-between">
-                                    <div className="flex gap-1">
-                                        <span className="text-base">Total</span>
-                                    </div>
-                                    <div className="flex gap-1">
-                                        <span className="text-base">$</span>
-                                        <span className="">
-                                            {formatPrice(
-                                                cost,
-                                                'USD',
-                                                window.navigator.language,
-                                                currencyOptions
-                                            )}
-                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
-                                        </span>
+                            <div className="w-1/2 flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4">
+                                <div className="flex items-center gap-2 ">
+                                    <i className="ri-calendar-2-line text-xl text-green-500"></i>
+                                    <div className="text-xs uppercase flex-none">
+                                        Booking Date
                                     </div>
                                 </div>
+                                <DatePicker
+                                    date={date}
+                                    onDateChange={changeVariant}
+                                    locale={enGB}
+                                    modifiers={modifiers}
+                                    modifiersClassNames={modifiersClassNames}>
+                                    {({ inputProps, focused }) => (
+                                        <div className="relative">
+                                            <div className="ml-4 absolute left-0 top-1/2 transform -translate-y-1/2 text-xs text-gray-600 whitespace-nowrap">
+                                                Check-in
+                                            </div>
+
+                                            <input
+                                                className={classNames(
+                                                    focused
+                                                        ? ' input-focused'
+                                                        : 'input',
+                                                    'flex-1 w-full focus:outline-none text-sm h-10 rounded-xl pl-28 pr-4'
+                                                )}
+                                                {...inputProps}
+                                            />
+                                        </div>
+                                    )}
+                                </DatePicker>
+                                <Block__InputSingle
+                                    isDisabled={false}
+                                    normal
+                                    whiteBg
+                                    bgColor="#ffffff"
+                                    handleChange={updatePeople}
+                                    id="price"
+                                    iconText="Guests"
+                                    iconClass="text-xs"
+                                    iconPadding="pl-36 pr-2"
+                                    width="w-full"
+                                    height="h-10"
+                                    margins=""
+                                    value={currentVariant.quantity}
+                                    placeholder=""
+                                    //rtl={rtl}
+                                    type={'number'}
+                                    autoComplete={'off'}
+                                />
                             </div>
                         </div>
+                        {!mobile && (
+                            <div className="flex flex-col mt-8 px-2 gap-4">
+                                <div className="flex flex-col text-sm">
+                                    <div className="flex justify-between">
+                                        <div className="flex gap-1">
+                                            <span className="text-base">$</span>
+                                            <span className="">
+                                                {formatPrice(
+                                                    currentVariant?.price,
+                                                    'USD',
+                                                    window.navigator.language,
+                                                    currencyOptions
+                                                )}
+                                                {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                            </span>
+                                            <span>x</span>
+                                            <span>
+                                                {currentVariant.quantity}
+                                            </span>
+                                            <span>guests</span>
+                                        </div>
+                                        <div className="flex gap-1">
+                                            <span className="text-base">$</span>
+                                            <span className="">
+                                                {formatPrice(
+                                                    cost,
+                                                    'USD',
+                                                    window.navigator.language,
+                                                    currencyOptions
+                                                )}
+                                                {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="border-t border-gray-300"></div>
+                                <div className="flex flex-col text-sm font-bold">
+                                    <div className="flex justify-between">
+                                        <div className="flex gap-1">
+                                            <span className="text-base">
+                                                Total
+                                            </span>
+                                        </div>
+                                        <div className="flex gap-1">
+                                            <span className="text-base">$</span>
+                                            <span className="">
+                                                {formatPrice(
+                                                    cost,
+                                                    'USD',
+                                                    window.navigator.language,
+                                                    currencyOptions
+                                                )}
+                                                {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                         {/* <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
                             <p className="">{desc}</p>
                         </div>
@@ -426,7 +520,61 @@ const BuyingCardGuide = ({
                     <div>No Bookable dates avaialable</div>
                 )
             ) : (
-                <Spinner />
+                <>
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                        <PillType type="guided" label="Buying Options" />
+                    </div>
+                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
+                        <div className="flex items-center gap-2 justify-center">
+                            {/* <i className="ri-download-cloud-2-line text-xl text-green-500"></i> */}
+                            <SkeletonText width="w-6" height="h-6" />
+                            <SkeletonText width="w-28" />
+                            {/* <div className="text-xs uppercase">
+                            Digital Access Price
+                        </div> */}
+                        </div>
+
+                        <div className="justify-center flex items-center gap-2 text-2xl font-semibold uppercase animate-pulse my-4">
+                            <SkeletonText width="w-28" />
+                            <SkeletonText width="w-16" />
+                        </div>
+                    </div>
+                    <div className="flex flex-col  gap-4 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-8 mt-4">
+                        <div className="flex items-center gap-2 justify-center ">
+                            <SkeletonText width="w-48" />
+                        </div>
+                        <div className="flex items-center gap-2 justify-center ">
+                            <SkeletonText width="w-48" />
+                        </div>
+                    </div>
+                    <div
+                        className={classNames(
+                            'h-full flex items-center flex-col justify-between',
+                            'mt-4'
+                        )}>
+                        <SkeletonButton width="w-full" />
+
+                        {children}
+                    </div>
+                    {!mobile && (
+                        <>
+                            <div className="py-6 px-2">
+                                <div className="flex flex-col gap-3 text-xs">
+                                    <SkeletonText width="w-28" />
+                                    <SkeletonText width="w-20" />
+                                </div>
+                            </div>
+                            <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                                <p className="">{desc}</p>
+                            </div>
+                            <div className="pt-6 px-2">
+                                <div className="flex flex-col gap-3 text-xs">
+                                    <SkeletonText width="w-28" />
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </>
             )}
         </div>
     );

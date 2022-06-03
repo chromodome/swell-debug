@@ -15,9 +15,10 @@ import 'react-dates/lib/css/_datepicker.css';
 import '@/styles/datepicker.custom.css';
 import '@/styles/rcSlider.css';
 import 'rc-slider/assets/index.css';
-import 'react-nice-dates/build/style.css'
+import 'react-nice-dates/build/style.css';
 import '@/styles/calendar.css';
 import '@/styles/editor.css';
+import '@/styles/niceDates.css';
 
 import Head from 'next/head';
 import SimpleReactLightbox from 'simple-react-lightbox';
@@ -78,7 +79,6 @@ function MyApp({ Component, pageProps }) {
                         />
                     </Head>
                     <Provider store={store}>
-                        
                         <ToastContainer
                             className="mt-36"
                             // toastClassName={({ type }) =>
