@@ -9,6 +9,7 @@ import { currenciesObject } from 'constants/currenciesObject';
 import SkeletonText from '../blocks/Card/SkeletonText';
 import SkeletonButton from '../blocks/Card/SkeletonButton';
 import classNames from 'classnames';
+import PillType from '../blocks/Card/PillType';
 
 const currencyOptions = {
     rounding: 0.001
@@ -84,9 +85,12 @@ const BuyingCardDigital = ({
 
     return (
         <div
-            className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
+            className={`relative flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
             {!loading && !loadingIds ? (
                 <>
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                        <PillType type="digital" label="Buying Options" />
+                    </div>
                     <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
                         <div className="flex items-center gap-2 ">
                             <i className="ri-download-cloud-2-line text-xl text-green-500"></i>

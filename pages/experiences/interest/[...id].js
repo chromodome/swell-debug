@@ -9,18 +9,20 @@ import ExperienceFilter from '@/blocks/ExperienceFilter';
 import LoadMore from '@/blocks/LoadMore';
 import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
 import { pageCount } from '@/helpers/FEutils';
-import { getLandingPage } from '@/helpers/apiServices/experiences';
+// import { getLandingPage } from '@/helpers/apiServices/experiences';
 import SliderInterests from '@/components/sections/SliderInterests';
 import Row from '@/components/sections/Row';
+import SkeletonText from '@/components/blocks/Card/SkeletonText';
+import SliderDestinations from '@/components/sections/SliderDestinations';
 
 const LandingPage = ({
     globalState: {
         lang,
-        siteData: { categories = [] }
-    },
-    landingData
+        siteData: { destinationList = [], categories = [] }
+    }
+    // landingData
 }) => {
-    const dataLanding = JSON.parse(landingData);
+    // const dataLanding = JSON.parse(landingData);
     const { query, isReady } = useRouter();
     const [dataLoading, setDataLoading] = useState(true);
     const [loadMoreData, setLoadMoreData] = useState(false);
@@ -93,6 +95,7 @@ const LandingPage = ({
                 // 404
             }
             loadExperiences(interest.current, filterType.current);
+
             setPageIsReady(true);
         }
     }, []);
@@ -102,7 +105,8 @@ const LandingPage = ({
             <SliderInterests
                 margins="mt-12"
                 sectionTitles={translations[lang].sections.wanderByInterest}
-                data={dataLanding?.data?.interests || []}
+                // data={dataLanding?.data?.interests || []}
+                data={categories || []}
                 path={'/experiences/interest/'}
                 tagRatio="landscape"
             />
@@ -110,29 +114,69 @@ const LandingPage = ({
             {pageIsReady && (
                 <>
                     <ExperienceFilter query={query} classes="-mt-8" />
-                    {!dataLoading && (
-                        <Row>
-                            <div className="px-4">
-                                <div className="flex flex-wrap gap-2 border-t pt-4 pb-8 border-gray-300">
-                                    {totalCount.current > 0 ? (
-                                        <>
-                                            <span className="text-xl font-light text-gray-700 tracking-tight">
-                                                We found
-                                            </span>
-                                            <span className="text-xl font-semibold text-gray-700 tracking-tight">
-                                                {`${totalCount.current} Experiences`}
-                                            </span>
-                                        </>
-                                    ) : (
-                                        <span className="text-xl font-light text-gray-700 tracking-tight">
-                                            We couldn't find any experiences
-                                            matching your criteria
-                                        </span>
-                                    )}
-                                </div>
+
+                    <Row>
+                        <div className="px-4">
+                            <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
+                                {!dataLoading ? (
+                                    <>
+                                        <div className="text-3xl uppercase font-light text-blue-600">
+                                            {categories.find(
+                                                (item) =>
+                                                    item.slug ===
+                                                    interest.current
+                                            )?.name ?? 'All'}
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {totalCount.current > 0 ? (
+                                                <>
+                                                    <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                        We found
+                                                    </span>
+                                                    <span className="text-xl font-semibold text-gray-700 tracking-tight">
+                                                        {`${
+                                                            totalCount.current
+                                                        } ${
+                                                            totalCount.current >
+                                                            1
+                                                                ? 'Experiences'
+                                                                : 'Experience'
+                                                        }`}
+                                                    </span>
+                                                </>
+                                            ) : (
+                                                <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                    We couldn't find any
+                                                    experiences matching your
+                                                    criteria
+                                                </span>
+                                            )}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="flex pt-2 mb-2">
+                                            <SkeletonText
+                                                height="h-6"
+                                                width="w-36"
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-2 pt-2">
+                                            <SkeletonText
+                                                height="h-4"
+                                                width="w-20"
+                                            />
+                                            <SkeletonText
+                                                height="h-4"
+                                                width="w-36"
+                                            />
+                                        </div>
+                                    </>
+                                )}
                             </div>
-                        </Row>
-                    )}
+                        </div>
+                    </Row>
+
                     <GridList
                         // sectionTitles={translations[lang].sections.trendingThisWeek}
                         data={expList}
@@ -140,15 +184,24 @@ const LandingPage = ({
                         btnAction="load"
                         btnUrl="/experiences/search"
                         dataLoading={dataLoading}
+                        loadMoreData={loadMoreData}
                         handleLoadClick={handleLoadClick}
                         showButton={
                             currentPage.current !== totalPages.current ||
                             loadMoreData
                         }
                     />
+                    <SliderDestinations
+                        margins="mt-12"
+                        sectionTitles={
+                            translations[lang].sections.wanderByDestination
+                        }
+                        data={destinationList || []}
+                        tagRatio="landscape"
+                    />
                 </>
             )}
-            <LoadMore loadMoreData={loadMoreData} />
+            {/* <LoadMore loadMoreData={loadMoreData} /> */}
         </Layout>
     );
 };
@@ -164,21 +217,21 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
 
-export async function getServerSideProps({ params }) {
-    let landingData = null;
+// export async function getServerSideProps({ params }) {
+//     let landingData = null;
 
-    try {
-        landingData = await getLandingPage();
-    } catch (error) {
-        return {
-            props: {},
-            notFound: true
-        };
-    }
+//     try {
+//         landingData = await getLandingPage();
+//     } catch (error) {
+//         return {
+//             props: {},
+//             notFound: true
+//         };
+//     }
 
-    return {
-        props: {
-            landingData: JSON.stringify(landingData?.data)
-        }
-    };
-}
+//     return {
+//         props: {
+//             landingData: JSON.stringify(landingData?.data)
+//         }
+//     };
+// }

@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useRouter } from 'next/router';
 import Layout from '@/components/layouts/Layout';
-import {fetchCartAction, updateCartAction} from '@/store/actions/swell/cart';
-import {
-    convertVariantNameDateToIso
-} from '@/helpers/calander';
+import { fetchCartAction, updateCartAction } from '@/store/actions/swell/cart';
+import { convertVariantNameDateToIso } from '@/helpers/calander';
 import ExpSubsection from '@/components/sections/ExpSubsection';
 import { currenciesObject } from '@/constants/currenciesObject';
 import { getCheckoutData } from '@/helpers/apiServices/checkout';
@@ -38,6 +36,8 @@ import FormIkPayment from '@/components/forms/FormIkPayment';
 import { CardAmex, CardMastercard, CardVisa } from '@/components/svg/BankCards';
 import Spinner from '@/components/blocks/Spinner';
 import { postPurchase } from '@/helpers/apiServices/purchases';
+import Row from '@/components/sections/Row';
+import LayoutLoading from '@/components/layouts/LayoutLoading';
 
 // book/experiences/:id?sku=123&guests=3&isPrivate=false
 
@@ -62,15 +62,19 @@ const Checkout = ({
     const [loadingCart, setLoadingCart] = useState(true);
     const router = useRouter();
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
-    
+
     const parseCart = () => {
         const { digital, guided } = cart;
-        const type = Object.keys(digital).length ? 'DIGITAL' :  Object.keys(guided).length ? 'GUIDED' : null;
+        const type = Object.keys(digital).length
+            ? 'DIGITAL'
+            : Object.keys(guided).length
+            ? 'GUIDED'
+            : null;
         const product = {
             type,
             title: '',
             description: '',
-            featured_image: "",
+            featured_image: '',
             destinations: [],
             days: 0,
             username: '',
@@ -80,39 +84,36 @@ const Checkout = ({
             quantity: 0,
             travel_date: '',
             publish_id: '',
-            experience_id: '',
+            experience_id: ''
             //
-        }
+        };
         // convertVariantNameDateToIso
 
-        if(!type) {
+        if (!type) {
             return { type };
         }
 
-        if(type === 'GUIDED') {
-            const guidedItems =  guided[Object.keys(guided)[0]];
-            const item = guidedItems[Object.keys(guidedItems)[0]]
+        if (type === 'GUIDED') {
+            const guidedItems = guided[Object.keys(guided)[0]];
+            const item = guidedItems[Object.keys(guidedItems)[0]];
 
             const {
-                price=0,
-                price_total: totalPrice=0,
-                quantity=0,
-                variant: {
-                    name
-                },
-                product:
-                    {
-                        name: title='',
-                        description='',
-                        content: {
-                            featured_image="",
-                            destinations=[],
-                            days=0,
-                            username='',
-                            first='',
-                            publish_id,
-                            experience_id,
-                        }
+                price = 0,
+                price_total: totalPrice = 0,
+                quantity = 0,
+                variant: { name },
+                product: {
+                    name: title = '',
+                    description = '',
+                    content: {
+                        featured_image = '',
+                        destinations = [],
+                        days = 0,
+                        username = '',
+                        first = '',
+                        publish_id,
+                        experience_id
+                    }
                 }
             } = item;
 
@@ -128,29 +129,28 @@ const Checkout = ({
             product['quantity'] = quantity;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
-            product['travel_date'] = convertVariantNameDateToIso(name)
+            product['travel_date'] = convertVariantNameDateToIso(name);
         }
 
-        if(type === 'DIGITAL') {
-            const { 
-                price=0,
-                price_total: totalPrice=0,
-                quantity=0,
-                product:
-                    {
-                        name: title='',
-                        description='',
-                        content: {
-                            featured_image="",
-                            destinations=[],
-                            days=0,
-                            username='',
-                            first='',
-                            publish_id,
-                            experience_id,
-                        }
+        if (type === 'DIGITAL') {
+            const {
+                price = 0,
+                price_total: totalPrice = 0,
+                quantity = 0,
+                product: {
+                    name: title = '',
+                    description = '',
+                    content: {
+                        featured_image = '',
+                        destinations = [],
+                        days = 0,
+                        username = '',
+                        first = '',
+                        publish_id,
+                        experience_id
+                    }
                 }
-            } =  digital[Object.keys(digital)[0]];
+            } = digital[Object.keys(digital)[0]];
 
             product['featured_image'] = featured_image;
             product['destinations'] = destinations;
@@ -167,7 +167,7 @@ const Checkout = ({
         }
 
         return product;
-    }
+    };
     const {
         type,
         featured_image,
@@ -182,18 +182,18 @@ const Checkout = ({
         quantity,
         travel_date,
         publish_id,
-        experience_id,
+        experience_id
     } = parseCart();
 
     const {
-        unitPrice=1,
-        qty=1,
-        subTotal=1,
-        discountTotal=1,
-        discountArr=[],
-        taxRate=1,
-        tax=1,
-        total=1
+        unitPrice = 1,
+        qty = 1,
+        subTotal = 1,
+        discountTotal = 1,
+        discountArr = [],
+        taxRate = 1,
+        tax = 1,
+        total = 1
     } = {};
 
     const { rate } = useXchangeRate({ from: 'USD', to: preferredCurrency });
@@ -277,9 +277,9 @@ const Checkout = ({
 
     const [postingOrder, setPostingOrder] = useState(false);
     const handleSubmit = (values, actions) => {
-        const guidedData = {}
+        const guidedData = {};
 
-        if(type == 'GUIDED') {
+        if (type == 'GUIDED') {
             guidedData.people = quantity;
             guidedData.travel_date = travel_date;
         }
@@ -291,36 +291,37 @@ const Checkout = ({
             experience_id,
             type,
             title,
-            experience: publish_id,
+            experience: publish_id
         }).then(() => {
             setTimeout(() => {
                 updateCartAction([]);
                 router.replace('/experiences/purchased');
-            }, 2000)
-            
-        })
-
+            }, 2000);
+        });
 
         //  console.log('userId',auth.user.id,'\nquantity', quantity,'\npublish_id',publish_id, "\nexperience_id", experience_id, '\ntravel_date', travel_date )
         // submitPayment({ ...values, ccCountry: selectedCountry });
         // console.log('values =', { ...values, ccCountry: selectedCountry });
         //actions.setSubmitting(true);
     };
-    const reloadCartTimeoutId = useRef(null)
-    const reloadCart =  () => {
+    const reloadCartTimeoutId = useRef(null);
+    const reloadCart = () => {
         // When local storage changes, dump the list to
         // It means cart updated reload cart
-        clearTimeout(reloadCartTimeoutId.current)
-        if(window.localStorage.getItem('xx') !== JSON.stringify(cart) && !loadingCart) {
+        clearTimeout(reloadCartTimeoutId.current);
+        if (
+            window.localStorage.getItem('xx') !== JSON.stringify(cart) &&
+            !loadingCart
+        ) {
             reloadCartTimeoutId.current = setTimeout(() => {
                 setLoadingCart(true);
                 fetchCartAction().then(() => {
                     setLoadingCart(false);
                 });
-            }, 1000)
+            }, 1000);
         }
-      //  console.log(JSON.parse(window.localStorage.getItem('xx')));
-    }
+        //  console.log(JSON.parse(window.localStorage.getItem('xx')));
+    };
 
     // end form submission
     useEffect(() => {
@@ -330,233 +331,245 @@ const Checkout = ({
             cartListener = window.addEventListener('storage', reloadCart);
         });
 
-        return  () => window.removeEventListener('storage', cartListener);
+        return () => window.removeEventListener('storage', cartListener);
     }, []);
 
     useEffect(() => {
-        if(!siteLoading) {
-            if(!auth.isAuthenticated) {
+        if (!siteLoading) {
+            if (!auth.isAuthenticated) {
                 updateCartAction([]); // reset cart and leave page
-                router.replace('/')
+                router.replace('/');
             }
         }
-        
     }, [siteLoading]);
 
     return (
         <>
             <Layout>
-
-                {!loadingCart && type && !postingOrder
-                ? <div
-                    className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
-                    <div className={``}>
-                        <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
-                            Checkout
+                {!loadingCart && type && !postingOrder ? (
+                    <div
+                        className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
+                        <div className={``}>
+                            <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
+                                Checkout
+                            </div>
                         </div>
-                    </div>
-                    <main className={`flex items-start lg:gap-16 xl:gap-24 `}>
-                        <section className="w-96 lg:w-3/5 mb-24">
-                        
-                            {type == 'GUIDED' && (
-                                <>
-                                    <ExpSubsection
-                                        padding="pb-8"
-                                        margins="mb-8">
-                                        <div className="text-green-400 text-2xl font-bold mb-4">
-                                            Your booking
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <div className="flex flex-col gap-1">
-                                                <div className="font-bold">
-                                                    Date
-                                                </div>
-                                                <div>
-                                                    {moment(
-                                                        travel_date
-                                                    ).format('MMMM Do YYYY')}
-                                                </div>
+                        <main
+                            className={`flex items-start lg:gap-16 xl:gap-24 `}>
+                            <section className="w-96 lg:w-3/5 mb-24">
+                                {type == 'GUIDED' && (
+                                    <>
+                                        <ExpSubsection
+                                            padding="pb-8"
+                                            margins="mb-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                                Your booking
                                             </div>
-                                            {/* <div className="flex flex-col">
+                                            <div className="flex flex-col gap-4">
+                                                <div className="flex flex-col gap-1">
+                                                    <div className="font-bold">
+                                                        Date
+                                                    </div>
+                                                    <div>
+                                                        {moment(
+                                                            travel_date
+                                                        ).format(
+                                                            'MMMM Do YYYY'
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                {/* <div className="flex flex-col">
                                                 <div className="font-bold">
                                                     Guests
                                                 </div>
                                                 <div>Dropdown here</div>
                                             </div> */}
-                                        </div>
-                                    </ExpSubsection>
+                                            </div>
+                                        </ExpSubsection>
 
-                                    <ExpSubsection
-                                        padding="pb-8"
-                                        margins="mb-8">
-                                        <div className="text-green-400 text-2xl font-bold mb-4">
-                                            Guest info
-                                        </div>
-                                        <div>
-                                            Lorem ipsum, dolor sit amet
-                                            consectetur adipisicing elit. Cumque
-                                            culpa ipsam ducimus ullam
-                                            consequatur exercitationem, atque
-                                            ratione officia autem temporibus.
-                                        </div>
-                                    </ExpSubsection>
-                                </>
-                            )}
-                            <ExpSubsection padding="pb-8" margins="mb-8">
-                                <div className="text-green-400 text-2xl font-bold mb-4">
-                                    Summary
-                                </div>
-                                <div dangerouslySetInnerHTML={{__html: description}} />
-                            </ExpSubsection>
-                            <ExpSubsection padding="pb-8" margins="mb-8">
-                                <div className="text-green-400 text-2xl font-bold mb-4">
-                                    Payment info
-                                </div>
-                                <div>
+                                        <ExpSubsection
+                                            padding="pb-8"
+                                            margins="mb-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                                Guest info
+                                            </div>
+                                            <div>
+                                                Lorem ipsum, dolor sit amet
+                                                consectetur adipisicing elit.
+                                                Cumque culpa ipsam ducimus ullam
+                                                consequatur exercitationem,
+                                                atque ratione officia autem
+                                                temporibus.
+                                            </div>
+                                        </ExpSubsection>
+                                    </>
+                                )}
+                                <ExpSubsection padding="pb-8" margins="mb-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                        Summary
+                                    </div>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: description
+                                        }}
+                                    />
+                                </ExpSubsection>
+                                <ExpSubsection padding="pb-8" margins="mb-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                        Payment info
+                                    </div>
                                     <div>
-                                        <Formik
-                                            initialValues={{
-                                                ccName: '',
-                                                ccNb: '',
-                                                ccExpiry: '',
-                                                ccCode: '',
-                                                ccCountry: 'FR'
-                                            }}
-                                            validationSchema={Yup.object({
-                                                ccName: Yup.string()
-                                                    .min(2, 'Min 2 characters')
-                                                    .max(
-                                                        50,
-                                                        'Max 50 characters'
-                                                    )
+                                        <div>
+                                            <Formik
+                                                initialValues={{
+                                                    ccName: '',
+                                                    ccNb: '',
+                                                    ccExpiry: '',
+                                                    ccCode: '',
+                                                    ccCountry: 'FR'
+                                                }}
+                                                validationSchema={Yup.object({
+                                                    ccName: Yup.string()
+                                                        .min(
+                                                            2,
+                                                            'Min 2 characters'
+                                                        )
+                                                        .max(
+                                                            50,
+                                                            'Max 50 characters'
+                                                        )
 
-                                                    .matches(
-                                                        regexString,
-                                                        'Numbers and special characters are not allowed.'
-                                                    )
-                                                    .required(
-                                                        'Name is a required field'
-                                                    ),
+                                                        .matches(
+                                                            regexString,
+                                                            'Numbers and special characters are not allowed.'
+                                                        )
+                                                        .required(
+                                                            'Name is a required field'
+                                                        ),
 
-                                                ccNb: Yup.string()
-                                                    .min(
-                                                        15,
-                                                        'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
-                                                    )
-                                                    .max(
-                                                        19,
-                                                        'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
-                                                    )
-                                                    .required(
-                                                        'Card number is a required field'
-                                                    ),
-                                                ccExpiry: Yup.string()
-                                                    .length(4, 'Invalid Date')
-                                                    .required(
-                                                        'Expiry is a required field'
-                                                    ),
-                                                ccCode: Yup.string()
+                                                    ccNb: Yup.string()
+                                                        .min(
+                                                            15,
+                                                            'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
+                                                        )
+                                                        .max(
+                                                            19,
+                                                            'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
+                                                        )
+                                                        .required(
+                                                            'Card number is a required field'
+                                                        ),
+                                                    ccExpiry: Yup.string()
+                                                        .length(
+                                                            4,
+                                                            'Invalid Date'
+                                                        )
+                                                        .required(
+                                                            'Expiry is a required field'
+                                                        ),
+                                                    ccCode: Yup.string()
 
-                                                    .matches(
-                                                        /^[0-9]+$/,
-                                                        'only digits'
-                                                    )
-                                                    .min(
-                                                        3,
-                                                        'CVC Must be at least 3 digits'
-                                                    )
-                                                    .max(4, 'Max 4 digits')
-                                                    .required(
-                                                        'CVC is a required field'
-                                                    )
-                                            })}
-                                            onSubmit={handleSubmit}>
-                                            {(props) => (
-                                                <Form id="paymentForm">
-                                                    <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
-                                                        <div className="md:w-1/2 lg:w-full flex-1 flex flex-col">
-                                                            <div className="flex items-center justify-end gap-6 mb-2 mr-4">
-                                                                <span className="text-xs">
-                                                                    We accept
-                                                                </span>
-                                                                <div className="flex items-center gap-4 ">
-                                                                    <CardAmex />
-                                                                    <CardVisa />
-                                                                    <CardMastercard />
+                                                        .matches(
+                                                            /^[0-9]+$/,
+                                                            'only digits'
+                                                        )
+                                                        .min(
+                                                            3,
+                                                            'CVC Must be at least 3 digits'
+                                                        )
+                                                        .max(4, 'Max 4 digits')
+                                                        .required(
+                                                            'CVC is a required field'
+                                                        )
+                                                })}
+                                                onSubmit={handleSubmit}>
+                                                {(props) => (
+                                                    <Form id="paymentForm">
+                                                        <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
+                                                            <div className="md:w-1/2 lg:w-full flex-1 flex flex-col">
+                                                                <div className="flex items-center justify-end gap-6 mb-2 mr-4">
+                                                                    <span className="text-xs">
+                                                                        We
+                                                                        accept
+                                                                    </span>
+                                                                    <div className="flex items-center gap-4 ">
+                                                                        <CardAmex />
+                                                                        <CardVisa />
+                                                                        <CardMastercard />
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div className="w-full flex flex-col rounded-xl border-gray-3001 gap-1 relative mb-8 ">
-                                                                <FormIkPayment
-                                                                    name="ccName"
-                                                                    label="Cardholder's name"
-                                                                    placeholder="Samy Tai"
-                                                                    radius="rounded-xl"
-                                                                    radiusActive="rounded-xl"
-                                                                    autoComplete="off"
-                                                                    icon="ri-user-3-line"
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={`w-full flex flex-col rounded-xl border-gray-3001 mb-8 gap-1 relative`}>
-                                                                <FormIkPayment
-                                                                    name="ccNb"
-                                                                    label="Card number"
-                                                                    placeholder="0000 0000 0000 0000"
-                                                                    radius="rounded-t-xl"
-                                                                    radiusActive="rounded-xl"
-                                                                    autoComplete="off"
-                                                                    options={{
-                                                                        creditCard: true
-                                                                    }}
-                                                                    icon="ri-bank-card-line"
-                                                                    filterMode={
-                                                                        true
-                                                                    }
-                                                                    cardMode
-                                                                />
+                                                                <div className="w-full flex flex-col rounded-xl border-gray-3001 gap-1 relative mb-8 ">
+                                                                    <FormIkPayment
+                                                                        name="ccName"
+                                                                        label="Cardholder's name"
+                                                                        placeholder="Samy Tai"
+                                                                        radius="rounded-xl"
+                                                                        radiusActive="rounded-xl"
+                                                                        autoComplete="off"
+                                                                        icon="ri-user-3-line"
+                                                                    />
+                                                                </div>
                                                                 <div
-                                                                    className={`w-full flex gap-1`}>
+                                                                    className={`w-full flex flex-col rounded-xl border-gray-3001 mb-8 gap-1 relative`}>
                                                                     <FormIkPayment
-                                                                        name="ccExpiry"
-                                                                        type="text"
-                                                                        label="Expiry"
-                                                                        placeholder="MM/YY"
-                                                                        radius="rounded-bl-xl"
+                                                                        name="ccNb"
+                                                                        label="Card number"
+                                                                        placeholder="0000 0000 0000 0000"
+                                                                        radius="rounded-t-xl"
                                                                         radiusActive="rounded-xl"
                                                                         autoComplete="off"
                                                                         options={{
-                                                                            date: true,
-                                                                            datePattern:
-                                                                                [
-                                                                                    'm',
-                                                                                    'y'
-                                                                                ]
+                                                                            creditCard: true
                                                                         }}
-                                                                        icon="ri-calendar-check-line"
-                                                                        filterMode
+                                                                        icon="ri-bank-card-line"
+                                                                        filterMode={
+                                                                            true
+                                                                        }
+                                                                        cardMode
                                                                     />
-                                                                    <FormIkPayment
-                                                                        name="ccCode"
-                                                                        type="text"
-                                                                        label="CVC"
-                                                                        placeholder="345"
-                                                                        radius="rounded-br-xl"
-                                                                        radiusActive="rounded-xl"
-                                                                        autoComplete="off"
-                                                                        options={{
-                                                                            blocks: [
-                                                                                4
-                                                                            ],
+                                                                    <div
+                                                                        className={`w-full flex gap-1`}>
+                                                                        <FormIkPayment
+                                                                            name="ccExpiry"
+                                                                            type="text"
+                                                                            label="Expiry"
+                                                                            placeholder="MM/YY"
+                                                                            radius="rounded-bl-xl"
+                                                                            radiusActive="rounded-xl"
+                                                                            autoComplete="off"
+                                                                            options={{
+                                                                                date: true,
+                                                                                datePattern:
+                                                                                    [
+                                                                                        'm',
+                                                                                        'y'
+                                                                                    ]
+                                                                            }}
+                                                                            icon="ri-calendar-check-line"
+                                                                            filterMode
+                                                                        />
+                                                                        <FormIkPayment
+                                                                            name="ccCode"
+                                                                            type="text"
+                                                                            label="CVC"
+                                                                            placeholder="345"
+                                                                            radius="rounded-br-xl"
+                                                                            radiusActive="rounded-xl"
+                                                                            autoComplete="off"
+                                                                            options={{
+                                                                                blocks: [
+                                                                                    4
+                                                                                ],
 
-                                                                            numericOnly: true
-                                                                        }}
-                                                                        icon="ri-more-fill"
-                                                                        filterMode
-                                                                    />
+                                                                                numericOnly: true
+                                                                            }}
+                                                                            icon="ri-more-fill"
+                                                                            filterMode
+                                                                        />
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                            {/* <CountryList
+                                                                {/* <CountryList
                                                                 handleChange={
                                                                     handleCountryChange
                                                                 }
@@ -575,7 +588,7 @@ const Checkout = ({
                                                                 }
                                                             /> */}
 
-                                                            {/* <Checkbox
+                                                                {/* <Checkbox
                                                                 name="terms"
                                                                 isChecked={
                                                                     termsChecked
@@ -584,134 +597,141 @@ const Checkout = ({
                                                                     setTermsChecked
                                                                 }
                                                             /> */}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </Form>
-                                            )}
-                                        </Formik>
+                                                    </Form>
+                                                )}
+                                            </Formik>
+                                        </div>
                                     </div>
-                                </div>
-                            </ExpSubsection>
-                        </section>
+                                </ExpSubsection>
+                            </section>
 
-                        <aside className="lg:w-2/5 sticky top-24 py-4 pb-24">
-                            <div
-                                className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
-                                <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
-                                    <div className="md:w-32 overflow-hidden rounded-lg">
-                                        <img
-                                            alt=""
-                                            className="object-cover object-center w-full h-full"
-                                            data-blink-src={featured_image}
-                                        />
-                                    </div>
-                                    <div>
-                                        <div className="border-b border-green-600 border-opacity-20 pb-2">
-                                            <div className="text-sm">
-                                                {title}
-                                            </div>
-                                            <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
-                                                <div className="flex  mr-8 py-1">
-                                                    <span className="text-green-400 mr-2">
-                                                        <MapPin size={18} />
-                                                    </span>
+                            <aside className="lg:w-2/5 sticky top-24 py-4 pb-24">
+                                <div
+                                    className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
+                                    <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
+                                        <div className="md:w-32 overflow-hidden rounded-lg">
+                                            <img
+                                                alt=""
+                                                className="object-cover object-center w-full h-full"
+                                                data-blink-src={featured_image}
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className="border-b border-green-600 border-opacity-20 pb-2">
+                                                <div className="text-sm">
+                                                    {title}
+                                                </div>
+                                                <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
+                                                    <div className="flex  mr-8 py-1">
+                                                        <span className="text-green-400 mr-2">
+                                                            <MapPin size={18} />
+                                                        </span>
 
-                                                    <span className="flex flex-wrap items-center">
-                                                        {destinations?.length >
-                                                        0 ? (
-                                                            destinations.map(
-                                                                (
-                                                                    item,
-                                                                    index,
-                                                                    itemArray
-                                                                ) => {
-                                                                    return (
-                                                                        <span
-                                                                            key={`${item}_${index}`}>
-                                                                            <span className="whitespace-nowrap">
-                                                                                { item
-                                                                                /* {country(
+                                                        <span className="flex flex-wrap items-center">
+                                                            {destinations?.length >
+                                                            0 ? (
+                                                                destinations.map(
+                                                                    (
+                                                                        item,
+                                                                        index,
+                                                                        itemArray
+                                                                    ) => {
+                                                                        return (
+                                                                            <span
+                                                                                key={`${item}_${index}`}>
+                                                                                <span className="whitespace-nowrap">
+                                                                                    {
+                                                                                        item
+                                                                                        /* {country(
                                                                                     'en',
                                                                                     item.code
-                                                                                )} */}
-                                                                            </span>
-                                                                            {index <
-                                                                                itemArray.length -
-                                                                                    1 && (
-                                                                                <span className="px-1">
-                                                                                    .
+                                                                                )} */
+                                                                                    }
                                                                                 </span>
-                                                                            )}
-                                                                        </span>
-                                                                    );
-                                                                }
-                                                            )
-                                                        ) : (
-                                                            <span className="w-20 bg-gray-300 rounded-full h-2" />
-                                                        )}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center mr-8 py-1">
-                                                    <span className="text-green-400 mr-2">
-                                                        <Clock size={18} />
-                                                    </span>
-                                                    {pluralize(days, 'Day')}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="text-xs mt-4 flex flex-wrap gap-x-1">
-                                            <span>
-                                                {`A ${capitalize(
-                                                    type
-                                                )} Experience by`}
-                                            </span>
-                                            <span className="underline font-semibold text-green-700">
-                                                {`${kreatorName({username, first})}`}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
-                                    <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                                        <div className=" mb-4 font-semibold">
-                                            Price details
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <div className="flex text-xs items-center justify-between border-b-2 pb-2 border-gray-300 border-dotted">
-                                                <span className="relative">
-                                                    Price
-                                                </span>
-                                                <span className="relative">
-                                                    {price}
-                                                </span>
-                                            </div>
-
-                                            <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
-                                                <div className="flex text-xs items-center justify-between ">
-                                                    <span className="relative">
-                                                        Quantity
-                                                    </span>
-                                                    <span className="relative">
-                                                        {quantity}
-                                                    </span>
-                                                </div>
-                                                {false && (
-                                                    <div className="flex text-xs items-center justify-between">
-                                                        <span className="flex items-center gap-2">
-                                                            <span className="relative">
-                                                                {/* {
-                                                                    discountTotalJSX.lineItem
-                                                                } */}
-                                                            </span>
-                                                        </span>
-                                                        <span className="relative">
-                                                            {ffff/* {
-                                                                discountTotalJSX.amount
-                                                            } */}
+                                                                                {index <
+                                                                                    itemArray.length -
+                                                                                        1 && (
+                                                                                    <span className="px-1">
+                                                                                        .
+                                                                                    </span>
+                                                                                )}
+                                                                            </span>
+                                                                        );
+                                                                    }
+                                                                )
+                                                            ) : (
+                                                                <span className="w-20 bg-gray-300 rounded-full h-2" />
+                                                            )}
                                                         </span>
                                                     </div>
-                                                )}
-                                                {/* {discountArr.length > 0 &&
+                                                    <div className="flex items-center mr-8 py-1">
+                                                        <span className="text-green-400 mr-2">
+                                                            <Clock size={18} />
+                                                        </span>
+                                                        {pluralize(days, 'Day')}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="text-xs mt-4 flex flex-wrap gap-x-1">
+                                                <span>
+                                                    {`A ${capitalize(
+                                                        type
+                                                    )} Experience by`}
+                                                </span>
+                                                <span className="underline font-semibold text-green-700">
+                                                    {`${kreatorName({
+                                                        username,
+                                                        first
+                                                    })}`}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
+                                        <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
+                                            <div className=" mb-4 font-semibold">
+                                                Price details
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <div className="flex text-xs items-center justify-between border-b-2 pb-2 border-gray-300 border-dotted">
+                                                    <span className="relative">
+                                                        Price
+                                                    </span>
+                                                    <span className="relative">
+                                                        {price}
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
+                                                    <div className="flex text-xs items-center justify-between ">
+                                                        <span className="relative">
+                                                            Quantity
+                                                        </span>
+                                                        <span className="relative">
+                                                            {quantity}
+                                                        </span>
+                                                    </div>
+                                                    {false && (
+                                                        <div className="flex text-xs items-center justify-between">
+                                                            <span className="flex items-center gap-2">
+                                                                <span className="relative">
+                                                                    {/* {
+                                                                    discountTotalJSX.lineItem
+                                                                } */}
+                                                                </span>
+                                                            </span>
+                                                            <span className="relative">
+                                                                {
+                                                                    ffff /* {
+                                                                discountTotalJSX.amount
+                                                            } */
+                                                                }
+                                                            </span>
+                                                        </div>
+                                                    )}
+                                                    {/* {discountArr.length > 0 &&
                                                     discountArr.map(
                                                         (single, index) => {
                                                             return (
@@ -753,102 +773,121 @@ const Checkout = ({
                                                         </span>
                                                     </div>
                                                 )} */}
-                                            </div>
-                                            <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
-                                                <span className="flex">
-                                                    <span className="relative">Total</span>
-                                                    {/* {preferredCurrency !=
+                                                </div>
+                                                <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                    <span className="flex">
+                                                        <span className="relative">
+                                                            Total
+                                                        </span>
+                                                        {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             *
                                                         </span>
                                                     )} */}
-                                                </span>
-                                                <span className="flex">
-                                                    <span className="relative">
-                                                        {totalPrice}
                                                     </span>
-                                                    {/* {preferredCurrency !=
+                                                    <span className="flex">
+                                                        <span className="relative">
+                                                            {totalPrice}
+                                                        </span>
+                                                        {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             **
                                                         </span>
                                                     )}*/}
-                                                </span> 
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {preferredCurrency !== 'USD' && (
-                                        <div className="px-2 mt-4">
-                                            <div className="flex items-center gap-1 text-xs">
-                                                <div className="">
-                                                    * 1 USD ~{' '}
-                                                </div>
-                                                <span>
-                                                    {/* {formatPrice(
+                                        {preferredCurrency !== 'USD' && (
+                                            <div className="px-2 mt-4">
+                                                <div className="flex items-center gap-1 text-xs">
+                                                    <div className="">
+                                                        * 1 USD ~{' '}
+                                                    </div>
+                                                    <span>
+                                                        {/* {formatPrice(
                                                         rate,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
                                                     )} */}
-                                                </span>
-                                                <div className="">
-                                                    {/* {preferredCurrency} */}
+                                                    </span>
+                                                    <div className="">
+                                                        {/* {preferredCurrency} */}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex items-center gap-1 text-xs">
-                                                <div className="">
-                                                    ** You will be charged
-                                                </div>
-                                                <div className="">$US</div>
-                                                <span>
-                                                    {/* {formatPrice(
+                                                <div className="flex items-center gap-1 text-xs">
+                                                    <div className="">
+                                                        ** You will be charged
+                                                    </div>
+                                                    <div className="">$US</div>
+                                                    <span>
+                                                        {/* {formatPrice(
                                                         total / 100,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
                                                     )} */}
-                                                </span>
+                                                    </span>
+                                                </div>
                                             </div>
+                                        )}
+                                        <div className="px-2 mt-4 text-xs">
+                                            Charges will appear as Stripe
+                                            Payment Services
                                         </div>
-                                    )}
-                                    <div className="px-2 mt-4 text-xs">
-                                        Charges will appear as Stripe Payment
-                                        Services
                                     </div>
-                                </div>
-                                <div className="border-b border-green-600 border-opacity-20  py-4">
-                                    <div className="px-2 text-xs">
-                                        To learn about our cancellation and
-                                        refund policy{' '}
-                                        <a
-                                            className="underline font-semibold text-green-700"
-                                            target="_blank"
-                                            href={`${process.env.NEXT_PUBLIC_URL}/help/article/4002`}>
-                                            click here
-                                        </a>
+                                    <div className="border-b border-green-600 border-opacity-20  py-4">
+                                        <div className="px-2 text-xs">
+                                            To learn about our cancellation and
+                                            refund policy{' '}
+                                            <a
+                                                className="underline font-semibold text-green-700"
+                                                target="_blank"
+                                                href={`${process.env.NEXT_PUBLIC_URL}/help/article/4002`}>
+                                                click here
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="h-full flex items-center flex-col justify-between">
-                                    <ButtonLoad
-                                        // handleClick={handleClick}
-                                        isLoading={processing}
-                                        label="Confirm and Pay"
-                                        width="w-full"
-                                        // handleClick={handleSubmit}
-                                        form="paymentForm"
-                                        type="submit"
-                                    />
+                                    <div className="h-full flex items-center flex-col justify-between">
+                                        <ButtonLoad
+                                            // handleClick={handleClick}
+                                            isLoading={processing}
+                                            label="Confirm and Pay"
+                                            width="w-full"
+                                            // handleClick={handleSubmit}
+                                            form="paymentForm"
+                                            type="submit"
+                                        />
+                                    </div>
                                 </div>
+                            </aside>
+                        </main>
+                    </div>
+                ) : postingOrder ? (
+                    <LayoutLoading>
+                        <div className="flex flex-col items-center max-w-2xl text-center mt-6 text-sm uppercase tracking-wide text-gray-600">
+                            <div>Processing order...</div>
+                            <div>
+                                Don't close this page. You will be redirected to
+                                your purchases page once the processing
+                                completes.
                             </div>
-                        </aside>
-                    </main>
-                </div>
-                : postingOrder
-                ? <div> <Spinner size={100}/> Processing order you will be redirected to purchase page. Please stay on this page until redirected </div>
-                : <div>Loading....</div>}
+                        </div>
+                    </LayoutLoading>
+                ) : (
+                    <LayoutLoading />
+
+                    // <Row>
+                    //     <div className="flex w-full flex-col items-center gap-8 h-max mt-16 md:mt-32 lg:mt-48">
+                    //         <Spinner size={50} />
+                    //     </div>
+                    // </Row>
+                )}
             </Layout>
         </>
     );
@@ -889,7 +928,7 @@ export async function getServerSideProps({ query }) {
     return {
         props: {
             checkoutData: {},
-            checkoutTotals:{}
+            checkoutTotals: {}
         }
     };
 }

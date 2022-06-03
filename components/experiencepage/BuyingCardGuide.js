@@ -13,9 +13,11 @@ import {
     convertVariantNameDateToIso
 } from '@/helpers/calander';
 import { isSameDay, isBefore } from 'date-fns';
-import { enGB } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
-
+import { enGB } from 'date-fns/locale';
+import { DatePicker } from 'react-nice-dates';
+import PillType from '../blocks/Card/PillType';
+import classNames from 'classnames';
+import InputDate from '../blocks/InputDate';
 
 const currencyOptions = {
     rounding: 0.001
@@ -27,9 +29,10 @@ const BuyingCardGuide = ({
     //         profile: { currency: preferredCurrency }
     //     }
     // },
+    auth,
     productData,
-    loading=true,
-    preferredCurrency="USD",
+    loading = true,
+    // preferredCurrency = 'USD',
     classes,
     price = 50,
     desc = '',
@@ -42,12 +45,17 @@ const BuyingCardGuide = ({
 }) => {
     const [date, setDate] = useState();
     const [modifiers, setModifiers] = useState(null);
+    const preferredCurrency = auth?.user?.profile?.currency ?? 'USD';
+
     const { values, currency, rate } = useXchangeRate(
         [price],
         'USD',
         preferredCurrency
     );
-    const [digitalBtnInfo, setdigitalBtnInfo] = useState({ showBuyBtn: true, showRmCartBtn: false });
+    const [digitalBtnInfo, setdigitalBtnInfo] = useState({
+        showBuyBtn: true,
+        showRmCartBtn: false
+    });
     const productCartId = useRef(null);
     const productId = useRef(null);
     const { showBuyBtn, showRmCartBtn } = digitalBtnInfo;
@@ -56,7 +64,7 @@ const BuyingCardGuide = ({
     const [variantsReady, setVariantsReady] = useState(false);
     const [currentDate, setCurrentDate] = useState(null);
     const dateVariantIdLookup = useRef({});
-    const  [currentVariant, setCurrentVariant] = useState(null);
+    const [currentVariant, setCurrentVariant] = useState(null);
     const modifiersClassNames = {
         highlight: 'has-booking',
         disabledColor: 'date_used_already'
@@ -65,82 +73,85 @@ const BuyingCardGuide = ({
     // Funcsconsole.log()
     const removeExpFromCart = () => {
         removeFromCart(productCartId.current);
-    }
+    };
 
     const parseVariants = (rawVariants) => {
         const tmpVariants = {};
 
         rawVariants.forEach((variant) => {
-            const {id} = variant;
+            const { id } = variant;
 
             tmpVariants[id] = {
                 ...variant,
                 quantity: 0
             };
-        })
+        });
 
-        return tmpVariants
-    }
+        return tmpVariants;
+    };
 
     const changeVariant = (date) => {
         setDate(date);
-        setSelectedDate(dateVariantIdLookup.current[new Date(date).toISOString()]) 
-    }
+        setSelectedDate(
+            dateVariantIdLookup.current[new Date(date).toISOString()]
+        );
+    };
 
     const addExpToCart = () => {
         const { id: variantId } = currentVariant;
-        console.log('currentVariant', currentVariant)
+        console.log('currentVariant', currentVariant);
         const { guided } = cart;
 
-        if(guided[expId] && guided[expId][variantId]) {
+        if (guided[expId] && guided[expId][variantId]) {
             const { id: cartId } = guided[expId][variantId];
 
-            if(!currentVariant.quantity) {
+            if (!currentVariant.quantity) {
                 removeFromCart(cartId);
             } else {
-                updateCart(cartId, { quantity: currentVariant.quantity })
+                updateCart(cartId, { quantity: currentVariant.quantity });
             }
-                
-
         } else {
             addToCart(productId.current, variantId, currentVariant.quantity);
         }
         setVariantsReady(false);
-    }
+    };
 
     const generateFormAttrs = (loading) => {
         const btnData = {
-            btnLabel: 'Buy Now',
+            btnLabel: 'Book Now',
             btnDisabled: false,
             cost: 0
-        }
-        if(!loading && currentVariant) {
+        };
+        if (!loading && currentVariant) {
             const { id: variantId } = currentVariant;
             const { guided } = cart;
 
-            btnData.cost = currentVariant.quantity * currentVariant.price
-            if(guided[expId] && guided[expId][variantId]) {
-                if(guided[expId][variantId].quantity === currentVariant.quantity) {
+            btnData.cost = currentVariant.quantity * currentVariant.price;
+            if (guided[expId] && guided[expId][variantId]) {
+                if (
+                    guided[expId][variantId].quantity ===
+                    currentVariant.quantity
+                ) {
                     btnData.btnDisabled = true;
-                    btnData.btnLabel =  'NA';
+                    btnData.btnLabel = 'NA';
                 } else {
                     btnData.btnDisabled = false;
-                    btnData.btnLabel =  'Update Cart';
+                    btnData.btnLabel = 'Update Cart';
                 }
             } else if (!currentVariant.quantity) {
                 btnData.btnDisabled = true;
-                btnData.btnLabel =  'NA';
+                btnData.btnLabel = 'Select number of guests';
             }
         }
-        
+
         return btnData;
-    }
+    };
 
     const updatePeople = (e) => {
         const { quantity, stock_level: stockLevel } = variants[selectedDate];
         const peopleCount = Number(e.target.value);
 
-        if(peopleCount > -1 && peopleCount <= stockLevel) {
+        if (peopleCount > -1 && peopleCount <= stockLevel) {
             setVariants({
                 ...variants,
                 [selectedDate]: {
@@ -149,16 +160,16 @@ const BuyingCardGuide = ({
                 }
             });
         }
-    }
-
+    };
 
     useEffect(() => {
-        console.log('productDataproductData',productData)
-        if(!loading && currentDate) {
+        console.log('productDataproductData', productData);
+        if (!loading && currentDate) {
+            productId.current = productData.length
+                ? productData[0].parent_id
+                : null;
 
-            productId.current = productData.length ?  productData[0].parent_id : null;
-
-            // this will check if in cart but if already bought 
+            // this will check if in cart but if already bought
             // do that check first
             setVariants(parseVariants(productData));
             setVariantsReady(true);
@@ -168,203 +179,255 @@ const BuyingCardGuide = ({
                 const { id, name } = next;
                 const dateKey = convertVariantNameDateToIso(name);
 
-                return  { ...prev, [dateKey]: id }
-
+                return { ...prev, [dateKey]: id };
             }, {});
 
             setSelectedDate(dateVariantIdLookup.current[bookableDates[0]]);
 
             setModifiers({
-                disabled: (date) =>  isBefore(new Date(date), new Date(currentDate)) || !bookableDates.includes(date.toISOString()),
+                disabled: (date) =>
+                    isBefore(new Date(date), new Date(currentDate)) ||
+                    !bookableDates.includes(date.toISOString()),
                 highlight: (date) => bookableDates.includes(date.toISOString())
             });
-            
         }
     }, [loading, currentDate]);
 
     useEffect(() => {
         getDate().then((data) => {
-            if(!isNaN(Date.parse(data?.data))) {
+            if (!isNaN(Date.parse(data?.data))) {
                 setCurrentDate(data.data);
             }
-        })
-    }, [])
+        });
+    }, []);
 
     useEffect(() => {
         const { loading: cartLoading } = cart;
 
-        if(cart !== null && !cartLoading && variantsReady) {
+        if (cart !== null && !cartLoading && variantsReady) {
             const { guided } = cart;
             const tmpVariants = {};
-            
+
             Object.keys(variants).forEach((key) => {
                 tmpVariants[key] = {
                     ...variants[key],
-                    quantity: guided[expId] && guided[expId][key] ? guided[expId][key].quantity : 0
-                }
-            })
+                    quantity:
+                        guided[expId] && guided[expId][key]
+                            ? guided[expId][key].quantity
+                            : 0
+                };
+            });
             setVariants(tmpVariants);
         }
     }, [cart, variantsReady]);
 
-    const {cost, btnLabel, btnDisabled} = generateFormAttrs(loading);
+    const { cost, btnLabel, btnDisabled } = generateFormAttrs(loading);
 
     useEffect(() => {
-        console.log(variants[selectedDate])
-        setCurrentVariant(variants[selectedDate])
-    }, [selectedDate, variants])
-    
+        console.log(variants[selectedDate]);
+        setCurrentVariant(variants[selectedDate]);
+    }, [selectedDate, variants]);
 
     return (
         <div
-            className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
-            { !loading  && currentVariant
-            ? Object.keys(variants).length && !isNaN(date.getTime()) ? <>
-                <DatePicker
-                    date={date}
-                    onDateChange={changeVariant}
-                    locale={enGB} 
-                    modifiers={modifiers}
-                    modifiersClassNames={modifiersClassNames}>
-                        {({ inputProps, focused }) => (
-                            <input
-                            className={'input' + (focused ? ' -focused' : '')}
-                            {...inputProps}
-                            />
-                        )}
-                </DatePicker>
-                <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                    <div className="flex items-center gap-2 ">
-                        <i className="ri-download-cloud-2-line text-xl text-green-500"></i>
-                        <div className="text-xs uppercase">
-                            Guide Access Price
+            className={`relative flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
+            {!loading && currentVariant ? (
+                Object.keys(variants).length && !isNaN(date.getTime()) ? (
+                    <>
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                            <PillType type="guided" label="Buying Options" />
                         </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-2xl font-semibold uppercase  ">
-                        <span className="relative">
-                            {formatPrice(
-                                currentVariant?.price,
-                                preferredCurrency,
-                                window.navigator.language,
-                                currencyOptions
-                            )}
-                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
-                        </span>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
+                                <div className="flex items-center gap-2 text-2xl font-semibold uppercase  ">
+                                    <div
+                                        className={classNames(
+                                            'flex items-center'
+                                        )}>
+                                        <span className="text-base">$</span>
+                                        <span className="">
+                                            {formatPrice(
+                                                currentVariant?.price,
+                                                'USD',
+                                                window.navigator.language,
+                                                currencyOptions
+                                            )}
+                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                        </span>
+                                    </div>
 
-                        <div className="text-sm">{currency.symbol}*</div>
-                        <i className="las la-long-arrow-alt-right text-green-500"></i>
-                        {/* <div className="">FREE</div> */}
-                    </div>
-                </div>
-                <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
-                    <p className="">{desc}</p>
-                </div>
-                <div className="mt-4 pb-4 px-2">
-                    {/* <div className="flex items-center gap-1 text-xs">
-                        <div className="">* Charged as</div>
-                        <div className="">$US</div>
-                        <span>
-                            {formatPrice(
-                                variants.current[selectedDate].price,
-                                'USD',
-                                window.navigator.language,
-                                currencyOptions
-                            )}
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs">
-                        <div className="">** 1 $US ~ </div>
+                                    {preferredCurrency !== 'USD' && (
+                                        <>
+                                            <i className="las la-equals text-green-500"></i>
+                                            <span className="relative">
+                                                {`~${formatPrice(
+                                                    currentVariant?.price,
+                                                    preferredCurrency,
+                                                    window.navigator.language,
+                                                    currencyOptions
+                                                )}`}
+                                                {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                            </span>
+                                            <div className="text-sm">
+                                                {currency.symbol}*
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-8">
+                                <div className="flex items-center gap-2 ">
+                                    <i className="ri-calendar-2-line text-xl text-green-500"></i>
+                                    <div className="text-xs uppercase flex-none">
+                                        Booking Date
+                                    </div>
+                                </div>
+                                <DatePicker
+                                    date={date}
+                                    onDateChange={changeVariant}
+                                    locale={enGB}
+                                    modifiers={modifiers}
+                                    modifiersClassNames={modifiersClassNames}>
+                                    {({ inputProps, focused }) => (
+                                        // <InputDate
+                                        //     isDisabled={false}
+                                        //     normal
+                                        //     whiteBg
+                                        //     bgColor="#ffffff"
+                                        //     handleChange={updatePeople}
+                                        //     id="price"
+                                        //     iconText="Check-in"
+                                        //     iconClass="text-xs"
+                                        //     iconPadding="pl-36 pr-2"
+                                        //     width="w-full"
+                                        //     height="h-10"
+                                        //     margins=""
+                                        //     // value={currentVariant.quantity}
+                                        //     placeholder=""
+                                        //     //rtl={rtl}
+                                        //     type={'number'}
+                                        //     autoComplete={'off'}
+                                        //     {...inputProps}
+                                        //     focused={focused}
+                                        // />
 
-                        <span>
-                            {formatPrice(
-                                rate,
-                                'USD',
-                                window.navigator.language,
-                                currencyOptions
-                            )}
-                        </span>
-                        <div className="">
-                            {currenciesObject[preferredCurrency].symbol}
-                        </div>
-                    </div> */}
-                    <div>
-                        Avail places: {currentVariant.stock_level}
-                        <Block__InputSingle
-                                isDisabled={false}
-                                normal
-                              //  error={priceError}
-                                // handleChange={(e) =>
-                                //     handleCapacityPriceChange(
-                                //         e,
-                                //         groupIndex,
-                                //         key
-                                //     )
-                                // }
-                                handleChange={updatePeople}
-                                id='price'
-                                iconText='Price per person'
-                                iconClass='text-xs'
-                                iconPadding='pl-36 pr-4'
-                                width='w-60'
-                                height='h-10'
-                                margins=''
-                                value={currentVariant.quantity}
-                                placeholder=''
-                                //rtl={rtl}
-                                type={'number'}
-                                autoComplete={"off"}
-                            />
-                        {/* <Block__InputSingle
-                            // label='Price per person'
-                            iconText='Price per person'
-                            labelPos='left'
-                            className='text-xs'
-                            height='h-10'
-                            width='w-full'
-                            rounded='rounded-lg'
-                            handleChange={null}
-                            // handleChange={handleUpdateDefaults}
-                            id={`price`}
-                            name='price'
-                            value={1}
-                            type={'number'}
-                        /> */}
-                    </div>
-                </div>
-                <div>
-                    cost: {cost}
-                </div>
-                <div className="h-full flex items-center flex-col justify-between">
-                    <Button
-                        disabled={btnDisabled}
-                        label={btnLabel}
-                        as="button"
-                        handleClick={addExpToCart}
-                        width="w-full"
-                    />
-                    {/* { showBuyBtn
-                        && <Button
-                                label="add to basket"
+                                        <div className="relative">
+                                            <div className="ml-4 absolute left-0 top-1/2 transform -translate-y-1/2 text-xs text-gray-600 whitespace-nowrap">
+                                                Check-in
+                                            </div>
+
+                                            <input
+                                                className={classNames(
+                                                    focused
+                                                        ? ' input-focused'
+                                                        : 'input',
+                                                    'flex-1 w-full focus:outline-none text-sm h-10 rounded-xl pl-28 pr-4'
+                                                )}
+                                                {...inputProps}
+                                            />
+                                        </div>
+                                    )}
+                                </DatePicker>
+                                <Block__InputSingle
+                                    isDisabled={false}
+                                    normal
+                                    whiteBg
+                                    bgColor="#ffffff"
+                                    handleChange={updatePeople}
+                                    id="price"
+                                    iconText="Guests"
+                                    iconClass="text-xs"
+                                    iconPadding="pl-36 pr-2"
+                                    width="w-full"
+                                    height="h-10"
+                                    margins=""
+                                    value={currentVariant.quantity}
+                                    placeholder=""
+                                    //rtl={rtl}
+                                    type={'number'}
+                                    autoComplete={'off'}
+                                />
+                            </div>
+                            <Button
+                                disabled={btnDisabled}
+                                label={btnLabel}
                                 as="button"
                                 handleClick={addExpToCart}
                                 width="w-full"
                             />
-                    }
-                    { showRmCartBtn
-                        && <Button
-                                label="remove from basket"
-                                as="button"
-                                handleClick={removeExpFromCart}
-                                width="w-full"
-                            />
-                    }
-                    { (!showBuyBtn && !showRmCartBtn && <div>Already bought</div>)} */}
-
-                    {children}
-                </div>
-            </> : <div>No Bookable dates avaialable</div>
-                : <Spinner />
-            }
+                        </div>
+                        <div className="flex flex-col mt-8 px-2 gap-4">
+                            <div className="flex flex-col text-sm">
+                                <div className="flex justify-between">
+                                    <div className="flex gap-1">
+                                        <span className="text-base">$</span>
+                                        <span className="">
+                                            {formatPrice(
+                                                currentVariant?.price,
+                                                'USD',
+                                                window.navigator.language,
+                                                currencyOptions
+                                            )}
+                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                        </span>
+                                        <span>x</span>
+                                        <span>{currentVariant.quantity}</span>
+                                        <span>guests</span>
+                                    </div>
+                                    <div className="flex gap-1">
+                                        <span className="text-base">$</span>
+                                        <span className="">
+                                            {formatPrice(
+                                                cost,
+                                                'USD',
+                                                window.navigator.language,
+                                                currencyOptions
+                                            )}
+                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border-t border-gray-300"></div>
+                            <div className="flex flex-col text-sm font-bold">
+                                <div className="flex justify-between">
+                                    <div className="flex gap-1">
+                                        <span className="text-base">Total</span>
+                                    </div>
+                                    <div className="flex gap-1">
+                                        <span className="text-base">$</span>
+                                        <span className="">
+                                            {formatPrice(
+                                                cost,
+                                                'USD',
+                                                window.navigator.language,
+                                                currencyOptions
+                                            )}
+                                            {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                            <p className="">{desc}</p>
+                        </div>
+                        <div className="mt-4 pb-4 px-2">
+                            <div>
+                                Avail places: {currentVariant.stock_level}
+                            </div>
+                        </div>
+                        <div>cost: {cost}</div> */}
+                        <div className="h-full flex items-center flex-col justify-between">
+                            {children}
+                        </div>
+                    </>
+                ) : (
+                    <div>No Bookable dates avaialable</div>
+                )
+            ) : (
+                <Spinner />
+            )}
         </div>
     );
 };

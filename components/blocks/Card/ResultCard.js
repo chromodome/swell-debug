@@ -174,13 +174,13 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                     {purchasedView && type.toLowerCase() === 'guided' && (
                         <div className="mt-4">
                             <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-xxs bg-green-100 text-green-600 whitespace-nowrap rounded-full px-2 py-0.5">
-                                    {`Travel Date:  ${moment(travelDate).format(
+                                <span className="text-xs bg-green-100 text-green-600 whitespace-nowrap rounded-full px-2 py-0.5">
+                                    {`Booked Date:  ${moment(travelDate).format(
                                         'MMM Do YYYY'
                                     )}`}
                                 </span>
-                                <span className="text-xxs bg-blue-100 text-blue-600 whitespace-nowrap rounded-full px-2 py-0.5">
-                                    People: {people}
+                                <span className="text-xs bg-blue-100 text-blue-600 whitespace-nowrap rounded-full px-2 py-0.5">
+                                    Booking for: {people} people
                                 </span>
                             </div>
                         </div>

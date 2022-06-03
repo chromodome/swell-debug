@@ -16,7 +16,8 @@ function GenericSelectList({
     labelTextSize = '0.875rem',
     menuTextSize = '0.875rem',
     selectedValue,
-    isLoading
+    isLoading,
+    placeholder = 'Select...'
 }) {
     const colourStyles = {
         control: (styles, state) => ({
@@ -119,6 +120,7 @@ function GenericSelectList({
         <div className={`${width} flex-grow-0`}>
             <Select
                 value={value}
+                placeholder={placeholder}
                 isClearable={false}
                 options={options}
                 onChange={selectChange}

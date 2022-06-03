@@ -15,6 +15,7 @@ const GridList = ({
     btnLabel = 'Load More',
     btnAction = 'url',
     btnUrl,
+    loadMoreData,
     dataLoading = false,
     showButton = true,
     handleLoadClick,
@@ -72,7 +73,7 @@ const GridList = ({
                         {btnAction === 'url' && !purchasedView && (
                             <ButtonLoad
                                 handleClick={handleClick}
-                                isLoading={isLoading}
+                                isLoading={loadMoreData}
                                 label={btnLabel}
                             />
                         )}
@@ -82,7 +83,7 @@ const GridList = ({
                             !purchasedView && (
                                 <ButtonLoad
                                     handleClick={handleLoad}
-                                    isLoading={isLoading}
+                                    isLoading={loadMoreData}
                                     label={btnLabel}
                                 />
                             )}

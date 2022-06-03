@@ -20,7 +20,7 @@ import {
 const LandingPage = ({
     globalState: {
         lang,
-        siteData: { destinationList }
+        siteData: { destinationList, categories }
     },
     latest: { results: latestList },
     landingData,
@@ -43,7 +43,8 @@ const LandingPage = ({
                 />
                 <SliderInterests
                     sectionTitles={translations[lang].sections.wanderByInterest}
-                    data={dataLanding?.data?.interests || []}
+                    data={categories || []}
+                    // data={dataLanding?.data?.interests || []}
                     path={'/experiences/interest/'}
                     world={false}
                 />

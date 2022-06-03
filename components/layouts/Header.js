@@ -195,7 +195,7 @@ const Header = ({
                                 label={translations[lang].menu.messages.title}
                                 icon="Inbox"
                                 link={`${NEXT_URL}/c/messages`}
-                                handleClick={toggleNav}
+                                handleClick={()=>toggleNav(false)}
                                 rtl={rtl}
                             /> */}
                             <NavbarItem
@@ -203,8 +203,8 @@ const Header = ({
                                     translations[lang].menu.myPurchases.title
                                 }
                                 icon="LayoutGrid"
-                                link={`${NEXT_URL}/experiences/purchased`}
-                                handleClick={toggleNav}
+                                link={`/experiences/purchased`}
+                                handleClick={() => toggleNav(false)}
                                 rtl={rtl}
                             />
                             {/* <NavbarItem
@@ -213,14 +213,14 @@ const Header = ({
                                 }
                                 icon="Heart"
                                 link={`${NEXT_URL}/favourites`}
-                                handleClick={toggleNav}
+                                handleClick={()=>toggleNav(false)}
                                 rtl={rtl}
                             /> */}
                             <NavbarItem
                                 label={translations[lang].menu.profile.title}
                                 icon="User"
-                                link={`${NEXT_URL}/profile`}
-                                handleClick={toggleNav}
+                                link={`/profile`}
+                                handleClick={() => toggleNav(false)}
                                 rtl={rtl}
                             />
                             {/* <NavbarItem
@@ -228,7 +228,7 @@ const Header = ({
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
                                 // handleClick={() => console.log('hello')}
-                                handleClick={toggleNav}
+                                handleClick={()=>toggleNav(false)}
                                 rtl={rtl}
                             /> */}
                             <NavbarItem
@@ -256,7 +256,7 @@ const Header = ({
                                 label={translations[lang].menu.helpCenter.title}
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
-                                handleClick={toggleNav}
+                                handleClick={() => toggleNav(false)}
                                 rtl={rtl}
                             />
                         </>

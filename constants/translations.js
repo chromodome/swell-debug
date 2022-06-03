@@ -78,7 +78,7 @@ const langData = {
             },
             exploreByKreator: {
                 title: 'Explore by Kreator',
-                subTitle: 'Browse all experiences by '
+                subTitle: 'Browse all experiences by your favorite Kreators'
             }
         },
         components: {
