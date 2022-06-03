@@ -108,6 +108,7 @@ class SwellController {
 
     byDestination= async (dest, type, limit, page) => {
         const queryObj = {};
+
         if(type !== 'all') {
             queryObj["content.type"] = DIGITAL_ONLY ? 'digital' : type;
         } else if(DIGITAL_ONLY) {

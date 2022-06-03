@@ -74,3 +74,9 @@ export const GET_PURCHASE_IDS = 'GET_PURCHASE_IDS';
 export const POST_PURCHASE = 'POST_PURCHASE';
 export const RESET_PURCHASES = 'RESET_PURCHASES';
 export const SET_PURCHASEDIDS_FLAG = 'SET_PURCHASEDIDS_FLAG';
+
+/*----------*/
+// purchases
+/*----------*/
+export const ORDER_SUCCESSS = 'ORDER_SUCCESSS';
+export const ORDER_THANKS_VIEWED = 'ORDER_THANKS_VIEWED';

@@ -99,7 +99,6 @@ function SectionPricingBooking({
     }
 
     const addDigitalProdToCart = (prodId) => {
-
         if(!auth.isAuthenticated || !auth.isProfile) {
             if(auth.isAuthenticated) {
                 setAuthPage('profile')
@@ -110,7 +109,12 @@ function SectionPricingBooking({
         } else {
             setLoading(true);
             updateCartAction([]).then((dd) => {
-                postCartAction({product_id: prodId, quantity: 1 }).then(() => {
+                postCartAction({
+                    product_id: prodId,
+                    quantity: 1,
+                    
+// cust_id: "1234"
+                }).then(() => {
                     setLoading(false);
                     router.push('/checkout');
                 });
@@ -144,6 +148,7 @@ function SectionPricingBooking({
     }
 
     const updateGuidedProdToCart = (cartId, quantity) => {
+        alert(333)
         setLoading(true);
         updateItemCartAction(cartId, quantity).then(() => {
             setLoading(false);

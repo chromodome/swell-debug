@@ -178,24 +178,6 @@ export const getLandingPage = () => {
                         }
                     }
                 }
-                interests: categories(where: { visible: true }, sort: "order_index:asc") {
-                    id
-                    name
-                    image
-                    description
-                    order_index,
-                    swell_id,
-                    slug
-                }
-                destinations: destinations(where: { visible: true }, sort: "order_index:asc") {
-                    id
-                    name
-                    slug
-                    image
-                    description
-                    country_list
-                    order_index
-                }
                 features(where: { isLive: true, isLanding_ne: true }) {
                     id
                     title

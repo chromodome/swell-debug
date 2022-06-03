@@ -2,67 +2,40 @@ import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import ToastMessage from '@/components/blocks/ToastMessage';
 import Layout from '@/components/layouts/Layout';
 import {fetchCartAction, updateCartAction} from '@/store/actions/swell/cart';
-import {
-    convertVariantNameDateToIso
-} from '@/helpers/calander';
+import { addOrderData } from '@/store/actions/order'
+import { convertVariantNameDateToIso } from '@/helpers/calander';
 import ExpSubsection from '@/components/sections/ExpSubsection';
-import { currenciesObject } from '@/constants/currenciesObject';
-import { getCheckoutData } from '@/helpers/apiServices/checkout';
 import moment from 'moment';
 import {
-    calculateCheckout,
     capitalize,
     kreatorName,
     pluralize
 } from '@/helpers/FEutils';
-import {
-    country,
-    findLowestPrice,
-    formatPrice,
-    getBrowserLocale
-} from '@/helpers/LocaleHelper';
-import useXchangeRate from '@/helpers/useXchangeRate';
 import { User, Clock, MapPin, Users, Layers } from 'lucide-react';
-
-import { regexString } from '@/helpers/regexPatterns';
-
-import FormIkInput from '@/components/forms/FormIkInput';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import CountryList from '@/components/blocks/CountryList';
 import { submitPayment, clearPaymentErrors } from '@/store/actions/payment';
-import ButtonLoad from '@/components/blocks/ButtonLoad';
-import FormIkPayment from '@/components/forms/FormIkPayment';
-import { CardAmex, CardMastercard, CardVisa } from '@/components/svg/BankCards';
 import Spinner from '@/components/blocks/Spinner';
 import { postPurchase } from '@/helpers/apiServices/purchases';
-
-// book/experiences/:id?sku=123&guests=3&isPrivate=false
-
-const currencyOptions = {
-    rounding: 0.001
-};
+import swell from '@/swell/swelljs.js'
 
 const Checkout = ({
-    submitPayment,
-    clearPaymentErrors,
-    payment: { processing },
-    globalState: { loading },
-    checkoutTotals,
-    checkoutData: { skus },
     auth,
     fetchCartAction,
     cart,
-    user,
     siteLoading,
-    postPurchase
+    postPurchase,
+    addOrderData
 }) => {
     const [loadingCart, setLoadingCart] = useState(true);
     const router = useRouter();
+    const { query, isReady } = useRouter();    const cardElement = useRef(null);
+    const cardExpiryId = useRef(null);
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
-    
+
+    const [processing, setProcessing] = useState(false);
     const parseCart = () => {
         const { digital, guided } = cart;
         const type = Object.keys(digital).length ? 'DIGITAL' :  Object.keys(guided).length ? 'GUIDED' : null;
@@ -77,13 +50,11 @@ const Checkout = ({
             first: '',
             price: 0,
             totalPrice: 0,
-            quantity: 0,
+            people: 0,
             travel_date: '',
             publish_id: '',
             experience_id: '',
-            //
         }
-        // convertVariantNameDateToIso
 
         if(!type) {
             return { type };
@@ -125,7 +96,7 @@ const Checkout = ({
             product['description'] = description;
             product['price'] = price;
             product['totalPrice'] = totalPrice;
-            product['quantity'] = quantity;
+            product['people'] = quantity;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
             product['travel_date'] = convertVariantNameDateToIso(name)
@@ -135,7 +106,7 @@ const Checkout = ({
             const { 
                 price=0,
                 price_total: totalPrice=0,
-                quantity=0,
+                people=0,
                 product:
                     {
                         name: title='',
@@ -163,11 +134,12 @@ const Checkout = ({
             product['totalPrice'] = totalPrice;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
-            product['quantity'] = 1;
+            product['people'] = people;
         }
 
         return product;
     }
+    const product = useRef(parseCart())
     const {
         type,
         featured_image,
@@ -179,133 +151,11 @@ const Checkout = ({
         description,
         price,
         totalPrice,
-        quantity,
+        people,
         travel_date,
         publish_id,
         experience_id,
-    } = parseCart();
-
-    const {
-        unitPrice=1,
-        qty=1,
-        subTotal=1,
-        discountTotal=1,
-        discountArr=[],
-        taxRate=1,
-        tax=1,
-        total=1
-    } = {};
-
-    const { rate } = useXchangeRate({ from: 'USD', to: preferredCurrency });
-
-    // start of some JSX needed consts
-
-    // const lineItemJSX = {
-    //     lineItem: `${formatPrice(
-    //         (unitPrice * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )} ${
-    //         type == 'GUIDED'
-    //             ? ` x ${pluralize(qty, 'guest')}`
-    //             : ' (Digital Access)'
-    //     }`,
-    //     amount: `${formatPrice(
-    //         (subTotal * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )}`
-    // };
-
-    // const subtotalJSX = {
-    //     lineItem: `Subtotal (${preferredCurrency})`,
-    //     amount: `${formatPrice(
-    //         (subTotal * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )}`
-    // };
-
-    // const discountTotalJSX = {
-    //     lineItem: `Discount (${preferredCurrency})`,
-    //     amount: `${formatPrice(
-    //         (discountTotal * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )}`
-    // };
-
-    // const taxJSX = {
-    //     lineItem: `Tax (${taxRate.toFixed(2)})%`,
-    //     amount: `${formatPrice(
-    //         (tax * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )}`
-    // };
-
-    // const totalJSX = {
-    //     lineItem: `Total (${preferredCurrency})`,
-    //     amount: `${formatPrice(
-    //         (total * rate) / 100,
-    //         preferredCurrency,
-    //         getBrowserLocale(),
-    //         currencyOptions,
-    //         'currency'
-    //     )}`
-    // };
-
-    // end of JSX
-
-    // handle form submission
-
-    const [selectedCountry, setSelectedCountry] = useState('FR');
-    const handleCountryChange = (val) => {
-        setSelectedCountry(val);
-        // console.log('profile', profileDataObj);
-    };
-
-    const [postingOrder, setPostingOrder] = useState(false);
-    const handleSubmit = (values, actions) => {
-        const guidedData = {}
-
-        if(type == 'GUIDED') {
-            guidedData.people = quantity;
-            guidedData.travel_date = travel_date;
-        }
-
-        setPostingOrder(true);
-        postPurchase({
-            ...guidedData,
-            user: auth.user.id,
-            experience_id,
-            type,
-            title,
-            experience: publish_id,
-        }).then(() => {
-            setTimeout(() => {
-                updateCartAction([]);
-                router.replace('/experiences/purchased');
-            }, 2000)
-            
-        })
-
-
-        //  console.log('userId',auth.user.id,'\nquantity', quantity,'\npublish_id',publish_id, "\nexperience_id", experience_id, '\ntravel_date', travel_date )
-        // submitPayment({ ...values, ccCountry: selectedCountry });
-        // console.log('values =', { ...values, ccCountry: selectedCountry });
-        //actions.setSubmitting(true);
-    };
+    } = product.current;
     const reloadCartTimeoutId = useRef(null)
     const reloadCart =  () => {
         // When local storage changes, dump the list to
@@ -319,10 +169,8 @@ const Checkout = ({
                 });
             }, 1000)
         }
-      //  console.log(JSON.parse(window.localStorage.getItem('xx')));
     }
 
-    // end form submission
     useEffect(() => {
         let cartListener = null;
         fetchCartAction().then(() => {
@@ -340,22 +188,143 @@ const Checkout = ({
                 router.replace('/')
             }
         }
-        
     }, [siteLoading]);
 
+    const tokenize = async () => {
+        setProcessing(true);
+        await swell.payment.tokenize({
+            card: {
+                onSuccess: () => {
+                    console.log('tokenize success');
+                    placeOrder();
+                },
+                onError: (err) => {
+                    setProcessing(false);
+                    pushError(err);
+                },
+            },
+        });
+    }
+
+    const placeOrder = async () => {
+        try {
+            await swell.cart.update({
+                account: {
+                    //  email: auth?.user?.email || "madeup@nothear.com"
+                    email: "madeup@nothear.com",//An email is required to submit an order
+                   // name: auth?.user?.first && auth?.user?.last ? `${auth?.user?.first} ${auth?.user?.last}` : 'noname'
+                }
+            });
+    
+            const order = await swell.cart.submitOrder();
+            const guidedData = {}
+
+            if(type == 'GUIDED') {
+                guidedData.people = people;
+                guidedData.travel_date = travel_date;
+            }
+
+            postPurchase({
+                user: auth.user.id,
+                swell_orderId: order.id,
+                experience_id,
+                experience: publish_id,
+                title,
+                type,
+                featured_image,
+                ...guidedData
+            }).then((res) => {
+                addOrderData({order, product});
+                router.push('/thanks');
+            });
+        } catch (err) {
+            setProcessing(false);
+            pushError(err);
+        }
+    }
+
+    useEffect(() => {
+        if(isReady && !loadingCart) {
+            swell.payment.createElements({
+                card: {
+                    elementId: cardElement.current, // default: #card-element
+                    separateElements: false, // required for separate elements
+                    
+                    cardExpiry: {
+                        elementId: cardExpiryId.current, // default: #cardExpiry-element
+                        options: {
+                            // options are passed as a direct argument to stripe.js
+                            style: {
+                                base: {
+                                    fontWeight: 500,
+                                    fontSize: '32px',
+                                    color: 'blue'
+                                }
+                            }
+                        }
+                    },
+                    // cardCvc: {
+                    // elementId: '#card-expiry-id' // default: #cardCvc-element
+                    // },
+                    options: {
+                        // options are passed as a direct argument to stripe.js
+                        style: {
+                            base: {
+                                fontWeight: 500,
+                                fontSize: '16px'
+                            }
+                        }
+                    },
+                    onChange: event => {
+                        // optional, called when the Element value changes
+                    },
+                    onReady: event => {
+                        // optional, called when the Element is fully rendered
+                    },
+                    onFocus: event => {
+                        // optional, called when the Element gains focus
+                    },
+                    onBlur: event => {
+                        // optional, called when the Element loses focus
+                    },
+                    onEscape: event => {
+                        // optional, called when the escape key is pressed within an Element
+                    },
+                    onClick: event => {
+                        // optional, called when the Element is clicked
+                    },
+                    onSuccess: result => {
+                        // optional, called on card payment success
+                    },
+                    onError: error => {
+                        // optional, called on card payment error
+                    }
+                }
+            })
+        }
+    }, [loadingCart]);
+    const pushError = (err) => {
+        toast.success(
+            <ToastMessage icon="😕" msg={err?.message || "Error"} alignTop={false} />,
+            {
+                hideProgressBar: true,
+                autoClose: 2500
+            }
+        );
+    }
     return (
         <>
             <Layout>
-
-                {!loadingCart && type && !postingOrder
+                {!loadingCart && type
                 ? <div
+                    style={{display: processing ? 'none' : 'block'}}
                     className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
                     <div className={``}>
                         <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
                             Checkout
                         </div>
                     </div>
-                    <main className={`flex items-start lg:gap-16 xl:gap-24 `}>
+                    <main style={{display: processing ? 'none' : 'flex'}} className={`flex items-start lg:gap-16 xl:gap-24 `}>
                         <section className="w-96 lg:w-3/5 mb-24">
                         
                             {type == 'GUIDED' && (
@@ -377,12 +346,6 @@ const Checkout = ({
                                                     ).format('MMMM Do YYYY')}
                                                 </div>
                                             </div>
-                                            {/* <div className="flex flex-col">
-                                                <div className="font-bold">
-                                                    Guests
-                                                </div>
-                                                <div>Dropdown here</div>
-                                            </div> */}
                                         </div>
                                     </ExpSubsection>
 
@@ -408,188 +371,16 @@ const Checkout = ({
                                 </div>
                                 <div dangerouslySetInnerHTML={{__html: description}} />
                             </ExpSubsection>
+                            
                             <ExpSubsection padding="pb-8" margins="mb-8">
                                 <div className="text-green-400 text-2xl font-bold mb-4">
                                     Payment info
                                 </div>
-                                <div>
-                                    <div>
-                                        <Formik
-                                            initialValues={{
-                                                ccName: '',
-                                                ccNb: '',
-                                                ccExpiry: '',
-                                                ccCode: '',
-                                                ccCountry: 'FR'
-                                            }}
-                                            validationSchema={Yup.object({
-                                                ccName: Yup.string()
-                                                    .min(2, 'Min 2 characters')
-                                                    .max(
-                                                        50,
-                                                        'Max 50 characters'
-                                                    )
-
-                                                    .matches(
-                                                        regexString,
-                                                        'Numbers and special characters are not allowed.'
-                                                    )
-                                                    .required(
-                                                        'Name is a required field'
-                                                    ),
-
-                                                ccNb: Yup.string()
-                                                    .min(
-                                                        15,
-                                                        'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
-                                                    )
-                                                    .max(
-                                                        19,
-                                                        'Card number should have 15 digits for Amex, 16 for MC/Visa and 19 for Meeza'
-                                                    )
-                                                    .required(
-                                                        'Card number is a required field'
-                                                    ),
-                                                ccExpiry: Yup.string()
-                                                    .length(4, 'Invalid Date')
-                                                    .required(
-                                                        'Expiry is a required field'
-                                                    ),
-                                                ccCode: Yup.string()
-
-                                                    .matches(
-                                                        /^[0-9]+$/,
-                                                        'only digits'
-                                                    )
-                                                    .min(
-                                                        3,
-                                                        'CVC Must be at least 3 digits'
-                                                    )
-                                                    .max(4, 'Max 4 digits')
-                                                    .required(
-                                                        'CVC is a required field'
-                                                    )
-                                            })}
-                                            onSubmit={handleSubmit}>
-                                            {(props) => (
-                                                <Form id="paymentForm">
-                                                    <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
-                                                        <div className="md:w-1/2 lg:w-full flex-1 flex flex-col">
-                                                            <div className="flex items-center justify-end gap-6 mb-2 mr-4">
-                                                                <span className="text-xs">
-                                                                    We accept
-                                                                </span>
-                                                                <div className="flex items-center gap-4 ">
-                                                                    <CardAmex />
-                                                                    <CardVisa />
-                                                                    <CardMastercard />
-                                                                </div>
-                                                            </div>
-                                                            <div className="w-full flex flex-col rounded-xl border-gray-3001 gap-1 relative mb-8 ">
-                                                                <FormIkPayment
-                                                                    name="ccName"
-                                                                    label="Cardholder's name"
-                                                                    placeholder="Samy Tai"
-                                                                    radius="rounded-xl"
-                                                                    radiusActive="rounded-xl"
-                                                                    autoComplete="off"
-                                                                    icon="ri-user-3-line"
-                                                                />
-                                                            </div>
-                                                            <div
-                                                                className={`w-full flex flex-col rounded-xl border-gray-3001 mb-8 gap-1 relative`}>
-                                                                <FormIkPayment
-                                                                    name="ccNb"
-                                                                    label="Card number"
-                                                                    placeholder="0000 0000 0000 0000"
-                                                                    radius="rounded-t-xl"
-                                                                    radiusActive="rounded-xl"
-                                                                    autoComplete="off"
-                                                                    options={{
-                                                                        creditCard: true
-                                                                    }}
-                                                                    icon="ri-bank-card-line"
-                                                                    filterMode={
-                                                                        true
-                                                                    }
-                                                                    cardMode
-                                                                />
-                                                                <div
-                                                                    className={`w-full flex gap-1`}>
-                                                                    <FormIkPayment
-                                                                        name="ccExpiry"
-                                                                        type="text"
-                                                                        label="Expiry"
-                                                                        placeholder="MM/YY"
-                                                                        radius="rounded-bl-xl"
-                                                                        radiusActive="rounded-xl"
-                                                                        autoComplete="off"
-                                                                        options={{
-                                                                            date: true,
-                                                                            datePattern:
-                                                                                [
-                                                                                    'm',
-                                                                                    'y'
-                                                                                ]
-                                                                        }}
-                                                                        icon="ri-calendar-check-line"
-                                                                        filterMode
-                                                                    />
-                                                                    <FormIkPayment
-                                                                        name="ccCode"
-                                                                        type="text"
-                                                                        label="CVC"
-                                                                        placeholder="345"
-                                                                        radius="rounded-br-xl"
-                                                                        radiusActive="rounded-xl"
-                                                                        autoComplete="off"
-                                                                        options={{
-                                                                            blocks: [
-                                                                                4
-                                                                            ],
-
-                                                                            numericOnly: true
-                                                                        }}
-                                                                        icon="ri-more-fill"
-                                                                        filterMode
-                                                                    />
-                                                                </div>
-                                                            </div>
-
-                                                            {/* <CountryList
-                                                                handleChange={
-                                                                    handleCountryChange
-                                                                }
-                                                                selectedValue={
-                                                                    selectedCountry
-                                                                }
-                                                                height="3.43rem"
-                                                                width="w-full"
-                                                                bgColor="white"
-                                                                panelHeight="150px"
-                                                                label="Country"
-                                                                labelTextSize="0.875rem"
-                                                                menuTextSize="0.75rem"
-                                                                isLoading={
-                                                                    false
-                                                                }
-                                                            /> */}
-
-                                                            {/* <Checkbox
-                                                                name="terms"
-                                                                isChecked={
-                                                                    termsChecked
-                                                                }
-                                                                setIsChecked={
-                                                                    setTermsChecked
-                                                                }
-                                                            /> */}
-                                                        </div>
-                                                    </div>
-                                                </Form>
-                                            )}
-                                        </Formik>
-                                    </div>
+                                <div >
+                                    <div  id="card-element-id" ref={cardElement}></div>
+                                    <div  id="card-expiry-id" ref={cardExpiryId}></div>
+                                    {/* <div  id="card-number-id"></div> */}
+                                    
                                 </div>
                             </ExpSubsection>
                         </section>
@@ -689,10 +480,10 @@ const Checkout = ({
                                             <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
                                                 <div className="flex text-xs items-center justify-between ">
                                                     <span className="relative">
-                                                        Quantity
+                                                        people
                                                     </span>
                                                     <span className="relative">
-                                                        {quantity}
+                                                        {people}
                                                     </span>
                                                 </div>
                                                 {false && (
@@ -711,48 +502,6 @@ const Checkout = ({
                                                         </span>
                                                     </div>
                                                 )}
-                                                {/* {discountArr.length > 0 &&
-                                                    discountArr.map(
-                                                        (single, index) => {
-                                                            return (
-                                                                <div
-                                                                    key={`discount_${index}`}
-                                                                    className="flex text-xs items-center justify-between">
-                                                                    <span className="flex items-center gap-2">
-                                                                        <span>
-                                                                            Coupon
-                                                                        </span>
-                                                                        <span className="bg-green-200 rounded-xl px-2 py-0.5 text-xxs">
-                                                                            {
-                                                                                single.code
-                                                                            }
-                                                                        </span>
-                                                                    </span>
-                                                                    <span className="relative">
-                                                                        {`${formatPrice(
-                                                                            (single.discount *
-                                                                                rate) /
-                                                                                100,
-                                                                            preferredCurrency,
-                                                                            getBrowserLocale(),
-                                                                            currencyOptions,
-                                                                            'currency'
-                                                                        )}`}
-                                                                    </span>
-                                                                </div>
-                                                            );
-                                                        }
-                                                    )}
-                                                {tax > 0 && (
-                                                    <div className="flex text-xs items-center justify-between">
-                                                        <span className="relative">
-                                                            {taxJSX.lineItem}
-                                                        </span>
-                                                        <span className="relative">
-                                                            {taxJSX.amount}
-                                                        </span>
-                                                    </div>
-                                                )} */}
                                             </div>
                                             <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
                                                 <span className="flex">
@@ -832,23 +581,19 @@ const Checkout = ({
                                 </div>
 
                                 <div className="h-full flex items-center flex-col justify-between">
-                                    <ButtonLoad
-                                        // handleClick={handleClick}
-                                        isLoading={processing}
-                                        label="Confirm and Pay"
-                                        width="w-full"
-                                        // handleClick={handleSubmit}
-                                        form="paymentForm"
-                                        type="submit"
-                                    />
+                                    <button onClick={tokenize}>Submit</button>
                                 </div>
                             </div>
                         </aside>
                     </main>
                 </div>
-                : postingOrder
-                ? <div> <Spinner size={100}/> Processing order you will be redirected to purchase page. Please stay on this page until redirected </div>
-                : <div>Loading....</div>}
+                : <div  > <Spinner size={100}/> getting Cart </div>
+                }
+                {
+                    processing 
+                    ? <div style={{display: processing ? 'block' : 'none'}}> <Spinner size={100}/> Processing order you will be redirected to purchase page. Please stay on this page until redirected </div>
+                    : null 
+                }
             </Layout>
         </>
     );
@@ -869,27 +614,11 @@ function mapDispatchToProps(dispatch) {
             submitPayment,
             clearPaymentErrors,
             fetchCartAction,
-            postPurchase
+            postPurchase,
+            addOrderData,
         },
         dispatch
     );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
-
-export async function getServerSideProps({ query }) {
-    // const {
-    //     data: { data: checkoutData }
-    // } = await getCheckoutData(query);
-
-    // console.log('data is', query);
-    // const checkoutTotals = calculateCheckout(checkoutData.skus[0], query);
-
-    // const checkoutTotals = {};
-    return {
-        props: {
-            checkoutData: {},
-            checkoutTotals:{}
-        }
-    };
-}

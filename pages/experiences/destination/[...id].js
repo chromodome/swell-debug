@@ -55,7 +55,8 @@ const LandingPage = ({
     }
 
     const countrySelect = (country) => {
-        router.push(`${country.slug}/${filterType.current}`);
+        console.log('country', country)
+       // router.push(`${country.slug}/${filterType.current}`);
     }
 
     const loadExperiences = (countryIds, type, page=1) => {
@@ -82,23 +83,27 @@ const LandingPage = ({
 
             if(destinationList.length) {
                 if(!found) {
-                    found = countriesArray.find(element => element.slug.toLowerCase() == query.id[0].toLowerCase());
+                    const slugList = query.id[0].toLowerCase().split('+');
+                    findParams.current = slugList.reduce((last, next) => {
+                        const finded = countriesArray.find(element => element.slug.toLowerCase() === next);
+                            if(finded) {
+                                return [...last, finded.code]
+                            } else {
+                                return last;
+                            }
+                    },[]).join('-')
 
-                    if(found) {
-                        findParams.current =  found.code;
-                    } else {
+                    if(!findParams.current.length) {
                         setDataLoading(false);
                     }
                 } else {
-                    findParams.current = found.country_list.join('-')
+                    findParams.current = found.country_list.join('-');
                 }
 
                 if(query.id.length > 1) {
                     filterType.current = accepedTypes.includes(query.id[1].toLowerCase()) ? query.id[1].toLowerCase() : 'all';
                 }
 
-                
-                
                 if(findParams.current.length) {
                     loadExperiences(findParams.current, filterType.current);
                 }
