@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Icons from '@/components/blocks/Icon/Icons';
 import { handleRowReverse, urlArrLength } from 'helpers/FEutils';
 import GenericBtn from './Map/GenericBtn';
+import classNames from 'classnames';
 
 const Block__HTML = ({ html, className }) => {
     return (
@@ -49,7 +50,9 @@ const Block__InputSingle = ({
     responsive,
     disabledColor = 'bg-gray-200',
     iconClass,
-    autoComplete=""
+    autoComplete = '',
+    focused,
+    ...inputProps
 }) => {
     const [hidden, setHidden] = useState(true);
     const classIcon = hidden ? 'text-gray-400' : 'text-green-500';
@@ -68,15 +71,14 @@ const Block__InputSingle = ({
             <span
                 className={`absolute right-24 top-1/2 transform -translate-y-1/2 cursor-pointer ${classIcon} `}
                 onMouseUp={() => setHidden(true)}
-                onMouseDown={() => setHidden(false)}
-            >
-                <Icons iName={hidden ? 'EYE_SLASH' : 'EYE'} size='xl' />
+                onMouseDown={() => setHidden(false)}>
+                <Icons iName={hidden ? 'EYE_SLASH' : 'EYE'} size="xl" />
             </span>
         ) : null;
 
     const iconJSX =
         type !== 'password' && icon ? (
-            <span className='absolute right-1 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400'>
+            <span className="absolute right-1 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400">
                 <Icons iName={icon} />
             </span>
         ) : null;
@@ -90,39 +92,45 @@ const Block__InputSingle = ({
                             ? 'flex flex-col'
                             : 'flex items-center '
                         : ''
-                }`}
-            >
+                }`}>
                 {label && (
                     <div
                         className={`${
                             responsive
                                 ? 'mb-2 ml-2 text-xs text-gray-600 whitespace-nowrap'
                                 : `${labelClass} ${labelWidth} ${labelJustify} ${labelMargin}`
-                        } `}
-                    >
+                        } `}>
                         {label}
                     </div>
                 )}
                 <div className={`relative ${width} flex items-center`}>
                     <input
+                        {...inputProps}
                         // style={{
                         //     border:
                         //         locked && locked.isDisabled && locked.visible
                         //             ? '2px dashed red'
                         //             : ''
                         // }}
-                        className={`${className} ${errorClass} ${width} ${height} ${rounded} ${padding} ${
-                            handleRowReverse(rtl).rtl
-                        } ${fontSize} block appearance-none placeholder-gray-400 placeholder-opacity-100 border leading-5 text-gray-700 focus:outline-none 
-                        ring-4 ring-transparent 
-                        ${
+
+                        className={classNames(
+                            className,
+                            errorClass,
+                            width,
+                            height,
+                            rounded,
+                            padding,
+                            handleRowReverse(rtl).rtl,
+                            fontSize,
+                            focused ? ' input-focused' : 'input',
                             isDisabled ||
-                            (locked && locked.isDisabled && locked.visible)
+                                (locked && locked.isDisabled && locked.visible)
                                 ? disabledColor
                                 : `hover:bg-white focus:bg-white ${
                                       whiteBg ? 'bg-white' : 'bg-kn-gray-100'
-                                  }`
-                        }  transition duration-200 `}
+                                  }`,
+                            'block appearance-none placeholder-gray-400 placeholder-opacity-100 border leading-5 text-gray-700 focus:outline-none       ring-4 ring-transparent transition duration-200'
+                        )}
                         onChange={handleChange}
                         type={newType}
                         id={id}
@@ -139,24 +147,35 @@ const Block__InputSingle = ({
                         <GenericBtn
                             params={[...locked.param]}
                             handleActionBtn={locked.handleClick}
-                            className={`transition-all ml-2
-                            hover:bg-gray-900 hover:text-white
-                            duration-300 out-expo outline-none focus:outline-none w-24
-                            h-10 rounded-xl flex items-center justify-center `}
-                        >
+                            // className={`transition-all ml-2
+                            // hover:bg-gray-900 hover:text-white
+                            // duration-300 out-expo outline-none focus:outline-none w-24
+                            // h-10 rounded-xl flex items-center justify-center `}
+                            bgColor={classNames(
+                                locked.isDisabled
+                                    ? 'bg-red-100 hover:bg-gray-900'
+                                    : 'bg-green-100 hover:bg-gray-900'
+                            )}
+                            textColor={classNames(
+                                locked.isDisabled
+                                    ? 'text-red-600  hover:text-white'
+                                    : 'text-green-900  hover:text-white'
+                            )}
+                            rounded="rounded-xl"
+                            textSize="text-sm"
+                            className={`transition-all ml-2 duration-300 out-expo  w-16
+                            h-10  flex items-center justify-center `}>
                             <i
                                 className={`${
                                     locked.isDisabled
-                                        ? 'ri-lock-line text-red-400'
-                                        : 'ri-lock-unlock-line text-green-400'
-                                } text-xl`}
-                            ></i>
+                                        ? 'ri-lock-line text-red-400a'
+                                        : 'ri-lock-unlock-line text-green-400a'
+                                } text-xl`}></i>
                         </GenericBtn>
                     ) : null}
                     {(icon || iconText) && (
                         <div
-                            className={`absolute left-4 top-1/2 text-xl text-gray-600 transform -translate-y-1/2 flex items-center `}
-                        >
+                            className={`absolute left-4 top-1/2 text-xl text-gray-600 transform -translate-y-1/2 flex items-center `}>
                             {icon && <i className={icon}></i>}
                             <span className={`${iconClass}`}>{iconText}</span>
                         </div>

@@ -30,6 +30,12 @@ export const fetchStartupData = (params) => {
                             categories {
                                 id,
                                 name,
+                               image,
+                               description,
+                               order_index,
+                               swell_id,
+                               slug
+                   
                             },
                             tags {
                                 id,

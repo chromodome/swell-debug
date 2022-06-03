@@ -6,11 +6,11 @@
 })('https://ucarecdn.com/libs/blinkloader/3.x/blinkloader.min.js', function () {
     window.Blinkloader.optimize({
         pubkey: '8655037f335d8f4f0419',
-        fadeIn: true,
+        fadeIn: false,
         lazyload: true,
         smartCompression: true,
         responsive: true,
         retina: true,
-        webp: true,
+        webp: true
     });
 });

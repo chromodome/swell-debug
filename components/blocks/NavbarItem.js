@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
+import router from 'next/router';
 
 const NavbarItem = ({
     label,
@@ -21,10 +22,20 @@ const NavbarItem = ({
         </div>
     );
 
+    const handleLink = () => {
+        handleClick();
+        router.push(link);
+    };
+
     return link ? (
-        <Link href={link}>
-            <a className="flex items-center px-12">{jsx}</a>
-        </Link>
+        // <Link href={link} onClick={handleClick}>
+        //     <a className="flex items-center px-12">{jsx}</a>
+        // </Link>
+        <button
+            className="focus:outline-none outline-none flex items-center px-12 w-full"
+            onClick={handleLink}>
+            {jsx}
+        </button>
     ) : (
         <button
             className="focus:outline-none outline-none flex items-center px-12 w-full"
