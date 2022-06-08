@@ -103,7 +103,7 @@ const ExperienceDetail = ({
                         <div
                             className={`mb-12a mt-16 md:mt-16 lg:mt-24 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                             <main className={` flex items-start`}>
-                                <section className="w-full lg:w-4/6 mb-0 md:mb-12">
+                                <section className="w-full lg:w-4/6 mb-0 md:mb-12a">
                                     <SectionMarketingIntro
                                         type={type}
                                         desc={desc}
@@ -126,6 +126,7 @@ const ExperienceDetail = ({
                                     /> */}
 
                                     <SectionMarketingItinerary
+                                        type={type}
                                         itinerary={itinerary}
                                     />
                                     {type.toLowerCase() === 'guided' &&
@@ -151,22 +152,25 @@ const ExperienceDetail = ({
                                     />
                                 </aside>
                             </main>
-                            <ExpSubsection borders="" margins="" padding="">
-                                <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 ">
-                                    {`Special requirements for Wanderers`}
-                                </div>
+                            {type.toLowerCase() === 'guided' && (
+                                <ExpSubsection borders="" margins="" padding="">
+                                    <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 ">
+                                        {`Special requirements for Travelers`}
+                                    </div>
 
-                                <div className="flex flex-col items-center md:items-start md:flex-row justify-between gap-4">
-                                    <p className="md:mr-4 lg:mr-8 text-gray-800">
-                                        If you have any special requests, please
-                                        reach out to us via the contact button
-                                        to see if we can accommodate your needs.
-                                    </p>
-                                    <Button type="outlined" rounded="lg">
-                                        Konnect with us
-                                    </Button>
-                                </div>
-                            </ExpSubsection>
+                                    <div className="flex flex-col items-center md:items-start md:flex-row justify-between gap-4">
+                                        <p className="md:mr-4 lg:mr-8 text-gray-800">
+                                            If you have any special requests,
+                                            please reach out to the kreator via
+                                            the contact button to see if they
+                                            can accommodate your needs.
+                                        </p>
+                                        <Button type="outlined" rounded="lg">
+                                            Contact Kreator
+                                        </Button>
+                                    </div>
+                                </ExpSubsection>
+                            )}
                         </div>
                     </div>
                 )}

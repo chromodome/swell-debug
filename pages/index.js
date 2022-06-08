@@ -16,6 +16,8 @@ import {
     NEXT_PUBLIC_LATEST_PER_PAGE,
     NEXT_PUBLIC_TRENDING_PER_PAGE
 } from '@/constants/public';
+import Row from '@/components/sections/Row';
+import Community from '@/components/sections/Community';
 
 const LandingPage = ({
     globalState: {
@@ -36,44 +38,62 @@ const LandingPage = ({
                 collection="showcase"
             />
 
-            <>
-                <SliderExperiences
-                    sectionTitles={translations[lang].sections.newThisMonth}
-                    latestList={latestList}
-                />
-                <SliderInterests
-                    sectionTitles={translations[lang].sections.wanderByInterest}
-                    data={categories || []}
-                    path={'/experiences/interest/'}
-                    world={false}
-                />
+            <GridList
+                sectionTitles={translations[lang].sections.trendingThisWeek}
+                data={trendingList}
+                btnLabel="Explore all experiences"
+                btnPos="side"
+                btnAction="url"
+                btnUrl="/experiences/destination/world/all"
+                margins="mt-16 mb-8 lg:mt-12 lg:mb-12"
+            />
 
-                <Showcase
-                    pill="top"
-                    data={randomItem(dataLanding?.data?.features)}
-                />
+            <Row>
+                <div className="">
+                    <SliderDestinations
+                        world={false}
+                        sectionTitles={
+                            translations[lang].sections.wanderByDestination
+                        }
+                        data={destinationList || []}
+                        tagRatio="portrait2"
+                    />
+                </div>
+            </Row>
+            {/* <Row>
+                    <div className="px-4">
+                        <SliderExperiences
+                            sectionTitles={
+                                translations[lang].sections.newThisMonth
+                            }
+                            latestList={latestList}
+                        />
+                    </div>
+                </Row> */}
+            {/* <Row>
+                    <div className="px-4">
+                        <SliderInterests
+                            sectionTitles={
+                                translations[lang].sections.wanderByInterest
+                            }
+                            data={categories || []}
+                            path={'/experiences/interest/'}
+                            world={false}
+                        />
+                    </div>
+                </Row> */}
 
-                <SliderDestinations
-                    world={false}
-                    sectionTitles={
-                        translations[lang].sections.wanderByDestination
-                    }
-                    data={destinationList || []}
-                />
-                {/* <SliderCollections
+            <Showcase
+                pill="top"
+                data={randomItem(dataLanding?.data?.features)}
+            />
+            <Community />
+
+            {/* <SliderCollections
                     sectionTitles={translations[lang].sections.curatedCollections}
                     data={dataLanding?.data?.curated || []}
                     boxed
                 /> */}
-                <GridList
-                    sectionTitles={translations[lang].sections.trendingThisWeek}
-                    data={trendingList}
-                    btnLabel="Explore all experiences"
-                    btnAction="url"
-                    btnUrl="/experiences/search/all"
-                    margins="mt-4 mb-8 lg:mt-8 lg:mb-12"
-                />
-            </>
         </Layout>
     );
 };

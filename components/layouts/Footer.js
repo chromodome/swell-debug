@@ -40,25 +40,25 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                         </section>
                         <section>
                             <h3 className="text-xl md:text-base text-green-400 mb-2 md:mb-4">
-                                Discover
+                                Explore
                             </h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
                                 <FooterMenuLink
                                     url="/experiences/search/all"
-                                    label="Explore all experiences"
+                                    label="All experiences"
                                 />
                                 <FooterMenuLink
                                     url="/experiences/destination/world/all"
-                                    label="Wander by Destination"
+                                    label="By Destination"
                                 />
                                 <FooterMenuLink
                                     url="/experiences/interest/all/all"
-                                    label="Wander by Interest"
+                                    label="By Interest"
                                 />
-                                <FooterMenuLink
+                                {/* <FooterMenuLink
                                     url="/kreators/featured"
                                     label="Featured creators"
-                                />
+                                /> */}
                             </nav>
                         </section>
                         <section>
@@ -66,10 +66,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                 Support
                             </h3>
                             <nav className="flex flex-col gap-2 text-xs font-light">
-                                <FooterMenuLink
+                                {/* <FooterMenuLink
                                     url="/help/article/5001"
                                     label="Updates for Covid-19"
-                                />
+                                /> */}
                                 <FooterMenuLink
                                     url="/help/article/1001"
                                     label="Help Center"

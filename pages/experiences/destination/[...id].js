@@ -17,10 +17,14 @@ import Row from '@/components/sections/Row';
 import GenericSelectList from '@/components/blocks/GenericSelectList';
 import SkeletonText from '@/components/blocks/Card/SkeletonText';
 import SliderInterests from '@/components/sections/SliderInterests';
+import { toggleCountryList } from '@/store/actions/globalState';
+
 // import CountryList from '@/components/blocks/CountryList';
 
 const LandingPage = ({
+    toggleCountryList,
     globalState: {
+        countryListIsOpen,
         lang,
         siteData: { destinationList = [], categories = [] }
     }
@@ -57,6 +61,7 @@ const LandingPage = ({
     const totalCount = useRef(0);
     const filterType = useRef('all');
     const findParams = useRef([]);
+
     const [pageIsReady, setPageIsReady] = useState(false);
 
     const getExps = async (countryIds, type, page = 1) => {
@@ -78,9 +83,7 @@ const LandingPage = ({
         if (pillCountryList.find((item) => item === 'WORLD'))
             setPillCountryList([code]);
         else setPillCountryList((prev) => [...prev, code]);
-
     };
-
 
     const loadExperiences = (countryIds, type, page = 1) => {
         getExps(countryIds, type, page).then((data) => {
@@ -155,6 +158,17 @@ const LandingPage = ({
         setPillCountryList(pillCountryList.filter((item) => item !== pill));
     };
 
+    const toggleExpand = () => {
+        toggleCountryList(!countryListIsOpen);
+        // const tmp = expand;
+        // expandFilters.current = !tmp;
+        // setExpand(!tmp);
+    };
+
+    useEffect(() => {
+        console.log('page loaded');
+    }, []);
+
     useEffect(() => {
         if (isReady) {
             let found = destinationList.find(
@@ -184,6 +198,7 @@ const LandingPage = ({
                         findParams.current = 'WORLD';
                     }
                 } else {
+                    toggleCountryList(false);
                     findParams.current = found.country_list.join('-');
                 }
 
@@ -195,7 +210,7 @@ const LandingPage = ({
                         : 'all';
                 }
 
-                if(findParams.current.length) {
+                if (findParams.current.length) {
                     loadExperiences(findParams.current, filterType.current);
                     const splitList = findParams.current.split('-');
                     setPillCountryList(splitList);
@@ -209,12 +224,16 @@ const LandingPage = ({
 
     return (
         <Layout>
-            <SliderDestinations
-                margins="mt-12"
-                sectionTitles={translations[lang].sections.wanderByDestination}
-                data={destinationList || []}
-                tagRatio="landscape"
-            />
+            <Row>
+                <SliderDestinations
+                    margins="mt-12"
+                    sectionTitles={
+                        translations[lang].sections.wanderByDestination
+                    }
+                    data={destinationList || []}
+                    tagRatio="landscape"
+                />
+            </Row>
 
             {pageIsReady && (
                 <>
@@ -225,7 +244,7 @@ const LandingPage = ({
                             <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
                                 {!dataLoading ? (
                                     <>
-                                        <div className="text-3xl uppercase font-light text-blue-600">
+                                        <div className="text-3xl tracking-tighter font-bold text-kn-primary">
                                             {findParams.current === 'WORLD'
                                                 ? 'The World'
                                                 : destinationList.find(
@@ -285,8 +304,8 @@ const LandingPage = ({
                     </Row>
 
                     <Row>
-                        <div className="flex items-center gap-4 px-4">
-                            <div className="w-80 pb-8">
+                        <div className="flex flex-col md:flex-row md:items-centera gap-4 px-4">
+                            <div className="w-80 pb-2 md:pb-8 flex-none">
                                 <GenericSelectList
                                     selectOptions={guideDates}
                                     handleChange={countrySelect}
@@ -303,26 +322,49 @@ const LandingPage = ({
                                     height="2rem"
                                 />
                             </div>
-                            <div className="flex gap-2 px-4 pb-8 items-center">
-                                {!pillCountryList.find(
-                                    (item) => item === 'WORLD'
-                                ) &&
-                                    pillCountryList.map((pill) => (
+                            {countryListIsOpen === true ||
+                            pillCountryList.length < 10 ? (
+                                <div className="flex flex-wrap gap-2 md:px-4 pb-8  items-center">
+                                    {pillCountryList.length >= 10 && (
                                         <button
-                                            onClick={() => handleRemove(pill)}
-                                            className="pl-4 pr-3 text-green-900 text-sm bg-green-200 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
-                                            <span>
-                                                {
-                                                    countriesArray.find(
-                                                        (item) =>
-                                                            item.code === pill
-                                                    ).name
-                                                }
-                                            </span>
-                                            <i className="ri-close-line"></i>
+                                            onClick={toggleExpand}
+                                            className="pr-4 pl-3 text-green-900 text-sm bg-green-400 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                            <i className="ri-arrow-left-s-line"></i>
+                                            <span>Collapse country List</span>
                                         </button>
-                                    ))}
-                            </div>
+                                    )}
+                                    {!pillCountryList.find(
+                                        (item) => item === 'WORLD'
+                                    ) &&
+                                        pillCountryList.map((pill) => (
+                                            <button
+                                                onClick={() =>
+                                                    handleRemove(pill)
+                                                }
+                                                className="pl-4 pr-3 text-green-900 text-sm bg-green-100 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                                <span>
+                                                    {
+                                                        countriesArray.find(
+                                                            (item) =>
+                                                                item.code ===
+                                                                pill
+                                                        ).name
+                                                    }
+                                                </span>
+                                                <i className="ri-close-line"></i>
+                                            </button>
+                                        ))}
+                                </div>
+                            ) : (
+                                <div className="flex flex-wrap gap-2 md:px-4 pb-8  items-center">
+                                    <button
+                                        onClick={toggleExpand}
+                                        className="pl-4 pr-3 text-green-900 text-sm bg-green-400 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                        <span>Expand country List</span>
+                                        <i className="ri-arrow-right-s-line"></i>
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </Row>
                     <GridList
@@ -341,16 +383,18 @@ const LandingPage = ({
                             loadMoreData
                         }
                     />
-                    <SliderInterests
-                        margins="mt-12"
-                        sectionTitles={
-                            translations[lang].sections.wanderByInterest
-                        }
-                        // data={dataLanding?.data?.interests || []}
-                        data={categories || []}
-                        path={'/experiences/interest/'}
-                        tagRatio="landscape"
-                    />
+                    <Row>
+                        <SliderInterests
+                            margins="mt-12"
+                            sectionTitles={
+                                translations[lang].sections.wanderByInterest
+                            }
+                            // data={dataLanding?.data?.interests || []}
+                            data={categories || []}
+                            path={'/experiences/interest/'}
+                            tagRatio="landscape"
+                        />
+                    </Row>
                 </>
             )}
             {/* <LoadMore loadMoreData={loadMoreData} /> */}
@@ -364,7 +408,7 @@ const mapStateToProps = (state) => ({
 });
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch);
+    return bindActionCreators({ toggleCountryList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

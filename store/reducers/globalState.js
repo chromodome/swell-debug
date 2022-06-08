@@ -12,6 +12,7 @@ const initialState = {
     authModalIsOpen: false,
     authComponent: 'login',
     pageLoading: true,
+    countryListIsOpen: false,
     siteData: {
         loading: true,
         tags: [],
@@ -71,6 +72,15 @@ const toggleAuthModal = (draft, action) => {
     };
 };
 
+const toggleCountryList = (draft, action) => {
+    const { countryListIsOpen } = action;
+
+    return {
+        ...draft,
+        countryListIsOpen
+    };
+};
+
 const setAuthPage = (draft, action) => {
     const { authComponent } = action;
 
@@ -108,6 +118,7 @@ const setStartUpData = (draft, action) => {
 export default createReducer(initialState, {
     [types.TOGGLE_LANG]: toggleLang,
     [types.TOGGLE_NAV]: toggleNav,
+    [types.TOGGLE_COUNTRYLIST]: toggleCountryList,
     [types.TOGGLE_CART]: toggleCart,
     [types.TOGGLE_AUTH_MODAL]: toggleAuthModal,
     [types.SET_AUTH_PAGE]: setAuthPage,

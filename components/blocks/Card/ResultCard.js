@@ -68,7 +68,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                     <img
                         alt="Placeholder"
                         // className={` w-full h-56 md:h-36 lg:h-44 xl:h-56 relative rounded-xl overflow-hidden  bg-gray-200 `}
-                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-56"
+                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52"
                         // className="rounded-xl object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
                         // data-blink-src={featured_image || ''}
                         src={featured_image || ''}
@@ -76,7 +76,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                 ) : (
                     <div
                         // className="rounded-xl bg-gray-200 w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
-                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-56">
+                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52">
                         <div className="relative h-full">
                             <div className="text-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                 <Icons iName="IMAGEALT2" />
@@ -106,7 +106,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
     return (
         <div
             key={myKey}
-            className={`my-3 px-2 w-full md:w-1/3 lg:w-1/4 xl:w-1/5 lg:my-4 lg:px-2 ${containerClass}`}>
+            className={`my-3 px-2 w-full md:w-1/3a lg:w-1/4a xl:w-1/5a lg:my-4 lg:px-2 ${containerClass}`}>
             <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
                 <KreatorBadge author={user} baseUrl={baseUrl} />
                 <div>{makeLink()}</div>
@@ -122,9 +122,9 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                         {type}
                     </div> */}
                 </div>
-                <div className="p-2 sm:p-4">
-                    <div className="flex items-center justify-between leading-tight text-black font-sans text-xs md:text-sm">
-                        <span className="flex">
+                <div className="p-2 sm:p-4 mt-2 sm:mt-0">
+                    <div className="flex items-center justify-between leading-tight text-black font-sans text-xs md:text-sm ">
+                        <span className="flex line-clamp-2 h-9 overflow-hidden">
                             {title ? (
                                 title
                             ) : (
@@ -134,18 +134,23 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                             )}
                         </span>
                     </div>
-                    <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
-                        <div className="flex  mr-8 py-1">
+                    <div className="mt-2 flex flex-row  font-sans text-xs md:text-xxs lg:text-xs text-gray-900">
+                        <div className="flex  mr-4 py-1">
                             <span className="text-kn-primary mr-2">
                                 <MapPin size={18} />
                             </span>
-                            <span className="flex flex-wrap items-center">
+                            <span className="max-w-28 truncate">
                                 {destinations?.length > 0 ? (
+                                    destinations.join(', ')
+                                ) : (
+                                    <span className="w-20 bg-gray-300 rounded-full h-2" />
+                                )}
+                                {/* {destinations?.length > 0 ? (
                                     destinations.map(
                                         (item, index, itemArray) => {
                                             return (
                                                 <span key={`${item}_${index}`}>
-                                                    <span className="whitespace-nowrap">
+                                                    <span className="whitespace-nowrap truncate">
                                                         {item}
                                                     </span>
                                                     {index <
@@ -161,10 +166,10 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                                     )
                                 ) : (
                                     <span className="w-20 bg-gray-300 rounded-full h-2" />
-                                )}
+                                )} */}
                             </span>
                         </div>
-                        <div className="flex items-center mr-8 py-1">
+                        <div className="flex items-center mr-8 py-1 whitespace-nowrap">
                             <span className="text-kn-primary mr-2">
                                 <Clock size={18} />
                             </span>

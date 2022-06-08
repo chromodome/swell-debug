@@ -15,6 +15,7 @@ const GridList = ({
     btnLabel = 'Load More',
     btnAction = 'url',
     btnUrl,
+    btnPos,
     loadMoreData,
     dataLoading = false,
     showButton = true,
@@ -42,16 +43,28 @@ const GridList = ({
                 className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${
                     margins ? margins : sectionTitles ? 'mt-24 mb-12' : 'mb-12'
                 }`}>
-                {sectionTitles && (
-                    <SectionTitle
-                        section={sectionTitles}
-                        className={titleClass}
-                        titleColor={titleColor}
-                    />
-                )}
+                <div className="flex justify-between">
+                    {sectionTitles && (
+                        <SectionTitle
+                            section={sectionTitles}
+                            className={titleClass}
+                            titleColor={titleColor}
+                        />
+                    )}
+                    {btnPos && btnAction === 'url' && !purchasedView && (
+                        <div className="hidden md:block">
+                            <ButtonLoad
+                                width="w-40"
+                                handleClick={handleClick}
+                                isLoading={loadMoreData}
+                                label={'Explore more'}
+                            />
+                        </div>
+                    )}
+                </div>
                 {!dataLoading ? (
                     <>
-                        <div className="flex flex-wrap -mx-1a lg:-mx-4a">
+                        <div className="grid grid-cols-1 px-2 lg-px-0 gap-y-4 md:gap-y-4 md:grid-cols-3 xl:grid-cols-5">
                             {data.map((item) => {
                                 return missing && purchasedView ? (
                                     <ResultCardMissing
@@ -70,14 +83,46 @@ const GridList = ({
                                 );
                             })}
                         </div>
-                        {btnAction === 'url' && !purchasedView && (
+                        {/* <div className="flex flex-wrap -mx-1a lg:-mx-4a">
+                            {data.map((item) => {
+                                return missing && purchasedView ? (
+                                    <ResultCardMissing
+                                        missing={true}
+                                        purchasedView={purchasedView}
+                                        myKey={item.id}
+                                        data={item}
+                                    />
+                                ) : (
+                                    <ResultCard
+                                        missing={true}
+                                        purchasedView={purchasedView}
+                                        myKey={item.id}
+                                        data={item}
+                                    />
+                                );
+                            })}
+                        </div> */}
+
+                        {btnPos && btnAction === 'url' && !purchasedView && (
+                            <div className="block md:hidden">
+                                <ButtonLoad
+                                    width="w-40"
+                                    handleClick={handleClick}
+                                    isLoading={loadMoreData}
+                                    label={'Explore more'}
+                                />
+                            </div>
+                        )}
+
+                        {!btnPos && btnAction === 'url' && !purchasedView && (
                             <ButtonLoad
                                 handleClick={handleClick}
                                 isLoading={loadMoreData}
                                 label={btnLabel}
                             />
                         )}
-                        {btnAction === 'load' &&
+                        {!btnPos &&
+                            btnAction === 'load' &&
                             showButton &&
                             data.length > 0 &&
                             !purchasedView && (
