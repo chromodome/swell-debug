@@ -10,7 +10,7 @@ const SliderList = ({
     breakPoints,
     boxed,
     classes,
-    padding = 'px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40',
+    padding = 'px-5a md:px-9a lg:px-12a xl:px-24a 2xl:px-40a',
     margins = 'mt-20 mb-4 md:mt-24 md:mb-4',
     dataLoading
 }) => {
@@ -33,7 +33,11 @@ const SliderList = ({
             <div
                 className={`overflow-x-hidden z-100  ${margins} mx-auto ${padding} ${classes}`}>
                 {section && (
-                    <SectionTitle section={section} className="mb-4 md:mb-0" />
+                    <SectionTitle
+                        section={section}
+                        className="mb-4 md:mb-0"
+                        // padding=""
+                    />
                 )}
                 {!dataLoading ? (
                     <div>

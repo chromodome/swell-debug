@@ -8,7 +8,7 @@ import React from 'react';
 const Row = ({ children, classes = '' }) => {
     return (
         <div
-            className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${classes}`}>
+            className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-44 ${classes}`}>
             {children}
         </div>
     );

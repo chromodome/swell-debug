@@ -23,10 +23,13 @@ import NavbarItem from '@/blocks/NavbarItem';
 import { handleRowReverse } from '@/helpers/FEutils';
 import translations from '@/constants/translations';
 
-import { NEXT_URL } from '@/config/index';
+// import { NEXT_URL } from '@/config/index';
 
 import debounce from '@/helpers/debounce';
 import ModalAuth from '../blocks/Modal/ModalAuth';
+import classNames from 'classnames';
+import NavLink from '../blocks/NavLink';
+import MenuLink from '../blocks/MenuLink';
 
 const Header = ({
     //  fetchCartAction,
@@ -132,6 +135,17 @@ const Header = ({
                         </div>
                     </div>
                     {isSearch && <Search lang={lang} rtl={rtl} />}
+                    <div className="hidden md:flex text-sma items-center gap-8">
+                        <MenuLink label={'About us'} href="/about/konnect" />
+                        <MenuLink
+                            label={'The Marketplace'}
+                            href="/about/marketplace"
+                        />
+                        <MenuLink
+                            label={'About Kreators'}
+                            href="/about/kreators"
+                        />
+                    </div>
                     <div className="flex justify-end items-center h-full  lg:w-1/3">
                         {isAvatar && (
                             <div
@@ -189,6 +203,33 @@ const Header = ({
             {/* <NavbarSidebarCart>kjh</NavbarSidebarCart> */}
             {isMenu && (
                 <NavbarSidebar>
+                    <div className="md:hidden">
+                        <NavbarItem
+                            justify="justify-center"
+                            label={'About us'}
+                            link={`/about/konnect`}
+                            // handleClick={() => console.log('hello')}
+                            handleClick={() => toggleNav(false)}
+                            rtl={rtl}
+                        />
+                        <NavbarItem
+                            label={'The Marketplace'}
+                            link={`/about/marketplace`}
+                            // handleClick={() => console.log('hello')}
+                            handleClick={() => toggleNav(false)}
+                            rtl={rtl}
+                        />
+                        <NavbarItem
+                            label={'About Kreators'}
+                            link={`/about/kreators`}
+                            // handleClick={() => console.log('hello')}
+                            handleClick={() => toggleNav(false)}
+                            rtl={rtl}
+                        />
+
+                        <div className="border-b border-gray-200 my-4"></div>
+                    </div>
+
                     {isAuthenticated ? (
                         <>
                             {/* <NavbarItem
@@ -252,13 +293,13 @@ const Header = ({
                                 handleClick={handleSignup}
                                 rtl={rtl}
                             />
-                            <NavbarItem
+                            {/* <NavbarItem
                                 label={translations[lang].menu.helpCenter.title}
                                 icon="HelpCircle"
                                 link={`http://academy.viakonnect.com`}
                                 handleClick={() => toggleNav(false)}
                                 rtl={rtl}
-                            />
+                            /> */}
                         </>
                     )}
                 </NavbarSidebar>

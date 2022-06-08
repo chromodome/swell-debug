@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import IconsLucide from '@/blocks/Icon/IconsLucide';
 import router from 'next/router';
+import classNames from 'classnames';
 
 const NavbarItem = ({
     label,
@@ -11,12 +12,16 @@ const NavbarItem = ({
 }) => {
     const jsx = (
         <div
-            className={`transition duration-200 ${
-                rtl ? 'text-base' : 'text-sm'
-            } rounded-lg flex flex-grow py-4 px-8 items-center text-gray-400 hover:bg-green-100 hover:text-green-600`}>
-            <span className="mx-2 w-8">
-                <IconsLucide icon={icon} />
-            </span>
+            className={classNames(
+                'transition duration-200 rounded-lg flex flex-grow py-4 px-8 items-center text-gray-400 hover:bg-green-100 hover:text-green-600',
+                rtl ? 'text-base' : 'text-sm',
+                !icon && 'justify-center'
+            )}>
+            {icon && (
+                <span className="mx-2 w-8">
+                    <IconsLucide icon={icon} />
+                </span>
+            )}
 
             {label}
         </div>

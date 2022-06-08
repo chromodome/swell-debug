@@ -9,11 +9,13 @@ import ItineraryCard from '@/components/blocks/Card/ItineraryCard';
 
 function SectionMarketingItinerary(props) {
     const {
+        type,
         itinerary: { trip_days: ItineraryDaysList = [] }
     } = props;
 
     return (
-        <ExpSubsection>
+        <ExpSubsection
+            borders={type.toLowerCase() === 'guided' ? 'border-b' : ''}>
             <div className="marketing-title">Experience Itinerary</div>
 
             <div className="w-full">

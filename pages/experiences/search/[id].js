@@ -150,24 +150,28 @@ const LandingPage = ({
                             loadMoreData
                         }
                     />
-                    <SliderInterests
-                        margins="mt-12"
-                        sectionTitles={
-                            translations[lang].sections.wanderByInterest
-                        }
-                        // data={dataLanding?.data?.interests || []}
-                        data={categories || []}
-                        path={'/experiences/interest/'}
-                        tagRatio="landscape"
-                    />
-                    <SliderDestinations
-                        margins="mt-12"
-                        sectionTitles={
-                            translations[lang].sections.wanderByDestination
-                        }
-                        data={destinationList || []}
-                        tagRatio="landscape"
-                    />
+                    <Row>
+                        <SliderInterests
+                            margins="mt-12"
+                            sectionTitles={
+                                translations[lang].sections.wanderByInterest
+                            }
+                            // data={dataLanding?.data?.interests || []}
+                            data={categories || []}
+                            path={'/experiences/interest/'}
+                            tagRatio="landscape"
+                        />
+                    </Row>
+                    <Row>
+                        <SliderDestinations
+                            margins="mt-12"
+                            sectionTitles={
+                                translations[lang].sections.wanderByDestination
+                            }
+                            data={destinationList || []}
+                            tagRatio="landscape"
+                        />
+                    </Row>
                 </>
             )}
             {/* <LoadMore loadMoreData={loadMoreData} /> */}

@@ -102,14 +102,16 @@ const LandingPage = ({
 
     return (
         <Layout>
-            <SliderInterests
-                margins="mt-12"
-                sectionTitles={translations[lang].sections.wanderByInterest}
-                // data={dataLanding?.data?.interests || []}
-                data={categories || []}
-                path={'/experiences/interest/'}
-                tagRatio="landscape"
-            />
+            <Row>
+                <SliderInterests
+                    margins="mt-12"
+                    sectionTitles={translations[lang].sections.wanderByInterest}
+                    // data={dataLanding?.data?.interests || []}
+                    data={categories || []}
+                    path={'/experiences/interest/'}
+                    tagRatio="landscape"
+                />
+            </Row>
 
             {pageIsReady && (
                 <>
@@ -120,12 +122,12 @@ const LandingPage = ({
                             <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
                                 {!dataLoading ? (
                                     <>
-                                        <div className="text-3xl uppercase font-light text-blue-600">
+                                        <div className="text-3xl tracking-tighter font-bold text-kn-primary">
                                             {categories.find(
                                                 (item) =>
                                                     item.slug ===
                                                     interest.current
-                                            )?.name ?? 'All'}
+                                            )?.name ?? 'All Interests'}
                                         </div>
                                         <div className="flex flex-wrap gap-2">
                                             {totalCount.current > 0 ? (
@@ -191,14 +193,16 @@ const LandingPage = ({
                             loadMoreData
                         }
                     />
-                    <SliderDestinations
-                        margins="mt-12"
-                        sectionTitles={
-                            translations[lang].sections.wanderByDestination
-                        }
-                        data={destinationList || []}
-                        tagRatio="landscape"
-                    />
+                    <Row>
+                        <SliderDestinations
+                            margins="mt-12"
+                            sectionTitles={
+                                translations[lang].sections.wanderByDestination
+                            }
+                            data={destinationList || []}
+                            tagRatio="landscape"
+                        />
+                    </Row>
                 </>
             )}
             {/* <LoadMore loadMoreData={loadMoreData} /> */}

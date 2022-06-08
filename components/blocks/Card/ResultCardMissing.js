@@ -15,12 +15,7 @@ const baseUrl = {
 };
 const currencyPrefix = '$US';
 
-const ResultCard = ({
-        purchasedView=false,
-        data,
-        containerClass,
-        myKey
-    }) => {
+const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
     const {
         title,
         people,
@@ -39,38 +34,35 @@ const ResultCard = ({
             // last="",
             // avatar="",
             // displayname="",
-        }={},
-
+        } = {}
     } = data;
 
     const makeLink = () => {
-        return <>
-                <div className="rounded-xl bg-gray-200 w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96">
+        return (
+            <>
+                <div className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52">
                     <div className="relative h-full">
                         <div className="text-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             <Icons iName="IMAGEALT2" />
                         </div>
                     </div>
                 </div>
-
             </>
+        );
 
         // return <Link href={`${baseUrl.experiencePage}/${slug}`}>
         //             <a>
         //                 {linkJsx}
         //             </a>
         //         </Link>
-        
-    }
+    };
 
     return (
         <div
             key={myKey}
-            className={`my-3 px-2 w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 lg:my-4 lg:px-2 ${containerClass}`}>
+            className={`my-3 px-2 w-full md:w-1/3a lg:w-1/4a xl:w-1/5a lg:my-4 lg:px-2 ${containerClass}`}>
             <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
-                <div>
-                    {makeLink()}
-                </div>
+                <div>{makeLink()}</div>
                 <div className="flex justify-around w-full transform-gpu -mt-4 px-4">
                     <div className="uppercase rounded-full h-8 flex justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6">
                         {type}
@@ -92,7 +84,6 @@ const ResultCard = ({
                         <span className="mr-2 font-normal uppercase text-xs tracking-wide">
                             Contact For Refund
                         </span>
-                        
                     </div>
                 </div>
             </div>
