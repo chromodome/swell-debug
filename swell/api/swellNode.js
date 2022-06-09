@@ -26,7 +26,8 @@ class SwellController {
             {
                 active: true,
                 limit,
-                ...queryObj
+                ...queryObj,
+                expand: [ "creator"]
             }
         );
 
@@ -44,7 +45,8 @@ class SwellController {
             {
                 active: true,
                 limit,
-                ...queryObj
+                ...queryObj,
+                expand: [ "creator"]
             }
         );
 
@@ -63,7 +65,8 @@ class SwellController {
             active: true,
             limit,
             page,
-            ...queryObj
+            ...queryObj,
+            expand: [ "creator"]
         });
 
         return response;
@@ -83,10 +86,35 @@ class SwellController {
             limit,
             page,
             ...queryObj,
-            'content.username': username
+            'content.username': username,
+            expand: [ "creator"]
         });
 
         return response;
+    };
+
+    getCreatorByUserName = async (username) => {
+        try {
+            const response = await swellServer.get('/creator', {
+                username
+            });
+
+            return response;
+        } catch (error) {
+            console.log('error', error)
+        }
+    };  
+
+    getCreatorByUserId = async (user_id) => {
+        try {
+            const response = await swellServer.get('/creator', {
+                user_id
+            });
+
+            return response;
+        } catch (error) {
+            console.log('error', error)
+        }
     };
 
     byCategory = async (category, type, limit, page) => {
@@ -102,10 +130,33 @@ class SwellController {
             limit,
             page,
             ...queryObj,
-            category
+            category,
+            expand: [ "creator"]
         });
 
         return response;
+    };
+
+    getKreators = async (limit, page) => {
+        const response = await swellServer.get('/creator/?sort=username+asc', {
+            limit,
+            page,
+        });
+
+        return response;
+    };
+
+
+    getExperienceBySlug = async (slug) => {
+        try {
+            const response = await swellServer.get('/products', {
+                slug,
+                expand: [ "creator"]
+            });
+            return response;
+        } catch (error) {
+            console.log('error', error)
+        }
     };
 
     byDestination = async (dest, type, limit, page) => {
@@ -136,6 +187,7 @@ class SwellController {
             limit,
             page,
             ...queryObj,
+            expand: [ "creator"],
             where: {
                 $or: destOrArray
             }

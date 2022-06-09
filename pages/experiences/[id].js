@@ -44,7 +44,6 @@ const ExperienceDetail = ({
         title: { [lang]: title },
         days: { [lang]: days },
         type: { [lang]: type },
-        user: { [lang]: user },
         bestTimeToGo: { [lang]: bestTimeToGo },
         destination: { [lang]: destination },
         accommodation: { [lang]: accommodation },
@@ -53,9 +52,23 @@ const ExperienceDetail = ({
             id: swellExpId,
             categories,
             tags,
-            content: { destinations, experience_id, views }
+            creator: {
+                username,
+                displayname,
+                avatar,
+                bio
+            },
+            content: { destinations, experience_id, views  }
         }
     } = contentfulExperience;
+    const user = {
+            username,
+            bio,
+            displayname,
+            profile: {
+                avatar,
+            }
+    };
     const updateViews =  async (swellExpId, views)=> {
         const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
                 method: 'PUT',
