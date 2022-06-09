@@ -30,6 +30,7 @@ const LandingPage = ({ globalState: { lang } }) => {
     const filterType = useRef('all');
     const userName = useRef(null);
     const [pageIsReady, setPageIsReady] = useState(false);
+    const [creator, setCreator] = useState(null)
 
     const getExps = async (user, type, page = 1) => {
         const response = await fetch(
@@ -47,7 +48,23 @@ const LandingPage = ({ globalState: { lang } }) => {
             currentPage.current + 1
         );
     };
+    const getCreatorData = async (user) => {
+        const response =  await fetch(
+            `/api/creator/${user}`
+        );
+        const data = await response.json();
+
+        if(data?.count) {
+            setCreator(data.results[0])
+        }
+
+        
+    }
+
     const loadExperiences = (user, type, page = 1) => {
+        if(page === 1) {
+            getCreatorData(user)
+        }
         getExps(user, type, page).then((data) => {
             const { count, page, pages, results } = data;
 
@@ -81,8 +98,8 @@ const LandingPage = ({ globalState: { lang } }) => {
     }, []);
 
     useEffect(() => {
-        if (expList?.length > 0) {
-            const { username, displayname, avatar } = expList?.[0]?.content;
+        if (creator) {
+            const { username, displayname, avatar } = creator;
             const newKreator = {
                 username,
                 profile: {
@@ -92,7 +109,7 @@ const LandingPage = ({ globalState: { lang } }) => {
             };
             setKreator(newKreator);
         }
-    }, [expList]);
+    }, [creator]);
 
     const userData = {
         dark_theme: true,
@@ -178,13 +195,20 @@ const LandingPage = ({ globalState: { lang } }) => {
                         <Row>
                             <div className="px-4">
                                 <div className="flex flex-col gap-4 border-t pt-8 pb-8 border-gray-300">
-                                    {/* <KreatorBadgeStaticFlat
-                                        customHeight="h-12"
-                                        customPadding="pl-16 pr-8"
-                                        author={kreator}
-                                        size="w-12 h-12"
-                                        textSize="text-lg"
-                                    /> */}
+                                { creator
+                                    ? 
+                                    <>
+                                        <KreatorBadgeStaticFlat
+                                            customHeight="h-12"
+                                            customPadding="pl-16 pr-8"
+                                            author={kreator}
+                                            size="w-12 h-12"
+                                            textSize="text-lg"
+                                        />
+                                        <div>{creator.bio}</div>
+                                    </>
+                                    : null
+                                }
                                     <div className="flex flex-wrap gap-2">
                                         {!dataLoading ? (
                                             <>

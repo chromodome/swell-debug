@@ -17,13 +17,13 @@ function SectionMarketingIntro(props) {
         budget_max = 0,
         budget_currency = 'USD',
         user: author,
-        user: { profile },
+        user: profile ,
         globalState: { siteData },
         bestTimeToGo: { time_range = false, isVisible: bestTimeToGoVisible },
         budgetVisible
     } = props;
 
-    console.log('props are', props);
+    console.log('props are', profile);
 
     return (
         <>

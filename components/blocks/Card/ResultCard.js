@@ -24,19 +24,22 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
         travelDate,
         price,
         slug,
+        creator: {
+            username = '',
+            first = '',
+            last = '',
+            avatar = '',
+            displayname = ''
+        }={},
         content: {
             experience_id,
             featured_image,
             type,
             days,
             destinations,
-            username = '',
-            first = '',
-            last = '',
-            avatar = '',
-            displayname = ''
         } = {}
     } = data;
+
     const user = {
         username,
         first,

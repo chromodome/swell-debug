@@ -44,7 +44,6 @@ const ExperienceDetail = ({
         title: { [lang]: title },
         days: { [lang]: days },
         type: { [lang]: type },
-        user: { [lang]: user },
         bestTimeToGo: { [lang]: bestTimeToGo },
         destination: { [lang]: destination },
         accommodation: { [lang]: accommodation },
@@ -53,13 +52,25 @@ const ExperienceDetail = ({
             id: swellExpId,
             categories,
             tags,
-            content: { destinations, experience_id, views }
+            creator: {
+                username,
+                displayname,
+                avatar,
+                bio
+            },
+            content: { destinations, experience_id, views  }
         }
     } = contentfulExperience;
-    const updateViews = async (swellExpId, views) => {
-        const response = await fetch(
-            `/api/views/${swellExpId}?views=${views}`,
-            {
+    const user = {
+            username,
+            bio,
+            displayname,
+            profile: {
+                avatar,
+            }
+    };
+    const updateViews =  async (swellExpId, views)=> {
+        const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
                 method: 'PUT',
                 body: [],
                 headers: {
@@ -92,18 +103,10 @@ const ExperienceDetail = ({
                             destinations={destinations}
                         />
                         <SectionMarketingGallery type={type} images={gallery} />
-                        <div className="fixed lg:hidden bottom-0 w-full z-100">
-                            <SectionPricingBooking
-                                expId={experience_id}
-                                swellExpId={swellExpId}
-                                type={type}
-                                mobile
-                            />
-                        </div>
                         <div
-                            className={`mb-12a mt-16 md:mt-16 lg:mt-24 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
+                            className={`mb-12 mt-16 md:mt-16 lg:mt-24 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                             <main className={` flex items-start`}>
-                                <section className="w-full lg:w-4/6 mb-0 md:mb-12a">
+                                <section className="w-full lg:w-4/6 mb-24">
                                     <SectionMarketingIntro
                                         type={type}
                                         desc={desc}
@@ -126,7 +129,6 @@ const ExperienceDetail = ({
                                     /> */}
 
                                     <SectionMarketingItinerary
-                                        type={type}
                                         itinerary={itinerary}
                                     />
                                     {type.toLowerCase() === 'guided' &&
@@ -144,7 +146,7 @@ const ExperienceDetail = ({
                                         )}
                                 </section>
 
-                                <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 mb-20">
+                                <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 ">
                                     <SectionPricingBooking
                                         expId={experience_id}
                                         swellExpId={swellExpId}
@@ -152,33 +154,30 @@ const ExperienceDetail = ({
                                     />
                                 </aside>
                             </main>
-                            {type.toLowerCase() === 'guided' && (
-                                <ExpSubsection borders="" margins="" padding="">
-                                    <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 ">
-                                        {`Special requirements for Travelers`}
-                                    </div>
+                            <ExpSubsection borders="">
+                                <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 ">
+                                    {`Special requirements for Wanderers`}
+                                </div>
 
-                                    <div className="flex flex-col items-center md:items-start md:flex-row justify-between gap-4">
-                                        <p className="md:mr-4 lg:mr-8 text-gray-800">
-                                            If you have any special requests,
-                                            please reach out to the kreator via
-                                            the contact button to see if they
-                                            can accommodate your needs.
-                                        </p>
-                                        <Button type="outlined" rounded="lg">
-                                            Contact Kreator
-                                        </Button>
-                                    </div>
-                                </ExpSubsection>
-                            )}
+                                <div className="flex justify-between">
+                                    <p className="md:mr-4 lg:mr-8 text-gray-800">
+                                        If you have any special requests, please
+                                        reach out to us via the contact button
+                                        to see if we can accommodate your needs.
+                                    </p>
+                                    <Button type="outlined" rounded="lg">
+                                        Konnect with us
+                                    </Button>
+                                </div>
+                            </ExpSubsection>
                         </div>
                     </div>
                 )}
 
-                {/* <div
+                <div
                     className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
                     <section className={`px-4`}></section>
-                </div> */}
+                </div>
             </Layout>
         </>
     );
