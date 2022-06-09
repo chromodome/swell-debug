@@ -27,6 +27,15 @@ export function toggleLang(lang) {
     };
 }
 
+export function toggleCountryList(countryListIsOpen) {
+    return (dispatch) => {
+        dispatch({
+            type: types.TOGGLE_COUNTRYLIST,
+            countryListIsOpen
+        });
+    };
+}
+
 export function toggleAuthModal(authModalIsOpen) {
     return (dispatch) => {
         dispatch({

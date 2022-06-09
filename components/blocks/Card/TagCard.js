@@ -7,6 +7,10 @@ const presets = {
         size: 'object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96',
         text: 'text-lg'
     },
+    portrait2: {
+        size: 'object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-52 lg:h-64 xl:h-72 2xl:h-72',
+        text: 'text-lg'
+    },
 
     landscape: {
         size: 'object-cover w-full h-24 lg:h-28',

@@ -5,8 +5,10 @@ import { randomItem } from '@/helpers/FEutils';
 import Avatar from 'components/specialty/Avatar';
 import Link from 'next/link';
 import KreatorBadgeStatic from '../blocks/KreatorBadgeStatic';
+import KreatorBadgeStaticFlat from '../blocks/KreatorBadgeStaticFlat';
 
 const Showcase = ({
+    profile,
     data,
     children,
     pill,
@@ -61,41 +63,54 @@ const Showcase = ({
                 <div
                     className={`z-100 mb-12 px-5 md:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 w-full md:w-1/2 flex-none`}>
                     <div className={`z-100 px-4 mt-8 md:mt-20 `}>
-                        {data.username && (
+                        {!children ? (
                             <>
-                                <KreatorBadgeStatic author={data?.user_id} />
-                            </>
-                        )}
-                        <div
-                            className={`inline-flex ${
-                                dark ? 'text-green-400' : 'text-green-500'
-                            } font-bold text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
-                            {data.title}
-                        </div>
-                        <div
-                            className={`${
-                                dark ? 'text-white' : 'text-gray-800'
-                            } mt-2 text-4xl font-bold leading-tight mb-8 whitespace-normal`}>
-                            {data.headline}
-                        </div>
-                        {data.description && (
-                            <div
-                                className={`${
-                                    dark ? 'text-white' : 'text-gray-800'
-                                } text-base mb-8`}
-                                dangerouslySetInnerHTML={{
-                                    __html: data.description
-                                }}
-                            />
-                        )}
+                                {data?.username && (
+                                    <>
+                                        <KreatorBadgeStatic
+                                            author={data.user_id}
+                                        />
+                                    </>
+                                )}
 
-                        {data.button && (
-                            <ButtonCard
-                                url={data.url}
-                                icon={'las la-arrow-right'}
-                                label={data.label}
-                                darkMode={dark}
-                            />
+                                <div
+                                    className={`inline-flex ${
+                                        dark
+                                            ? 'text-green-400'
+                                            : 'text-green-500'
+                                    } font-bold text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
+                                    {data.title}
+                                </div>
+                                <div
+                                    className={`${
+                                        dark ? 'text-white' : 'text-gray-800'
+                                    } mt-2 text-3xl md:text-4xl font-bold leading-tight mb-8 whitespace-normal`}>
+                                    {data.headline}
+                                </div>
+                                {data.description && (
+                                    <div
+                                        className={`${
+                                            dark
+                                                ? 'text-white'
+                                                : 'text-gray-800'
+                                        } text-base mb-8`}
+                                        dangerouslySetInnerHTML={{
+                                            __html: data.description
+                                        }}
+                                    />
+                                )}
+
+                                {data.button && (
+                                    <ButtonCard
+                                        url={data.url}
+                                        icon={'las la-arrow-right'}
+                                        label={data.label}
+                                        darkMode={dark}
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            children
                         )}
                     </div>
                 </div>

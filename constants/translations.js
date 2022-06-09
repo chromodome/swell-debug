@@ -57,11 +57,11 @@ const langData = {
                 subTitle: 'Fresh new adventures from around the globe'
             },
             wanderByDestination: {
-                title: 'Wander by destination',
+                title: 'Explore by destination',
                 subTitle: 'Every corner of the world is up for grabs.'
             },
             wanderByInterest: {
-                title: 'Wander by interest',
+                title: 'Explore by interest',
                 subTitle: 'A glimpse of what other wanderers are looking for'
             },
             curatedCollections: {

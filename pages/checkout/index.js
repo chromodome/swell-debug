@@ -5,21 +5,22 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import ToastMessage from '@/components/blocks/ToastMessage';
 import Layout from '@/components/layouts/Layout';
-import {fetchCartAction, updateCartAction} from '@/store/actions/swell/cart';
-import { addOrderData } from '@/store/actions/order'
+import { fetchCartAction, updateCartAction } from '@/store/actions/swell/cart';
+import { addOrderData } from '@/store/actions/order';
 import { convertVariantNameDateToIso } from '@/helpers/calander';
 import ExpSubsection from '@/components/sections/ExpSubsection';
 import moment from 'moment';
-import {
-    capitalize,
-    kreatorName,
-    pluralize
-} from '@/helpers/FEutils';
+import { capitalize, kreatorName, pluralize } from '@/helpers/FEutils';
 import { User, Clock, MapPin, Users, Layers } from 'lucide-react';
 import { submitPayment, clearPaymentErrors } from '@/store/actions/payment';
 import Spinner from '@/components/blocks/Spinner';
 import { postPurchase } from '@/helpers/apiServices/purchases';
-import swell from '@/swell/swelljs.js'
+import swell from '@/swell/swelljs.js';
+
+import Row from '@/components/sections/Row';
+import LayoutLoading from '@/components/layouts/LayoutLoading';
+import ButtonLoad from '@/components/blocks/ButtonLoad';
+import classNames from 'classnames';
 
 const Checkout = ({
     auth,
@@ -31,19 +32,24 @@ const Checkout = ({
 }) => {
     const [loadingCart, setLoadingCart] = useState(true);
     const router = useRouter();
-    const { query, isReady } = useRouter();    const cardElement = useRef(null);
+    const { query, isReady } = useRouter();
+    const cardElement = useRef(null);
     const cardExpiryId = useRef(null);
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
 
     const [processing, setProcessing] = useState(false);
     const parseCart = () => {
         const { digital, guided } = cart;
-        const type = Object.keys(digital).length ? 'DIGITAL' :  Object.keys(guided).length ? 'GUIDED' : null;
+        const type = Object.keys(digital).length
+            ? 'DIGITAL'
+            : Object.keys(guided).length
+            ? 'GUIDED'
+            : null;
         const product = {
             type,
             title: '',
             description: '',
-            featured_image: "",
+            featured_image: '',
             destinations: [],
             days: 0,
             username: '',
@@ -53,37 +59,34 @@ const Checkout = ({
             people: 0,
             travel_date: '',
             publish_id: '',
-            experience_id: '',
-        }
+            experience_id: ''
+        };
 
-        if(!type) {
+        if (!type) {
             return { type };
         }
 
-        if(type === 'GUIDED') {
-            const guidedItems =  guided[Object.keys(guided)[0]];
-            const item = guidedItems[Object.keys(guidedItems)[0]]
+        if (type === 'GUIDED') {
+            const guidedItems = guided[Object.keys(guided)[0]];
+            const item = guidedItems[Object.keys(guidedItems)[0]];
 
             const {
-                price=0,
-                price_total: totalPrice=0,
-                quantity=0,
-                variant: {
-                    name
-                },
-                product:
-                    {
-                        name: title='',
-                        description='',
-                        content: {
-                            featured_image="",
-                            destinations=[],
-                            days=0,
-                            username='',
-                            first='',
-                            publish_id,
-                            experience_id,
-                        }
+                price = 0,
+                price_total: totalPrice = 0,
+                quantity = 0,
+                variant: { name },
+                product: {
+                    name: title = '',
+                    description = '',
+                    content: {
+                        featured_image = '',
+                        destinations = [],
+                        days = 0,
+                        username = '',
+                        first = '',
+                        publish_id,
+                        experience_id
+                    }
                 }
             } = item;
 
@@ -99,29 +102,28 @@ const Checkout = ({
             product['people'] = quantity;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
-            product['travel_date'] = convertVariantNameDateToIso(name)
+            product['travel_date'] = convertVariantNameDateToIso(name);
         }
 
-        if(type === 'DIGITAL') {
-            const { 
-                price=0,
-                price_total: totalPrice=0,
-                people=0,
-                product:
-                    {
-                        name: title='',
-                        description='',
-                        content: {
-                            featured_image="",
-                            destinations=[],
-                            days=0,
-                            username='',
-                            first='',
-                            publish_id,
-                            experience_id,
-                        }
+        if (type === 'DIGITAL') {
+            const {
+                price = 0,
+                price_total: totalPrice = 0,
+                people = 0,
+                product: {
+                    name: title = '',
+                    description = '',
+                    content: {
+                        featured_image = '',
+                        destinations = [],
+                        days = 0,
+                        username = '',
+                        first = '',
+                        publish_id,
+                        experience_id
+                    }
                 }
-            } =  digital[Object.keys(digital)[0]];
+            } = digital[Object.keys(digital)[0]];
 
             product['featured_image'] = featured_image;
             product['destinations'] = destinations;
@@ -138,8 +140,8 @@ const Checkout = ({
         }
 
         return product;
-    }
-    const product = useRef(parseCart())
+    };
+    const product = useRef(parseCart());
     const {
         type,
         featured_image,
@@ -154,22 +156,25 @@ const Checkout = ({
         people,
         travel_date,
         publish_id,
-        experience_id,
+        experience_id
     } = product.current;
-    const reloadCartTimeoutId = useRef(null)
-    const reloadCart =  () => {
+    const reloadCartTimeoutId = useRef(null);
+    const reloadCart = () => {
         // When local storage changes, dump the list to
         // It means cart updated reload cart
-        clearTimeout(reloadCartTimeoutId.current)
-        if(window.localStorage.getItem('xx') !== JSON.stringify(cart) && !loadingCart) {
+        clearTimeout(reloadCartTimeoutId.current);
+        if (
+            window.localStorage.getItem('xx') !== JSON.stringify(cart) &&
+            !loadingCart
+        ) {
             reloadCartTimeoutId.current = setTimeout(() => {
                 setLoadingCart(true);
                 fetchCartAction().then(() => {
                     setLoadingCart(false);
                 });
-            }, 1000)
+            }, 1000);
         }
-    }
+    };
 
     useEffect(() => {
         let cartListener = null;
@@ -178,14 +183,14 @@ const Checkout = ({
             cartListener = window.addEventListener('storage', reloadCart);
         });
 
-        return  () => window.removeEventListener('storage', cartListener);
+        return () => window.removeEventListener('storage', cartListener);
     }, []);
 
     useEffect(() => {
-        if(!siteLoading) {
-            if(!auth.isAuthenticated) {
+        if (!siteLoading) {
+            if (!auth.isAuthenticated) {
                 updateCartAction([]); // reset cart and leave page
-                router.replace('/')
+                router.replace('/');
             }
         }
     }, [siteLoading]);
@@ -201,25 +206,25 @@ const Checkout = ({
                 onError: (err) => {
                     setProcessing(false);
                     pushError(err);
-                },
-            },
+                }
+            }
         });
-    }
+    };
 
     const placeOrder = async () => {
         try {
             await swell.cart.update({
                 account: {
-                    //  email: auth?.user?.email || "madeup@nothear.com"
-                    email: "madeup@nothear.com",//An email is required to submit an order
-                   // name: auth?.user?.first && auth?.user?.last ? `${auth?.user?.first} ${auth?.user?.last}` : 'noname'
+                    email: auth?.user?.email || 'subscription@viakonnect.com'
+                    // email: 'madeup@nothear.com' //An email is required to submit an order
+                    // name: auth?.user?.first && auth?.user?.last ? `${auth?.user?.first} ${auth?.user?.last}` : 'noname'
                 }
             });
-    
-            const order = await swell.cart.submitOrder();
-            const guidedData = {}
 
-            if(type == 'GUIDED') {
+            const order = await swell.cart.submitOrder();
+            const guidedData = {};
+
+            if (type == 'GUIDED') {
                 guidedData.people = people;
                 guidedData.travel_date = travel_date;
             }
@@ -234,22 +239,22 @@ const Checkout = ({
                 featured_image,
                 ...guidedData
             }).then((res) => {
-                addOrderData({order, product});
+                addOrderData({ order, product });
                 router.push('/thanks');
             });
         } catch (err) {
             setProcessing(false);
             pushError(err);
         }
-    }
+    };
 
     useEffect(() => {
-        if(isReady && !loadingCart) {
+        if (isReady && !loadingCart) {
             swell.payment.createElements({
                 card: {
                     elementId: cardElement.current, // default: #card-element
                     separateElements: false, // required for separate elements
-                    
+
                     cardExpiry: {
                         elementId: cardExpiryId.current, // default: #cardExpiry-element
                         options: {
@@ -275,325 +280,361 @@ const Checkout = ({
                             }
                         }
                     },
-                    onChange: event => {
+                    onChange: (event) => {
                         // optional, called when the Element value changes
                     },
-                    onReady: event => {
+                    onReady: (event) => {
                         // optional, called when the Element is fully rendered
                     },
-                    onFocus: event => {
+                    onFocus: (event) => {
                         // optional, called when the Element gains focus
                     },
-                    onBlur: event => {
+                    onBlur: (event) => {
                         // optional, called when the Element loses focus
                     },
-                    onEscape: event => {
+                    onEscape: (event) => {
                         // optional, called when the escape key is pressed within an Element
                     },
-                    onClick: event => {
+                    onClick: (event) => {
                         // optional, called when the Element is clicked
                     },
-                    onSuccess: result => {
+                    onSuccess: (result) => {
                         // optional, called on card payment success
                     },
-                    onError: error => {
+                    onError: (error) => {
                         // optional, called on card payment error
                     }
                 }
-            })
+            });
         }
     }, [loadingCart]);
     const pushError = (err) => {
         toast.success(
-            <ToastMessage icon="😕" msg={err?.message || "Error"} alignTop={false} />,
+            <ToastMessage
+                icon="😕"
+                msg={err?.message || 'Error'}
+                alignTop={false}
+            />,
             {
                 hideProgressBar: true,
                 autoClose: 2500
             }
         );
-    }
+    };
     return (
         <>
             <Layout>
-                {!loadingCart && type
-                ? <div
-                    style={{display: processing ? 'none' : 'block'}}
-                    className={` mb-12 mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
-                    <div className={``}>
-                        <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
-                            Checkout
+                {!loadingCart && type ? (
+                    <div
+                        style={{ display: processing ? 'none' : 'block' }}
+                        className={` mb-12a mt-12 lg:mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
+                        <div className={``}>
+                            <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
+                                Checkout
+                            </div>
                         </div>
-                    </div>
-                    <main style={{display: processing ? 'none' : 'flex'}} className={`flex items-start lg:gap-16 xl:gap-24 `}>
-                        <section className="w-96 lg:w-3/5 mb-24">
-                        
-                            {type == 'GUIDED' && (
-                                <>
-                                    <ExpSubsection
-                                        padding="pb-8"
-                                        margins="mb-8">
-                                        <div className="text-green-400 text-2xl font-bold mb-4">
-                                            Your booking
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <div className="flex flex-col gap-1">
-                                                <div className="font-bold">
-                                                    Date
-                                                </div>
-                                                <div>
-                                                    {moment(
-                                                        travel_date
-                                                    ).format('MMMM Do YYYY')}
+                        <main
+                            className={classNames(
+                                processing ? 'hidden' : 'flex',
+                                'items-start lg:gap-16 xl:gap-24 flex-col lg:flex-row'
+                            )}>
+                            <section
+                                className={classNames(
+                                    'w-full lg:w-3/5 lg:mb-24'
+                                )}>
+                                {type == 'GUIDED' && (
+                                    <>
+                                        <ExpSubsection
+                                            padding="pb-8"
+                                            margins="mb-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                                Your booking
+                                            </div>
+                                            <div className="flex flex-col gap-4">
+                                                <div className="flex flex-col gap-1">
+                                                    <div className="font-bold">
+                                                        Date
+                                                    </div>
+                                                    <div>
+                                                        {moment(
+                                                            travel_date
+                                                        ).format(
+                                                            'MMMM Do YYYY'
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </ExpSubsection>
+                                        </ExpSubsection>
 
-                                    <ExpSubsection
-                                        padding="pb-8"
-                                        margins="mb-8">
-                                        <div className="text-green-400 text-2xl font-bold mb-4">
-                                            Guest info
-                                        </div>
-                                        <div>
-                                            Lorem ipsum, dolor sit amet
-                                            consectetur adipisicing elit. Cumque
-                                            culpa ipsam ducimus ullam
-                                            consequatur exercitationem, atque
-                                            ratione officia autem temporibus.
-                                        </div>
-                                    </ExpSubsection>
-                                </>
-                            )}
-                            <ExpSubsection padding="pb-8" margins="mb-8">
-                                <div className="text-green-400 text-2xl font-bold mb-4">
-                                    Summary
-                                </div>
-                                <div dangerouslySetInnerHTML={{__html: description}} />
-                            </ExpSubsection>
-                            
-                            <ExpSubsection padding="pb-8" margins="mb-8">
-                                <div className="text-green-400 text-2xl font-bold mb-4">
-                                    Payment info
-                                </div>
-                                <div >
-                                    <div  id="card-element-id" ref={cardElement}></div>
-                                    <div  id="card-expiry-id" ref={cardExpiryId}></div>
-                                    {/* <div  id="card-number-id"></div> */}
-                                    
-                                </div>
-                            </ExpSubsection>
-                        </section>
+                                        <ExpSubsection
+                                            padding="pb-8"
+                                            margins="mb-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                                Guest info
+                                            </div>
+                                            <div>
+                                                Lorem ipsum, dolor sit amet
+                                                consectetur adipisicing elit.
+                                                Cumque culpa ipsam ducimus ullam
+                                                consequatur exercitationem,
+                                                atque ratione officia autem
+                                                temporibus.
+                                            </div>
+                                        </ExpSubsection>
+                                    </>
+                                )}
+                                <ExpSubsection padding="pb-8" margins="mb-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                        Summary
+                                    </div>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: description
+                                        }}
+                                    />
+                                </ExpSubsection>
 
-                        <aside className="lg:w-2/5 sticky top-24 py-4 pb-24">
-                            <div
-                                className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
-                                <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
-                                    <div className="md:w-32 overflow-hidden rounded-lg">
-                                        <img
-                                            alt=""
-                                            className="object-cover object-center w-full h-full"
-                                            data-blink-src={featured_image}
-                                        />
+                                <ExpSubsection padding="pb-8" margins="mb-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                        Payment info
                                     </div>
                                     <div>
-                                        <div className="border-b border-green-600 border-opacity-20 pb-2">
-                                            <div className="text-sm">
-                                                {title}
-                                            </div>
-                                            <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
-                                                <div className="flex  mr-8 py-1">
-                                                    <span className="text-green-400 mr-2">
-                                                        <MapPin size={18} />
-                                                    </span>
+                                        <div
+                                            id="card-element-id"
+                                            ref={cardElement}></div>
+                                        <div
+                                            id="card-expiry-id"
+                                            ref={cardExpiryId}></div>
+                                        {/* <div  id="card-number-id"></div> */}
+                                    </div>
+                                </ExpSubsection>
+                            </section>
 
-                                                    <span className="flex flex-wrap items-center">
-                                                        {destinations?.length >
-                                                        0 ? (
-                                                            destinations.map(
-                                                                (
-                                                                    item,
-                                                                    index,
-                                                                    itemArray
-                                                                ) => {
-                                                                    return (
-                                                                        <span
-                                                                            key={`${item}_${index}`}>
-                                                                            <span className="whitespace-nowrap">
-                                                                                { item
-                                                                                /* {country(
+                            <aside
+                                className={classNames(
+                                    'w-full lg:w-2/5 lg:stickya lg:top-12a py-4 lg:pb-24'
+                                )}>
+                                <div
+                                    className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
+                                    <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
+                                        <div className="md:w-32 overflow-hidden rounded-lg">
+                                            <img
+                                                alt=""
+                                                className="object-cover object-center w-full h-full"
+                                                data-blink-src={featured_image}
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className="border-b border-green-600 border-opacity-20 pb-2">
+                                                <div className="text-sm">
+                                                    {title}
+                                                </div>
+                                                <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
+                                                    <div className="flex  mr-8 py-1">
+                                                        <span className="text-green-400 mr-2">
+                                                            <MapPin size={18} />
+                                                        </span>
+
+                                                        <span className="flex flex-wrap items-center">
+                                                            {destinations?.length >
+                                                            0 ? (
+                                                                destinations.map(
+                                                                    (
+                                                                        item,
+                                                                        index,
+                                                                        itemArray
+                                                                    ) => {
+                                                                        return (
+                                                                            <span
+                                                                                key={`${item}_${index}`}>
+                                                                                <span className="whitespace-nowrap">
+                                                                                    {
+                                                                                        item
+                                                                                        /* {country(
                                                                                     'en',
                                                                                     item.code
-                                                                                )} */}
-                                                                            </span>
-                                                                            {index <
-                                                                                itemArray.length -
-                                                                                    1 && (
-                                                                                <span className="px-1">
-                                                                                    .
+                                                                                )} */
+                                                                                    }
                                                                                 </span>
-                                                                            )}
-                                                                        </span>
-                                                                    );
-                                                                }
-                                                            )
-                                                        ) : (
-                                                            <span className="w-20 bg-gray-300 rounded-full h-2" />
-                                                        )}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center mr-8 py-1">
-                                                    <span className="text-green-400 mr-2">
-                                                        <Clock size={18} />
-                                                    </span>
-                                                    {pluralize(days, 'Day')}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="text-xs mt-4 flex flex-wrap gap-x-1">
-                                            <span>
-                                                {`A ${capitalize(
-                                                    type
-                                                )} Experience by`}
-                                            </span>
-                                            <span className="underline font-semibold text-green-700">
-                                                {`${kreatorName({username, first})}`}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
-                                    <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                                        <div className=" mb-4 font-semibold">
-                                            Price details
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <div className="flex text-xs items-center justify-between border-b-2 pb-2 border-gray-300 border-dotted">
-                                                <span className="relative">
-                                                    Price
-                                                </span>
-                                                <span className="relative">
-                                                    {price}
-                                                </span>
-                                            </div>
-
-                                            <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
-                                                <div className="flex text-xs items-center justify-between ">
-                                                    <span className="relative">
-                                                        people
-                                                    </span>
-                                                    <span className="relative">
-                                                        {people}
-                                                    </span>
-                                                </div>
-                                                {false && (
-                                                    <div className="flex text-xs items-center justify-between">
-                                                        <span className="flex items-center gap-2">
-                                                            <span className="relative">
-                                                                {/* {
-                                                                    discountTotalJSX.lineItem
-                                                                } */}
-                                                            </span>
-                                                        </span>
-                                                        <span className="relative">
-                                                            {ffff/* {
-                                                                discountTotalJSX.amount
-                                                            } */}
+                                                                                {index <
+                                                                                    itemArray.length -
+                                                                                        1 && (
+                                                                                    <span className="px-1">
+                                                                                        .
+                                                                                    </span>
+                                                                                )}
+                                                                            </span>
+                                                                        );
+                                                                    }
+                                                                )
+                                                            ) : (
+                                                                <span className="w-20 bg-gray-300 rounded-full h-2" />
+                                                            )}
                                                         </span>
                                                     </div>
-                                                )}
+                                                    <div className="flex items-center mr-8 py-1">
+                                                        <span className="text-green-400 mr-2">
+                                                            <Clock size={18} />
+                                                        </span>
+                                                        {pluralize(days, 'Day')}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
-                                                <span className="flex">
-                                                    <span className="relative">Total</span>
-                                                    {/* {preferredCurrency !=
+                                            <div className="text-xs mt-4 flex flex-wrap gap-x-1">
+                                                <span>
+                                                    {`A ${capitalize(
+                                                        type
+                                                    )} Experience by`}
+                                                </span>
+                                                <span className="underline font-semibold text-green-700">
+                                                    {`${kreatorName({
+                                                        username,
+                                                        first
+                                                    })}`}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
+                                        <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
+                                            <div className=" mb-4 font-semibold">
+                                                Price details
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <div className="flex text-xs items-center justify-between  pb-2 border-b-2 border-gray-300 border-dotted">
+                                                    <span className="relative">
+                                                        Price
+                                                    </span>
+                                                    <span className="relative">
+                                                        {price}
+                                                    </span>
+                                                </div>
+
+                                                {type.toLowerCase() ===
+                                                    'guided' && (
+                                                    <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
+                                                        <div className="flex text-xs items-center justify-between ">
+                                                            <span className="relative">
+                                                                people
+                                                            </span>
+                                                            <span className="relative">
+                                                                {people}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                    <span className="flex">
+                                                        <span className="relative">
+                                                            Total
+                                                        </span>
+                                                        {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             *
                                                         </span>
                                                     )} */}
-                                                </span>
-                                                <span className="flex">
-                                                    <span className="relative">
-                                                        {totalPrice}
                                                     </span>
-                                                    {/* {preferredCurrency !=
+                                                    <span className="flex">
+                                                        <span className="relative">
+                                                            {totalPrice}
+                                                        </span>
+                                                        {/* {preferredCurrency !=
                                                         'USD' && (
                                                         <span className="text-xs">
                                                             **
                                                         </span>
                                                     )}*/}
-                                                </span> 
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {preferredCurrency !== 'USD' && (
-                                        <div className="px-2 mt-4">
-                                            <div className="flex items-center gap-1 text-xs">
-                                                <div className="">
-                                                    * 1 USD ~{' '}
-                                                </div>
-                                                <span>
-                                                    {/* {formatPrice(
+                                        {preferredCurrency !== 'USD' && (
+                                            <div className="px-2 mt-4">
+                                                <div className="flex items-center gap-1 text-xs">
+                                                    <div className="">
+                                                        * 1 USD ~{' '}
+                                                    </div>
+                                                    <span>
+                                                        {/* {formatPrice(
                                                         rate,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
                                                     )} */}
-                                                </span>
-                                                <div className="">
-                                                    {/* {preferredCurrency} */}
+                                                    </span>
+                                                    <div className="">
+                                                        {/* {preferredCurrency} */}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex items-center gap-1 text-xs">
-                                                <div className="">
-                                                    ** You will be charged
-                                                </div>
-                                                <div className="">$US</div>
-                                                <span>
-                                                    {/* {formatPrice(
+                                                <div className="flex items-center gap-1 text-xs">
+                                                    <div className="">
+                                                        ** You will be charged
+                                                    </div>
+                                                    <div className="">$US</div>
+                                                    <span>
+                                                        {/* {formatPrice(
                                                         total / 100,
                                                         'USD',
                                                         getBrowserLocale(),
                                                         currencyOptions
                                                     )} */}
-                                                </span>
+                                                    </span>
+                                                </div>
                                             </div>
+                                        )}
+                                        <div className="px-2 mt-4 text-xs">
+                                            Charges will appear as Stripe
+                                            Payment Services
                                         </div>
-                                    )}
-                                    <div className="px-2 mt-4 text-xs">
-                                        Charges will appear as Stripe Payment
-                                        Services
                                     </div>
-                                </div>
-                                <div className="border-b border-green-600 border-opacity-20  py-4">
-                                    <div className="px-2 text-xs">
-                                        To learn about our cancellation and
-                                        refund policy{' '}
-                                        <a
-                                            className="underline font-semibold text-green-700"
-                                            target="_blank"
-                                            href={`${process.env.NEXT_PUBLIC_URL}/help/article/4002`}>
-                                            click here
-                                        </a>
+                                    <div className="border-b border-green-600 border-opacity-20  py-4">
+                                        <div className="px-2 text-xs">
+                                            To learn about our cancellation and
+                                            refund policy{' '}
+                                            <a
+                                                className="underline font-semibold text-green-700"
+                                                target="_blank"
+                                                href={`${process.env.NEXT_PUBLIC_URL}/help/article/4002`}>
+                                                click here
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="h-full flex items-center flex-col justify-between">
-                                    <button onClick={tokenize}>Submit</button>
+                                    <div className="h-full flex items-center flex-col justify-between">
+                                        <ButtonLoad
+                                            handleClick={tokenize}
+                                            isLoading={false}
+                                            label="Confirm and Pay"
+                                            width="w-full"
+                                            // handleClick={handleSubmit}
+                                            // form="paymentForm"
+                                            // type="submit"
+                                        />
+                                        {/* <button onClick={tokenize}>
+                                            Submit
+                                        </button> */}
+                                    </div>
                                 </div>
+                            </aside>
+                        </main>
+                    </div>
+                ) : (
+                    <LayoutLoading message="Preparing checkout" />
+                )}
+                {processing ? (
+                    <LayoutLoading>
+                        <div className="flex flex-col items-center max-w-2xl text-center mt-6 text-sm uppercase tracking-wide text-gray-600">
+                            <div>Processing order...</div>
+                            <div>
+                                Don't close this page. You will be redirected to
+                                your purchases page once the processing
+                                completes.
                             </div>
-                        </aside>
-                    </main>
-                </div>
-                : <div  > <Spinner size={100}/> getting Cart </div>
-                }
-                {
-                    processing 
-                    ? <div style={{display: processing ? 'block' : 'none'}}> <Spinner size={100}/> Processing order you will be redirected to purchase page. Please stay on this page until redirected </div>
-                    : null 
-                }
+                        </div>
+                    </LayoutLoading>
+                ) : null}
             </Layout>
         </>
     );
@@ -615,7 +656,7 @@ function mapDispatchToProps(dispatch) {
             clearPaymentErrors,
             fetchCartAction,
             postPurchase,
-            addOrderData,
+            addOrderData
         },
         dispatch
     );

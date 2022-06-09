@@ -16,6 +16,7 @@ const currencyOptions = {
 };
 
 const BuyingCardDigital = ({
+    mobile,
     auth,
     productData,
     loading = true,
@@ -85,20 +86,26 @@ const BuyingCardDigital = ({
 
     return (
         <div
-            className={`relative flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards ${classes} `}>
+            className={classNames(
+                'relative flex flex-col px-4 xl:px-8 pt-8 pb-4  xl:pb-8 bg-kn-white ',
+                mobile
+                    ? 'rounded-t-2xl shadow-cards-top'
+                    : 'rounded-2xl shadow-cards',
+                classes
+            )}>
             {!loading && !loadingIds ? (
                 <>
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                         <PillType type="digital" label="Buying Options" />
                     </div>
                     <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                        <div className="flex items-center gap-2 ">
+                        <div className="flex items-center gap-2 justify-center">
                             <i className="ri-download-cloud-2-line text-xl text-green-500"></i>
                             <div className="text-xs uppercase">
                                 Digital Access Price
                             </div>
                         </div>
-                        <div className="flex items-center gap-2 text-2xl font-semibold uppercase  ">
+                        <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
                             <div className={classNames('flex items-center')}>
                                 <span className="text-base">$</span>
                                 <span className="">
@@ -131,42 +138,53 @@ const BuyingCardDigital = ({
                             )}
                         </div>
                     </div>
-                    <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
-                        <p className="">{desc}</p>
-                    </div>
-                    <div className="mt-4 pb-4 px-2">
-                        <div className="flex items-center gap-1 text-xs">
-                            <div className="">* Charged as</div>
-                            <div className="">$US</div>
-                            <span>
-                                {formatPrice(
-                                    price,
-                                    'USD',
-                                    window.navigator.language,
-                                    currencyOptions
-                                )}
-                            </span>
+                    {!mobile && (
+                        <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                            <p className="">{desc}</p>
                         </div>
-                        {preferredCurrency !== 'USD' && (
+                    )}
+                    {!mobile && (
+                        <div className="mt-4 pb-4 px-2">
                             <div className="flex items-center gap-1 text-xs">
-                                <div className="">** 1 $US ~ </div>
-
+                                <div className="">* Charged as</div>
+                                <div className="">$US</div>
                                 <span>
                                     {formatPrice(
-                                        rate,
+                                        price,
                                         'USD',
                                         window.navigator.language,
                                         currencyOptions
                                     )}
                                 </span>
-                                <div className="">
-                                    {currenciesObject[preferredCurrency].symbol}
-                                </div>
                             </div>
-                        )}
-                    </div>
+                            {preferredCurrency !== 'USD' && (
+                                <div className="flex items-center gap-1 text-xs">
+                                    <div className="">** 1 $US ~ </div>
 
-                    <div className="h-full flex items-center flex-col justify-between">
+                                    <span>
+                                        {formatPrice(
+                                            rate,
+                                            'USD',
+                                            window.navigator.language,
+                                            currencyOptions
+                                        )}
+                                    </span>
+                                    <div className="">
+                                        {
+                                            currenciesObject[preferredCurrency]
+                                                .symbol
+                                        }
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <div
+                        className={classNames(
+                            'h-full flex items-center flex-col justify-between',
+                            mobile && 'mt-4'
+                        )}>
                         {showBuyBtn && !purchasedIds.includes(expId) && (
                             <Button
                                 label="Buy Now"
@@ -209,8 +227,11 @@ const BuyingCardDigital = ({
                 </>
             ) : (
                 <>
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                        <PillType type="digital" label="Buying Options" />
+                    </div>
                     <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                        <div className="flex items-center gap-2 ">
+                        <div className="flex items-center gap-2 justify-center">
                             {/* <i className="ri-download-cloud-2-line text-xl text-green-500"></i> */}
                             <SkeletonText width="w-6" height="h-6" />
                             <SkeletonText width="w-28" />
@@ -218,22 +239,30 @@ const BuyingCardDigital = ({
                                 Digital Access Price
                             </div> */}
                         </div>
-                        <div className="flex items-center gap-2 text-2xl font-semibold uppercase animate-pulse my-4">
+                        <div className="justify-center flex items-center gap-2 text-2xl font-semibold uppercase animate-pulse my-4">
                             <SkeletonText width="w-28" />
                             <SkeletonText width="w-16" />
                         </div>
                     </div>
-                    <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
-                        <p className="">{desc}</p>
-                    </div>
-                    <div className="py-6 px-2">
-                        <div className="flex flex-col gap-3 text-xs">
-                            <SkeletonText width="w-28" />
-                            <SkeletonText width="w-20" />
-                        </div>
-                    </div>
+                    {!mobile && (
+                        <>
+                            <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                                <p className="">{desc}</p>
+                            </div>
+                            <div className="py-6 px-2">
+                                <div className="flex flex-col gap-3 text-xs">
+                                    <SkeletonText width="w-28" />
+                                    <SkeletonText width="w-20" />
+                                </div>
+                            </div>
+                        </>
+                    )}
 
-                    <div className="h-full flex items-center flex-col justify-between">
+                    <div
+                        className={classNames(
+                            'h-full flex items-center flex-col justify-between',
+                            mobile && 'mt-4'
+                        )}>
                         <SkeletonButton width="w-full" />
 
                         {children}

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 const ButtonLoad = ({
     label,
     color,
-    width,
+    width = 'w-80',
     height,
     isLoading = false,
     handleClick,
@@ -16,7 +16,8 @@ const ButtonLoad = ({
         <button
             onClick={handleClick}
             className={classNames(
-                'relative overflow-hidden h-12 w-80 rounded-lg flex items-center justify-center ',
+                'relative overflow-hidden h-12 rounded-lg flex items-center justify-center ',
+                width,
                 animate
                     ? 'transform-gpu duration-300 hover:-translate-y-2 ease-in-out'
                     : '',

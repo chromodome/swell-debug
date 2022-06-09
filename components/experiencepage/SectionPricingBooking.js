@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useRouter } from 'next/router';
@@ -21,6 +21,7 @@ import BuyingCardDigital from './BuyingCardDigital';
 import BuyingCardGuide from './BuyingCardGuide';
 
 function SectionPricingBooking({
+    mobile,
     type,
     expId,
     swellExpId,
@@ -50,58 +51,60 @@ function SectionPricingBooking({
     //     console.log('cart', data)
     // }
     const getPrice = async (type) => {
-        const isguided = type.toLowerCase()==='guided';
-        const response = await fetch(`/api/price/${isguided ? swellExpId : expId}?type=${type}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
+        const isguided = type.toLowerCase() === 'guided';
+        const response = await fetch(
+            `/api/price/${isguided ? swellExpId : expId}?type=${type}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        });
+        );
         const data = await response.json();
 
         setProductData(isguided ? data.results : data.results[0]);
         setLoading(false);
-    }
-    
+    };
+
     const buy = () => {
-        console.log('buy')
+        console.log('buy');
         // postCartAction([])
         postCartAction({
             product_id: '623af66b8fa1f37a3fe78436',
-            variant_id: "623af6cabbe8a77a6033fb24",
-            quantity: 1,
-
-        })
-    }
+            variant_id: '623af6cabbe8a77a6033fb24',
+            quantity: 1
+        });
+    };
 
     const get = () => {
-        console.log('get')
+        console.log('get');
         fetchCartAction().then((dd) => {
-            console.log('dddd', dd)
-        })
-    }
+            console.log('dddd', dd);
+        });
+    };
     const reset = () => {
-        console.log('get')
+        console.log('get');
         updateCartAction([]).then((dd) => {
-            console.log('dddd', dd)
-        })
-    }
+            console.log('dddd', dd);
+        });
+    };
 
     const removeProdFromCart = (cartId) => {
         setLoading(true);
         updateCartAction([]).then((dd) => {
             console.log('dddd', dd);
             setLoading(false);
-        })
+        });
         // removeFromCartAction(cartId).then(() => {
         //     setLoading(false);
         // });
-    }
+    };
 
     const addDigitalProdToCart = (prodId) => {
-        if(!auth.isAuthenticated || !auth.isProfile) {
-            if(auth.isAuthenticated) {
-                setAuthPage('profile')
+        if (!auth.isAuthenticated || !auth.isProfile) {
+            if (auth.isAuthenticated) {
+                setAuthPage('profile');
             } else {
                 setAuthPage('login');
             }
@@ -111,27 +114,26 @@ function SectionPricingBooking({
             updateCartAction([]).then((dd) => {
                 postCartAction({
                     product_id: prodId,
-                    quantity: 1,
-                    
-// cust_id: "1234"
+                    quantity: 1
+
+                    // cust_id: "1234"
                 }).then(() => {
                     setLoading(false);
                     router.push('/checkout');
                 });
-            })
+            });
         }
         // setLoading(true);
         // postCartAction({product_id: prodId, quantity: 1 }).then(() => {
         //     setLoading(false);
         // });
-    }
+    };
 
     const addGuidedProdToCart = (prodId, variantId, quantity) => {
-
-        if(!auth.isAuthenticated) {
-                setAuthPage('login');
-                toggleAuthModal(true);
-            } else {
+        if (!auth.isAuthenticated) {
+            setAuthPage('login');
+            toggleAuthModal(true);
+        } else {
             setLoading(true);
             updateCartAction([]).then((dd) => {
                 postCartAction({
@@ -142,23 +144,22 @@ function SectionPricingBooking({
                     setLoading(false);
                     router.push('/checkout');
                 });
-            })
+            });
         }
-        
-    }
+    };
 
     const updateGuidedProdToCart = (cartId, quantity) => {
-        alert(333)
+        alert(333);
         setLoading(true);
         updateItemCartAction(cartId, quantity).then(() => {
             setLoading(false);
         });
-    }
+    };
 
     useEffect(() => {
         updateCartAction([]);
         getPrice(type);
-      //  getCart()
+        //  getCart()
     }, []);
 
     // useEffect(() => {
@@ -170,6 +171,7 @@ function SectionPricingBooking({
         <div className="">
             {type === 'GUIDED' ? (
                 <BuyingCardGuide
+                    mobile={mobile}
                     loading={loading}
                     productData={productData}
                     price={productData?.price}
@@ -182,8 +184,8 @@ function SectionPricingBooking({
                 />
             ) : (
                 <>
-                    <span>Pricing Card here</span>
                     <BuyingCardDigital
+                        mobile={mobile}
                         type={type.toLowerCase()}
                         loading={loading}
                         productData={productData}
@@ -191,7 +193,7 @@ function SectionPricingBooking({
                         expId={expId}
                         addToCart={addDigitalProdToCart}
                         removeFromCart={removeProdFromCart}
-                       // desc="For a limited time only, you can try our experiences for free!"
+                        // desc="For a limited time only, you can try our experiences for free!"
                         desc=""
                     />
                 </>
@@ -213,15 +215,18 @@ const mapStateToProps = (state) => ({
 });
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        fetchCartAction,
-        postCartAction,
-        updateCartAction,
-        removeFromCartAction,
-        updateItemCartAction,
-        setAuthPage,
-        toggleAuthModal
-    }, dispatch);
+    return bindActionCreators(
+        {
+            fetchCartAction,
+            postCartAction,
+            updateCartAction,
+            removeFromCartAction,
+            updateItemCartAction,
+            setAuthPage,
+            toggleAuthModal
+        },
+        dispatch
+    );
 }
 
 export default connect(
