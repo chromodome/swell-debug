@@ -4,11 +4,11 @@ import NavLink from './NavLink';
 const MenuLink = ({
     href,
     label,
-    lineHeight = 'h-1',
+    lineHeight = 'h-0.5',
     boxHeight = 'h-8',
-    lineColor = 'bg-green-400',
+    lineColor = 'bg-green-400a bg-green-900 bg-opacity-75',
     textSize = '',
-    activeClass = 'text-green-500 font-semibold'
+    activeClass = 'text-green-500a text-gray-900 font-semibold'
 }) => {
     return (
         <NavLink
@@ -20,7 +20,10 @@ const MenuLink = ({
             )}>
             {(isActive) => (
                 <>
-                    <div className={classNames(isActive && activeClass)}>
+                    <div
+                        className={classNames(
+                            isActive ? activeClass : 'text-gray-900'
+                        )}>
                         {label}
                     </div>
                     <div

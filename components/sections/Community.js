@@ -10,7 +10,7 @@ const Community = () => {
                 <div
                     className={`relative 
                                  bg-contain bg-no-repeat bg-center py-0 xl:py-16 `}>
-                    <div className="flex flex-col-reverse lg:flex-row justify-between items-center mb-8 md:gap-16 ">
+                    <div className="flex flex-col-reverse lg:flex-row justify-between md:gap-16 ">
                         <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
                             <SectionTitle
                                 section={{
@@ -20,7 +20,7 @@ const Community = () => {
                                 size="text-4xl md:text-5xl"
                                 className=""
                             />
-                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                            <div className="text-2xl md:text-4xl xl:text-4xl tracking-tight text-gray-800 font-semibold leading-tight mb-8">
                                 Join our community of growing kreators
                             </div>
                             <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
