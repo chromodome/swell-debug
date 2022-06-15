@@ -12,7 +12,10 @@ const SliderList = ({
     classes,
     padding = 'px-5a md:px-9a lg:px-12a xl:px-24a 2xl:px-40a',
     margins = 'mt-20 mb-4 md:mt-24 md:mb-4',
-    dataLoading
+    dataLoading,
+    loop,
+    useRow,
+    randomStart
 }) => {
     const [slidesPerBp, setSlidesPerBp] = useState(getSlidesPerBp(breakPoints));
 
@@ -41,7 +44,11 @@ const SliderList = ({
                 )}
                 {!dataLoading ? (
                     <div>
-                        <CarouselCards scrollSlides={slidesPerBp}>
+                        <CarouselCards
+                            loop={loop}
+                            randomStart={randomStart}
+                            scrollSlides={slidesPerBp}
+                            useRow={useRow}>
                             {children}
                         </CarouselCards>
                     </div>

@@ -3,6 +3,7 @@ import NavLink from './NavLink';
 
 const MenuLink = ({
     href,
+    type,
     label,
     lineHeight = 'h-0.5',
     boxHeight = 'h-8',
@@ -12,6 +13,8 @@ const MenuLink = ({
 }) => {
     return (
         <NavLink
+            type={type}
+            exact
             href={href}
             className={classNames(
                 'relative group flex items-center',

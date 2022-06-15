@@ -30,7 +30,7 @@ const LandingPage = ({ globalState: { lang } }) => {
     const filterType = useRef('all');
     const userName = useRef(null);
     const [pageIsReady, setPageIsReady] = useState(false);
-    const [creator, setCreator] = useState(null)
+    const [creator, setCreator] = useState(null);
 
     const getExps = async (user, type, page = 1) => {
         const response = await fetch(
@@ -40,6 +40,10 @@ const LandingPage = ({ globalState: { lang } }) => {
 
         return data;
     };
+
+    const displayNameFinal =
+        creator?.displayname ?? creator?.first ?? creator?.username ?? '...';
+
     const handleLoadClick = () => {
         setLoadMoreData(true);
         loadExperiences(
@@ -49,21 +53,17 @@ const LandingPage = ({ globalState: { lang } }) => {
         );
     };
     const getCreatorData = async (user) => {
-        const response =  await fetch(
-            `/api/creator/${user}`
-        );
+        const response = await fetch(`/api/creator/${user}`);
         const data = await response.json();
 
-        if(data?.count) {
-            setCreator(data.results[0])
+        if (data?.count) {
+            setCreator(data.results[0]);
         }
-
-        
-    }
+    };
 
     const loadExperiences = (user, type, page = 1) => {
-        if(page === 1) {
-            getCreatorData(user)
+        if (page === 1) {
+            getCreatorData(user);
         }
         getExps(user, type, page).then((data) => {
             const { count, page, pages, results } = data;
@@ -98,8 +98,9 @@ const LandingPage = ({ globalState: { lang } }) => {
     }, []);
 
     useEffect(() => {
+        console.log('creator', creator);
         if (creator) {
-            const { username, displayname, avatar } = creator;
+            const { username, displayname, avatar, first } = creator;
             const newKreator = {
                 username,
                 profile: {
@@ -117,11 +118,11 @@ const LandingPage = ({ globalState: { lang } }) => {
         blackPill: true,
         blackPillTxt: 'Kreator Showcase',
 
-        user_id: 'arabiantrails',
-        title: 'Turki @ArabianTrails',
+        user_id: creator?.username,
+        title: displayNameFinal,
         headline: 'Headline',
-        description:
-            "Hello! I'm a multi-cultural traveler based in Saudi and the UAE. I’m an avid backpacker, photographer, and graphic designer who loves to travel and explore different cultures. During the Covid pandemic, I focused on documenting my journeys through Saudi Arabia and set up a free road trip guide to provide free information to travelers. I am here to share some of my more detailed personal trips around Saudi Arabia while highlighting the amazing nature, history, and culture of this great country. ",
+        description: creator?.bio,
+
         url: null, // btn
         label: null //btn
     };
@@ -183,9 +184,13 @@ const LandingPage = ({ globalState: { lang } }) => {
                     <div
                         className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 mt-12 mb-8`}>
                         <SectionTitle
-                            section={
-                                translations[lang].sections.exploreByKreator
-                            }
+                            section={{
+                                title: `Experiences by ${displayNameFinal}`,
+                                subTitle: ''
+                            }}
+                            // section={
+                            //     translations[lang].sections.exploreByKreator
+                            // }
                         />
                     </div>
 
@@ -195,20 +200,18 @@ const LandingPage = ({ globalState: { lang } }) => {
                         <Row>
                             <div className="px-4">
                                 <div className="flex flex-col gap-4 border-t pt-8 pb-8 border-gray-300">
-                                { creator
-                                    ? 
-                                    <>
-                                        <KreatorBadgeStaticFlat
-                                            customHeight="h-12"
-                                            customPadding="pl-16 pr-8"
-                                            author={kreator}
-                                            size="w-12 h-12"
-                                            textSize="text-lg"
-                                        />
-                                        <div>{creator.bio}</div>
-                                    </>
-                                    : null
-                                }
+                                    {/* {creator ? (
+                                        <>
+                                            <KreatorBadgeStaticFlat
+                                                customHeight="h-12"
+                                                customPadding="pl-16 pr-8"
+                                                author={kreator}
+                                                size="w-12 h-12"
+                                                textSize="text-lg"
+                                            />
+                                            <div>{creator.bio}</div>
+                                        </>
+                                    ) : null} */}
                                     <div className="flex flex-wrap gap-2">
                                         {!dataLoading ? (
                                             <>

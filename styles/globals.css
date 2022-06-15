@@ -346,9 +346,9 @@
     background: #969696;
 }
 ::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: transparent;
     border-radius: 10px;
-    box-shadow: inset 7px 10px 12px #fcfcfc;
+    box-shadow: none;
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--success {

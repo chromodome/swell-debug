@@ -119,24 +119,29 @@ const Header = ({
                     showHeader ? 'translate-y-0' : '-translate-y-24'
                 }`}>
                 <div className="flex flex-1 flex-row justify-between items-center h-full ">
-                    <div className="flex flex-shrink-0  lg:w-1/3">
-                        <div
-                            onClick={handleClick}
-                            className={`flex  items-center cursor-pointer ${
-                                rtl
-                                    ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
-                                    : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
-                            } gap-3 ${handleRowReverse(rtl).flex}`}>
-                            {/* <img src="/assets/media/kn_logoicon.svg" /> */}
-                            <img src="/assets/media/kn_logoicon_black.svg" />
+                    <div className="flex lg:w-1/3 items-center gap-2">
+                        <div className="flex flex-shrink-0">
+                            <div
+                                onClick={handleClick}
+                                className={`flex items-center cursor-pointer ${
+                                    rtl
+                                        ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
+                                        : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
+                                } gap-3 ${handleRowReverse(rtl).flex}`}>
+                                {/* <img src="/assets/media/kn_logoicon.svg" /> */}
+                                <img src="/assets/media/kn_logoicon_black.svg" />
 
-                            <img
-                                className=""
-                                src="/assets/media/kn_logotext.svg"
-                            />
+                                <img
+                                    className=""
+                                    src="/assets/media/kn_logotext.svg"
+                                />
+                            </div>
+                        </div>
+                        <div className="rounded-full bg-white px-1 text-xxs h-4 flex items-center mt-1.5">
+                            beta
                         </div>
                     </div>
-                    {isSearch && <Search lang={lang} rtl={rtl} />}
+                    {/* {isSearch && <Search lang={lang} rtl={rtl} />} */}
                     {/* <div className="hidden md:flex text-sma items-center gap-8">
                         <MenuLink label={'About us'} href="/about/konnect" />
                         <MenuLink
@@ -148,8 +153,9 @@ const Header = ({
                             href="/about/kreators"
                         />
                     </div> */}
-                    <div className="flex justify-end items-center h-full  lg:w-1/2">
-                        <div className="hidden md:flex text-sma items-center gap-8 mr-6">
+                    <div className="flex justify-end items-center h-full  lg:w-2/3">
+                        <div className="hidden md:flex text-sma items-center gap-4 lg:gap-8 mr-6">
+                            <MenuLink label={'Home'} href="/" />
                             <MenuLink
                                 label={'About us'}
                                 href="/about/konnect"
@@ -160,7 +166,8 @@ const Header = ({
                             />
                             <MenuLink
                                 label={'About Kreators'}
-                                href="/about/kreators"
+                                href="https://kreator.viakonnect.com"
+                                type="url"
                             />
                         </div>
                         {isAvatar && (
