@@ -17,7 +17,7 @@ const SliderDestinations = ({
     data,
     dataLoading = false,
     classes,
-    margins = 'mt-20 mb-4 lg:mt-24 lg:mb-20',
+    margins = 'mt-8 mb-0 lg:mt-8 lg:mb-0',
     tagMargins = 'mt-3 lg:mt-4 ',
     tagPadding = 'px-2 lg:px-2 pb-12',
     tagRatio = 'portrait',
