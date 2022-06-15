@@ -50,25 +50,31 @@ const ExperienceDetail = ({
         itinerary: { [lang]: itinerary },
         swellExp: {
             id: swellExpId,
-            categories,
+            category_index: { id:categories },
             tags,
             creator: {
                 username,
                 displayname,
                 avatar,
-                bio
+                bio,
+                first
             },
             content: { destinations, experience_id, views  }
         }
     } = contentfulExperience;
+
     const user = {
             username,
             bio,
             displayname,
             profile: {
                 avatar,
+                first,
+                username,
+                displayname
             }
     };
+
     const updateViews =  async (swellExpId, views)=> {
         const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
                 method: 'PUT',
@@ -129,6 +135,7 @@ const ExperienceDetail = ({
                                     /> */}
 
                                     <SectionMarketingItinerary
+                                        type={type}
                                         itinerary={itinerary}
                                     />
                                     {type.toLowerCase() === 'guided' &&

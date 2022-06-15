@@ -15,11 +15,14 @@ const SectionMarketingTitles = (props) => {
         globalState: { siteData }
     } = props;
 
-
     const cats_list = categories.map((cat) => {
-        // const found = siteData.categories.find((elm) => elm.id == cat);
-        return cat.name;
-    });
+        const found = siteData.categories.find((elm) => {
+
+            return elm.swell_id === cat
+        })
+
+        return found?.name;
+    }).filter(elm => elm);;
 
     const EmptyData = <span className="w-20 bg-gray-300 rounded-full h-2" />;
     const ContentDays = days ? <span> {getDays(days)}</span> : EmptyData;

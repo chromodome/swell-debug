@@ -47,6 +47,7 @@ const Header = ({
         authModalIsOpen,
         authComponent
     },
+    auth,
     auth: { user, isAuthenticated, isProfile },
 
     isLogo = true,
@@ -105,9 +106,11 @@ const Header = ({
         logout();
     };
 
-    // useEffect(() => {
-    //     fetchCartAction()
-    // }, []);
+    useEffect(() => {
+        if(isAuthenticated && !isProfile) {
+            setAuthPage('profile');
+        }
+    }, [auth]);
 
     return (
         <>
@@ -147,23 +150,24 @@ const Header = ({
                         />
                     </div>
                     <div className="flex justify-end items-center h-full  lg:w-1/3">
-                        {isAvatar && (
+                        {isAvatar ? (
                             <div
                                 className={`hidden lg:flex items-center ${
                                     isLang ? '' : 'mr-10'
                                 }`}>
                                 <div className="hidden xl:block mx-4 text-sm">
                                     {user
-                                        ? `${translations[lang].messages.hello} ${user?.profile?.first}`
+                                        ? `${translations[lang].messages.hello} ${user?.profile?.first || user?.email || ''}`
                                         : `Guest`}
                                 </div>
-                                {user ? (
+                                {user?.profile?.avatar ? (
                                     <Avatar profile={user?.profile} />
                                 ) : (
                                     <IconsLucide icon="User" />
                                 )}
                             </div>
-                        )}
+                        )
+                    : <div>asd</div>}
                         {isLang && <LangList />}
 
                         {isMenu && (

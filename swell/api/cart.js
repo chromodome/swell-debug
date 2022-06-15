@@ -6,13 +6,22 @@ export const getCart = async () => {
     return cart;
 }
 
-
 export const addCart = async (item) => {
     const cart = await fetchApi('cart', 'addItem', item);
 
     return cart;
 }
 
+export const addVoucher = async (coupon) => {
+    const cart = await fetchApi('cart', 'applyCoupon', coupon);
+
+    return cart;
+}
+export const removeVoucher = async (coupon) => {
+    const cart = await fetchApi('cart', 'removeCoupon');
+
+    return cart;
+}
 export const updateCart = async (items) => {
     const cart = await fetchApi('cart', 'setItems', items);
 

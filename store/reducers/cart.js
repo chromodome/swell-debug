@@ -25,7 +25,7 @@ function createReducer(initialState, handlers) {
     });
 }
 export default createReducer(initialState, {
-    [`${types.GET_CART}_FULFILLED`]: updateCart,
+    [`${types.ADD_VOUCHER_TO_CART}_FULFILLED`]: updateCart,
     [`${types.GET_CART}_PENDING`]: fetchingCart,
 
     [`${types.UPDATE_CART}_FULFILLED`]: updateCart,
@@ -36,4 +36,10 @@ export default createReducer(initialState, {
 
     [`${types.REMOVE_FROM_CART}_FULFILLED`]: updateCart,
     [`${types.REMOVE_FROM_CART}_PENDING`]: fetchingCart,
+    
+    [`${types.ADD_VOUCHER_TO_CART}_FULFILLED`]: updateCart,
+    [`${types.ADD_VOUCHER_TO_CART}_PENDING`]: fetchingCart,
+    
+    [`${types.REMOVE_VOUCHER_FROM_CART}_FULFILLED`]: updateCart,
+    [`${types.REMOVE_VOUCHER_FROM_CART}_PENDING`]: fetchingCart,
 });

@@ -1,12 +1,42 @@
 
-import { getCart, addCart, updateCart, removeFromCart, updateItemCart }  from '@/swell/api/cart';
+import { getCart, addCart, updateCart, removeFromCart, updateItemCart, addVoucher }  from '@/swell/api/cart';
 import * as types from '@/store/actions/types';
+import {ADD_VOUCHER_TO_CART} from '../types';
+import {removeVoucher} from '../../../swell/api/cart';
 
 export const fetchCartAction = () => {
     return (dispatch) =>
         dispatch({
             type: types.GET_CART,
             payload: getCart()
+        })
+            .then((res) => res)
+            .catch((error) => {
+                // console.log(error);
+                // serverErrors(error);
+                // return { error };
+            });
+};
+
+export const addVoucherAction = (voucher) => {
+    return (dispatch) =>
+        dispatch({
+            type: types.ADD_VOUCHER_TO_CART,
+            payload: addVoucher(voucher)
+        })
+            .then((res) => res)
+            .catch((error) => {
+                // console.log(error);
+                // serverErrors(error);
+                return  error ;
+            });
+};
+
+export const removeVoucherAction = () => {
+    return (dispatch) =>
+        dispatch({
+            type: types.REMOVE_VOUCHER_FROM_CART,
+            payload: removeVoucher()
         })
             .then((res) => res)
             .catch((error) => {

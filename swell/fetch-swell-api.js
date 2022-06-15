@@ -6,6 +6,10 @@ const fetchApi = async (query='get', method='list', variables={}, queryStr) => {
     } 
     if(method === 'updateItem') {
         return await swell[query][method](queryStr, {...variables})
+    } else if(method === 'applyCoupon') {
+        return await swell.cart.applyCoupon(variables);
+    } else if(method === 'removeCoupon') {
+        swell.cart.removeCoupon();
     }
 
     return await swell[query][method](typeof variables === 'string' ? variables : Array.isArray(variables) ? [...variables] : {...variables});

@@ -1,4 +1,3 @@
-import getSwellExperience from './getSwellExperience';
 import getExpContentfull from './getExpContentull';
 import { SwellController } from '@/swell/api/swellNode';
 

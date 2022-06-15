@@ -9,6 +9,8 @@ export const updateCart = (draft, action) => {
         }
     }
     if(payload) {
+        const { coupon, sub_total, grand_total, discount_total } = payload;
+
         payload.items.forEach((item) => {
             const type = item.product.content.type.toLowerCase();
             const {
@@ -31,7 +33,11 @@ export const updateCart = (draft, action) => {
         draft = {
                 loading: false,
                 error: false,
-                ...cart
+                ...cart,
+                coupon,
+                sub_total,
+                grand_total,
+                discount_total
             }
             const serializedState = JSON.stringify(cart);
 

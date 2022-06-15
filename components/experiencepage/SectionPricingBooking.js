@@ -14,7 +14,8 @@ import {
     postCartAction,
     updateCartAction,
     removeFromCartAction,
-    updateItemCartAction
+    updateItemCartAction,
+    removeVoucherAction
 } from '@/store/actions/swell/cart';
 import translations from 'constants/translations';
 import BuyingCardDigital from './BuyingCardDigital';
@@ -32,6 +33,7 @@ function SectionPricingBooking({
     updateCartAction,
     removeFromCartAction,
     updateItemCartAction,
+    removeVoucherAction,
     setAuthPage,
     toggleAuthModal
 }) {
@@ -39,6 +41,7 @@ function SectionPricingBooking({
     const [productData, setProductData] = useState(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
+    const { isReady } = useRouter();
 
     // const getCart = async (type) => {
     //     const response = await fetch(`/api/cart/`, {
@@ -149,16 +152,24 @@ function SectionPricingBooking({
     };
 
     const updateGuidedProdToCart = (cartId, quantity) => {
-        alert(333);
         setLoading(true);
         updateItemCartAction(cartId, quantity).then(() => {
             setLoading(false);
         });
     };
 
-    useEffect(() => {
+    const resetCart = () => {
         updateCartAction([]);
-        getPrice(type);
+        removeVoucherAction();
+        // swell.cart.removeCoupon()
+    }
+
+    useEffect(() => {
+        if(isReady) {
+            resetCart();
+            getPrice(type);
+        }
+        
         //  getCart()
     }, []);
 
@@ -222,6 +233,7 @@ function mapDispatchToProps(dispatch) {
             updateCartAction,
             removeFromCartAction,
             updateItemCartAction,
+            removeVoucherAction,
             setAuthPage,
             toggleAuthModal
         },
