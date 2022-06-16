@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useEmblaCarousel } from 'embla-carousel/react';
 import { Buttons__GroupNextPrev } from '@/blocks/Button/Buttons';
+import Row from '../sections/Row';
+import { randomItem, randomNumber } from '@/helpers/FEutils';
 
-const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
+const CarouselCards = ({
+    children,
+    scrollSlides = 5,
+    loop = false,
+    useRow,
+    randomStart
+}) => {
     const [viewportRef, embla] = useEmblaCarousel({
         slidesToScroll: scrollSlides,
         skipSnaps: false,
@@ -25,36 +33,30 @@ const CarouselCards = ({ children, scrollSlides = 5, loop = false }) => {
         onSelect();
     }, [embla, onSelect]);
 
+    useEffect(() => {
+        if (embla && randomStart)
+            embla.scrollTo(randomNumber(0, (children?.length ?? 1) - 1), true);
+    }, [embla]);
+
     return (
         <div className="">
-            <div className="">
-                <Buttons__GroupNextPrev
-                    nextEnabled={nextBtnEnabled}
-                    nextAction={scrollNext}
-                    prevEnabled={prevBtnEnabled}
-                    prevAction={scrollPrev}
-                    // isPrev={!prevBtnState}
-                    className={`z-30 touch:hidden`}
-                    // rtl={rtl}
-                />
-            </div>
+            <Row mainClasses={useRow ? undefined : ''}>
+                <div className={useRow ? 'mb-4 md:px-4' : ''}>
+                    <Buttons__GroupNextPrev
+                        nextEnabled={nextBtnEnabled}
+                        nextAction={scrollNext}
+                        prevEnabled={prevBtnEnabled}
+                        prevAction={scrollPrev}
+                        // isPrev={!prevBtnState}
+                        className={`z-30 touch:hidden2`}
+                        // rtl={rtl}
+                    />
+                </div>
+            </Row>
 
             <div className="embla">
                 <div className="embla__viewport" ref={viewportRef}>
-                    <div className="embla__container">
-                        {/* {slides.map((index) => (
-                            <div className='embla__slide' key={index}>
-                                <div className='embla__slide__inner'>
-                                    <img
-                                        className='embla__slide__img'
-                                        src={mediaByIndex(index)}
-                                        alt='A cool cat.'
-                                    />
-                                </div>
-                            </div>
-                        ))} */}
-                        {children}
-                    </div>
+                    <div className="embla__container">{children}</div>
                 </div>
             </div>
         </div>

@@ -52,19 +52,20 @@ const GridList = ({
                         />
                     )}
                     {btnPos && btnAction === 'url' && !purchasedView && (
-                        <div className="hidden md:block">
+                        <div className="hidden md:block pr-4">
                             <ButtonLoad
                                 width="w-40"
                                 handleClick={handleClick}
                                 isLoading={loadMoreData}
                                 label={'Explore more'}
+                                margins=""
                             />
                         </div>
                     )}
                 </div>
                 {!dataLoading ? (
                     <>
-                        <div className="grid grid-cols-1 px-2 lg-px-0 gap-y-4 md:gap-y-4 md:grid-cols-3 xl:grid-cols-5">
+                        <div className="grid grid-cols-1 px-2 lg-px-0 gap-y-0 md:gap-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                             {data.map((item) => {
                                 return missing && purchasedView ? (
                                     <ResultCardMissing

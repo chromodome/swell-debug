@@ -8,8 +8,8 @@ const tmpTopBar = {
         text: 'WELCOME10'
     },
     bar: {
-        bgColor: 'bg-green-400',
-        textColor: 'text-green-900',
+        bgColor: 'bg-green-400a bg-gray-800',
+        textColor: 'text-green-900a text-white',
         text: '$10 off your first purchase with this coupon'
     }
     // link: '/help/article/5001'
@@ -26,7 +26,7 @@ const tmpTopBar2 = {
             textColor: 'text-green-700'
         },
         bar: {
-            bgColor: 'bg-green-400',
+            bgColor: 'bg-green-400a bg-gray-800',
             textColor: 'text-green-900'
         }
     }

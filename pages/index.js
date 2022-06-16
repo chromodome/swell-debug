@@ -18,6 +18,7 @@ import {
 } from '@/constants/public';
 import Row from '@/components/sections/Row';
 import Community from '@/components/sections/Community';
+import SliderShowcases from '@/components/sections/SliderShowcases';
 
 const LandingPage = ({
     globalState: {
@@ -29,14 +30,13 @@ const LandingPage = ({
     trending: { results: trendingList }
 }) => {
     const dataLanding = JSON.parse(landingData);
+    const [randomCover, setRandomCover] = useState(
+        randomItem(dataLanding?.data?.landing)
+    );
 
     return (
         <Layout>
-            <Showcase
-                pill="bottom"
-                data={randomItem(dataLanding?.data?.landing)}
-                collection="showcase"
-            />
+            <Showcase pill="bottom" data={randomCover} collection="showcase" />
 
             <GridList
                 sectionTitles={translations[lang].sections.trendingThisWeek}
@@ -46,6 +46,7 @@ const LandingPage = ({
                 btnAction="url"
                 btnUrl="/experiences/destination/world/all"
                 margins="mt-16 mb-8 lg:mt-12 lg:mb-12"
+                titleClass=""
             />
 
             <Row>
@@ -83,10 +84,11 @@ const LandingPage = ({
                     </div>
                 </Row> */}
 
-            <Showcase
+            {/* <Showcase
                 pill="top"
                 data={randomItem(dataLanding?.data?.features)}
-            />
+            /> */}
+            <SliderShowcases data={dataLanding?.data?.features} />
             <Community />
 
             {/* <SliderCollections

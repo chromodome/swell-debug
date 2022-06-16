@@ -118,38 +118,49 @@ const Header = ({
                 style={{ zIndex: 300 }}
                 className={`${
                     handleRowReverse(rtl).rtl
-                } fixed top-0 w-full inset-x-0 h-16 md:h-20 bg-white shadow-cards flex items-center transform-gpu duration-300 ${
+                } fixed top-0 w-full inset-x-0 h-16 md:h-20 bg-white2 bg-green-400 shadow-cards flex items-center transform-gpu duration-300 ${
                     showHeader ? 'translate-y-0' : '-translate-y-24'
                 }`}>
                 <div className="flex flex-1 flex-row justify-between items-center h-full ">
-                    <div className="flex flex-shrink-0  lg:w-1/3">
-                        <div
-                            onClick={handleClick}
-                            className={`flex  items-center cursor-pointer ${
-                                rtl
-                                    ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
-                                    : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
-                            } gap-3 ${handleRowReverse(rtl).flex}`}>
-                            <img src="/assets/media/kn_logoicon.svg" />
-                            <img
-                                className=""
-                                src="/assets/media/kn_logotext.svg"
-                            />
+                    <div className="flex lg:w-1/3 items-center gap-2">
+                        <div className="flex flex-shrink-0">
+                            <div
+                                onClick={handleClick}
+                                className={`flex items-center cursor-pointer ${
+                                    rtl
+                                        ? 'mr-6 md:mr-8 lg:mr-10 xl:mr-32 2xl:mr-44'
+                                        : 'ml-6 md:ml-8 lg:ml-10 xl:ml-32 2xl:ml-44'
+                                } gap-3 ${handleRowReverse(rtl).flex}`}>
+                                {/* <img src="/assets/media/kn_logoicon.svg" /> */}
+                                <img src="/assets/media/kn_logoicon_black.svg" />
+
+                                <img
+                                    className=""
+                                    src="/assets/media/kn_logotext.svg"
+                                />
+                            </div>
+                        </div>
+                        <div className="rounded-full bg-white px-1 text-xxs h-4 flex items-center mt-1.5">
+                            beta
                         </div>
                     </div>
-                    {isSearch && <Search lang={lang} rtl={rtl} />}
-                    <div className="hidden md:flex text-sma items-center gap-8">
-                        <MenuLink label={'About us'} href="/about/konnect" />
-                        <MenuLink
-                            label={'The Marketplace'}
-                            href="/about/marketplace"
-                        />
-                        <MenuLink
-                            label={'About Kreators'}
-                            href="/about/kreators"
-                        />
-                    </div>
-                    <div className="flex justify-end items-center h-full  lg:w-1/3">
+                    <div className="flex justify-end items-center h-full  lg:w-2/3">
+                        <div className="hidden md:flex text-sma items-center gap-4 lg:gap-8 mr-6">
+                            <MenuLink label={'Home'} href="/" />
+                            <MenuLink
+                                label={'About us'}
+                                href="/about/konnect"
+                            />
+                            <MenuLink
+                                label={'The Marketplace'}
+                                href="/about/marketplace"
+                            />
+                            <MenuLink
+                                label={'About Kreators'}
+                                href="https://kreator.viakonnect.com"
+                                type="url"
+                            />
+                        </div>
                         {isAvatar ? (
                             <div
                                 className={`hidden lg:flex items-center ${
@@ -167,7 +178,7 @@ const Header = ({
                                 )}
                             </div>
                         )
-                    : <div>asd</div>}
+                    : null}
                         {isLang && <LangList />}
 
                         {isMenu && (
@@ -188,7 +199,7 @@ const Header = ({
                                 <button
                                     onClick={() => toggleNav(!navIsOpen)}
                                     className={`focus:outline-none w-20 
-                               flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-green-400 transition-all duration-200 hover:bg-gray-900 hover:text-white ${
+                               flex flex-shrink-0 h-12 items-center justify-center text-2xl bg-gray-800 transition-all duration-200 hover:bg-white text-white hover:text-gray-900 ${
                                    rtl ? 'rounded-r-lg' : 'rounded-l-lg'
                                }`}>
                                     <i

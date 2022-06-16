@@ -9,18 +9,18 @@ const Community = () => {
             <Row>
                 <div
                     className={`relative 
-                                 bg-contain bg-no-repeat bg-center py-0 xl:py-16 `}>
-                    <div className="flex flex-col-reverse lg:flex-row justify-between items-center mb-8 md:gap-16 ">
+                                 bg-contain bg-no-repeat bg-center  lg:pt-8  lg:pb-0 2xl:pb-0 `}>
+                    <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-4 lg:gap-16 ">
                         <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
                             <SectionTitle
                                 section={{
                                     title: 'A Community'
                                 }}
                                 padding=""
-                                size="text-4xl md:text-5xl"
-                                className=""
+                                // size="text-4xl md:text-5xl"
+                                titlePadding="pb-1"
                             />
-                            <div className="text-2xl md:text-4xl xl:text-5xl tracking-tight text-gray-900 font-semibold leading-tight mb-8">
+                            <div className="text-2xl md:text-2xl xl:text-2xl tracking-tight text-gray-800 font-semibold leading-tight mb-4">
                                 Join our community of growing kreators
                             </div>
                             <div className="text-green-900 text-base md:text-lg xl:text-xl font-normal mb-8">
@@ -52,7 +52,7 @@ const Community = () => {
                             />
                         </div>
                         <div className="px-4 md:px-0 mb-8">
-                            <img src="/assets/media/community_2.png" />
+                            <img src="/assets/media/community_3.png" />
                         </div>
                     </div>
                 </div>

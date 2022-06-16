@@ -78,13 +78,13 @@ const Showcase = ({
                                         dark
                                             ? 'text-green-400'
                                             : 'text-green-500'
-                                    } font-bold text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
+                                    } font-bold text-2xl lg:text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
                                     {data.title}
                                 </div>
                                 <div
                                     className={`${
                                         dark ? 'text-white' : 'text-gray-800'
-                                    } mt-2 text-3xl md:text-4xl font-bold leading-tight mb-8 whitespace-normal`}>
+                                    } mt-2 text-xl md:text-2xl lg:text-4xl md:font-bold lg:leading-tight mb-8 whitespace-normal`}>
                                     {data.headline}
                                 </div>
                                 {data.description && (
@@ -116,7 +116,7 @@ const Showcase = ({
                 </div>
             )}
             {collection != 'showcase' && (
-                <div className="z-50 flex-none md:w-1/2 h-full overflow-hidden ">
+                <div className="z-50 flex-none md:w-1/2 h-64 md:h-full overflow-hidden ">
                     <img
                         alt="Placeholder"
                         className="rounded-b-2xl object-cover w-full h-full transform md:rounded-l-full md:scale-150 md:translate-x-1/4"
