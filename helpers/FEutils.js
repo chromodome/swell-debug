@@ -85,7 +85,7 @@ export const capitalize = (string) => {
 };
 
 export const kreatorName = (profile) => {
-    return profile?.displayname || profile?.first;
+    return profile?.displayname || profile?.first || profile?.username;
 };
 
 export const getDays = (days) => {
@@ -108,7 +108,7 @@ export const calculateCheckout = (data, query) => {
         .filter((elm) => elm);
     const reducer = (previous, current) => {
         const newVal = previous.discount + current.discount;
-        console.log('new val', newVal);
+
         return newVal;
     };
     const discountTotal = discountArr.length

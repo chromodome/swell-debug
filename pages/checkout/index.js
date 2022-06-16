@@ -5,7 +5,12 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import ToastMessage from '@/components/blocks/ToastMessage';
 import Layout from '@/components/layouts/Layout';
-import { fetchCartAction, updateCartAction } from '@/store/actions/swell/cart';
+import {
+    fetchCartAction,
+    updateCartAction,
+    addVoucherAction,
+    removeVoucherAction
+} from '@/store/actions/swell/cart';
 import { addOrderData } from '@/store/actions/order';
 import { convertVariantNameDateToIso } from '@/helpers/calander';
 import ExpSubsection from '@/components/sections/ExpSubsection';
@@ -13,7 +18,8 @@ import moment from 'moment';
 import { capitalize, kreatorName, pluralize } from '@/helpers/FEutils';
 import { User, Clock, MapPin, Users, Layers } from 'lucide-react';
 import { submitPayment, clearPaymentErrors } from '@/store/actions/payment';
-import Spinner from '@/components/blocks/Spinner';
+import { Block__InputSingle } from 'components/blocks/Blocks';
+import PageSpinner from '@/components/blocks/PageSpinner';
 import { postPurchase } from '@/helpers/apiServices/purchases';
 import swell from '@/swell/swelljs.js';
 
@@ -22,15 +28,20 @@ import LayoutLoading from '@/components/layouts/LayoutLoading';
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 import classNames from 'classnames';
 
+
 const Checkout = ({
     auth,
     fetchCartAction,
     cart,
+    addVoucherAction,
+    removeVoucherAction,
     siteLoading,
     postPurchase,
     addOrderData
 }) => {
     const [loadingCart, setLoadingCart] = useState(true);
+    const [loadingCoupon, setLoadingCoupon] = useState(false);
+    const [voucher, setVoucher] = useState('');
     const router = useRouter();
     const { query, isReady } = useRouter();
     const cardElement = useRef(null);
@@ -38,8 +49,17 @@ const Checkout = ({
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
 
     const [processing, setProcessing] = useState(false);
+    const {
+        coupon,
+        sub_total,
+        grand_total,
+        discount_total
+    } = cart;
     const parseCart = () => {
-        const { digital, guided } = cart;
+        const {
+            digital,
+            guided
+        } = cart;
         const type = Object.keys(digital).length
             ? 'DIGITAL'
             : Object.keys(guided).length
@@ -55,13 +75,12 @@ const Checkout = ({
             username: '',
             first: '',
             price: 0,
-            totalPrice: 0,
             people: 0,
             travel_date: '',
             publish_id: '',
             experience_id: ''
         };
-
+console.log(coupon)
         if (!type) {
             return { type };
         }
@@ -72,7 +91,6 @@ const Checkout = ({
 
             const {
                 price = 0,
-                price_total: totalPrice = 0,
                 quantity = 0,
                 variant: { name },
                 product: {
@@ -98,7 +116,6 @@ const Checkout = ({
             product['first'] = first;
             product['description'] = description;
             product['price'] = price;
-            product['totalPrice'] = totalPrice;
             product['people'] = quantity;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
@@ -108,7 +125,6 @@ const Checkout = ({
         if (type === 'DIGITAL') {
             const {
                 price = 0,
-                price_total: totalPrice = 0,
                 people = 0,
                 product: {
                     name: title = '',
@@ -133,7 +149,6 @@ const Checkout = ({
             product['first'] = first;
             product['description'] = description;
             product['price'] = price;
-            product['totalPrice'] = totalPrice;
             product['publish_id'] = publish_id;
             product['experience_id'] = experience_id;
             product['people'] = people;
@@ -152,7 +167,6 @@ const Checkout = ({
         first,
         description,
         price,
-        totalPrice,
         people,
         travel_date,
         publish_id,
@@ -163,10 +177,7 @@ const Checkout = ({
         // When local storage changes, dump the list to
         // It means cart updated reload cart
         clearTimeout(reloadCartTimeoutId.current);
-        if (
-            window.localStorage.getItem('xx') !== JSON.stringify(cart) &&
-            !loadingCart
-        ) {
+        if (window.localStorage.getItem('xx') !== JSON.stringify(cart) && !loadingCart) {
             reloadCartTimeoutId.current = setTimeout(() => {
                 setLoadingCart(true);
                 fetchCartAction().then(() => {
@@ -176,24 +187,7 @@ const Checkout = ({
         }
     };
 
-    useEffect(() => {
-        let cartListener = null;
-        fetchCartAction().then(() => {
-            setLoadingCart(false);
-            cartListener = window.addEventListener('storage', reloadCart);
-        });
-
-        return () => window.removeEventListener('storage', cartListener);
-    }, []);
-
-    useEffect(() => {
-        if (!siteLoading) {
-            if (!auth.isAuthenticated) {
-                updateCartAction([]); // reset cart and leave page
-                router.replace('/');
-            }
-        }
-    }, [siteLoading]);
+    
 
     const tokenize = async () => {
         setProcessing(true);
@@ -205,7 +199,7 @@ const Checkout = ({
                 },
                 onError: (err) => {
                     setProcessing(false);
-                    pushError(err);
+                    pushMessage(err);
                 }
             }
         });
@@ -216,8 +210,6 @@ const Checkout = ({
             await swell.cart.update({
                 account: {
                     email: auth?.user?.email || 'subscription@viakonnect.com'
-                    // email: 'madeup@nothear.com' //An email is required to submit an order
-                    // name: auth?.user?.first && auth?.user?.last ? `${auth?.user?.first} ${auth?.user?.last}` : 'noname'
                 }
             });
 
@@ -244,10 +236,53 @@ const Checkout = ({
             });
         } catch (err) {
             setProcessing(false);
-            pushError(err);
+            pushMessage(err);
         }
     };
 
+    const removeCoupon = () => {
+        setLoadingCoupon(true);
+        removeVoucherAction().then(() => {
+            setLoadingCoupon(false);
+            pushMessage("Coupon successfully removed");
+        });
+    }
+
+    const pushMessage = (msg) => {
+        let message = '';
+        let icon = "😕";
+
+        if(typeof msg === 'object') {
+            message = msg?.message || 'Error'
+        } else {
+            icon = "😊";
+            message = msg;
+        }
+        toast.success(
+            <ToastMessage
+                icon={icon}
+                msg={message}
+                alignTop={false}
+            />,
+            {
+                hideProgressBar: true,
+                autoClose: 2500
+            }
+        );
+    };
+
+    const addVoucher = () => {
+        setLoadingCoupon(true);
+        addVoucherAction(voucher).then((res) => {
+            setLoadingCoupon(false);
+            if(res instanceof Error) {
+                removeVoucherAction();
+                pushMessage(res);
+            } else {
+                pushMessage("Coupon successfully applied");
+            }
+        });
+    }
     useEffect(() => {
         if (isReady && !loadingCart) {
             swell.payment.createElements({
@@ -308,19 +343,26 @@ const Checkout = ({
             });
         }
     }, [loadingCart]);
-    const pushError = (err) => {
-        toast.success(
-            <ToastMessage
-                icon="😕"
-                msg={err?.message || 'Error'}
-                alignTop={false}
-            />,
-            {
-                hideProgressBar: true,
-                autoClose: 2500
+
+    useEffect(() => {
+        let cartListener = null;
+        fetchCartAction().then(() => {
+            setLoadingCart(false);
+            cartListener = window.addEventListener('storage', reloadCart);
+        });
+
+        return () => window.removeEventListener('storage', cartListener);
+    }, []);
+
+    useEffect(() => {
+        if (!siteLoading) {
+            if (!auth.isAuthenticated) {
+                updateCartAction([]); // reset cart and leave page
+                router.replace('/');
             }
-        );
-    };
+        }
+    }, [siteLoading]);
+    
     return (
         <>
             <Layout>
@@ -414,6 +456,38 @@ const Checkout = ({
                                 className={classNames(
                                     'w-full lg:w-2/5 lg:stickya lg:top-12a py-4 lg:pb-24'
                                 )}>
+                                <div className="flex flex-col gap-6 mb-4 ">
+                                    <Block__InputSingle
+                                        responsive={true}
+                                        whiteBg={true}
+                                        normal
+                                        error={false}
+                                        handleChange={(e) =>
+                                            setVoucher(
+                                                e.target.value
+                                            )
+                                        }
+                                        id="first"
+                                        margins=""
+                                        value={voucher}
+                                        placeholder={'first'}
+                                        // rtl={rtl}
+                                        height="h-10"
+                                        fontSize="text-sm"
+                                        label=""
+                                        labelPos="left"
+                                        labelJustify="text-right mr-2"
+                                        labelMargin=""
+                                        labelWidth="w-32"
+                                    />
+                                    <ButtonLoad
+                                        handleClick={addVoucher}
+                                        isLoading={loadingCoupon}
+                                        label="Add Voucher"
+                                        width="w-full"
+                                        
+                                    />
+                                </div>
                                 <div
                                     className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
                                     <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
@@ -495,6 +569,19 @@ const Checkout = ({
                                             </div>
                                         </div>
                                     </div>
+                                    {
+                                        coupon && !loadingCoupon
+                                        ? <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
+                                            <div>
+                                                <span>{coupon.name}</span>
+                                                <button style={{float: 'right'}} onClick={removeCoupon}>X</button>
+                                            </div>
+                                            
+                                    </div>
+                                    : null
+
+                                    }
+                                    
                                     <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
                                         <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
                                             <div className=" mb-4 font-semibold">
@@ -523,6 +610,35 @@ const Checkout = ({
                                                         </div>
                                                     </div>
                                                 )}
+                                                { coupon && !loadingCoupon
+                                                    ? <div>
+                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                            <span className="flex">
+                                                                <span className="relative">
+                                                                    Subtotal
+                                                                </span>
+                                                            </span>
+                                                            <span className="flex">
+                                                                <span className="relative">
+                                                                    {sub_total}
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                            <span className="flex">
+                                                                <span className="relative">
+                                                                    Discount
+                                                                </span>
+                                                            </span>
+                                                            <span className="flex">
+                                                                <span className="relative">
+                                                                    {discount_total}
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    : null
+                                                }
                                                 <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
                                                     <span className="flex">
                                                         <span className="relative">
@@ -537,7 +653,7 @@ const Checkout = ({
                                                     </span>
                                                     <span className="flex">
                                                         <span className="relative">
-                                                            {totalPrice}
+                                                            {grand_total}
                                                         </span>
                                                         {/* {preferredCurrency !=
                                                         'USD' && (
@@ -655,6 +771,8 @@ function mapDispatchToProps(dispatch) {
             submitPayment,
             clearPaymentErrors,
             fetchCartAction,
+            addVoucherAction,
+            removeVoucherAction,
             postPurchase,
             addOrderData
         },

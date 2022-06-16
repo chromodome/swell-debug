@@ -6,7 +6,6 @@ import KreatorBadgeStatic from '@/components/blocks/KreatorBadgeStatic';
 import MarketingBudget from './MarketingBudget';
 import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
 import RawCard from '@/blocks/Card/RawCard';
-import { areIntervalsOverlapping } from 'date-fns';
 import Link from 'next/link';
 
 function SectionMarketingIntro(props) {
@@ -16,14 +15,11 @@ function SectionMarketingIntro(props) {
         budget_min = 0,
         budget_max = 0,
         budget_currency = 'USD',
-        user: author,
-        user: profile ,
+        user: author ,
         globalState: { siteData },
         bestTimeToGo: { time_range = false, isVisible: bestTimeToGoVisible },
         budgetVisible
     } = props;
-
-    console.log('props are', profile);
 
     return (
         <>
@@ -52,7 +48,7 @@ function SectionMarketingIntro(props) {
                                             <Link
                                                 href={`/experiences/user/${author.username}/all`}>
                                                 <a className=" underline text-base lg:text-lg text-green-700">{`${kreatorName(
-                                                    profile
+                                                    author.profile
                                                 )}`}</a>
                                             </Link>
                                         </div>
@@ -64,7 +60,7 @@ function SectionMarketingIntro(props) {
                                     desc ? 'text-gray-800' : 'italic'
                                 } text-xs md:text-sm`}
                                 dangerouslySetInnerHTML={{
-                                    __html: profile.bio
+                                    __html: author.bio
                                 }}
                             />
                         </div>

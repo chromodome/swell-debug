@@ -47,6 +47,7 @@ const Header = ({
         authModalIsOpen,
         authComponent
     },
+    auth,
     auth: { user, isAuthenticated, isProfile },
 
     isLogo = true,
@@ -105,9 +106,11 @@ const Header = ({
         logout();
     };
 
-    // useEffect(() => {
-    //     fetchCartAction()
-    // }, []);
+    useEffect(() => {
+        if(isAuthenticated && !isProfile) {
+            setAuthPage('profile');
+        }
+    }, [auth]);
 
     return (
         <>
@@ -141,18 +144,6 @@ const Header = ({
                             beta
                         </div>
                     </div>
-                    {/* {isSearch && <Search lang={lang} rtl={rtl} />} */}
-                    {/* <div className="hidden md:flex text-sma items-center gap-8">
-                        <MenuLink label={'About us'} href="/about/konnect" />
-                        <MenuLink
-                            label={'The Marketplace'}
-                            href="/about/marketplace"
-                        />
-                        <MenuLink
-                            label={'About Kreators'}
-                            href="/about/kreators"
-                        />
-                    </div> */}
                     <div className="flex justify-end items-center h-full  lg:w-2/3">
                         <div className="hidden md:flex text-sma items-center gap-4 lg:gap-8 mr-6">
                             <MenuLink label={'Home'} href="/" />
@@ -170,23 +161,24 @@ const Header = ({
                                 type="url"
                             />
                         </div>
-                        {isAvatar && (
+                        {isAvatar ? (
                             <div
                                 className={`hidden lg:flex items-center ${
                                     isLang ? '' : 'mr-10'
                                 }`}>
                                 <div className="hidden xl:block mx-4 text-sm">
                                     {user
-                                        ? `${translations[lang].messages.hello} ${user?.profile?.first}`
+                                        ? `${translations[lang].messages.hello} ${user?.profile?.first || user?.email || ''}`
                                         : `Guest`}
                                 </div>
-                                {user ? (
+                                {user?.profile?.avatar ? (
                                     <Avatar profile={user?.profile} />
                                 ) : (
                                     <IconsLucide icon="User" />
                                 )}
                             </div>
-                        )}
+                        )
+                    : null}
                         {isLang && <LangList />}
 
                         {isMenu && (
