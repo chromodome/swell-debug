@@ -5,7 +5,10 @@ import router, { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
-import { NEXT_PUBLIC_ITEMS_PER_PAGE, NEXT_PUBLIC_SOCIAL_MEDIA } from '@/constants/public';
+import {
+    NEXT_PUBLIC_ITEMS_PER_PAGE,
+    NEXT_PUBLIC_SOCIAL_MEDIA
+} from '@/constants/public';
 import LoadMore from '@/blocks/LoadMore';
 import translations from '@/constants/translations';
 import { pageCount } from '@/helpers/FEutils';
@@ -16,6 +19,7 @@ import KreatorBadgeStatic from '@/components/blocks/KreatorBadgeStatic';
 import KreatorBadgeStaticFlat from '@/components/blocks/KreatorBadgeStaticFlat';
 import Showcase from '@/components/sections/Showcase';
 import classNames from 'classnames';
+import SocialMediaKreator from '@/components/blocks/SocialMediaKreator';
 
 const LandingPage = ({ globalState: { lang } }) => {
     const { query, isReady } = useRouter();
@@ -53,22 +57,21 @@ const LandingPage = ({ globalState: { lang } }) => {
         );
     };
     const parseUserData = (userData) => {
-        const social =  {};
-        NEXT_PUBLIC_SOCIAL_MEDIA.forEach(sMedia => {
-            if(userData[sMedia]) {
+        const social = {};
+        NEXT_PUBLIC_SOCIAL_MEDIA.forEach((sMedia) => {
+            if (userData[sMedia]) {
                 social[sMedia] = userData[sMedia];
                 delete userData[sMedia];
             }
         });
 
-        return { ...userData, social}
-    }
+        return { ...userData, social };
+    };
     const getCreatorData = async (user) => {
         const response = await fetch(`/api/creator/${user}`);
         const data = await response.json();
-        
+
         if (data?.count) {
-            
             setCreator(parseUserData(data.results[0]));
         }
     };
@@ -109,11 +112,11 @@ const LandingPage = ({ globalState: { lang } }) => {
         }
     }, []);
 
-    
-
     const userData = {
         dark_theme: true,
-        image: 'https://ucarecdn.com/bb0e6c49-c58b-4ef6-8ff4-a64793b873d5/',
+        image:
+            creator?.cover_image ??
+            'https://ucarecdn.com/bb0e6c49-c58b-4ef6-8ff4-a64793b873d5/',
         blackPill: true,
         blackPillTxt: 'Kreator Showcase',
 
@@ -124,7 +127,7 @@ const LandingPage = ({ globalState: { lang } }) => {
         social: creator?.social || {},
         coverImage: creator?.cover_image,
         url: null, // btn
-        label: null, //btn
+        label: null //btn
     };
 
     const userProfile = {
@@ -153,12 +156,14 @@ const LandingPage = ({ globalState: { lang } }) => {
                 <>
                     <Showcase data={userData}>
                         <div className={classNames('flex gap-4 md:gap-8')}>
-                            {kreator && <KreatorBadgeStaticFlat
-                                avatarOnly
-                                card={false}
-                                author={kreator}
-                                size="w-16 h-16 md:w-28 md:h-28"
-                            />}
+                            {kreator && (
+                                <KreatorBadgeStaticFlat
+                                    avatarOnly
+                                    card={false}
+                                    author={kreator}
+                                    size="w-16 h-16 md:w-28 md:h-28"
+                                />
+                            )}
 
                             <div>
                                 <div
@@ -171,7 +176,7 @@ const LandingPage = ({ globalState: { lang } }) => {
                                 </div>
                                 <div
                                     className={classNames(
-                                        'hidden md:block text-base mb-8 h-72 overflow-y-auto pr-4',
+                                        'hidden md:block text-base mb-8 max-h-72 overflow-y-auto pr-4',
                                         userData.dark_theme
                                             ? 'text-white'
                                             : 'text-gray-800'
@@ -180,22 +185,31 @@ const LandingPage = ({ globalState: { lang } }) => {
                                         __html: userData.description
                                     }}
                                 />
+                                <div className="flex items-center gap-2 text-xl">
+                                    <SocialMediaKreator
+                                        preset="white"
+                                        social={userData.social}
+                                    />
+                                </div>
                             </div>
-                            <div className={classNames(
-                                        'hidden md:block text-base mb-8 h-72 overflow-y-auto pr-4',
-                                        userData.dark_theme
-                                            ? 'text-white'
-                                            : 'text-gray-800'
-                                    )}>
+                            {/* <div
+                                className={classNames(
+                                    'hidden md:block text-base mb-8 h-72 overflow-y-auto pr-4',
+                                    userData.dark_theme
+                                        ? 'text-white'
+                                        : 'text-gray-800'
+                                )}>
                                 <div>Social Media</div>
-                                {
-                                    Object.keys(userData.social).map((key) => {
-                                        return <div key={key}>{userData.social[key]}</div>
-                                    })
-                                }
-                            </div>
+                                {Object.keys(userData.social).map((key) => {
+                                    return (
+                                        <div key={key}>
+                                            {userData.social[key]}
+                                        </div>
+                                    );
+                                })}
+                            </div> */}
                         </div>
-                        
+
                         <div
                             className={classNames(
                                 'md:hidden text-base mt-4 h-72 overflow-y-auto pr-4',
