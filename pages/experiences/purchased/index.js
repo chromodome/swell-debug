@@ -43,13 +43,15 @@ const Purchased = ({
                 people,
                 travelDate,
                 name,
-                content: {
-                    ...experience,
+                creator: {
                     username,
                     first,
                     last,
-                    avatar,
-                    displayname,
+                    avatar, 
+                    displayname
+                },
+                content: {
+                    ...experience,
                     destinations: places_lists.map((dest) => dest.name)
                 }
             };

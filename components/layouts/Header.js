@@ -48,7 +48,7 @@ const Header = ({
         authComponent
     },
     auth,
-    auth: { user, isAuthenticated, isProfile },
+    auth: { user, isAuthenticated, isProfile,loading },
 
     isLogo = true,
     isSearch = false,
@@ -107,7 +107,7 @@ const Header = ({
     };
 
     useEffect(() => {
-        if(isAuthenticated && !isProfile) {
+        if(isAuthenticated && !isProfile && !loading) {
             setAuthPage('profile');
         }
     }, [auth]);

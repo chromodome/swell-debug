@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Icons from '../Icon/Icons';
 
 const ImageHover = ({
@@ -9,10 +10,18 @@ const ImageHover = ({
     nohover,
     bg = 'bg-white'
 }) => {
+    const [canClick, setCanClick] = useState(false);
     const handleClick = () => {
-        if (!disabled) handleActionBtn(...params);
+        if (!disabled && canClick) handleActionBtn(...params);
     };
 
+    const hasLoaded = (e) => {
+        setCanClick(true);
+    }
+
+    const noLoad = (e) => {
+        setCanClick(false);
+    }
     return url ? (
         <div
             className={`${
@@ -20,6 +29,8 @@ const ImageHover = ({
             } relative h-full ${className}`}
             onClick={handleClick}>
             <img
+                onLoad={hasLoaded}
+                onError={noLoad}
                 alt="Placeholder"
                 className="transform object-cover object-center w-full h-full"
                 src={url}

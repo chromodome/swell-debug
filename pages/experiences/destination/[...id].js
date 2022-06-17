@@ -168,7 +168,7 @@ const LandingPage = ({
     useEffect(() => {
         console.log('page loaded');
     }, []);
-
+    console.log('expList', expList)
     useEffect(() => {
         if (isReady) {
             let found = destinationList.find(

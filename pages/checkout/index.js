@@ -355,7 +355,9 @@ const Checkout = ({
                 router.replace('/');
             }
         }
-    }, [siteLoading]);
+
+    }, [siteLoading, auth]);
+    
 
     return (
         <>

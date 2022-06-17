@@ -5,7 +5,7 @@ import router, { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
 import GridList from '@/sections/GridList';
 import ExperienceFilter from '@/blocks/ExperienceFilter';
-import { NEXT_PUBLIC_ITEMS_PER_PAGE } from '@/constants/public';
+import { NEXT_PUBLIC_ITEMS_PER_PAGE, NEXT_PUBLIC_SOCIAL_MEDIA } from '@/constants/public';
 import LoadMore from '@/blocks/LoadMore';
 import translations from '@/constants/translations';
 import { pageCount } from '@/helpers/FEutils';
@@ -52,12 +52,24 @@ const LandingPage = ({ globalState: { lang } }) => {
             currentPage.current + 1
         );
     };
+    const parseUserData = (userData) => {
+        const social =  {};
+        NEXT_PUBLIC_SOCIAL_MEDIA.forEach(sMedia => {
+            if(userData[sMedia]) {
+                social[sMedia] = userData[sMedia];
+                delete userData[sMedia];
+            }
+        });
+
+        return { ...userData, social}
+    }
     const getCreatorData = async (user) => {
         const response = await fetch(`/api/creator/${user}`);
         const data = await response.json();
-
+        
         if (data?.count) {
-            setCreator(data.results[0]);
+            
+            setCreator(parseUserData(data.results[0]));
         }
     };
 
@@ -97,8 +109,31 @@ const LandingPage = ({ globalState: { lang } }) => {
         }
     }, []);
 
+    
+
+    const userData = {
+        dark_theme: true,
+        image: 'https://ucarecdn.com/bb0e6c49-c58b-4ef6-8ff4-a64793b873d5/',
+        blackPill: true,
+        blackPillTxt: 'Kreator Showcase',
+
+        user_id: creator?.username,
+        title: displayNameFinal,
+        headline: 'Headline',
+        description: creator?.bio,
+        social: creator?.social || {},
+        coverImage: creator?.cover_image,
+        url: null, // btn
+        label: null, //btn
+    };
+
+    const userProfile = {
+        avatar: 'https://ucarecdn.com/7255a900-4a82-4384-aa5d-7c5c1c869bff/',
+        username: 'arabiantrails',
+        displayName: 'Turki @ArabianTrails'
+    };
+
     useEffect(() => {
-        console.log('creator', creator);
         if (creator) {
             const { username, displayname, avatar, first } = creator;
             const newKreator = {
@@ -112,39 +147,19 @@ const LandingPage = ({ globalState: { lang } }) => {
         }
     }, [creator]);
 
-    const userData = {
-        dark_theme: true,
-        image: 'https://ucarecdn.com/bb0e6c49-c58b-4ef6-8ff4-a64793b873d5/',
-        blackPill: true,
-        blackPillTxt: 'Kreator Showcase',
-
-        user_id: creator?.username,
-        title: displayNameFinal,
-        headline: 'Headline',
-        description: creator?.bio,
-
-        url: null, // btn
-        label: null //btn
-    };
-
-    const userProfile = {
-        avatar: 'https://ucarecdn.com/7255a900-4a82-4384-aa5d-7c5c1c869bff/',
-        username: 'arabiantrails',
-        displayName: 'Turki @ArabianTrails'
-    };
-
     return (
         <Layout>
             {pageIsReady && (
                 <>
                     <Showcase data={userData}>
                         <div className={classNames('flex gap-4 md:gap-8')}>
-                            <KreatorBadgeStaticFlat
+                            {kreator && <KreatorBadgeStaticFlat
                                 avatarOnly
                                 card={false}
                                 author={kreator}
                                 size="w-16 h-16 md:w-28 md:h-28"
-                            />
+                            />}
+
                             <div>
                                 <div
                                     className={`inline-flex ${
@@ -154,7 +169,6 @@ const LandingPage = ({ globalState: { lang } }) => {
                                     } font-bold text-2xl md:text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
                                     {userData.title}
                                 </div>
-
                                 <div
                                     className={classNames(
                                         'hidden md:block text-base mb-8 h-72 overflow-y-auto pr-4',
@@ -167,7 +181,21 @@ const LandingPage = ({ globalState: { lang } }) => {
                                     }}
                                 />
                             </div>
+                            <div className={classNames(
+                                        'hidden md:block text-base mb-8 h-72 overflow-y-auto pr-4',
+                                        userData.dark_theme
+                                            ? 'text-white'
+                                            : 'text-gray-800'
+                                    )}>
+                                <div>Social Media</div>
+                                {
+                                    Object.keys(userData.social).map((key) => {
+                                        return <div key={key}>{userData.social[key]}</div>
+                                    })
+                                }
+                            </div>
                         </div>
+                        
                         <div
                             className={classNames(
                                 'md:hidden text-base mt-4 h-72 overflow-y-auto pr-4',
