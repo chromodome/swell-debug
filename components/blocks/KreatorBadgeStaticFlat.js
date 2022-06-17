@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 const KreatorBadgeStaticFlat = ({
     author,
-
+    author: { username },
     avatarOnly = false,
     card = true,
     size = 'w-14 h-14',
