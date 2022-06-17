@@ -92,7 +92,9 @@ export const formatPrice = (
     currency,
     locale = 'en-US',
     options,
-    style = 'decimal'
+    style = 'decimal',
+    prefix = '',
+    suffix = ''
 ) => {
     let rounding;
     if (!options) rounding = currenciesObject[currency].budget_rounding;
@@ -105,7 +107,9 @@ export const formatPrice = (
         style,
         currency: currency
     });
-    return formatter.format(Math.round(value / rounding) * rounding);
+    return `${prefix}${formatter.format(
+        Math.round(value / rounding) * rounding
+    )}${suffix}`;
 };
 
 export const getBrowserLocale = () => {

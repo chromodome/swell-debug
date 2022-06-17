@@ -1,4 +1,5 @@
 import Spinner from '@/components/blocks/Spinner';
+import classNames from 'classnames';
 
 const ButtonLoad = ({
     label,
@@ -11,7 +12,8 @@ const ButtonLoad = ({
     type = 'button',
     form,
     disabled = false,
-    margins = 'mt-8'
+    margins = 'mt-8',
+    animation = true
 }) => {
     const btnJSX = (
         <button
@@ -19,12 +21,20 @@ const ButtonLoad = ({
             type={type}
             form={form}
             onClick={handleClick}
-            className={`focus:outline-none relative overflow-hidden ${width} ${height} rounded-lg flex items-center justify-center ${
+            className={classNames(
+                'focus:outline-none relative overflow-hidden rounded-lg flex items-center justify-center ',
+                animation &&
+                    'transform-gpu duration-300 hover:-translate-y-2 ease-in-out',
+                width,
+                height,
                 isLoading
                     ? 'bg-gray-900 text-white'
                     : 'bg-gradient-to-r from-green-400 via-green-400 to-green-500 shadow-2xl-green-500 hover:shadow-none font-bold text-green-800 hover:bg-gray-900 transition-all hover:text-white hover:font-semibold'
-            } transform-gpu duration-300 hover:-translate-y-2 ease-in-out `}>
-            <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            )}>
+            <span
+                className={classNames(
+                    'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'
+                )}>
                 {isLoading ? (
                     <Spinner />
                 ) : (

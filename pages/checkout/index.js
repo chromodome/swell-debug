@@ -27,7 +27,11 @@ import Row from '@/components/sections/Row';
 import LayoutLoading from '@/components/layouts/LayoutLoading';
 import ButtonLoad from '@/components/blocks/ButtonLoad';
 import classNames from 'classnames';
+import { formatPrice } from '@/helpers/LocaleHelper';
 
+const currencyOptions = {
+    rounding: 0.001
+};
 
 const Checkout = ({
     auth,
@@ -49,17 +53,9 @@ const Checkout = ({
     let preferredCurrency = auth?.user?.profile?.currency || 'USD';
 
     const [processing, setProcessing] = useState(false);
-    const {
-        coupon,
-        sub_total,
-        grand_total,
-        discount_total
-    } = cart;
+    const { coupon, sub_total, grand_total, discount_total } = cart;
     const parseCart = () => {
-        const {
-            digital,
-            guided
-        } = cart;
+        const { digital, guided } = cart;
         const type = Object.keys(digital).length
             ? 'DIGITAL'
             : Object.keys(guided).length
@@ -80,7 +76,7 @@ const Checkout = ({
             publish_id: '',
             experience_id: ''
         };
-console.log(coupon)
+        console.log(coupon);
         if (!type) {
             return { type };
         }
@@ -177,7 +173,10 @@ console.log(coupon)
         // When local storage changes, dump the list to
         // It means cart updated reload cart
         clearTimeout(reloadCartTimeoutId.current);
-        if (window.localStorage.getItem('xx') !== JSON.stringify(cart) && !loadingCart) {
+        if (
+            window.localStorage.getItem('xx') !== JSON.stringify(cart) &&
+            !loadingCart
+        ) {
             reloadCartTimeoutId.current = setTimeout(() => {
                 setLoadingCart(true);
                 fetchCartAction().then(() => {
@@ -186,8 +185,6 @@ console.log(coupon)
             }, 1000);
         }
     };
-
-    
 
     const tokenize = async () => {
         setProcessing(true);
@@ -244,26 +241,22 @@ console.log(coupon)
         setLoadingCoupon(true);
         removeVoucherAction().then(() => {
             setLoadingCoupon(false);
-            pushMessage("Coupon successfully removed");
+            pushMessage('Coupon successfully removed');
         });
-    }
+    };
 
     const pushMessage = (msg) => {
         let message = '';
-        let icon = "😕";
+        let icon = '😕';
 
-        if(typeof msg === 'object') {
-            message = msg?.message || 'Error'
+        if (typeof msg === 'object') {
+            message = msg?.message || 'Error';
         } else {
-            icon = "😊";
+            icon = '😊';
             message = msg;
         }
         toast.success(
-            <ToastMessage
-                icon={icon}
-                msg={message}
-                alignTop={false}
-            />,
+            <ToastMessage icon={icon} msg={message} alignTop={false} />,
             {
                 hideProgressBar: true,
                 autoClose: 2500
@@ -275,14 +268,15 @@ console.log(coupon)
         setLoadingCoupon(true);
         addVoucherAction(voucher).then((res) => {
             setLoadingCoupon(false);
-            if(res instanceof Error) {
+            if (res instanceof Error) {
                 removeVoucherAction();
                 pushMessage(res);
             } else {
-                pushMessage("Coupon successfully applied");
+                pushMessage('Coupon successfully applied');
             }
+            setVoucher('');
         });
-    }
+    };
     useEffect(() => {
         if (isReady && !loadingCart) {
             swell.payment.createElements({
@@ -362,14 +356,14 @@ console.log(coupon)
             }
         }
     }, [siteLoading]);
-    
+
     return (
         <>
             <Layout>
                 {!loadingCart && type ? (
                     <div
                         style={{ display: processing ? 'none' : 'block' }}
-                        className={` mb-12a mt-12 lg:mt-24 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
+                        className={` mb-12a mt-12 lg:mt-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
                         <div className={``}>
                             <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
                                 Checkout
@@ -456,38 +450,6 @@ console.log(coupon)
                                 className={classNames(
                                     'w-full lg:w-2/5 lg:stickya lg:top-12a py-4 lg:pb-24'
                                 )}>
-                                <div className="flex flex-col gap-6 mb-4 ">
-                                    <Block__InputSingle
-                                        responsive={true}
-                                        whiteBg={true}
-                                        normal
-                                        error={false}
-                                        handleChange={(e) =>
-                                            setVoucher(
-                                                e.target.value
-                                            )
-                                        }
-                                        id="first"
-                                        margins=""
-                                        value={voucher}
-                                        placeholder={'first'}
-                                        // rtl={rtl}
-                                        height="h-10"
-                                        fontSize="text-sm"
-                                        label=""
-                                        labelPos="left"
-                                        labelJustify="text-right mr-2"
-                                        labelMargin=""
-                                        labelWidth="w-32"
-                                    />
-                                    <ButtonLoad
-                                        handleClick={addVoucher}
-                                        isLoading={loadingCoupon}
-                                        label="Add Voucher"
-                                        width="w-full"
-                                        
-                                    />
-                                </div>
                                 <div
                                     className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
                                     <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
@@ -569,19 +531,52 @@ console.log(coupon)
                                             </div>
                                         </div>
                                     </div>
-                                    {
-                                        coupon && !loadingCoupon
-                                        ? <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
+                                    {coupon && !loadingCoupon ? (
+                                        <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
                                             <div>
                                                 <span>{coupon.name}</span>
-                                                <button style={{float: 'right'}} onClick={removeCoupon}>X</button>
+                                                <button
+                                                    style={{ float: 'right' }}
+                                                    onClick={removeCoupon}>
+                                                    X
+                                                </button>
                                             </div>
-                                            
+                                        </div>
+                                    ) : null}
+                                    <div className="flex gap-2 mt-4">
+                                        <Block__InputSingle
+                                            responsive={true}
+                                            whiteBg={false}
+                                            normal
+                                            error={false}
+                                            handleChange={(e) =>
+                                                setVoucher(e.target.value)
+                                            }
+                                            id="first"
+                                            margins=""
+                                            value={voucher}
+                                            placeholder={'Coupon code'}
+                                            // rtl={rtl}
+                                            height="h-10"
+                                            fontSize="text-sm"
+                                            label=""
+                                            labelPos="left"
+                                            labelJustify="text-right mr-2"
+                                            labelMargin=""
+                                            labelWidth="w-32"
+                                        />
+                                        <ButtonLoad
+                                            handleClick={addVoucher}
+                                            isLoading={loadingCoupon}
+                                            label="Add"
+                                            width="w-full"
+                                            margins=""
+                                            width="w-20"
+                                            height="h-10"
+                                            animation={false}
+                                        />
                                     </div>
-                                    : null
 
-                                    }
-                                    
                                     <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
                                         <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
                                             <div className=" mb-4 font-semibold">
@@ -593,7 +588,15 @@ console.log(coupon)
                                                         Price
                                                     </span>
                                                     <span className="relative">
-                                                        {price}
+                                                        {formatPrice(
+                                                            price,
+                                                            'USD',
+                                                            window.navigator
+                                                                .language,
+                                                            currencyOptions,
+                                                            undefined,
+                                                            '$US '
+                                                        )}
                                                     </span>
                                                 </div>
 
@@ -610,8 +613,8 @@ console.log(coupon)
                                                         </div>
                                                     </div>
                                                 )}
-                                                { coupon && !loadingCoupon
-                                                    ? <div>
+                                                {coupon && !loadingCoupon ? (
+                                                    <div className="border-b-2 border-gray-300 border-dotted pb-2">
                                                         <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
                                                             <span className="flex">
                                                                 <span className="relative">
@@ -620,7 +623,16 @@ console.log(coupon)
                                                             </span>
                                                             <span className="flex">
                                                                 <span className="relative">
-                                                                    {sub_total}
+                                                                    {formatPrice(
+                                                                        sub_total,
+                                                                        'USD',
+                                                                        window
+                                                                            .navigator
+                                                                            .language,
+                                                                        currencyOptions,
+                                                                        undefined,
+                                                                        '$US '
+                                                                    )}
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -632,13 +644,21 @@ console.log(coupon)
                                                             </span>
                                                             <span className="flex">
                                                                 <span className="relative">
-                                                                    {discount_total}
+                                                                    {formatPrice(
+                                                                        discount_total,
+                                                                        'USD',
+                                                                        window
+                                                                            .navigator
+                                                                            .language,
+                                                                        currencyOptions,
+                                                                        undefined,
+                                                                        '$US '
+                                                                    )}
                                                                 </span>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    : null
-                                                }
+                                                ) : null}
                                                 <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
                                                     <span className="flex">
                                                         <span className="relative">
@@ -653,7 +673,15 @@ console.log(coupon)
                                                     </span>
                                                     <span className="flex">
                                                         <span className="relative">
-                                                            {grand_total}
+                                                            {formatPrice(
+                                                                grand_total,
+                                                                'USD',
+                                                                window.navigator
+                                                                    .language,
+                                                                currencyOptions,
+                                                                undefined,
+                                                                '$US '
+                                                            )}
                                                         </span>
                                                         {/* {preferredCurrency !=
                                                         'USD' && (
