@@ -50,7 +50,7 @@ const ExperienceDetail = ({
         itinerary: { [lang]: itinerary },
         swellExp: {
             id: swellExpId,
-            category_index: { id:categories },
+            category_index: { id:categories } = [],
             tags,
             creator: {
                 username,

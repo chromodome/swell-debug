@@ -361,7 +361,7 @@ console.log(coupon)
                 router.replace('/');
             }
         }
-    }, [siteLoading]);
+    }, [siteLoading, auth]);
     
     return (
         <>

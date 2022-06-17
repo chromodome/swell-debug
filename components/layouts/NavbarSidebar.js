@@ -39,8 +39,7 @@ const NavbarSidebar = ({
                 }-0 w-full md:w-96 bg-white  shadow-images transition duration-300 ease-in-out transform-gpu ${
                     navIsOpen
                         ? 'translate-x-0'
-                        : handleRowReverse(rtl).menuTranslateReverse +
-                          ' pointer-events-none'
+                        : handleRowReverse(rtl).menuTranslateReverse + ' pointer-events-none'
                 }`}>
                 <nav className=" flex flex-col relative flex-1 pt-40 md:pt-28">
                     <div className="md:hidden fixed inset-x-0 top-6">
@@ -63,11 +62,8 @@ const NavbarSidebar = ({
                                 className={`${
                                     auth?.user ? 'ml-8' : 'ml-12'
                                 } flex items-center`}>
-                                {auth?.user?.profile ? (
-                                    <Avatar
-                                        profile={auth?.user?.profile}
-                                        size="w-12 h-12"
-                                    />
+                                {auth.user?.profile?.avatar ? (
+                                    <Avatar profile={auth?.user?.profile} />
                                 ) : (
                                     <IconsLucide icon="User" />
                                 )}
