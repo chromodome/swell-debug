@@ -30,7 +30,7 @@ const Pill__Icon = ({ icon, size }) => {
 const Pill__Logo = ({ noshadow }) => {
     return (
         <div
-            className={`w-8 h-11 flex flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-green-300 via-green-400 to-green-500 ${
+            className={`w-8 h-11 transform d-hdpi-2:scale-75 flex flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-green-300 via-green-400 to-green-500 ${
                 noshadow ? '' : 'shadow-2xl-green-500'
             }`}>
             <KnIcons
@@ -44,7 +44,7 @@ const Pill__Logo = ({ noshadow }) => {
 
 const Pill__Title = ({ title }) => {
     return (
-        <div className="leading-8 text-2xl font-bold  lg:text-2xl pt-6 lg:py-0 lg:px-8 bg-clip-text text-transparent bg-gradient-to-tr from-black to-green-400">
+        <div className="leading-8 text-2xl d-hdpi-2:text-vw-2xl font-bold  lg:text-2xl pt-6 lg:py-0 lg:px-8 d-hdpi-2:px-vw-8 d-hdpi-2:py-0 bg-clip-text text-transparent bg-gradient-to-tr from-black to-green-400">
             {title}
         </div>
     );
@@ -53,7 +53,7 @@ const Pill__Title = ({ title }) => {
 const Pill__Experience = ({ label = 'Digital', classes = '' }) => {
     return (
         <div
-            className={`uppercase rounded-full h-8 flex whitespace-nowrap justify-center items-center bg-gray-900 text-xxs text-kn-primary tracking-widest px-6 ${classes}`}>
+            className={`uppercase rounded-full h-8 d-hdpi-2:h-vw-8 flex whitespace-nowrap justify-center items-center bg-gray-900 text-xxs d-hdpi-2:text-vw-xxs text-kn-primary tracking-widest px-6 d-hdpi-2:px-vw-6 ${classes}`}>
             {label}
         </div>
     );

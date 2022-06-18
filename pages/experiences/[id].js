@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import getMarketingExperience from '@/swell/api/getMarketingExperience';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/Layout';
@@ -17,6 +17,7 @@ import SectionPricingBooking from '@/components/experiencepage/SectionPricingBoo
 import { NEXT_PUBLIC_DIGITAL_ONLY } from '@/constants/public';
 import SectionWhatsIncluded from '@/components/experiencepage/SectionWhatsIncluded';
 import SectionPolicies from '@/components/experiencepage/SectionPolicies';
+import { NEXT_PUBLIC_SOCIAL_MEDIA } from '@/constants/public';
 // import SectionPolicies from '@/components/experiencepage/SectionPolicies';
 
 const lang = 'en-US';
@@ -24,6 +25,7 @@ const ExperienceDetail = ({
     globalState: { siteData },
     contentfulExperience = {}
 }) => {
+    const [social, setSocial] = useState(null);
     const router = useRouter();
     const { isReady } = useRouter();
     const {
@@ -50,34 +52,42 @@ const ExperienceDetail = ({
         itinerary: { [lang]: itinerary },
         swellExp: {
             id: swellExpId,
-            category_index: { id:categories } = [],
+            category_index: { id: categories } = [],
             tags,
-            creator: {
-                username,
-                displayname,
-                avatar,
-                bio,
-                first
-            },
-            content: { destinations, experience_id, views  }
+            creator,
+            creator: { username, displayname, avatar, bio, first },
+            content: { destinations, experience_id, views }
         }
     } = contentfulExperience;
 
     const user = {
+        username,
+        bio,
+        displayname,
+        profile: {
+            avatar,
+            first,
             username,
-            bio,
-            displayname,
-            profile: {
-                avatar,
-                first,
-                username,
-                displayname
+            displayname
+        }
+    };
+    const parseUserData = (userData) => {
+        const tmpSocial = {};
+
+        NEXT_PUBLIC_SOCIAL_MEDIA.forEach((sMedia) => {
+            if (userData[sMedia]) {
+                tmpSocial[sMedia] = userData[sMedia];
+                delete userData[sMedia];
             }
+        });
+
+        return { ...userData, social: tmpSocial };
     };
 
-    const updateViews =  async (swellExpId, views)=> {
-        const response = await fetch(`/api/views/${swellExpId}?views=${views}`, {
-
+    const updateViews = async (swellExpId, views) => {
+        const response = await fetch(
+            `/api/views/${swellExpId}?views=${views}`,
+            {
                 method: 'PUT',
                 body: [],
                 headers: {
@@ -94,6 +104,8 @@ const ExperienceDetail = ({
             } else {
                 updateViews(swellExpId, views + 1);
             }
+
+            setSocial(parseUserData(creator).social);
         }
     }, []);
 
@@ -121,6 +133,7 @@ const ExperienceDetail = ({
                                         budget_min={budget_min}
                                         budget_currency={budget_currency}
                                         user={user}
+                                        social={social}
                                         bestTimeToGo={bestTimeToGo}
                                         budgetVisible={budgetVisible}
                                         // budget = {}: { isVisible: budgetVisible },

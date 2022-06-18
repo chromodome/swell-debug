@@ -23,7 +23,7 @@ const GridList = ({
     purchasedView = false,
     missing = false,
     margins,
-    titleClass = 'mb-8',
+    titleClass = 'mb-8 d-hdpi-2:mb-vw-8',
     titleColor
 }) => {
     const router = useRouter();
@@ -40,8 +40,12 @@ const GridList = ({
     return (
         <>
             <div
-                className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${
-                    margins ? margins : sectionTitles ? 'mt-24 mb-12' : 'mb-12'
+                className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 d-hdpi-2:px-vw-40 ${
+                    margins
+                        ? margins
+                        : sectionTitles
+                        ? 'mt-24 mb-12 d-hdpi-2:mt-vw-24 d-hdpi-2:mb-vw-12'
+                        : 'mb-12 d-hdpi-2:mb-vw-12'
                 }`}>
                 <div className="flex justify-between">
                     {sectionTitles && (
@@ -52,9 +56,9 @@ const GridList = ({
                         />
                     )}
                     {btnPos && btnAction === 'url' && !purchasedView && (
-                        <div className="hidden md:block pr-4">
+                        <div className="hidden md:block pr-4 d-hdpi-2:pr-vw-4">
                             <ButtonLoad
-                                width="w-40"
+                                width="w-40 d-hdpi-2:w-vw-40"
                                 handleClick={handleClick}
                                 isLoading={loadMoreData}
                                 label={'Explore more'}

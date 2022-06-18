@@ -131,7 +131,10 @@ const Buttons__GroupNextPrev = ({
     rtl = false
 }) => {
     return (
-        <div className={`flex ${rtl ? 'flex-row' : 'flex-row-reverse'}`}>
+        <div
+            className={`transform origin-top-right d-hdpi-2:scale-60 flex ${
+                rtl ? 'flex-row' : 'flex-row-reverse'
+            }`}>
             <div
                 className={`flex gap-2 ${className} ${
                     rtl ? 'flex-row-reverse' : 'flex-row'

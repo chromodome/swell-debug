@@ -44,8 +44,8 @@ const TopBar = () => {
 
     return topBar ? (
         <div
-            className={`w-full mt-16 md:mt-20 ${bgColor} ${topBar.bar.textColor} text-sm flex items-center justify-center`}>
-            <div className="flex items-center gap-4 px-4 max-w-6xl w-full justify-center min-h-12 py-2">
+            className={`w-full mt-16 md:mt-20 d-hdpi-2:mt-vw-20 ${bgColor} ${topBar.bar.textColor} text-sm d-hdpi-2:text-vw-sm flex items-center justify-center`}>
+            <div className="flex items-center gap-4 px-4 d-hdpi-2:px-vw-4 max-w-6xl w-full justify-center min-h-12 d-hdpi-2:min-h-vw-12 py-2 d-hdpi-2:py-vw-2">
                 {topBar?.link ? (
                     <Link href={tmpTopBar.link}>
                         <a>
@@ -59,7 +59,7 @@ const TopBar = () => {
             </div>
         </div>
     ) : (
-        <div className="mt-16 md:mt-20" />
+        <div className="mt-16 md:mt-20 d-hdpi-2:mt-vw-20" />
     );
 };
 
@@ -68,7 +68,7 @@ export default TopBar;
 const BarPill = ({ topBar }) => {
     return (
         <div
-            className={`shadow-xl-green focus:outline-none text-sm font-semibold flex items-center justify-center px-4 h-8 rounded-full whitespace-nowrap ${topBar.pill.bgColor} ${topBar.pill.textColor} `}>
+            className={`shadow-xl-green focus:outline-none text-sm d-hdpi-2:text-vw-sm font-semibold flex items-center justify-center px-4 h-8 d-hdpi-2:px-vw-4 d-hdpi-2:h-vw-8 rounded-full whitespace-nowrap ${topBar.pill.bgColor} ${topBar.pill.textColor} `}>
             {topBar.pill.text}
         </div>
     );

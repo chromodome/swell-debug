@@ -9,7 +9,7 @@ const Community = () => {
             <Row>
                 <div
                     className={`relative 
-                                 bg-contain bg-no-repeat bg-center  lg:pt-8  lg:pb-0 2xl:pb-0 `}>
+                                 bg-contain bg-no-repeat bg-center lg:pt-24  lg:pb-12  `}>
                     <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-4 lg:gap-16 ">
                         <div className="lg:w-1/2 flex flex-col px-8 md:px-0">
                             <SectionTitle

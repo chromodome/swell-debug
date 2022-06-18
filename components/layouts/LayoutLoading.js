@@ -16,7 +16,7 @@ function LayoutLoading({
     return (
         <>
             <div
-                className={`absolute inset-0 flex items-center justify-center`}>
+                className={`absolute inset-0 flex items-center justify-center d-hdpi-2:text-vw-base`}>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <span className="flex justify-center">
                         <PageSpinner size="64" strokeWidth="20" />

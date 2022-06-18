@@ -38,6 +38,8 @@ const LandingPage = ({
         <Layout>
             <Showcase pill="bottom" data={randomCover} collection="showcase" />
 
+            <div className="hidden d-hdpi-2:block">Min Res is 2</div>
+            <div className="hidden d-hdpi-3:block">Min Res is 3</div>
             <GridList
                 sectionTitles={translations[lang].sections.trendingThisWeek}
                 data={trendingList}
@@ -45,7 +47,7 @@ const LandingPage = ({
                 btnPos="side"
                 btnAction="url"
                 btnUrl="/experiences/destination/world/all"
-                margins="mt-16 mb-8 lg:mt-12 lg:mb-12"
+                margins="mt-16 mb-8 lg:mt-12 lg:mb-12 d-hdpi-2:mt-vw-12 d-hdpi-2:mb-vw-12"
                 titleClass=""
             />
 

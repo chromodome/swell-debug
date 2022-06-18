@@ -57,6 +57,7 @@ const LandingPage = ({ globalState: { lang } }) => {
         );
     };
     const parseUserData = (userData) => {
+        console.log('creator', userData);
         const social = {};
         NEXT_PUBLIC_SOCIAL_MEDIA.forEach((sMedia) => {
             if (userData[sMedia]) {
@@ -70,7 +71,7 @@ const LandingPage = ({ globalState: { lang } }) => {
     const getCreatorData = async (user) => {
         const response = await fetch(`/api/creator/${user}`);
         const data = await response.json();
-
+        console.log('data');
         if (data?.count) {
             setCreator(parseUserData(data.results[0]));
         }
@@ -154,7 +155,7 @@ const LandingPage = ({ globalState: { lang } }) => {
         <Layout>
             {pageIsReady && (
                 <>
-                    <Showcase data={userData}>
+                    <Showcase data={userData} dataLoading={dataLoading}>
                         <div className={classNames('flex gap-4 md:gap-8')}>
                             {kreator && (
                                 <KreatorBadgeStaticFlat

@@ -4,19 +4,19 @@ import classNames from 'classnames';
 const ButtonLoad = ({
     label,
     color,
-    width = 'w-80',
+    width = 'w-80 d-hdpi-2:w-vw-80',
     height,
     isLoading = false,
     handleClick,
     nowrap,
-    margins = 'mt-8',
+    margins = 'mt-8 d-hdpi-2:mt-vw-8',
     animate = true
 }) => {
     const btnJSX = (
         <button
             onClick={handleClick}
             className={classNames(
-                'relative overflow-hidden h-12 rounded-lg flex items-center justify-center ',
+                'relative overflow-hidden h-12 d-hdpi-2:h-vw-12 rounded-lg d-hdpi-2:rounded-vw-lg flex items-center justify-center d-hdpi-2:text-vw-base',
                 width,
                 animate
                     ? 'transform-gpu duration-300 hover:-translate-y-2 ease-in-out'

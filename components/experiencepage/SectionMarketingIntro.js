@@ -7,6 +7,7 @@ import MarketingBudget from './MarketingBudget';
 import BestTimeToGoRanges from '@/components/blocks/BestTimeToGoRanges';
 import RawCard from '@/blocks/Card/RawCard';
 import Link from 'next/link';
+import SocialMediaKreator from '../blocks/SocialMediaKreator';
 
 function SectionMarketingIntro(props) {
     const {
@@ -15,10 +16,11 @@ function SectionMarketingIntro(props) {
         budget_min = 0,
         budget_max = 0,
         budget_currency = 'USD',
-        user: author ,
+        user: author,
         globalState: { siteData },
         bestTimeToGo: { time_range = false, isVisible: bestTimeToGoVisible },
-        budgetVisible
+        budgetVisible,
+        social
     } = props;
 
     return (
@@ -63,6 +65,9 @@ function SectionMarketingIntro(props) {
                                     __html: author.bio
                                 }}
                             />
+                            <div className="flex items-center gap-2 text-xl">
+                                <SocialMediaKreator social={social} />
+                            </div>
                         </div>
                     </div>
                 </RawCard>

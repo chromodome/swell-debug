@@ -28,7 +28,7 @@ const Showcase = ({
         ) : null;
     return !dataLoading ? (
         <div
-            className={`w-full md:h-128 relative flex justify-between flex-col-reverse md:flex-row`}>
+            className={`w-full md:h-128 d-hdpi-2:h-vw-128 relative flex justify-between flex-col-reverse md:flex-row`}>
             {/* div that will house bg + overlay */}
             <div className="absolute inset-0 bg-gray-200 overflow-hidden">
                 <img
@@ -61,8 +61,9 @@ const Showcase = ({
             )}
             {true && (
                 <div
-                    className={`z-100 mb-12 px-5 md:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 w-full md:w-1/2 flex-none`}>
-                    <div className={`z-100 px-4 mt-8 md:mt-20 `}>
+                    className={`z-100 mb-12 px-5 md:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 d-hdpi-2:pl-vw-40 d-hdpi-2:pr-vw-20  w-full md:w-1/2 flex-none`}>
+                    <div
+                        className={`z-100 px-4 mt-8 md:mt-20 d-hdpi-2:px-vw-4 d-hdpi-2:mt-vw-20`}>
                         {!children ? (
                             <>
                                 {data?.username && (
@@ -78,13 +79,13 @@ const Showcase = ({
                                         dark
                                             ? 'text-green-400'
                                             : 'text-green-500'
-                                    } font-bold text-2xl lg:text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
+                                    } font-bold text-2xl lg:text-3xl d-hdpi-2:text-vw-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2 d-hdpi-2:mb-vw-2`}>
                                     {data.title}
                                 </div>
                                 <div
                                     className={`${
                                         dark ? 'text-white' : 'text-gray-800'
-                                    } mt-2 text-xl md:text-2xl lg:text-4xl md:font-bold lg:leading-tight mb-8 whitespace-normal`}>
+                                    } mt-2 text-xl md:text-2xl lg:text-4xl d-hdpi-2:text-vw-4xl md:font-bold lg:leading-tight mb-8 d-hdpi-2:mb-vw-8 whitespace-normal`}>
                                     {data.headline}
                                 </div>
                                 {data.description && (
@@ -93,7 +94,7 @@ const Showcase = ({
                                             dark
                                                 ? 'text-white'
                                                 : 'text-gray-800'
-                                        } text-base mb-8`}
+                                        } text-base d-hdpi-2:text-vw-base mb-8 d-hdpi-2:mb-vw-8`}
                                         dangerouslySetInnerHTML={{
                                             __html: data.description
                                         }}
@@ -127,7 +128,7 @@ const Showcase = ({
         </div>
     ) : (
         <div
-            className={`w-full h-128 relative pt-1 bg-gray-300 animate-pulse`}></div>
+            className={`w-full h-128 d-hdpi-2:h-vw-128 relative pt-1 d-hdpi-2:pt-vw-1 bg-gray-300 animate-pulse`}></div>
     );
 };
 

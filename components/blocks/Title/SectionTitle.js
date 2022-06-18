@@ -5,7 +5,7 @@ const SectionTitle = ({
     section: { title = '', subTitle = '' },
     className = '',
     padding = 'px-4',
-    size = 'text-3xl',
+    size = 'text-3xl d-hdpi-2:text-vw-3xl',
     titleColor,
     titlePadding = 'pb-3'
 }) => {
@@ -13,7 +13,7 @@ const SectionTitle = ({
         <div className={`${padding} ${className} `}>
             <div
                 className={classNames(
-                    'inline-flex  font-bold tracking-tight  leading-none flex-shrink-0 flex-initial',
+                    'inline-flex  font-bold tracking-tight leading-none flex-shrink-0 flex-initial',
                     titlePadding,
                     size,
                     titleColor,
@@ -24,7 +24,9 @@ const SectionTitle = ({
                 )}>
                 {title}
             </div>
-            {subTitle ? <div className="mb-1">{subTitle}</div> : null}
+            {subTitle ? (
+                <div className="mb-1 d-hdpi-2:text-vw-base">{subTitle}</div>
+            ) : null}
         </div>
     );
 };
