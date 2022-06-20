@@ -240,7 +240,7 @@ const Header = ({
                         <NavbarItem
                             justify="justify-center"
                             label={'About us'}
-                            link={`/help/article/1001`}
+                            link={'/help/article/1001'}
                             // handleClick={() => console.log('hello')}
                             handleClick={() => toggleNav(false)}
                             rtl={rtl}
