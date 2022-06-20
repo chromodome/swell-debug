@@ -22,6 +22,7 @@ const KreatorBadgeStaticFlat = ({
                             profile={author?.profile}
                             card={card}
                             size={size}
+                            username={username}
                         />
                     ) : (
                         <div
@@ -36,6 +37,7 @@ const KreatorBadgeStaticFlat = ({
                                     'flex items-center no-underline text-white'
                                 )}>
                                 <Avatar
+                                    username={username}
                                     profile={author?.profile}
                                     card={card}
                                     size={

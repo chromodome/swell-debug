@@ -6,19 +6,19 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
     return (
         <footer className="">
             {isBody && (
-                <div className="bg-gray-800 pt-12 pb-6 px-8 w-full">
+                <div className="bg-gray-800 pt-12 pb-6 px-8 w-full d-hdpi-2:pt-vw-12 d-hdpi-2:pb-vw-6 d-hdpi-2:px-vw-8">
                     {/* <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 h-48a min-h-full text-white"> */}
                     <div className="mx-auto max-w-6xl gap-8 flex flex-col md:flex-row w-full text-white justify-center">
                         <section>
                             <div className="flex items-center gap-3 -mt-2">
                                 <img
-                                    className="h-8"
+                                    className="h-8 d-hdpi-2:h-vw-8"
                                     src="/assets/media/kn_logoicon_white.svg"
                                     // height={45}
                                     // width={31}
                                 />
                                 <img
-                                    className="flex-shrink-0 w-24"
+                                    className="flex-shrink-0 w-24 d-hdpi-2:w-vw-24"
                                     src="/assets/media/kn_logotext_white.svg"
                                     // height={45}
                                     // width={31}
@@ -27,10 +27,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                         </section>
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-8 text-white">
                             <section>
-                                <h3 className="text-2xl md:text-base text-green-400 mb-2">
+                                <h3 className="text-2xl d-hdpi-2:text-vw-base md:text-base text-green-400 mb-2 d-hdpi-2:mb-vw-2">
                                     About
                                 </h3>
-                                <nav className="flex flex-col gap-2 md:text-xs font-light">
+                                <nav className="flex flex-col gap-2 md:text-xs font-light d-hdpi-2:text-vw-xs">
                                     <FooterMenuLink
                                         url="/help/article/1001"
                                         label="What is Konnect"
@@ -46,10 +46,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                 </nav>
                             </section>
                             <section>
-                                <h3 className="text-2xl md:text-base text-green-400 mb-2">
+                                <h3 className="text-2xl md:text-base text-green-400 mb-2 d-hdpi-2:text-vw-base d-hdpi-2:mb-vw-2">
                                     Explore
                                 </h3>
-                                <nav className="flex flex-col gap-2 md:text-xs font-light">
+                                <nav className="flex flex-col gap-2 md:text-xs font-light d-hdpi-2:text-vw-xs">
                                     <FooterMenuLink
                                         url="/experiences/search/all"
                                         label="All experiences"
@@ -69,10 +69,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                 </nav>
                             </section>
                             <section>
-                                <h3 className="text-2xl md:text-base text-green-400 mb-2">
+                                <h3 className="text-2xl md:text-base text-green-400 mb-2 d-hdpi-2:text-vw-base d-hdpi-2:mb-vw-2">
                                     Support
                                 </h3>
-                                <nav className="flex flex-col gap-2 md:text-xs font-light">
+                                <nav className="flex flex-col gap-2 md:text-xs font-light d-hdpi-2:text-vw-xs">
                                     {/* <FooterMenuLink
                                         url="/help/article/5001"
                                         label="Updates for Covid-19"
@@ -97,10 +97,10 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                 </nav>
                             </section>
                             <section>
-                                <h3 className="text-2xl md:text-base text-green-400 mb-2">
+                                <h3 className="text-2xl md:text-base text-green-400 mb-2 d-hdpi-2:text-vw-base d-hdpi-2:mb-vw-2">
                                     Stay in touch
                                 </h3>
-                                <nav className="flex gap-2 text-2xl font-light">
+                                <nav className="flex gap-2 text-2xl font-light d-hdpi-2:text-vw-2xl">
                                     <a
                                         target="_blank"
                                         noreferrer
@@ -123,15 +123,14 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                                         <i className="ri-youtube-line"></i>
                                     </a>
                                 </nav>
-                                <nav className="flex flex-col gap-2 md:text-xs font-light"></nav>
                             </section>
                         </div>
                     </div>
                 </div>
             )}
             {isBottomBar && (
-                <div className="bg-gray-800 py-3">
-                    <div className="mx-auto max-w-6xl text-white text-xs justify-center flex items-center">
+                <div className="bg-gray-800 py-3 d-hdpi-2:py-vw-3">
+                    <div className="mx-auto max-w-6xl text-gray-400 text-xs d-hdpi-2:text-vw-xs justify-center flex items-center">
                         © Copyright 2022 Viakonnect. All rights reserved.
                     </div>
                 </div>

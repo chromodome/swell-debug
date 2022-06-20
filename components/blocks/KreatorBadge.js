@@ -25,7 +25,7 @@ const KreatorBadge = ({
             {!nolink ? (
                 <Link href={`/experiences/user/${username}/all`}>
                     <a className="h-8 d-hdpi-2:h-vw-8 flex items-center no-underline text-white">
-                        <Avatar profile={profile} card />
+                        <Avatar profile={profile} card username={username} />
                         {/* <img
                         className="absolute z-10 inline-block h-8 w-8 rounded-full "
                         data-blink-src={`${avatar}`}
@@ -38,7 +38,7 @@ const KreatorBadge = ({
                 </Link>
             ) : (
                 <div className="h-8 d-hdpi-2:h-vw-8 flex items-center no-underline text-white">
-                    <Avatar profile={profile} card />
+                    <Avatar profile={profile} username={username} card />
                     {/* <img
                     className="absolute z-10 inline-block h-8 w-8 rounded-full "
                     data-blink-src={`${avatar}`}

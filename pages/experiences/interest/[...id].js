@@ -104,7 +104,7 @@ const LandingPage = ({
         <Layout>
             <Row>
                 <SliderInterests
-                    margins="mt-12"
+                    margins="mt-12 d-hdpi-2:mt-vw-12"
                     sectionTitles={translations[lang].sections.wanderByInterest}
                     // data={dataLanding?.data?.interests || []}
                     data={categories || []}
@@ -115,14 +115,17 @@ const LandingPage = ({
 
             {pageIsReady && (
                 <>
-                    <ExperienceFilter query={query} classes="-mt-8" />
+                    <ExperienceFilter
+                        query={query}
+                        classes="-mt-8 d-hdpi-2:-mt-4"
+                    />
 
                     <Row>
-                        <div className="px-4">
-                            <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
+                        <div className="px-4 d-hdpi-2:px-vw-4">
+                            <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300 d-hdpi-2:gap-1 d-hdpi-2:pt-vw-4 d-hdpi-2:pb-vw-8">
                                 {!dataLoading ? (
                                     <>
-                                        <div className="text-3xl tracking-tighter font-bold text-kn-primary">
+                                        <div className="text-3xl d-hdpi-2:text-vw-3xl tracking-tighter font-bold text-kn-primary">
                                             {categories.find(
                                                 (item) =>
                                                     item.slug ===
@@ -132,10 +135,10 @@ const LandingPage = ({
                                         <div className="flex flex-wrap gap-2">
                                             {totalCount.current > 0 ? (
                                                 <>
-                                                    <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                         We found
                                                     </span>
-                                                    <span className="text-xl font-semibold text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-semibold text-gray-700 tracking-tight">
                                                         {`${
                                                             totalCount.current
                                                         } ${
@@ -147,7 +150,7 @@ const LandingPage = ({
                                                     </span>
                                                 </>
                                             ) : (
-                                                <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                     We couldn't find any
                                                     experiences matching your
                                                     criteria
@@ -157,20 +160,20 @@ const LandingPage = ({
                                     </>
                                 ) : (
                                     <>
-                                        <div className="flex pt-2 mb-2">
+                                        <div className="flex pt-2 mb-2 d-hdpi-2:pt-vw-2 d-hdpi-2:mb-vw-2">
                                             <SkeletonText
-                                                height="h-6"
-                                                width="w-36"
+                                                height="h-6 d-hdpi-2:h-vw-6"
+                                                width="w-36 d-hdpi-2:w-vw-36"
                                             />
                                         </div>
-                                        <div className="flex items-center gap-2 pt-2">
+                                        <div className="flex items-center gap-2 pt-2 d-hdpi-2:gap1 d-hdpi-2:pt-vw-2">
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-20"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-20 d-hdpi-2:w-vw-20"
                                             />
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-36"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-36 d-hdpi-2:w-vw-36"
                                             />
                                         </div>
                                     </>
@@ -195,7 +198,7 @@ const LandingPage = ({
                     />
                     <Row>
                         <SliderDestinations
-                            margins="mt-12"
+                            margins="mt-12 d-hdpi-2:mt-vw-12"
                             sectionTitles={
                                 translations[lang].sections.wanderByDestination
                             }

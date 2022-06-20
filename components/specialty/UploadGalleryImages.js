@@ -130,9 +130,9 @@ const UploadGalleryImages = ({
             imagesOnly={true}
             multipleMax={maxImages}
             tabs={'file camera instagram'}
-            imageShrink='1600x1600'
+            imageShrink="1600x1600"
             multipartMinSize={104857600}
-            inputAcceptTypes=''
+            inputAcceptTypes=""
             localeTranslations={errors}
             locale
         />
@@ -140,10 +140,9 @@ const UploadGalleryImages = ({
         <button
             disabled
             className={classNames(
-                'focus:outline-none mx-auto md:mx-0 outline-none font-medium text-base rounded-md text-gray-400 bg-gray-200 flex items-center justify-center'
+                'focus:outline-none mx-auto md:mx-0 outline-none font-medium text-base d-hdpi-2:text-vw-base rounded-md d-hdpi-2:rounded text-gray-400 bg-gray-200 flex items-center justify-center'
             )}
-            style={{ width: 175, height: 37 }}
-        >
+            style={{ width: 175, height: 37 }}>
             Choose images
         </button>
     );

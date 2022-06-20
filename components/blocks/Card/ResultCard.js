@@ -71,7 +71,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                     <img
                         alt="Placeholder"
                         // className={` w-full h-56 md:h-36 lg:h-44 xl:h-56 relative rounded-xl overflow-hidden  bg-gray-200 `}
-                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52"
+                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52 d-hdpi-2:h-vw-52 d-hdpi-2:rounded-vw-xl"
                         // className="rounded-xl object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
                         // data-blink-src={featured_image || ''}
                         src={featured_image || ''}
@@ -79,7 +79,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                 ) : (
                     <div
                         // className="rounded-xl bg-gray-200 w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
-                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52">
+                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52 d-hdpi-2:h-vw-52 d-hdpi-2:rounded-vw-xl">
                         <div className="relative h-full">
                             <div className="text-xs d-hdpi-2:text-vw-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                 <Icons iName="IMAGEALT2" />
@@ -137,10 +137,10 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                             )}
                         </span>
                     </div>
-                    <div className="mt-2 flex flex-row  font-sans text-xs md:text-xxs lg:text-xs d-hdpi-2:text-vw-xs text-gray-900 d-hdpi-2:mt-vw-2">
-                        <div className="flex  mr-4 py-1 d-hdpi-2:mr-vw-4 d-hdpi-2:py-vw-1">
-                            <span className="text-kn-primary mr-2 d-hdpi-2:mr-vw-2">
-                                <MapPin size={18} />
+                    <div className="mt-2 flex flex-row font-sans text-xs md:text-xxs lg:text-xs d-hdpi-2:text-vw-xs text-gray-900 d-hdpi-2:mt-vw-2">
+                        <div className="flex items-center mr-4 py-1 d-hdpi-2:mr-vw-4 d-hdpi-2:py-vw-1">
+                            <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                <i className="ri-map-pin-line text-xl d-hdpi-2:text-vw-xl"></i>
                             </span>
                             <span className="max-w-28 truncate d-hdpi-2:max-w-vw-28">
                                 {destinations?.length > 0 ? (
@@ -151,15 +151,15 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                             </span>
                         </div>
                         <div className="flex items-center mr-8 py-1 whitespace-nowrap d-hdpi-2:mr-vw-8 d-hdpi-2:py-vw-1">
-                            <span className="text-kn-primary mr-2 d-hdpi-2:mr-vw-2">
-                                <Clock size={18} />
+                            <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                <i className="ri-time-line text-xl d-hdpi-2:text-vw-xl"></i>
                             </span>
                             {ContentDays}
                         </div>
                     </div>
                     {purchasedView && type.toLowerCase() === 'guided' && (
                         <div className="mt-4 d-hdpi-2:mt-vw-4">
-                            <div className="flex flex-wrap items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2 d-hdpi-2:gap-1">
                                 <span className="text-xs bg-green-100 text-green-600 whitespace-nowrap rounded-full px-2 py-0.5 d-hdpi-2:text-vw-xs d-hdpi-2:px-vw-2 d-hdpi-2:py-vw-0.5">
                                     {`Booked Date:  ${moment(travelDate).format(
                                         'MMM Do YYYY'
@@ -172,7 +172,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                         </div>
                     )}
                     {!purchasedView && (
-                        <div className="transition-colors duration-300 group-hover:bg-kn-primary flex justify-center items-center mt-6 w-full rounded-lg border-2 border-kn-primary h-10 text-black text-sm font-bold tracking-tight group-hover:text-white d-hdpi-2:text-vw-sm d-hdpi-2:mt-vw-6 d-hdpi-2:h-vw-10">
+                        <div className="transition-colors duration-300 group-hover:bg-kn-primary flex justify-center items-center mt-6 w-full rounded-lg d-hdpi-2:rounded-vw-lg border-2 d-hdpi-2:border border-kn-primary h-10 text-black text-sm font-bold tracking-tight group-hover:text-white d-hdpi-2:text-vw-sm d-hdpi-2:mt-vw-6 d-hdpi-2:h-vw-10">
                             <span className="mr-2 font-normal text-xs d-hdpi-2:text-vw-xs">
                                 {type.toUpperCase() === 'DIGITAL'
                                     ? 'Get if for'
@@ -185,7 +185,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                             {type.toUpperCase() === 'DIGITAL' ? (
                                 ''
                             ) : (
-                                <span className="ml-1 flex gap-1 text-xs font-medium d-hdpi-2:text-vw-xs d-hdpi-2:ml-vw-1"></span>
+                                <span className="ml-1 flex gap-1 text-xs font-medium d-hdpi-2:text-vw-xs d-hdpi-2:ml-vw-1 d-hdpi-2:gap-0.5"></span>
                             )}
                         </div>
                     )}

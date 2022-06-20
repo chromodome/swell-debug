@@ -1,7 +1,8 @@
 const Avatar = ({
     profile,
     card,
-    size = 'w-8 h-8 d-hdpi-2:w-vw-8 d-hdpi-2:h-vw-8'
+    size = 'w-8 h-8 d-hdpi-2:w-vw-8 d-hdpi-2:h-vw-8',
+    username = 'Konnect'
 }) => {
     return (
         <div className={`${card ? 'absolute z-100 inline-block' : ''}`}>
@@ -15,7 +16,11 @@ const Avatar = ({
                         className="object-cover w-full h-full"
                     />
                 ) : (
-                    <p>dwdasd</p>
+                    <div>{`${(profile?.first ?? username)
+                        .charAt(0)
+                        .toUpperCase()}${
+                        profile?.last?.charAt(0)?.toUpperCase() ?? ''
+                    }`}</div>
                 )}
             </div>
         </div>

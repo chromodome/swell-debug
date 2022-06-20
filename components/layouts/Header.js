@@ -185,9 +185,13 @@ const Header = ({
                                         : `Guest`}
                                 </div>
                                 {user?.profile?.avatar ? (
-                                    <Avatar profile={user?.profile} />
+                                    <Avatar
+                                        profile={user?.profile}
+                                        username={user.username}
+                                    />
                                 ) : (
-                                    <IconsLucide icon="User" />
+                                    <i className="ri-user-3-line text-2xl d-hdpi-2:text-vw-2xl"></i>
+                                    // <IconsLucide icon="User" />
                                 )}
                             </div>
                         ) : null}
@@ -272,7 +276,7 @@ const Header = ({
                                 label={
                                     translations[lang].menu.myPurchases.title
                                 }
-                                icon="LayoutGrid"
+                                icon="ri-wallet-line"
                                 link={`/experiences/purchased`}
                                 handleClick={() => toggleNav(false)}
                                 rtl={rtl}
@@ -288,14 +292,14 @@ const Header = ({
                             /> */}
                             <NavbarItem
                                 label={translations[lang].menu.profile.title}
-                                icon="User"
+                                icon="ri-user-3-line"
                                 link={`/profile`}
                                 handleClick={() => toggleNav(false)}
                                 rtl={rtl}
                             />
                             {/* <NavbarItem
                                 label={translations[lang].menu.helpCenter.title}
-                                icon="HelpCircle"
+                                icon="ri-question-line"
                                 link={`http://academy.viakonnect.com`}
                                 // handleClick={() => console.log('hello')}
                                 handleClick={()=>toggleNav(false)}
@@ -303,7 +307,7 @@ const Header = ({
                             /> */}
                             <NavbarItem
                                 label={translations[lang].menu.signout.title}
-                                icon="LogOut"
+                                icon="ri-logout-box-r-line"
                                 handleClick={handleLogout}
                                 rtl={rtl}
                             />
@@ -312,19 +316,19 @@ const Header = ({
                         <>
                             <NavbarItem
                                 label={translations[lang].menu.signin.title}
-                                icon="LogIn"
+                                icon="ri-login-box-line"
                                 handleClick={handleSignin}
                                 rtl={rtl}
                             />
                             <NavbarItem
                                 label={translations[lang].menu.signup.title}
-                                icon="UserPlus"
+                                icon="ri-user-add-line"
                                 handleClick={handleSignup}
                                 rtl={rtl}
                             />
                             {/* <NavbarItem
                                 label={translations[lang].menu.helpCenter.title}
-                                icon="HelpCircle"
+                                icon="ri-book-open-line"
                                 link={`http://academy.viakonnect.com`}
                                 handleClick={() => toggleNav(false)}
                                 rtl={rtl}

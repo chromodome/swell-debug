@@ -113,7 +113,7 @@ const ExperienceDetail = ({
         <>
             <Layout>
                 {!siteData.loading && (
-                    <div className="overflow-x-hidden md:overflow-x-visible">
+                    <div className="overflow-x-hidden md:overflow-x-visible d-hdpi-2:text-vw-base">
                         <SectionMarketingTitles
                             title={title}
                             days={days}
@@ -123,9 +123,9 @@ const ExperienceDetail = ({
                         />
                         <SectionMarketingGallery type={type} images={gallery} />
                         <div
-                            className={`mb-12 mt-16 md:mt-16 lg:mt-24 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl`}>
+                            className={`mb-12 mt-16 md:mt-16 lg:mt-16 mx-auto px-5 md:px-12 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl d-hdpi-2:max-w-screen-2/3 d-hdpi-2:px-vw-12 d-hdpi-2:mt-vw-16 d-hdpi-2:mb-vw-20 xl:mb-20`}>
                             <main className={` flex items-start`}>
-                                <section className="w-full lg:w-4/6 mb-24">
+                                <section className="w-full lg:w-4/6 mb-0 d-hdpi-2:mb-0">
                                     <SectionMarketingIntro
                                         type={type}
                                         desc={desc}
@@ -167,7 +167,7 @@ const ExperienceDetail = ({
                                         )}
                                 </section>
 
-                                <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 mb-20">
+                                <aside className="hidden lg:block lg:w-2/6 sticky top-24 pl-4 lg:pl-8 xl:pl-12 py-4 pb-24 mb-20 d-hdpi-2:pl-vw-12 d-hdpi-2:py-vw-4 d-hdpi-2:pb-vw-24 d-hdpi-2:mb-vw-20">
                                     <SectionPricingBooking
                                         expId={experience_id}
                                         swellExpId={swellExpId}
@@ -177,19 +177,21 @@ const ExperienceDetail = ({
                             </main>
                             {type.toLowerCase() === 'guided' && (
                                 <ExpSubsection borders="" margins="" padding="">
-                                    <div className="text-green-400 inline-flex font-semibold text-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 ">
+                                    <div className="text-green-400 inline-flex font-semibold text-2xl d-hdpi-2:text-vw-2xl tracking-tight leading-none flex-shrink-0 flex-initial mb-6 d-hdpi-2:mb-vw-6">
                                         {`Special requirements for Travelers`}
                                     </div>
 
-                                    <div className="flex flex-col items-center md:items-start md:flex-row justify-between gap-4">
-                                        <p className="md:mr-4 lg:mr-8 text-gray-800">
+                                    <div className="flex flex-col items-center md:items-start md:flex-row justify-between gap-4 d-hdpi-2:gap-2">
+                                        <div className="text-gray-800">
                                             If you have any special requests,
                                             please reach out to the kreator via
                                             the contact button to see if they
                                             can accommodate your needs.
-                                        </p>
+                                        </div>
                                         <Button type="outlined" rounded="lg">
-                                            Contact Kreator
+                                            <span className="w-full flex-none">
+                                                Contact Kreator
+                                            </span>
                                         </Button>
                                     </div>
                                 </ExpSubsection>

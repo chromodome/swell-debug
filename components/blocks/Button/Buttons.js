@@ -193,14 +193,18 @@ const Button__Selectable = ({
     return (
         <button
             className={`flex justify-center items-center
-                py-1 p-3 mb-2 mr-2 rounded text-xs ${
+                py-1 p-3 mb-2 mr-2 rounded text-xs d-hdpi-2:text-vw-xs d-hdpi-2:rounded-vw-base d-hdpi-2:mr-vw-2 d-hdpi-2:mb-vw-2 d-hdpi-2:py-vw-1 d-hdpi-2:p-vw-3 ${
                     selected
                         ? 'bg-gray-900 text-kn-white'
-                        : 'border-2 border-kn-primary text-kn-primary hover:bg-kn-primary hover:text-kn-white'
+                        : 'border-2 border-kn-primary text-kn-primary hover:bg-kn-primary hover:text-kn-white d-hdpi-2:border'
                 }`}
             onClick={() => handleClick(children)}>
             {selected && (
-                <Icons iName={icon} iClasses="text-kn-white mr-2" size="sm" />
+                <Icons
+                    iName={icon}
+                    iClasses="text-kn-white mr-2 d-hdpi-2:mr-vw-2"
+                    size="sm"
+                />
             )}
             {children}
         </button>
@@ -211,36 +215,40 @@ const Button = ({
     icon,
     children,
     iconClasses,
-    wrapperClasses,
+    wrapperClasses = 'w-full',
     handleClick,
     rounded = 'none',
     type = 'default'
 }) => {
     const typeClasses = {
         default:
-            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center hover:text-black hover:bg-kn-white bg-gray-800 border-gray-800 hover:border-gray-800 text-white',
+            'w-full max-w-max2 px-6 d-hdpi-2:px-vw-6 focus:outline-none h-10 d-hdpi-2:h-vw-10 w-9 d-hdpi-2:w-vw-9 border-2 d-hdpi-2:border flex items-center justify-center hover:text-black hover:bg-kn-white bg-gray-800 border-gray-800 hover:border-gray-800 text-white',
         primary: [],
         secondary: [],
         outlined:
-            'w-full max-w-max px-6 focus:outline-none h-10 w-9 border-2 flex items-center justify-center text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white',
+            'w-full max-w-max2 px-6 d-hdpi-2:px-vw-6 focus:outline-none h-10 d-hdpi-2:h-vw-10 w-9 d-hdpi-2:w-auto border-2 d-hdpi-2:border flex items-center justify-center text-black border-kn-primary hover:bg-gray-800 hover:border-gray-800 hover:text-white',
         custom: []
     };
 
     const roundedClasses = {
         none: [],
-        lg: 'rounded-lg',
+        lg: 'rounded-lg d-hdpi-2:rounded-vw-lg',
         full: 'rounded-full'
     };
 
     return (
         <button
             onClick={handleClick}
-            className={`transition-colors duration-300 ${wrapperClasses} ${roundedClasses[rounded]}  ${typeClasses[type]}`}>
+            className={`flex-none  transition-colors duration-300 ${wrapperClasses} ${roundedClasses[rounded]}  ${typeClasses[type]}`}>
             {children}
             {icon ? (
                 <Icons
                     iName={icon}
-                    iClasses={iconClasses ? iconClasses : 'text-kn-white ml-2'}
+                    iClasses={
+                        iconClasses
+                            ? iconClasses
+                            : 'text-kn-white ml-2 d-hdpi-2:ml-vw-2'
+                    }
                     size="sm"
                 />
             ) : null}

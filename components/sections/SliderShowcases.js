@@ -42,7 +42,7 @@ const SliderShowcases = ({
                         );
                     })
                 ) : (
-                    <div className="flex gap-4 mt-9 d-hdpi-2:mt-vw-8">
+                    <div className="flex gap-4 mt-9 d-hdpi-2:mt-vw-8 d-hdpi-2:gap-2">
                         {skeletonArray.map((item, index) => (
                             <TagCardSkeleton
                                 key={`sk_${index}`}

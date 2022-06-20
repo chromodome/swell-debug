@@ -168,7 +168,7 @@ const LandingPage = ({
     useEffect(() => {
         console.log('page loaded');
     }, []);
-    console.log('expList', expList)
+    console.log('expList', expList);
     useEffect(() => {
         if (isReady) {
             let found = destinationList.find(
@@ -226,7 +226,7 @@ const LandingPage = ({
         <Layout>
             <Row>
                 <SliderDestinations
-                    margins="mt-12"
+                    margins="mt-12 d-hdpi-2:mt-vw-12"
                     sectionTitles={
                         translations[lang].sections.wanderByDestination
                     }
@@ -237,14 +237,17 @@ const LandingPage = ({
 
             {pageIsReady && (
                 <>
-                    <ExperienceFilter query={query} classes="-mt-8" />
+                    <ExperienceFilter
+                        query={query}
+                        classes="-mt-8 d-hdpi-2:-mt-4"
+                    />
 
                     <Row>
-                        <div className="px-4">
-                            <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
+                        <div className="px-4 d-hdpi-2:px-vw-4">
+                            <div className="flex flex-col gap-2 d-hdpi-2:gap-1 border-t pt-4 d-hdpi-2:pt-vw-4 pb-8 d-hdpi-2:pb-vw-8 border-gray-300">
                                 {!dataLoading ? (
                                     <>
-                                        <div className="text-3xl tracking-tighter font-bold text-kn-primary">
+                                        <div className="text-3xl d-hdpi-2:text-vw-3xl tracking-tighter font-bold text-kn-primary">
                                             {findParams.current === 'WORLD'
                                                 ? 'The World'
                                                 : destinationList.find(
@@ -253,13 +256,13 @@ const LandingPage = ({
                                                           query.id[0].toLowerCase()
                                                   )?.name}
                                         </div>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="flex flex-wrap gap-2 d-hdpi-2:gap-1">
                                             {totalCount.current > 0 ? (
                                                 <>
-                                                    <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                         We found
                                                     </span>
-                                                    <span className="text-xl font-semibold text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-semibold text-gray-700 tracking-tight">
                                                         {`${
                                                             totalCount.current
                                                         } ${
@@ -271,7 +274,7 @@ const LandingPage = ({
                                                     </span>
                                                 </>
                                             ) : (
-                                                <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                     We couldn't find any
                                                     experiences matching your
                                                     criteria
@@ -281,20 +284,20 @@ const LandingPage = ({
                                     </>
                                 ) : (
                                     <>
-                                        <div className="flex pt-2 mb-2">
+                                        <div className="flex pt-2 mb-2 d-hdpi-2:pt-vw-2 d-hdpi-2:mb-vw-2">
                                             <SkeletonText
-                                                height="h-6"
-                                                width="w-36"
+                                                height="h-6 d-hdpi-2:h-vw-6"
+                                                width="w-36 d-hdpi-2:w-vw-36"
                                             />
                                         </div>
-                                        <div className="flex items-center gap-2 pt-2">
+                                        <div className="flex items-center gap-2 pt-2 d-hdpi-2:gap-1 d-hdpi-2:pt-vw-2">
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-20"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-20 d-hdpi-2:w-vw-20"
                                             />
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-36"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-36 d-hdpi-2:w-vw-36"
                                             />
                                         </div>
                                     </>
@@ -304,8 +307,8 @@ const LandingPage = ({
                     </Row>
 
                     <Row>
-                        <div className="flex flex-col md:flex-row md:items-centera gap-4 px-4">
-                            <div className="w-80 pb-2 md:pb-8 flex-none">
+                        <div className="flex flex-col md:flex-row md:items-centera gap-4 px-4 d-hdpi-2:gap-2 d-hdpi-2:px-vw-4">
+                            <div className="w-80 d-hdpi-2:w-vw-80 pb-2 md:pb-8 flex-none d-hdpi-2:pb-vw-8">
                                 <GenericSelectList
                                     selectOptions={guideDates}
                                     handleChange={countrySelect}
@@ -324,11 +327,11 @@ const LandingPage = ({
                             </div>
                             {countryListIsOpen === true ||
                             pillCountryList.length < 10 ? (
-                                <div className="flex flex-wrap gap-2 md:px-4 pb-8  items-center">
+                                <div className="flex flex-wrap gap-2 d-hdpi-2:gap-1 md:px-4 pb-8  items-center d-hdpi-2:pxvw-4 d-hdpi-2:pb-vw-8">
                                     {pillCountryList.length >= 10 && (
                                         <button
                                             onClick={toggleExpand}
-                                            className="pr-4 pl-3 text-green-900 text-sm bg-green-400 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                            className="pr-4 pl-3 d-hdpi-2:pr-vw-4 d-hdpi-2:pl-vw-3 text-green-900 text-sm d-hdpi-2:text-vw-sm bg-green-400 py-1 d-hdpi-2:py-vw-1 rounded-full flex items-center gap-2 d-hdpi-2:gap-1 hover:bg-gray-900 hover:text-white">
                                             <i className="ri-arrow-left-s-line"></i>
                                             <span>Collapse country List</span>
                                         </button>
@@ -341,7 +344,7 @@ const LandingPage = ({
                                                 onClick={() =>
                                                     handleRemove(pill)
                                                 }
-                                                className="pl-4 pr-3 text-green-900 text-sm bg-green-100 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                                className="pl-4 pr-3 d-hdpi-2:pl-vw-4 d-hdpi-2:pr-vw-3 text-green-900 text-sm d-hdpi-2:text-vw-sm bg-green-100 py-1 d-hdpi-2:py-vw-1 rounded-full flex items-center gap-2 d-hdpi-2:gap-1 hover:bg-gray-900 hover:text-white">
                                                 <span>
                                                     {
                                                         countriesArray.find(
@@ -356,10 +359,10 @@ const LandingPage = ({
                                         ))}
                                 </div>
                             ) : (
-                                <div className="flex flex-wrap gap-2 md:px-4 pb-8  items-center">
+                                <div className="flex flex-wrap gap-2 d-hdpi-2:gap-1 md:px-4 pb-8 d-hdpi-2:px-vw-4 d-hdpi-2:pb-vw-8 items-center">
                                     <button
                                         onClick={toggleExpand}
-                                        className="pl-4 pr-3 text-green-900 text-sm bg-green-400 py-1 rounded-full flex items-center gap-2 hover:bg-gray-900 hover:text-white">
+                                        className="pl-4 pr-3 d-hdpi-2:pl-vw-4 d-hdpi-2:pr-vw-3 text-green-900 text-sm d-hdpi-2:text-vw-sm bg-green-400 py-1 d-hdpi-2:py-vw-1 rounded-full flex items-center gap-2 d-hdpi-2:gap-1 hover:bg-gray-900 hover:text-white">
                                         <span>Expand country List</span>
                                         <i className="ri-arrow-right-s-line"></i>
                                     </button>
@@ -385,7 +388,7 @@ const LandingPage = ({
                     />
                     <Row>
                         <SliderInterests
-                            margins="mt-12"
+                            margins="mt-12 d-hdpi-2:mt-vw-12"
                             sectionTitles={
                                 translations[lang].sections.wanderByInterest
                             }

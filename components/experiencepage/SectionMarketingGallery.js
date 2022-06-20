@@ -33,8 +33,8 @@ function SectionMarketingGallery({
             <SRLWrapper elements={expImages} options={lightBoxOptions} />
 
             <div
-                className={`z-100 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 relative mt-12 md:mt-0 `}>
-                <div className="hidden md:grid md:h-72 lg:h-96 xl:h-128 overflow-hidden rounded-xl w-full gap-2 grid-rows-4 grid-cols-8 grid-flow-col relative">
+                className={`z-100 mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 relative mt-12 md:mt-0 d-hdpi-2:px-vw-40 `}>
+                <div className="hidden md:grid md:h-72 lg:h-96 xl:h-128 d-hdpi-2:h-vw-128 mt-vw-1.5 overflow-hidden rounded-xl d-hdpi-2:rounded-vw-xl w-full gap-2 grid-rows-4 grid-cols-8 grid-flow-col relative d-hdpi-2:gap-1">
                     <ImageHover
                         url={`${expImages[1]?.src}-/scale_crop/480x640/smart_objects_faces_points/`}
                         handleActionBtn={lightBoxHandler}
@@ -67,19 +67,19 @@ function SectionMarketingGallery({
                         className="row-span-2 col-span-1"
                     />
 
-                    <div className="absolute bottom-4 right-4">
+                    <div className="absolute bottom-4 right-4 d-hdpi-2:bottom-vw-4 d-hdpi-2:right-vw-4">
                         <ButtonGeneric
                             handleAction={lightBoxHandler}
                             shadow="shadow-double"
                             params={[0]}
                             label="View All"
-                            icon="ri-image-line text-lg"
-                            fontSize="text-xs"
+                            icon="ri-image-line text-lg d-hdpi-2:text-vw-lg"
+                            fontSize="text-xs d-hdpi-2:text-vw-xs"
                             ring=""
                         />
                     </div>
                 </div>
-                <div className="md:hidden h-96 overflow-hidden rounded-xl w-full grid gap-1 grid-rows-4 grid-cols-6 grid-flow-col relative">
+                <div className="md:hidden h-96 overflow-hidden rounded-xl w-full grid gap-1 d-hdpi-2:gap-0.5 grid-rows-4 grid-cols-6 grid-flow-col relative">
                     <ImageHover
                         url={`${expImages[0]?.src}-/scale_crop/480x480/smart_objects_faces_points/`}
                         handleActionBtn={lightBoxHandler}

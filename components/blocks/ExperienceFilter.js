@@ -3,7 +3,7 @@ import Row from '@/sections/Row';
 import ButtonsRow from '@/blocks/Button/ButtonsRow';
 import { NEXT_PUBLIC_DIGITAL_ONLY } from '@/constants/public';
 
-const ExperienceFilter = ({ query, classes = 'mt-20' }) => {
+const ExperienceFilter = ({ query, classes = 'mt-20 d-hdpi-2:mt-vw-20' }) => {
     const isArrayType = Array.isArray(query?.id);
     const handleExpTypeClick = (data) => {
         let type = '';

@@ -24,7 +24,8 @@ const GridList = ({
     missing = false,
     margins,
     titleClass = 'mb-8 d-hdpi-2:mb-vw-8',
-    titleColor
+    titleColor,
+    filteredCount
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -70,23 +71,29 @@ const GridList = ({
                 {!dataLoading ? (
                     <>
                         <div className="grid grid-cols-1 px-2 lg-px-0 gap-y-0 md:gap-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                            {data.map((item) => {
-                                return missing && purchasedView ? (
-                                    <ResultCardMissing
-                                        missing={true}
-                                        purchasedView={purchasedView}
-                                        myKey={item.id}
-                                        data={item}
-                                    />
-                                ) : (
-                                    <ResultCard
-                                        missing={true}
-                                        purchasedView={purchasedView}
-                                        myKey={item.id}
-                                        data={item}
-                                    />
-                                );
-                            })}
+                            {data
+                                .filter((item, index) => {
+                                    if (filteredCount)
+                                        return index <= filteredCount - 1;
+                                    else return true;
+                                })
+                                .map((item) => {
+                                    return missing && purchasedView ? (
+                                        <ResultCardMissing
+                                            missing={true}
+                                            purchasedView={purchasedView}
+                                            myKey={item.id}
+                                            data={item}
+                                        />
+                                    ) : (
+                                        <ResultCard
+                                            missing={true}
+                                            purchasedView={purchasedView}
+                                            myKey={item.id}
+                                            data={item}
+                                        />
+                                    );
+                                })}
                         </div>
                         {/* <div className="flex flex-wrap -mx-1a lg:-mx-4a">
                             {data.map((item) => {

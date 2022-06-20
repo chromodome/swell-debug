@@ -87,10 +87,10 @@ const BuyingCardDigital = ({
     return (
         <div
             className={classNames(
-                'relative flex flex-col px-4 xl:px-8 pt-8 pb-4  xl:pb-8 bg-kn-white ',
+                'relative flex flex-col px-4 xl:px-8 pt-8 pb-4  xl:pb-8 bg-kn-white d-hdpi-2:px-vw-8 d-hdpi-2:pb-vw-8 d-hdpi-2:pt-vw-8 d-hdpi-2:text-vw-base',
                 mobile
-                    ? 'rounded-t-2xl shadow-cards-top'
-                    : 'rounded-2xl shadow-cards',
+                    ? 'rounded-t-2xl shadow-cards-top d-hdpi-2:rounded-t-vw-2xl'
+                    : 'rounded-2xl shadow-cards d-hdpi-2:rounded-vw-2xl',
                 classes
             )}>
             {!loading && !loadingIds ? (
@@ -98,16 +98,18 @@ const BuyingCardDigital = ({
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                         <PillType type="digital" label="Buying Options" />
                     </div>
-                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
+                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4">
                         <div className="flex items-center gap-2 justify-center">
-                            <i className="ri-download-cloud-2-line text-xl text-green-500"></i>
-                            <div className="text-xs uppercase">
+                            <i className="ri-download-cloud-2-line text-xl text-green-500 d-hdpi-2:text-vw-2xl"></i>
+                            <div className="text-xs uppercase d-hdpi-2:text-vw-xs">
                                 Digital Access Price
                             </div>
                         </div>
-                        <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
+                        <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center d-hdpi-2:gap-vw-1 d-hdpi-2:text-vw-2xl">
                             <div className={classNames('flex items-center')}>
-                                <span className="text-base">$</span>
+                                <span className="text-base d-hdpi-2:text-vw-base">
+                                    $
+                                </span>
                                 <span className="">
                                     {formatPrice(
                                         price,
@@ -121,7 +123,7 @@ const BuyingCardDigital = ({
 
                             {preferredCurrency !== 'USD' && (
                                 <>
-                                    <i className="las la-equals text-green-500"></i>
+                                    <i className="las la-equals text-green-500 d-hdpi-2:text-vw-2xl"></i>
                                     <span className="relative">
                                         {`~${formatPrice(
                                             values[0],
@@ -131,7 +133,7 @@ const BuyingCardDigital = ({
                                         )}`}
                                         {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
                                     </span>
-                                    <div className="text-sm">
+                                    <div className="text-sm d-hdpi-2:text-vw-sm">
                                         {currency.symbol}*
                                     </div>
                                 </>
@@ -139,13 +141,13 @@ const BuyingCardDigital = ({
                         </div>
                     </div>
                     {!mobile && (
-                        <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                        <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2 d-hdpi-2:pb-vw-4 d-hdpi-2:mt-vw-4 d-hdpi-2:px-vw-2">
                             <p className="">{desc}</p>
                         </div>
                     )}
                     {!mobile && (
-                        <div className="mt-4 pb-4 px-2">
-                            <div className="flex items-center gap-1 text-xs">
+                        <div className="mt-4 pb-4 px-2 d-hdpi-2:mt-vw-4 d-hdpi-2:pb-vw-4 d-hdpi-2:px-vw-2">
+                            <div className="flex items-center gap-1 text-xs d-hdpi-2:gap-0.5 d-hdpi-2:text-vw-xs">
                                 <div className="">* Charged as</div>
                                 <div className="">$US</div>
                                 <span>
@@ -158,7 +160,7 @@ const BuyingCardDigital = ({
                                 </span>
                             </div>
                             {preferredCurrency !== 'USD' && (
-                                <div className="flex items-center gap-1 text-xs">
+                                <div className="flex items-center gap-1 text-xs d-hdpi-2:gap-0.5 d-hdpi-2:text-vw-xs">
                                     <div className="">** 1 $US ~ </div>
 
                                     <span>
@@ -183,7 +185,7 @@ const BuyingCardDigital = ({
                     <div
                         className={classNames(
                             'h-full flex items-center flex-col justify-between',
-                            mobile && 'mt-4'
+                            mobile && 'mt-4 d-hdpi-2:mt-vw-4'
                         )}>
                         {showBuyBtn && !purchasedIds.includes(expId) && (
                             <Button
@@ -197,7 +199,7 @@ const BuyingCardDigital = ({
                             <>
                                 <div
                                     className={classNames(
-                                        'w-full rounded-lg bg-gray-50 flex items-center justify-center py-4'
+                                        'w-full rounded-lg d-hdpi-2:rounded-vw-lg bg-gray-50 flex items-center justify-center py-4 d-hdpi-2:py-vw-4'
                                     )}>
                                     Already purchased
                                 </div>
@@ -230,29 +232,32 @@ const BuyingCardDigital = ({
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                         <PillType type="digital" label="Buying Options" />
                     </div>
-                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                        <div className="flex items-center gap-2 justify-center">
+                    <div className="flex flex-col pb-2 d-hdpi-2:pb-vw-2 rounded-xl d-hdpi-2:rounded-vw-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4">
+                        <div className="flex items-center gap-2 d-hdpi-2:gap-1 justify-center">
                             {/* <i className="ri-download-cloud-2-line text-xl text-green-500"></i> */}
-                            <SkeletonText width="w-6" height="h-6" />
-                            <SkeletonText width="w-28" />
+                            <SkeletonText
+                                width="w-6 d-hdpi-2:w-vw-6"
+                                height="h-6 d-hdpi-2:h-vw-6"
+                            />
+                            <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
                             {/* <div className="text-xs uppercase">
                                 Digital Access Price
                             </div> */}
                         </div>
-                        <div className="justify-center flex items-center gap-2 text-2xl font-semibold uppercase animate-pulse my-4">
-                            <SkeletonText width="w-28" />
-                            <SkeletonText width="w-16" />
+                        <div className="justify-center flex items-center gap-2 d-hdpi-2:gap-1 text-2xl d-hdpi-2:text-vw-2xl font-semibold uppercase animate-pulse my-4 d-hdpi-2:my-vw-4">
+                            <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
+                            <SkeletonText width="w-16 d-hdpi-2:w-vw-16" />
                         </div>
                     </div>
                     {!mobile && (
                         <>
-                            <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                            <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2 d-hdpi-2:pb-vw-4 d-hdpi-2:mt-vw-4 d-hdpi-2:px-vw-2">
                                 <p className="">{desc}</p>
                             </div>
-                            <div className="py-6 px-2">
-                                <div className="flex flex-col gap-3 text-xs">
-                                    <SkeletonText width="w-28" />
-                                    <SkeletonText width="w-20" />
+                            <div className="py-6 px-2 d-hdpi-2:py-vw-6 d-hdpi-2:px-vw-2">
+                                <div className="flex flex-col gap-3 text-xs d-hdpi-2:gap-1.5 d-hdpi-2:text-vw-xs">
+                                    <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
+                                    <SkeletonText width="w-20 d-hdpi-2:w-vw-20" />
                                 </div>
                             </div>
                         </>
@@ -261,7 +266,7 @@ const BuyingCardDigital = ({
                     <div
                         className={classNames(
                             'h-full flex items-center flex-col justify-between',
-                            mobile && 'mt-4'
+                            mobile && 'mt-4 d-hdpi-2:mt-vw-4'
                         )}>
                         <SkeletonButton width="w-full" />
 

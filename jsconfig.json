@@ -12,6 +12,7 @@
             "@/styles/*": ["styles/*"],
             "@/pages/*": ["pages/*"],
             "@/helpers/*": ["helpers/*"],
+            "@/hooks/*": ["hooks/*"],
             "@/constants/*": ["constants/*"],
             "@/context/*": ["context/*"],
             "@/config/*": ["config/*"],

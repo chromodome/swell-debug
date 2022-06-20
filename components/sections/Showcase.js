@@ -104,7 +104,9 @@ const Showcase = ({
                                 {data.button && (
                                     <ButtonCard
                                         url={data.url}
-                                        icon={'las la-arrow-right'}
+                                        icon={
+                                            'las la-arrow-right d-hdpi-2:mt-vw-0.5'
+                                        }
                                         label={data.label}
                                         darkMode={dark}
                                     />

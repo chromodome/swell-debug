@@ -4,10 +4,10 @@ import React from 'react';
 const SectionTitle = ({
     section: { title = '', subTitle = '' },
     className = '',
-    padding = 'px-4',
+    padding = 'px-4 d-hdpi-2:px-vw-4',
     size = 'text-3xl d-hdpi-2:text-vw-3xl',
     titleColor,
-    titlePadding = 'pb-3'
+    titlePadding = 'pb-3 d-hdpi-2:pb-vw-3'
 }) => {
     return (
         <div className={`${padding} ${className} `}>

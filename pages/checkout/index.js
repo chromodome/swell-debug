@@ -355,9 +355,7 @@ const Checkout = ({
                 router.replace('/');
             }
         }
-
     }, [siteLoading, auth]);
-    
 
     return (
         <>
@@ -365,16 +363,16 @@ const Checkout = ({
                 {!loadingCart && type ? (
                     <div
                         style={{ display: processing ? 'none' : 'block' }}
-                        className={` mb-12a mt-12 lg:mt-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl `}>
+                        className={` mb-12a mt-12 lg:mt-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl d-hdpi-2:max-w-screen-2/3 d-hdpi-2:px-vw-9 d-hdpi-2:mt-vw-12 d-hdpi-2:text-vw-base`}>
                         <div className={``}>
-                            <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8">
+                            <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8 d-hdpi-2:text-vw-3xl d-hdpi-2:pb-vw-8">
                                 Checkout
                             </div>
                         </div>
                         <main
                             className={classNames(
                                 processing ? 'hidden' : 'flex',
-                                'items-start lg:gap-16 xl:gap-24 flex-col lg:flex-row'
+                                'items-start lg:gap-16 xl:gap-24 flex-col lg:flex-row d-hdpi-2:gap-12'
                             )}>
                             <section
                                 className={classNames(
@@ -383,13 +381,13 @@ const Checkout = ({
                                 {type == 'GUIDED' && (
                                     <>
                                         <ExpSubsection
-                                            padding="pb-8"
-                                            margins="mb-8">
-                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                            padding="pb-8 d-hdpi-2:pb-vw-8"
+                                            margins="mb-8 d-hdpi-2:mb-vw-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4 d-hdpi-2:text-vw-2xl d-hdpi-2:mb-vw-4">
                                                 Your booking
                                             </div>
-                                            <div className="flex flex-col gap-4">
-                                                <div className="flex flex-col gap-1">
+                                            <div className="flex flex-col gap-4 d-hdpi-2:gap-2">
+                                                <div className="flex flex-col gap-1 d-hdpi-2:gap-0.5">
                                                     <div className="font-bold">
                                                         Date
                                                     </div>
@@ -405,9 +403,9 @@ const Checkout = ({
                                         </ExpSubsection>
 
                                         <ExpSubsection
-                                            padding="pb-8"
-                                            margins="mb-8">
-                                            <div className="text-green-400 text-2xl font-bold mb-4">
+                                            padding="pb-8 d-hdpi-2:pb-vw-8"
+                                            margins="mb-8 d-hdpi-2:mb-vw-8">
+                                            <div className="text-green-400 text-2xl font-bold mb-4 d-hdpi-2:text-vw-2xl d-hdpi-2:mb-vw-4">
                                                 Guest info
                                             </div>
                                             <div>
@@ -421,8 +419,10 @@ const Checkout = ({
                                         </ExpSubsection>
                                     </>
                                 )}
-                                <ExpSubsection padding="pb-8" margins="mb-8">
-                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                <ExpSubsection
+                                    padding="pb-8 d-hdpi-2:pb-vw-8"
+                                    margins="mb-8 d-hdpi-2:mb-vw-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4 d-hdpi-2:text-vw-2xl d-hdpi-2:mb-vw-4">
                                         Summary
                                     </div>
                                     <div
@@ -432,8 +432,10 @@ const Checkout = ({
                                     />
                                 </ExpSubsection>
 
-                                <ExpSubsection padding="pb-8" margins="mb-8">
-                                    <div className="text-green-400 text-2xl font-bold mb-4">
+                                <ExpSubsection
+                                    padding="pb-8 d-hdpi-2:pb-vw-8"
+                                    margins="mb-8 d-hdpi-2:mb-vw-8">
+                                    <div className="text-green-400 text-2xl font-bold mb-4 d-hdpi-2:text-vw-2xl d-hdpi-2:mb-vw-4">
                                         Payment info
                                     </div>
                                     <div>
@@ -450,12 +452,12 @@ const Checkout = ({
 
                             <aside
                                 className={classNames(
-                                    'w-full lg:w-2/5 lg:stickya lg:top-12a py-4 lg:pb-24'
+                                    'w-full lg:w-2/5 lg:stickya lg:top-12a py-4 lg:pb-24 d-hdpi-2:pb-vw-24'
                                 )}>
                                 <div
-                                    className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards`}>
-                                    <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6">
-                                        <div className="md:w-32 overflow-hidden rounded-lg">
+                                    className={`flex flex-col px-4 xl:px-8 pt-4 pb-4  xl:pb-8 xl:pt-8 bg-kn-white rounded-2xl shadow-cards d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-8 d-hdpi-2:rounded-vw-2xl`}>
+                                    <div className="flex flex-col md:flex-row gap-4 border-b border-green-600 border-opacity-20 pb-6 d-hdpi-2:pb-vw-6">
+                                        <div className="md:w-32 overflow-hidden rounded-lg d-hdpi-2:w-vw-32 d-hdpi-2:rounded-vw-lg">
                                             <img
                                                 alt=""
                                                 className="object-cover object-center w-full h-full"
@@ -463,14 +465,14 @@ const Checkout = ({
                                             />
                                         </div>
                                         <div>
-                                            <div className="border-b border-green-600 border-opacity-20 pb-2">
-                                                <div className="text-sm">
+                                            <div className="border-b border-green-600 border-opacity-20 pb-2 d-hdpi-2:pb-vw-2">
+                                                <div className="text-sm d-hdpi-2:text-vw-sm">
                                                     {title}
                                                 </div>
-                                                <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900">
-                                                    <div className="flex  mr-8 py-1">
-                                                        <span className="text-green-400 mr-2">
-                                                            <MapPin size={18} />
+                                                <div className="mt-2 flex flex-wrap items-center font-sans text-xs text-gray-900 d-hdpi-2:mt-vw-2 d-hdpi-2:text-vw-xs">
+                                                    <div className="flex  mr-8 py-1 d-hdpi-2:mr-vw-8 d-hdpi-2:py-vw-1">
+                                                        <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                                            <i className="ri-map-pin-line text-xl d-hdpi-2:text-vw-xl"></i>
                                                         </span>
 
                                                         <span className="flex flex-wrap items-center">
@@ -497,7 +499,7 @@ const Checkout = ({
                                                                                 {index <
                                                                                     itemArray.length -
                                                                                         1 && (
-                                                                                    <span className="px-1">
+                                                                                    <span className="px-1 d-hdpi-2:px-vw-1">
                                                                                         .
                                                                                     </span>
                                                                                 )}
@@ -506,19 +508,19 @@ const Checkout = ({
                                                                     }
                                                                 )
                                                             ) : (
-                                                                <span className="w-20 bg-gray-300 rounded-full h-2" />
+                                                                <span className="w-20 bg-gray-300 rounded-full h-2 d-hdpi-2:w-vw-20 d-hdpi-2:h-vw-2" />
                                                             )}
                                                         </span>
                                                     </div>
-                                                    <div className="flex items-center mr-8 py-1">
-                                                        <span className="text-green-400 mr-2">
-                                                            <Clock size={18} />
+                                                    <div className="flex items-center mr-8 py-1 d-hdpi-2:mr-vw-8 d-hdpi-2:py-vw-1">
+                                                        <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                                            <i className="ri-time-line text-xl d-hdpi-2:text-vw-xl"></i>
                                                         </span>
                                                         {pluralize(days, 'Day')}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs mt-4 flex flex-wrap gap-x-1">
+                                            <div className="text-xs mt-4 flex flex-wrap gap-x-1 d-hdpi-2:text-vw-xs d-hdpi-2:mt-vw-4 d-hdpi-2:gap-x-0.5">
                                                 <span>
                                                     {`A ${capitalize(
                                                         type
@@ -534,7 +536,7 @@ const Checkout = ({
                                         </div>
                                     </div>
                                     {coupon && !loadingCoupon ? (
-                                        <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
+                                        <div className="border-b border-green-600 border-opacity-20  py-6 pb-4 d-hdpi-2:py-vw-6 d-hdpi-2:pb-vw-4">
                                             <div>
                                                 <span>{coupon.name}</span>
                                                 <button
@@ -545,7 +547,7 @@ const Checkout = ({
                                             </div>
                                         </div>
                                     ) : null}
-                                    <div className="flex gap-2 mt-4">
+                                    <div className="flex justify-between gap-2 mt-4 d-hdpi-2:gap-1 d-hdpi-2:mt-vw-4">
                                         <Block__InputSingle
                                             responsive={true}
                                             whiteBg={false}
@@ -559,13 +561,14 @@ const Checkout = ({
                                             value={voucher}
                                             placeholder={'Coupon code'}
                                             // rtl={rtl}
-                                            height="h-10"
-                                            fontSize="text-sm"
+                                            height="h-10 d-hdpi-2:h-vw-10"
+                                            fontSize="text-sm d-hdpi-2:text-vw-sm"
                                             label=""
                                             labelPos="left"
-                                            labelJustify="text-right mr-2"
+                                            labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                             labelMargin=""
-                                            labelWidth="w-32"
+                                            labelWidth="w-32 d-hdpi-2:w-vw-32"
+                                            flex="flex-1"
                                         />
                                         <ButtonLoad
                                             handleClick={addVoucher}
@@ -573,19 +576,19 @@ const Checkout = ({
                                             label="Add"
                                             width="w-full"
                                             margins=""
-                                            width="w-20"
-                                            height="h-10"
+                                            width="w-20 d-hdpi-2:w-vw-20"
+                                            height="h-10 d-hdpi-2:h-vw-10"
                                             animation={false}
                                         />
                                     </div>
 
-                                    <div className="border-b border-green-600 border-opacity-20  py-6 pb-4">
-                                        <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                                            <div className=" mb-4 font-semibold">
+                                    <div className="border-b border-green-600 border-opacity-20  py-6 pb-4 d-hdpi-2:py-vw-6 d-hdpi-2:pb-vw-4">
+                                        <div className="flex flex-col rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4 d-hdpi-2:rounded-vw-xl ">
+                                            <div className=" mb-4 font-semibold d-hdpi-2:mb-vw-4">
                                                 Price details
                                             </div>
-                                            <div className="flex flex-col gap-2">
-                                                <div className="flex text-xs items-center justify-between  pb-2 border-b-2 border-gray-300 border-dotted">
+                                            <div className="flex flex-col gap-2 d-hdpi-2:gap-1">
+                                                <div className="flex text-xs items-center justify-between  pb-2 border-b-2 border-gray-300 border-dotted d-hdpi-2:text-vw-xs d-hdpi-2:pb-vw-2 d-hdpi-2:border-b">
                                                     <span className="relative">
                                                         Price
                                                     </span>
@@ -604,8 +607,8 @@ const Checkout = ({
 
                                                 {type.toLowerCase() ===
                                                     'guided' && (
-                                                    <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted">
-                                                        <div className="flex text-xs items-center justify-between ">
+                                                    <div className="flex flex-col gap-2 border-b-2 pb-2 border-gray-300 border-dotted d-hdpi-2:gap-1 d-hdpi-2:border-b d-hdpi-2:pb-vw-2">
+                                                        <div className="flex text-xs items-center justify-between d-hdpi-2:text-vw-xs">
                                                             <span className="relative">
                                                                 people
                                                             </span>
@@ -616,8 +619,8 @@ const Checkout = ({
                                                     </div>
                                                 )}
                                                 {coupon && !loadingCoupon ? (
-                                                    <div className="border-b-2 border-gray-300 border-dotted pb-2">
-                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                    <div className="border-b-2 border-gray-300 border-dotted pb-2 d-hdpi-2:border-b d-hdpi-2:pb-vw-2">
+                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 d-hdpi-2:text-vw-sm d-hdpi-2:pt-vw-2">
                                                             <span className="flex">
                                                                 <span className="relative">
                                                                     Subtotal
@@ -638,7 +641,7 @@ const Checkout = ({
                                                                 </span>
                                                             </span>
                                                         </div>
-                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                        <div className="flex text-sm font-semibold items-center justify-between pt-2 d-hdpi-2:text-vw-sm d-hdpi-2:pt-vw-2">
                                                             <span className="flex">
                                                                 <span className="relative">
                                                                     Discount
@@ -661,7 +664,7 @@ const Checkout = ({
                                                         </div>
                                                     </div>
                                                 ) : null}
-                                                <div className="flex text-sm font-semibold items-center justify-between pt-2 ">
+                                                <div className="flex text-sm font-semibold items-center justify-between pt-2 d-hdpi-2:text-vw-sm d-hdpi-2:pt-vw-2">
                                                     <span className="flex">
                                                         <span className="relative">
                                                             Total
@@ -697,8 +700,8 @@ const Checkout = ({
                                         </div>
 
                                         {preferredCurrency !== 'USD' && (
-                                            <div className="px-2 mt-4">
-                                                <div className="flex items-center gap-1 text-xs">
+                                            <div className="px-2 mt-4 d-hdpi-2:px-vw-2 d-hdpi-2:mt-vw-4">
+                                                <div className="flex items-center gap-1 text-xs d-hdpi-2:text-vw-xs d-hdpi-2:gap-0.5">
                                                     <div className="">
                                                         * 1 USD ~{' '}
                                                     </div>
@@ -714,7 +717,7 @@ const Checkout = ({
                                                         {/* {preferredCurrency} */}
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-1 text-xs">
+                                                <div className="flex items-center gap-1 text-xs d-hdpi-2:gap-0.5 d-hdpi-2:text-vw-xs">
                                                     <div className="">
                                                         ** You will be charged
                                                     </div>
@@ -730,13 +733,13 @@ const Checkout = ({
                                                 </div>
                                             </div>
                                         )}
-                                        <div className="px-2 mt-4 text-xs">
+                                        <div className="px-2 mt-4 text-xs d-hdpi-2:px-vw-2 d-hdpi-2:mt-vw-4 d-hdpi-2:text-vw-xs">
                                             Charges will appear as Stripe
                                             Payment Services
                                         </div>
                                     </div>
-                                    <div className="border-b border-green-600 border-opacity-20  py-4">
-                                        <div className="px-2 text-xs">
+                                    <div className="border-b border-green-600 border-opacity-20  py-4 d-hdpi-2:py-vw-4">
+                                        <div className="px-2 text-xs d-hdpi-2:px-vw-2 d-hdpi-2:text-vw-xs">
                                             To learn about our cancellation and
                                             refund policy{' '}
                                             <a
@@ -771,7 +774,7 @@ const Checkout = ({
                 )}
                 {processing ? (
                     <LayoutLoading>
-                        <div className="flex flex-col items-center max-w-2xl text-center mt-6 text-sm uppercase tracking-wide text-gray-600">
+                        <div className="flex flex-col items-center max-w-2xl text-center mt-6 text-sm d-hdpi-2:text-vw-sm d-hdpi-2:mt-vw-6 d-hdpi-2:max-w-screen-1/3 uppercase tracking-wide text-gray-600">
                             <div>Processing order...</div>
                             <div>
                                 Don't close this page. You will be redirected to

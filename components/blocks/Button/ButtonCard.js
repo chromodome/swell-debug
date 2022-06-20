@@ -11,7 +11,7 @@ const ButtonCard = ({
 }) => {
     const classes = `${className} rounded-full bg-white px-6 d-hdpi-2:px-vw-6 py-3 d-hdpi-2:py-vw-3 hover:bg-gray-900  hover:text-white ${
         darkMode ? 'hover:bg-opacity-50' : ''
-    } transition-all duration-200 ring-transparent hover:ring-green-400 ring-2 shadow-2xl-green-500 inline-flex items-center justify-center`;
+    } transition-all duration-200 ring-transparent hover:ring-green-400 ring-2 d-hdpi-2:ring-1 shadow-2xl-green-500 inline-flex items-center justify-center`;
     const labelJSX = (
         <>
             {icon && (

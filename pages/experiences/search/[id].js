@@ -76,7 +76,7 @@ const LandingPage = ({
             {pageIsReady && (
                 <>
                     <div
-                        className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 mt-12 mb-8`}>
+                        className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 mt-12 mb-8 d-hdpi-2:px-vw-40 d-hdpi-2:mt-vw-12 d-hdpi-2:mb-vw-8`}>
                         <SectionTitle
                             section={
                                 translations[lang].sections.exploreEverything
@@ -87,17 +87,17 @@ const LandingPage = ({
                     <ExperienceFilter query={query} classes="" />
 
                     <Row>
-                        <div className="px-4">
-                            <div className="flex flex-col gap-2 border-t pt-4 pb-8 border-gray-300">
-                                <div className="flex flex-wrap gap-2">
+                        <div className="px-4 d-hdpi-2:px-vw-4">
+                            <div className="flex flex-col gap-2 d-hdpi-2:gap-1 border-t pt-4 pb-8 border-gray-300 d-hdpi-2:pt-vw-4 d-hdpi-2:pb-vw-8">
+                                <div className="flex flex-wrap gap-2 d-hdpi-2:gap-1">
                                     {!dataLoading ? (
                                         <>
                                             {totalCount.current > 0 ? (
                                                 <>
-                                                    <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                         We found
                                                     </span>
-                                                    <span className="text-xl font-semibold text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-semibold text-gray-700 tracking-tight">
                                                         {`${
                                                             totalCount.current
                                                         } ${
@@ -109,7 +109,7 @@ const LandingPage = ({
                                                     </span>
                                                 </>
                                             ) : (
-                                                <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                     We couldn't find any
                                                     experiences matching your
                                                     criteria
@@ -117,14 +117,14 @@ const LandingPage = ({
                                             )}
                                         </>
                                     ) : (
-                                        <div className="flex items-center gap-2 pt-2">
+                                        <div className="flex items-center gap-2 pt-2 d-hdpi-2:gap-1 d-hdpi-2:pt-vw-2">
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-20"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-20 d-hdpi-2:w-vw-20"
                                             />
                                             <SkeletonText
-                                                height="h-4"
-                                                width="w-36"
+                                                height="h-4 d-hdpi-2:h-vw-4"
+                                                width="w-36 d-hdpi-2:w-vw-36"
                                             />
                                         </div>
                                     )}
@@ -152,7 +152,7 @@ const LandingPage = ({
                     />
                     <Row>
                         <SliderInterests
-                            margins="mt-12"
+                            margins="mt-12 d-hdpi-2:mt-vw-12"
                             sectionTitles={
                                 translations[lang].sections.wanderByInterest
                             }
@@ -164,7 +164,7 @@ const LandingPage = ({
                     </Row>
                     <Row>
                         <SliderDestinations
-                            margins="mt-12"
+                            margins="mt-12 d-hdpi-2:mt-vw-12"
                             sectionTitles={
                                 translations[lang].sections.wanderByDestination
                             }

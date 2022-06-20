@@ -66,6 +66,7 @@ const NavbarSidebarCart = ({
                                 {auth?.user?.profile ? (
                                     <Avatar
                                         profile={auth?.user?.profile}
+                                        username={auth?.user?.username}
                                         size="w-12 h-12"
                                     />
                                 ) : (
@@ -112,7 +113,6 @@ const NavbarSidebarCart = ({
                             handleRowReverse(rtl).rtl
                         }`}>
                         {/* {children} */}
-
                         CART
                     </div>
                     <div className="px-12 flex items-center mt-8">

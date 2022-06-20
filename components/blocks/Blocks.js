@@ -21,16 +21,20 @@ const Block__InputSingle = ({
     locked = null,
     isDisabled = false,
     color = 'bg-green-50',
-    height = 'h-14',
+    height = 'h-14 d-hdpi-2:h-vw-14',
     width = 'w-full',
     margins = '',
     className = '',
-    rounded = 'rounded-xl',
+    rounded = 'rounded-xl d-hdpi-2:rounded-vw-xl',
     icon = '',
     iconText = '',
     iconPadding,
-    padding = `py-3 ${
-        iconPadding ? iconPadding : icon || iconText ? 'pl-16 pr-4' : 'px-4'
+    padding = `py-3 d-hdpi-2:py-vw-3 ${
+        iconPadding
+            ? iconPadding
+            : icon || iconText
+            ? 'pl-16 pr-4 d-hdpi-2:pl-vw-16 d-hdpi-2:pr-vw-4'
+            : 'px-4 d-hdpi-2:px-vw-4'
     }`,
     type = 'text',
     id,
@@ -40,17 +44,18 @@ const Block__InputSingle = ({
     placeholder,
     error = false,
     rtl = false,
-    fontSize = 'text-normal',
+    fontSize = 'text-base d-hdpi-2:text-vw-base',
     labelPos = 'top',
     label,
-    labelWidth = 'w-48',
+    labelWidth = 'w-48 d-hdpi-2:w-vw-48',
     labelJustify = 'text-left',
-    labelClass = 'text-xs px-2 text-gray-600 whitespace-nowrap',
-    labelMargin = 'mb-2',
+    labelClass = 'text-xs d-hdpi-2:text-vw-xs px-2 d-hdpi-2:px-vw-2 text-gray-600 whitespace-nowrap',
+    labelMargin = 'mb-2 d-hdpi-2:mb-vw-2',
     responsive,
     disabledColor = 'bg-gray-200',
     iconClass,
     autoComplete = '',
+    flex = 'flex-1 d-hdpi-2:flex-initial',
     focused,
     ...inputProps
 }) => {
@@ -69,7 +74,7 @@ const Block__InputSingle = ({
     const passwordJSX =
         type === 'password' ? (
             <span
-                className={`absolute right-24 top-1/2 transform -translate-y-1/2 cursor-pointer ${classIcon} `}
+                className={`absolute right-24 d-hdpi-2:right-vw-24 top-1/2 transform -translate-y-1/2 cursor-pointer ${classIcon} `}
                 onMouseUp={() => setHidden(true)}
                 onMouseDown={() => setHidden(false)}>
                 <Icons iName={hidden ? 'EYE_SLASH' : 'EYE'} size="xl" />
@@ -84,7 +89,7 @@ const Block__InputSingle = ({
         ) : null;
 
     return (
-        <div className={`${margins} flex-1 `}>
+        <div className={`${margins} ${flex} `}>
             <div
                 className={`${
                     labelPos === 'left'
@@ -97,7 +102,7 @@ const Block__InputSingle = ({
                     <div
                         className={`${
                             responsive
-                                ? 'mb-2 ml-2 text-xs text-gray-600 whitespace-nowrap'
+                                ? 'mb-2 ml-2 d-hdpi-2:mb-vw-2 d-hdpi-2:,l-vw-2 text-xs d-hdpi-2:text-vw-xs text-gray-600 whitespace-nowrap'
                                 : `${labelClass} ${labelWidth} ${labelJustify} ${labelMargin}`
                         } `}>
                         {label}
@@ -129,7 +134,7 @@ const Block__InputSingle = ({
                                 : `hover:bg-white focus:bg-white ${
                                       whiteBg ? 'bg-white' : 'bg-kn-gray-100'
                                   }`,
-                            'block appearance-none placeholder-gray-400 placeholder-opacity-100 border leading-5 text-gray-700 focus:outline-none       ring-4 ring-transparent transition duration-200'
+                            'block appearance-none placeholder-gray-400 placeholder-opacity-100 border leading-5 d-hdpi-2:leading-tight text-gray-700 focus:outline-none   ring-4 d-hdpi-2:ring-2 ring-transparent transition duration-200'
                         )}
                         onChange={handleChange}
                         type={newType}
@@ -161,21 +166,21 @@ const Block__InputSingle = ({
                                     ? 'text-red-600  hover:text-white'
                                     : 'text-green-900  hover:text-white'
                             )}
-                            rounded="rounded-xl"
+                            rounded="rounded-xl d-hdpi-2:rounded-vw-xl"
                             textSize="text-sm"
-                            className={`transition-all ml-2 duration-300 out-expo  w-16
+                            className={`transition-all ml-2 duration-300 out-expo w-16 d-hdpi-2:w-vw-16 d-hdpi-2:h-vw-10 d-hdpi-2:ml-vw-2
                             h-10  flex items-center justify-center `}>
                             <i
                                 className={`${
                                     locked.isDisabled
                                         ? 'ri-lock-line text-red-400a'
                                         : 'ri-lock-unlock-line text-green-400a'
-                                } text-xl`}></i>
+                                } text-xl d-hdpi-2:text-vw-xl`}></i>
                         </GenericBtn>
                     ) : null}
                     {(icon || iconText) && (
                         <div
-                            className={`absolute left-4 top-1/2 text-xl text-gray-600 transform -translate-y-1/2 flex items-center `}>
+                            className={`absolute left-4 d-hdpi-2:left-vw-4 top-1/2 text-xl d-hdpi-2:text-vw-xl text-gray-600 transform -translate-y-1/2 flex items-center `}>
                             {icon && <i className={icon}></i>}
                             <span className={`${iconClass}`}>{iconText}</span>
                         </div>
@@ -188,7 +193,7 @@ const Block__InputSingle = ({
 
 const Block__InputSingle2 = ({
     color = 'bg-green-50',
-    height = 'h-14',
+    height = 'h-14 ',
     width = 'w-full',
     margins = '',
     className = '',

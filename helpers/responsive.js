@@ -8,3 +8,13 @@ export const getSlidesPerBp = (breakPoints) => {
         else return breakPoints.default.slides;
     }
 };
+
+export const getTrendingGridColumns = (width) => {
+    let items = 3;
+
+    if (width >= 768) items = 6;
+    if (width >= 1024) items = 8;
+    if (width >= 1280) items = 10;
+
+    return items;
+};

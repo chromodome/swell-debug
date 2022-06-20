@@ -156,13 +156,16 @@ const LandingPage = ({ globalState: { lang } }) => {
             {pageIsReady && (
                 <>
                     <Showcase data={userData} dataLoading={dataLoading}>
-                        <div className={classNames('flex gap-4 md:gap-8')}>
+                        <div
+                            className={classNames(
+                                'flex gap-4 md:gap-8 d-hdpi-2:gap-4'
+                            )}>
                             {kreator && (
                                 <KreatorBadgeStaticFlat
                                     avatarOnly
                                     card={false}
                                     author={kreator}
-                                    size="w-16 h-16 md:w-28 md:h-28"
+                                    size="w-16 h-16 md:w-28 md:h-28 d-hdpi-2:w-vw-28 d-hdpi-2:h-vw-28"
                                 />
                             )}
 
@@ -172,12 +175,12 @@ const LandingPage = ({ globalState: { lang } }) => {
                                         userData.dark_theme
                                             ? 'text-green-400'
                                             : 'text-green-500'
-                                    } font-bold text-2xl md:text-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2`}>
+                                    } font-bold text-2xl md:text-3xl d-hdpi-2:text-vw-3xl tracking-tight leading-tight flex-shrink-0 flex-initial mb-2 d-hdpi-2:mb-vw-2`}>
                                     {userData.title}
                                 </div>
                                 <div
                                     className={classNames(
-                                        'hidden md:block text-base mb-8 max-h-72 overflow-y-auto pr-4',
+                                        'hidden md:block text-base mb-8 max-h-72 overflow-y-auto pr-4 d-hdpi-2:text-vw-base d-hdpi-2:mb-vw-8 d-hdpi-2:max-h-vw-72 d-hdpi-2:pr-vw-4',
                                         userData.dark_theme
                                             ? 'text-white'
                                             : 'text-gray-800'
@@ -186,7 +189,7 @@ const LandingPage = ({ globalState: { lang } }) => {
                                         __html: userData.description
                                     }}
                                 />
-                                <div className="flex items-center gap-2 text-xl">
+                                <div className="flex items-center gap-2 text-xl d-hdpi-2:gap-1 d-hdpi-2:text-vw-xl">
                                     <SocialMediaKreator
                                         preset="white"
                                         social={userData.social}
@@ -225,7 +228,7 @@ const LandingPage = ({ globalState: { lang } }) => {
                     </Showcase>
 
                     <div
-                        className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 mt-12 mb-8`}>
+                        className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-44 mt-12 mb-2 d-hdpi-2:px-vw-44 d-hdpi-2:mt-vw-12 d-hdpi-2:mb-vw-2`}>
                         <SectionTitle
                             section={{
                                 title: `Experiences by ${displayNameFinal}`,
@@ -241,29 +244,17 @@ const LandingPage = ({ globalState: { lang } }) => {
 
                     {kreator && (
                         <Row>
-                            <div className="px-4">
-                                <div className="flex flex-col gap-4 border-t pt-8 pb-8 border-gray-300">
-                                    {/* {creator ? (
-                                        <>
-                                            <KreatorBadgeStaticFlat
-                                                customHeight="h-12"
-                                                customPadding="pl-16 pr-8"
-                                                author={kreator}
-                                                size="w-12 h-12"
-                                                textSize="text-lg"
-                                            />
-                                            <div>{creator.bio}</div>
-                                        </>
-                                    ) : null} */}
-                                    <div className="flex flex-wrap gap-2">
+                            <div className="px-4 d-hdpi-2:px-vw-4">
+                                <div className="flex flex-col gap-4 d-hdpi-2:gap-2 border-t pt-6 pb-4 border-gray-300 d-hdpi-2:pt-vw-6 d-hdpi-2:pb-vw-4">
+                                    <div className="flex flex-wrap gap-2 d-hdpi-2:gap-1">
                                         {!dataLoading ? (
                                             <>
                                                 {totalCount.current > 0 ? (
                                                     <>
-                                                        <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                        <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                             We found
                                                         </span>
-                                                        <span className="text-xl font-semibold text-gray-700 tracking-tight">
+                                                        <span className="text-xl d-hdpi-2:text-vw-xl font-semibold text-gray-700 tracking-tight">
                                                             {`${
                                                                 totalCount.current
                                                             } ${
@@ -275,7 +266,7 @@ const LandingPage = ({ globalState: { lang } }) => {
                                                         </span>
                                                     </>
                                                 ) : (
-                                                    <span className="text-xl font-light text-gray-700 tracking-tight">
+                                                    <span className="text-xl d-hdpi-2:text-vw-xl font-light text-gray-700 tracking-tight">
                                                         We couldn't find any
                                                         experiences matching
                                                         your criteria
@@ -283,14 +274,14 @@ const LandingPage = ({ globalState: { lang } }) => {
                                                 )}
                                             </>
                                         ) : (
-                                            <div className="flex items-center gap-2 pt-2">
+                                            <div className="flex items-center gap-2 pt-2 d-hdpi-2:gap-1 d-hdpi-2:pt-vw-2">
                                                 <SkeletonText
-                                                    height="h-4"
-                                                    width="w-20"
+                                                    height="h-4 d-hdpi-2:h-vw-4"
+                                                    width="w-20 d-hdpi-2:w-vw-20"
                                                 />
                                                 <SkeletonText
-                                                    height="h-4"
-                                                    width="w-36"
+                                                    height="h-4 d-hdpi-2:h-vw-4"
+                                                    width="w-36 d-hdpi-2:w-vw-36"
                                                 />
                                             </div>
                                         )}

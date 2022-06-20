@@ -33,11 +33,13 @@ function SectionWhatToDo(props) {
     return (
         <>
             <ExpSubsection>
-                <div className="marketing-title mb-8">The Destination</div>
+                <div className="marketing-title mb-8 d-hdpi-2:mb-vw-8">
+                    The Destination
+                </div>
 
                 {desc && (
                     <div
-                        className="block-html text-gray-800 leading-7 text-sm1 md:text-base"
+                        className="block-html text-gray-800 leading-7 text-sm1 md:text-base d-hdpi-2:text-vw-base d-hdpi-2:leading-normal"
                         dangerouslySetInnerHTML={{
                             __html: desc || ''
                         }}

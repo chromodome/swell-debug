@@ -230,8 +230,12 @@ module.exports = {
             screens: {
                 touch: { raw: '(hover: none)' },
                 portrait: { raw: '(orientation: portrait)' },
-                'd-hdpi-2': { min: '1024px', raw: '(min-resolution: 192dpi)' },
-                'd-hdpi-3': { min: '1024px', raw: '(min-resolution: 288dpi)' }
+                'd-hdpi-2': {
+                    raw: '(min-width: 1024px) and (min-resolution: 192dpi) and (pointer: fine)'
+                },
+                'd-hdpi-3': {
+                    raw: '(min-width: 1024px) and (min-resolution: 288dpi) and (pointer: fine)'
+                }
                 // => @media (orientation: portrait) { ... }
             },
             colors: {
