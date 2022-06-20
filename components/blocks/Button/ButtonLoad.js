@@ -4,22 +4,22 @@ import classNames from 'classnames';
 const ButtonLoad = ({
     label,
     color,
-    width = 'w-80',
+    width = 'w-80 d-hdpi-2:w-vw-80',
     height,
     isLoading = false,
     handleClick,
     nowrap,
-    margins = 'mt-8',
+    margins = 'mt-8 d-hdpi-2:mt-vw-8',
     animate = true
 }) => {
     const btnJSX = (
         <button
             onClick={handleClick}
             className={classNames(
-                'relative overflow-hidden h-12 rounded-lg flex items-center justify-center ',
+                'relative overflow-hidden h-12 d-hdpi-2:h-vw-12 rounded-lg d-hdpi-2:rounded-vw-lg flex items-center justify-center d-hdpi-2:text-vw-base',
                 width,
                 animate
-                    ? 'transform-gpu duration-300 hover:-translate-y-2 ease-in-out'
+                    ? 'transform-gpu duration-300 hover:-translate-y-2 d-hdpi-2:-translate-y-1 ease-in-out'
                     : '',
                 isLoading
                     ? 'bg-gray-900 text-white'
@@ -27,7 +27,9 @@ const ButtonLoad = ({
             )}>
             <span className="absolute left-1/2 top-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 ">
                 {isLoading ? (
-                    <Spinner strokeColor="#000000" />
+                    <span className="transform d-hdpi-2:scale-65">
+                        <Spinner strokeColor="#000000" />
+                    </span>
                 ) : (
                     <span className="whitespace-nowrap">{label}</span>
                 )}
@@ -36,7 +38,9 @@ const ButtonLoad = ({
             <span className="absolute font-normal inset-0 bg-gray-900 transition-opacity duration-200 hover:opacity-100 opacity-0">
                 <span className="absolute left-1/2 top-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 ">
                     {isLoading ? (
-                        <Spinner />
+                        <span className="transform d-hdpi-2:scale-65">
+                            <Spinner />
+                        </span>
                     ) : (
                         <span className="whitespace-nowrap">{label}</span>
                     )}

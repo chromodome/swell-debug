@@ -16,11 +16,11 @@ const cssError = {
 
 const FormIkInput = ({
     className = '',
-    rounded = 'rounded-xl',
-    padding = 'py-3 px-4',
-    height = 'h-14',
+    rounded = 'rounded-xl d-hdpi-2:rounded-vw-xl',
+    padding = 'py-3 px-4 d-hdpi-2:py-vw-3 d-hdpi-2:px-vw-4',
+    height = 'h-14 d-hdpi-2:h-vw-14',
     width = 'w-full',
-    text = 'text-sm',
+    text = 'text-sm d-hdpi-2:text-vw-sm',
     icon,
     type = 'text',
     placeholder,
@@ -53,7 +53,7 @@ const FormIkInput = ({
     const passwordJSX =
         type === 'password' ? (
             <span
-                className={`absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer ${classIcon} `}
+                className={`absolute right-4 d-hdpi-2:right-vw-4 top-1/2 transform -translate-y-1/2 cursor-pointer ${classIcon} `}
                 onMouseUp={() => setHidden(true)}
                 onMouseDown={() => setHidden(false)}>
                 <Icons iName={hidden ? 'EYE_SLASH' : 'EYE'} size="xl" />
@@ -62,7 +62,7 @@ const FormIkInput = ({
 
     const iconJSX =
         type !== 'password' && icon ? (
-            <span className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400">
+            <span className="absolute right-4 d-hdpi-2:right-vw-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400">
                 <Icons iName={icon} />
             </span>
         ) : null;
@@ -77,7 +77,7 @@ const FormIkInput = ({
                         className={`${text} ${width} ${height} ${rounded} ${padding}  ${classError} ${
                             handleRowReverse(rtl).rtl
                         } block appearance-none placeholder-gray-400 placeholder-opacity-100 border leading-5 text-gray-700 focus:outline-none 
-                        ring-4 ring-transparent 
+                        ring-4 d-hdpi-2:ring-2 ring-transparent 
                         bg-kn-gray-100 hover:bg-white focus:bg-white transition duration-200`}
                         type={newType}
                         placeholder={placeholder}
@@ -87,12 +87,12 @@ const FormIkInput = ({
                     {passwordJSX}
                     {iconJSX}
                     {meta.touched && meta.error && (
-                        <div className="absolute z-100 -right-8 top-1/2 transform -translate-y-1/2 cursor-pointer ">
+                        <div className="absolute z-100 -right-8 d-hdpi-2:-right-4 top-1/2 transform -translate-y-1/2 cursor-pointer ">
                             <PopoverBlock
                                 element={
-                                    <i className="ri-error-warning-line text-xl text-red-400"></i>
+                                    <i className="ri-error-warning-line text-xl d-hdpi-2:text-vw-xl text-red-400"></i>
                                 }>
-                                <div className="w-48 text-xs p-4 bg-white select-none">
+                                <div className="w-48 d-hdpi-2:w-vw-48 text-xs d-hdpi-2:text-vw-xs p-4 d-hdpi-2:p-vw-4bg-white select-none">
                                     {meta.error}
                                 </div>
                             </PopoverBlock>

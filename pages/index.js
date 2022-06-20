@@ -19,7 +19,8 @@ import {
 import Row from '@/components/sections/Row';
 import Community from '@/components/sections/Community';
 import SliderShowcases from '@/components/sections/SliderShowcases';
-
+import useWindowSize from '@/hooks/useWindowSize';
+import { getTrendingGridColumns } from '@/helpers/responsive';
 const LandingPage = ({
     globalState: {
         lang,
@@ -34,6 +35,8 @@ const LandingPage = ({
         randomItem(dataLanding?.data?.landing)
     );
 
+    const windowSize = useWindowSize();
+
     return (
         <Layout>
             <Showcase pill="bottom" data={randomCover} collection="showcase" />
@@ -45,8 +48,9 @@ const LandingPage = ({
                 btnPos="side"
                 btnAction="url"
                 btnUrl="/experiences/destination/world/all"
-                margins="mt-16 mb-8 lg:mt-12 lg:mb-12"
+                margins="mt-16 mb-8 lg:mt-12 lg:mb-12 d-hdpi-2:mt-vw-12 d-hdpi-2:mb-vw-12"
                 titleClass=""
+                filteredCount={getTrendingGridColumns(windowSize.width)}
             />
 
             <Row>

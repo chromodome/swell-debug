@@ -45,24 +45,25 @@ const LandingCapture = ({ captureEmail, auth, session: { ip }, ...props }) => {
     }, []);
 
     return (
-        <div className="w-full h-full ">
-            <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-center gap-8 md:gap-0 mx-auto lg:max-w-7xl w-full">
+        <div className="w-full h-full d-hdpi-2:text-vw-base">
+            <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-center gap-8 md:gap-0 mx-auto lg:max-w-7xl w-full d-hdpi-2:max-w-screen-2/3">
                 <div className="md:w-2/5 lg:w-auto ">
                     <img
-                        className="lg:h-96"
+                        className="lg:h-96 d-hdpi-2:h-vw-96"
                         src="/assets/media/joinus@2x.png"
                     />
                 </div>
-                <div className="md:w-3/5 xl:w-1/2">
+                <div className="md:w-3/5 xl:w-1/2 d-hdpi-2:w-1/2">
                     <div className="">
-                        <div className={`flex flex-col  lg:px-8  pt-8 md:pt-0`}>
+                        <div
+                            className={`flex flex-col  lg:px-8  pt-8 md:pt-0 d-hdpi-2:px-vw-8`}>
                             <GradientTitle
-                                label="Join us"
-                                textSize="text-4xl"
+                                label={props.title ?? 'Join us'}
+                                textSize="text-4xl d-hdpi-2:text-vw-4xl"
                                 containerClass=""
                             />
 
-                            <div className="flex text-gray-600 mt-4 mb-4 leading-7">
+                            <div className="flex text-gray-600 mt-4 mb-4 leading-7 d-hdpi-2:leading-normal">
                                 If you want to know more about the development
                                 and launch, subscribe to our list, and join
                                 thousands of people who - like you - are excited
@@ -82,7 +83,7 @@ const LandingCapture = ({ captureEmail, auth, session: { ip }, ...props }) => {
                                     onSubmit={handleSubmit}>
                                     {(props) => (
                                         <Form id="joinForm">
-                                            <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
+                                            <div className="flex flex-col md:flex-row lg:flex-col mt-6 gap-12 lg:gap-0 d-hdpi-2:gap-6 d-hdpi-2:mt-vw-6">
                                                 <div className="md:w-1/2 lg:w-full flex-1 flex flex-col">
                                                     <FormIkInput
                                                         name="email"
@@ -91,16 +92,9 @@ const LandingCapture = ({ captureEmail, auth, session: { ip }, ...props }) => {
                                                             'E-mail address'
                                                         }
                                                         autoComplete="off"
-                                                        className="mb-4"
+                                                        className="mb-4 d-hdpi-2:mb-vw-4"
                                                     />
 
-                                                    {/* <Checkbox
-                                                        name="terms"
-                                                        isChecked={termsChecked}
-                                                        setIsChecked={
-                                                            setTermsChecked
-                                                        }
-                                                    /> */}
                                                     <ButtonLoad
                                                         // handleClick={handleClick}
                                                         isLoading={auth.loading}

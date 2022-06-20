@@ -4,15 +4,15 @@ import classNames from 'classnames';
 const ButtonLoad = ({
     label,
     color,
-    width = 'w-80',
-    height = 'h-12',
+    width = 'w-80 d-hdpi-2:w-vw-80',
+    height = 'h-12 d-hdpi-2:h-vw-12',
     isLoading = false,
     handleClick,
     nowrap,
     type = 'button',
     form,
     disabled = false,
-    margins = 'mt-8',
+    margins = 'mt-8 d-hdpi-2:mt-vw-8',
     animation = true
 }) => {
     const btnJSX = (
@@ -22,9 +22,9 @@ const ButtonLoad = ({
             form={form}
             onClick={handleClick}
             className={classNames(
-                'focus:outline-none relative overflow-hidden rounded-lg flex items-center justify-center ',
+                'focus:outline-none relative overflow-hidden rounded-lg d-hdpi-2:rounded-vw-lg flex items-center justify-center d-hdpi-2:text-vw-base',
                 animation &&
-                    'transform-gpu duration-300 hover:-translate-y-2 ease-in-out',
+                    'transform-gpu duration-300 hover:-translate-y-2 d-hdpi-2:-translate-y-1 ease-in-out',
                 width,
                 height,
                 isLoading

@@ -20,9 +20,9 @@ const Exception = ({ items = [], handleClick }) => {
                     border-2 border-kn-primary-400 text-kn-primary-500
                     bg-transparent
                     hover:text-kn-primary
-                    hover:border-kn-primary capitalize"
+                    hover:border-kn-primary capitalize d-hdpi-2:py-vw-1 d-hdpi-2:p-vw-4 d-hdpi-2:mb-vw-2 d-hdpi-2:mr-vw-2 d-hdpi-2:text-vw-xs d-hdpi-2:border"
                     icon="CLOSE"
-                    iconClasses="ml-4"
+                    iconClasses="ml-4 d-hdpi-2:ml-vw-4"
                     type="custom"
                     handleClick={() => handleClick(value)}>
                     {value.name}

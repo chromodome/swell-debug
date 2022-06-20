@@ -341,42 +341,42 @@ function ProfilePage(props) {
         <Layout>
             <Script>UPLOADCARE_PUBLIC_KEY = '8655037f335d8f4f0419';</Script>
             {!isLoading && user ? (
-                <div className="w-full mt-16">
+                <div className="w-full mt-16 d-hdpi-2:mt-vw-16 d-hdpi-2:text-vw-base mb-16 d-hdpi-2:mb-vw-16">
                     <div
                         className={`relative 
-                        px-4 md-px-0 max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto `}>
-                        <div className="mt-12 mb-10 px-4">
-                            <div className={`mb-12`}>
+                        px-4 md-px-0 max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto d-hdpi-2:max-w-screen-2/3 `}>
+                        <div className="mt-12 mb-0 px-4 d-hdpi-2:mt-vw-12 d-hdpi-2:px-vw-4">
+                            <div className={`mb-12 d-hdpi-2:mb-vw-12`}>
                                 <SectionTitle
                                     section={{
                                         title: 'My Profile'
                                     }}
                                     padding=""
-                                    size="text-4xl md:text-5xl"
+                                    size="text-4xl md:text-5xl d-hdpi-2:text-vw-4xl"
                                     className=""
                                 />
                             </div>
 
-                            <div className="flex flex-col md:flex-row gap-8 md:gap-16 ">
+                            <div className="flex flex-col md:flex-row gap-8 md:gap-16 d-hdpi-2:gap-8">
                                 <div className="w-full">
-                                    <div className="mb-16">
-                                        <div className="mb-4 ml2-40 flex items-center gap-2 text-green-500">
-                                            <i className="ri-account-circle-line text-2xl"></i>
+                                    <div className="mb-16 d-hdpi-2:mb-vw-16">
+                                        <div className="mb-4 ml2-40 flex items-center gap-2 text-green-500 d-hdpi-2:mb-vw-4">
+                                            <i className="ri-account-circle-line text-2xl d-hdpi-2:text-vw-2xl"></i>
                                             <span>Account</span>
                                         </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8">
-                                            <div className="flex flex-col gap-6 mb-4 ">
-                                                <div className="relative pt-4 ">
-                                                    <div className="text-xs mb-2 px-2 text-gray-600">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 d-hdpi-2:gap-4">
+                                            <div className="flex flex-col gap-6 mb-4 d-hdpi-2:gap-3 d-hdpi-2:mb-vw-4">
+                                                <div className="relative pt-4 d-hdpi-2:pt-vw-4">
+                                                    <div className="text-xs mb-2 px-2 text-gray-600 d-hdpi-2:text-vw-xs d-hdpi-2:mb-vw-2 d-hdpi-2:px-vw-2">
                                                         Avatar
                                                     </div>
-                                                    <div className=" flex flex-col items-start gap-4 w-full md:w-max">
+                                                    <div className=" flex flex-col items-start gap-4 w-full md:w-max d-hdpi-2:gap-2">
                                                         {avatar ? (
                                                             <>
                                                                 <Image
                                                                     size="360"
                                                                     src={avatar}
-                                                                    className="h-32 w-32 lg:h-48 lg:w-48 object-cover object-center overflow-hidden rounded-full shadow-images mx-auto"
+                                                                    className="h-32 w-32 lg:h-48 lg:w-48 object-cover object-center overflow-hidden rounded-full shadow-images mx-auto d-hdpi-2:h-vw-48 d-hdpi-2:w-vw-48"
                                                                     fixEdge={
                                                                         true
                                                                     }
@@ -398,15 +398,15 @@ function ProfilePage(props) {
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <div className="h-32 w-32 lg:h-48 lg:w-48 border-2 border-gray-200 rounded-full relative">
-                                                                    <div className="text-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                                                                <div className="h-32 w-32 lg:h-48 lg:w-48 d-hdpi-2:w-vw-48 d-hdpi-2:h-vw-48 border-2 d-hdpi-2:border border-gray-200 rounded-full relative">
+                                                                    <div className="text-xs d-hdpi-2:text-vw-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                                                                         {/* <Icons iName='ADDIMAGE' /> */}
                                                                     </div>
                                                                 </div>
                                                             </>
                                                         )}
 
-                                                        <div className="text-sm w-full h-full flex tracking-widest uppercase justify-center items-center ">
+                                                        <div className="text-sm d-hdpi-2:text-vw-sm w-full h-full flex tracking-widest uppercase justify-center items-center ">
                                                             <UploadGalleryImages
                                                                 multiple={false}
                                                                 maxImages={1}
@@ -418,7 +418,7 @@ function ProfilePage(props) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="flex flex-col gap-6 mb-4 ">
+                                            <div className="flex flex-col gap-6 mb-4 d-hdpi-2:gap-3 d-hdpi-2:mb-vw-4">
                                                 <Block__InputSingle
                                                     responsive={true}
                                                     whiteBg={true}
@@ -439,11 +439,11 @@ function ProfilePage(props) {
                                                     value={username}
                                                     placeholder={'username'}
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="Username"
                                                     labelPos="top"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
                                                 />
 
@@ -473,11 +473,11 @@ function ProfilePage(props) {
                                                     value={email}
                                                     placeholder={'email'}
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10 "
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="Email"
                                                     labelPos="top"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
                                                 />
                                                 <Block__InputSingle
@@ -509,11 +509,11 @@ function ProfilePage(props) {
                                                         'Type new password'
                                                     }
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="Password"
                                                     labelPos="left"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:text-mr-2"
                                                     labelMargin=""
                                                 />
                                             </div>
@@ -522,15 +522,15 @@ function ProfilePage(props) {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col md:flex-row gap-8 md:gap-16 ">
+                            <div className="flex flex-col md:flex-row gap-8 md:gap-16 d-hdpi-2:gap-8">
                                 <div className="w-full">
-                                    <div className="mb-16">
-                                        <div className="mb-4 ml2-40 flex items-center gap-2 text-green-500">
-                                            <i className="ri-profile-line text-2xl"></i>
+                                    <div className="mb-16 d-hdpi-2:mb-vw-16">
+                                        <div className="mb-4 ml2-40 flex items-center gap-2 text-green-500 d-hdpi-2:mb-vw-4 d-hdpi-2:gap-1">
+                                            <i className="ri-profile-line text-2xl d-hdpi-2:text-vw-2xl"></i>
                                             <span>Profile</span>
                                         </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8">
-                                            <div className="flex flex-col gap-6 mb-4 ">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 d-hdpi-2:gap-4">
+                                            <div className="flex flex-col gap-6 mb-4 d-hdpi-2:gap-3 d-hdpi-2:mb-vw-4">
                                                 <Block__InputSingle
                                                     responsive={true}
                                                     whiteBg={true}
@@ -550,13 +550,13 @@ function ProfilePage(props) {
                                                     value={first}
                                                     placeholder={'first'}
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="First Name"
                                                     labelPos="left"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
-                                                    labelWidth="w-32"
+                                                    labelWidth="w-32 d-hdpi-2:w-vw-32"
                                                 />
                                                 <Block__InputSingle
                                                     responsive={true}
@@ -576,13 +576,13 @@ function ProfilePage(props) {
                                                     value={last}
                                                     placeholder={'last'}
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="Last Name"
                                                     labelPos="left"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
-                                                    labelWidth="w-32"
+                                                    labelWidth="w-32 d-hdpi-2:w-vw-32"
                                                 />
                                                 <Block__InputSingle
                                                     responsive={true}
@@ -602,11 +602,11 @@ function ProfilePage(props) {
                                                         'Travel with Kony'
                                                     }
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="Display Name"
                                                     labelPos="left"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
                                                 />
                                             </div>
@@ -641,13 +641,13 @@ function ProfilePage(props) {
                                                     value={city}
                                                     placeholder={''}
                                                     // rtl={rtl}
-                                                    height="h-10"
-                                                    fontSize="text-sm"
+                                                    height="h-10 d-hdpi-2:h-vw-10"
+                                                    fontSize="text-sm d-hdpi-2:text-vw-sm"
                                                     label="City"
                                                     labelPos="left"
-                                                    labelJustify="text-right mr-2"
+                                                    labelJustify="text-right mr-2 d-hdpi-2:mr-vw-2"
                                                     labelMargin=""
-                                                    labelWidth="w-32"
+                                                    labelWidth="w-32 d-hdpi-2:w-vw-32"
                                                 />
 
                                                 <CurrencyList
@@ -672,7 +672,7 @@ function ProfilePage(props) {
                         </div>
                         <div className="">
                             <div>
-                                <div className="w-full flex items-center justify-end gap-8">
+                                <div className="w-full flex items-center justify-end gap-8 d-hdpi-2:gap-4">
                                     <div className="flex items-center">
                                         <GenericCheckBox
                                             name="terms"
@@ -680,7 +680,7 @@ function ProfilePage(props) {
                                             setIsChecked={setFormLocked}
                                             bgColor="bg-white"
                                         />
-                                        <div className="text-sm ">
+                                        <div className="text-sm d-hdpi-2:text-vw-sm">
                                             Confirm Changes to save
                                         </div>
                                     </div>

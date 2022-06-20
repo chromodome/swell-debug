@@ -17,7 +17,7 @@ const ModalAuth = ({
             <ModalGeneric
                 setModalIsOpen={toggleAuthModal}
                 close
-                size="md:max-w-xl md:w-full xl:h-auto"
+                size="md:max-w-xl md:w-full xl:h-auto d-hdpi-2:max-w-screen-1/3"
                 auth={auth}>
                 {authComponent === 'login' && <AuthLogin />}
                 {authComponent === 'register' && <AuthRegister />}

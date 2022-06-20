@@ -24,20 +24,20 @@ const Checkbox = ({ isChecked, setIsChecked, ...props }) => {
     }, [meta.error]);
 
     return (
-        <div className="mt-4">
+        <div className="mt-4 d-hdpi-2:mt-vw-4">
             <div className="flex items-center ">
                 <input
                     name={props.name}
-                    className="opacity-0 absolute h-8 w-8 cursor-pointer"
+                    className="opacity-0 absolute h-8 w-8 d-hdpi-2:h-vw-8 d-hdpi-2:w-vw-8 cursor-pointer"
                     onClick={handleClick}
                     autoComplete="off"
                     {...field}
                 />
                 <div
-                    className={`${classFocus} bg-gray-100 border rounded-lg w-8 h-8 flex flex-shrink-0 justify-center items-center mr-4 ring-4 ring-transparent  border-transparent`}>
+                    className={`${classFocus} bg-gray-100 border rounded-lg d-hdpi-2:rounded-vw-lg w-8 h-8 d-hdpi-2:w-vw-8 d-hdpi-2:h-vw-8 flex flex-shrink-0 justify-center items-center mr-4 d-hdpi-2:mr-vw-4  ring-4 d-hdpi-2:ring-2 ring-transparent  border-transparent`}>
                     {isChecked && (
                         <svg
-                            className="fill-current w-5 h-5 text-green-500 pointer-events-none"
+                            className="fill-current w-5 h-5 d-hdpi-2:w-vw-6 d-hdpi-2:h-vw-6 text-green-500 pointer-events-none"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
@@ -47,8 +47,10 @@ const Checkbox = ({ isChecked, setIsChecked, ...props }) => {
                         </svg>
                     )}
                 </div>
-                <div htmlFor="A3-yes" className="text-xs text-gray-400">
-                    <span className="mr-1">
+                <div
+                    htmlFor="A3-yes"
+                    className="text-xs d-hdpi-2:text-vw-xs text-gray-400">
+                    <span className="mr-1 d-hdpi-2:mr-vw-1">
                         By signing up and creating an account, you agree to the
                     </span>
                     <a

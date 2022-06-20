@@ -30,13 +30,13 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
             last = '',
             avatar = '',
             displayname = ''
-        }={},
+        } = {},
         content: {
             experience_id,
             featured_image,
             type,
             days,
-            destinations,
+            destinations
         } = {}
     } = data;
 
@@ -71,7 +71,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                     <img
                         alt="Placeholder"
                         // className={` w-full h-56 md:h-36 lg:h-44 xl:h-56 relative rounded-xl overflow-hidden  bg-gray-200 `}
-                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52"
+                        className="rounded-xl object-cover w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52 d-hdpi-2:h-vw-52 d-hdpi-2:rounded-vw-xl"
                         // className="rounded-xl object-cover w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
                         // data-blink-src={featured_image || ''}
                         src={featured_image || ''}
@@ -79,9 +79,9 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                 ) : (
                     <div
                         // className="rounded-xl bg-gray-200 w-full h-40 xs360:h-44 xs390:h-52 xs410:h-56 sm:h-64 md:h-64 lg:h-64 xl:h-72 2xl:h-96"
-                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52">
+                        className="rounded-xl bg-gray-200 w-full h-56 md:h-36 lg:h-44 xl:h-36 2xl:h-52 d-hdpi-2:h-vw-52 d-hdpi-2:rounded-vw-xl">
                         <div className="relative h-full">
-                            <div className="text-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <div className="text-xs d-hdpi-2:text-vw-xs whitespace-nowrap tracking-widest uppercase absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                 <Icons iName="IMAGEALT2" />
                             </div>
                         </div>
@@ -109,11 +109,11 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
     return (
         <div
             key={myKey}
-            className={`my-3 px-2 w-full md:w-1/3a lg:w-1/4a xl:w-1/5a lg:my-4 lg:px-2 ${containerClass}`}>
-            <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
+            className={`my-3 px-2 w-full md:w-1/3a lg:w-1/4a xl:w-1/5a lg:my-4 lg:px-2 ${containerClass} d-hdpi-2:my-vw-4 d-hdpi-2:px-vw-2`}>
+            <div className="group-scope relative bg-transparent transition-all duration-300 transform-gpu overflow-hidden rounded-xl d-hdpi-2:rounded-vw-xl hover:shadow-xl hover:-translate-y-1 hover:bg-white">
                 <KreatorBadge author={user} baseUrl={baseUrl} />
                 <div>{makeLink()}</div>
-                <div className="flex justify-around w-full transform-gpu -mt-4 px-4">
+                <div className="flex justify-around w-full transform-gpu -mt-4 px-4 d-hdpi-2:-mt-3 d-hdpi-2:px-vw-4">
                     <PillType type={type} />
                     {/* <div
                         className={classNames(
@@ -125,77 +125,55 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                         {type}
                     </div> */}
                 </div>
-                <div className="p-2 sm:p-4 mt-2 sm:mt-0">
-                    <div className="flex items-center justify-between leading-tight text-black font-sans text-xs md:text-sm ">
-                        <span className="flex line-clamp-2 h-9 overflow-hidden">
+                <div className="p-2 sm:p-4 mt-2 sm:mt-0 d-hdpi-2:p-vw-4">
+                    <div className="flex items-center justify-between leading-tight text-black font-sans text-xs md:text-sm d-hdpi-2:text-vw-sm">
+                        <span className="flex line-clamp-2 h-9 d-hdpi-2:h-vw-9 overflow-hidden">
                             {title ? (
                                 title
                             ) : (
                                 <span className="flex">
-                                    <span className="w-48 bg-gray-300 rounded-xl h-3" />
+                                    <span className="w-48 d-hdpi-2:w-vw-48 bg-gray-300 rounded-xl d-hdpi-2:rounded-vw-xl h-3 d-hdpi-2:h-vw-3" />
                                 </span>
                             )}
                         </span>
                     </div>
-                    <div className="mt-2 flex flex-row  font-sans text-xs md:text-xxs lg:text-xs text-gray-900">
-                        <div className="flex  mr-4 py-1">
-                            <span className="text-kn-primary mr-2">
-                                <MapPin size={18} />
+                    <div className="mt-2 flex flex-row font-sans text-xs md:text-xxs lg:text-xs d-hdpi-2:text-vw-xs text-gray-900 d-hdpi-2:mt-vw-2">
+                        <div className="flex items-center mr-4 py-1 d-hdpi-2:mr-vw-4 d-hdpi-2:py-vw-1">
+                            <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                <i className="ri-map-pin-line text-xl d-hdpi-2:text-vw-xl"></i>
                             </span>
-                            <span className="max-w-28 truncate">
+                            <span className="max-w-28 truncate d-hdpi-2:max-w-vw-28">
                                 {destinations?.length > 0 ? (
                                     destinations.join(', ')
                                 ) : (
-                                    <span className="w-20 bg-gray-300 rounded-full h-2" />
+                                    <span className="w-20 d-hdpi-2:w-vw-20 bg-gray-300 rounded-full h-2 d-hdpi-2:h-vw-2" />
                                 )}
-                                {/* {destinations?.length > 0 ? (
-                                    destinations.map(
-                                        (item, index, itemArray) => {
-                                            return (
-                                                <span key={`${item}_${index}`}>
-                                                    <span className="whitespace-nowrap truncate">
-                                                        {item}
-                                                    </span>
-                                                    {index <
-                                                        itemArray.length -
-                                                            1 && (
-                                                        <span className="px-1">
-                                                            .
-                                                        </span>
-                                                    )}
-                                                </span>
-                                            );
-                                        }
-                                    )
-                                ) : (
-                                    <span className="w-20 bg-gray-300 rounded-full h-2" />
-                                )} */}
                             </span>
                         </div>
-                        <div className="flex items-center mr-8 py-1 whitespace-nowrap">
-                            <span className="text-kn-primary mr-2">
-                                <Clock size={18} />
+                        <div className="flex items-center mr-8 py-1 whitespace-nowrap d-hdpi-2:mr-vw-8 d-hdpi-2:py-vw-1">
+                            <span className="text-green-400 mr-2 d-hdpi-2:mr-vw-2">
+                                <i className="ri-time-line text-xl d-hdpi-2:text-vw-xl"></i>
                             </span>
                             {ContentDays}
                         </div>
                     </div>
                     {purchasedView && type.toLowerCase() === 'guided' && (
-                        <div className="mt-4">
-                            <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-xs bg-green-100 text-green-600 whitespace-nowrap rounded-full px-2 py-0.5">
+                        <div className="mt-4 d-hdpi-2:mt-vw-4">
+                            <div className="flex flex-wrap items-center gap-2 d-hdpi-2:gap-1">
+                                <span className="text-xs bg-green-100 text-green-600 whitespace-nowrap rounded-full px-2 py-0.5 d-hdpi-2:text-vw-xs d-hdpi-2:px-vw-2 d-hdpi-2:py-vw-0.5">
                                     {`Booked Date:  ${moment(travelDate).format(
                                         'MMM Do YYYY'
                                     )}`}
                                 </span>
-                                <span className="text-xs bg-blue-100 text-blue-600 whitespace-nowrap rounded-full px-2 py-0.5">
+                                <span className="text-xs bg-blue-100 text-blue-600 whitespace-nowrap rounded-full px-2 py-0.5 d-hdpi-2:text-vw-xs d-hdpi-2:px-vw-2 d-hdpi-2:py-vw-0.5">
                                     Booking for: {people} people
                                 </span>
                             </div>
                         </div>
                     )}
                     {!purchasedView && (
-                        <div className="transition-colors duration-300 group-hover:bg-kn-primary flex justify-center items-center mt-6 w-full rounded-lg border-2 border-kn-primary h-10 text-black text-sm font-bold tracking-tight group-hover:text-white">
-                            <span className="mr-2 font-normal text-xs">
+                        <div className="transition-colors duration-300 group-hover:bg-kn-primary flex justify-center items-center mt-6 w-full rounded-lg d-hdpi-2:rounded-vw-lg border-2 d-hdpi-2:border border-kn-primary h-10 text-black text-sm font-bold tracking-tight group-hover:text-white d-hdpi-2:text-vw-sm d-hdpi-2:mt-vw-6 d-hdpi-2:h-vw-10">
+                            <span className="mr-2 font-normal text-xs d-hdpi-2:text-vw-xs">
                                 {type.toUpperCase() === 'DIGITAL'
                                     ? 'Get if for'
                                     : 'Starting'}
@@ -207,7 +185,7 @@ const ResultCard = ({ purchasedView = false, data, containerClass, myKey }) => {
                             {type.toUpperCase() === 'DIGITAL' ? (
                                 ''
                             ) : (
-                                <span className="ml-1 flex gap-1 text-xs font-medium"></span>
+                                <span className="ml-1 flex gap-1 text-xs font-medium d-hdpi-2:text-vw-xs d-hdpi-2:ml-vw-1 d-hdpi-2:gap-0.5"></span>
                             )}
                         </div>
                     )}

@@ -29,14 +29,14 @@ const CountryList = ({
     isLoading,
     labelPos = 'top',
     label,
-    labelWidth = 'w-48',
+    labelWidth = 'w-48 d-hdpi-2:w-vw-48',
     labelJustify = 'text-left',
-    labelClass = 'text-xs px-2 text-gray-600 whitespace-nowrap',
-    labelMargin = 'mb-2'
+    labelClass = 'text-xs d-hdpi-2:text-vw-xs px-2 d-hdpi-2:px-vw-2 text-gray-600 whitespace-nowrap',
+    labelMargin = 'mb-2 d-hdpi-2:mb-vw-2'
 }) => {
     // console.log('id1', selectedValue);
     return (
-        <div className={`flex-1`}>
+        <div className={`flex-1 d-hdpi-2:flex-initial`}>
             <div
                 className={`${
                     labelPos === 'left'
@@ -49,7 +49,7 @@ const CountryList = ({
                     <div
                         className={`${
                             responsive
-                                ? 'mb-2 ml-2 text-xs text-gray-600 whitespace-nowrap'
+                                ? 'mb-2 ml-2 text-xs d-hdpi-2:mb-vw-2 d-hdpi-2:ml-vw-2 d-hdpi-2:text-vw-xs text-gray-600 whitespace-nowrap'
                                 : `${labelClass} ${labelWidth} ${labelJustify} ${labelMargin}`
                         } `}>
                         {label}

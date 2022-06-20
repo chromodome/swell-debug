@@ -253,18 +253,20 @@ const DestinationMap = ({
 
     return (
         <>
-            <div className="mb-6">
+            <div className="mb-6 d-hdpi-2:mb-vw-6">
                 <div className="relative" ref={containerRef}>
                     <>
-                        <div className="absolute top-8 right-8 z-10">
+                        <div className="absolute top-8 right-8 z-10 d-hdpi-2:top-vw-8 d-hdpi-2:right-vw-8">
                             <CollapseButton
                                 labelHover="Zoom to fit"
                                 handleClick={resetBounds}
-                                icon="ri-artboard-2-line text-2xl -ml-0.5"
+                                icon="ri-artboard-2-line text-2xl d-hdpi-2:text-vw-2xl -ml-0.5 d-hdpi-2:-ml-vw-0.5"
                                 size="10"
-                                textSize="text-xs"
-                                sizeHover="w-36"
-                                offsetCenter="3"
+                                height="h-10 d-hdpi-2:h-vw-10"
+                                width="w-10 d-hdpi-2:w-vw-10"
+                                textSize="text-xs d-hdpi-2:text-vw-xs"
+                                sizeHover="hover:w-36 d-hdpi-2:hover:w-vw-36"
+                                offsetCenter="group-scope-hover:translate-x-3  d-hdpi-2:group-scope-hover:translate-x-1.5"
                                 btnColor="bg-green-400 hover:bg-gray-900 text-green-900 hover:text-white"
                             />
                         </div>

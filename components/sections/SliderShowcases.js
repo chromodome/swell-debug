@@ -27,7 +27,7 @@ const SliderShowcases = ({
                 useRow={true}
                 loop={true}
                 margins={margins}
-                padding="py-4"
+                padding="py-4 d-hdpi-2:py-vw-4"
                 breakPoints={breakPoints}
                 section={sectionTitles}
                 dataLoading={dataLoading}>
@@ -42,7 +42,7 @@ const SliderShowcases = ({
                         );
                     })
                 ) : (
-                    <div className="flex gap-4 mt-9">
+                    <div className="flex gap-4 mt-9 d-hdpi-2:mt-vw-8 d-hdpi-2:gap-2">
                         {skeletonArray.map((item, index) => (
                             <TagCardSkeleton
                                 key={`sk_${index}`}

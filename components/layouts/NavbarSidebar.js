@@ -17,7 +17,8 @@ const NavbarSidebar = ({
     const getName = () => {
         const showName =
             auth?.user?.profile?.displayname || auth?.user?.profile?.first;
-        const theClass = showName.length > 20 ? 'text-sm' : '';
+        const theClass =
+            showName.length > 20 ? 'text-sm d-hdpi-2:text-vw-sm' : '';
         return {
             string: showName,
             strClass: theClass
@@ -36,15 +37,16 @@ const NavbarSidebar = ({
                 style={{ zIndex: 303 }}
                 className={`fixed inset-y-0 ${
                     handleRowReverse(rtl).right
-                }-0 w-full md:w-96 bg-white  shadow-images transition duration-300 ease-in-out transform-gpu ${
+                }-0 w-full md:w-96 d-hdpi-2:w-vw-96 bg-white  shadow-images transition duration-300 ease-in-out transform-gpu d-hdpi-2:text-vw-base ${
                     navIsOpen
                         ? 'translate-x-0'
-                        : handleRowReverse(rtl).menuTranslateReverse + ' pointer-events-none'
+                        : handleRowReverse(rtl).menuTranslateReverse +
+                          ' pointer-events-none'
                 }`}>
-                <nav className=" flex flex-col relative flex-1 pt-40 md:pt-28">
-                    <div className="md:hidden fixed inset-x-0 top-6">
+                <nav className=" flex flex-col relative flex-1 pt-40 md:pt-28 d-hdpi-2:pt-vw-28 d-hdpi-2:text-vw-base">
+                    <div className="md:hidden fixed inset-x-0 top-6 d-hdpi-2:top-vw-6">
                         <div
-                            className={`flex  items-center ml-8 gap-3 ${
+                            className={`flex  items-center ml-8 gap-3 d-hdpi-2:ml-vw-8 d-hdpi-2:gap-1.5 ${
                                 handleRowReverse(rtl).flex
                             }`}>
                             <img src="/assets/media/kn_logoicon.svg" />
@@ -55,20 +57,25 @@ const NavbarSidebar = ({
                         </div>
                     </div>
 
-                    <div className="fixed inset-x-0 bottom-full top-6">
+                    <div className="fixed inset-x-0 bottom-full top-6 d-hdpi-2:top-vw-6 ">
                         <div
                             className={`flex gap-4 md:gap-0 flex-col-reverse md:flex-row  md:justify-between md:items-center `}>
                             <div
                                 className={`${
-                                    auth?.user ? 'ml-8' : 'ml-12'
+                                    auth?.user
+                                        ? 'ml-8 d-hdpi-2:ml-vw-8'
+                                        : 'ml-12 d-hdpi-2:ml-vw-12'
                                 } flex items-center`}>
                                 {auth.user?.profile?.avatar ? (
-                                    <Avatar profile={auth?.user?.profile} />
+                                    <Avatar
+                                        profile={auth?.user?.profile}
+                                        username={auth?.user?.username}
+                                    />
                                 ) : (
-                                    <IconsLucide icon="User" />
+                                    <i className="ri-user-3-line text-2xl d-hdpi-2:text-vw-2xl"></i>
                                 )}
 
-                                <div className="px-2">
+                                <div className="px-2 d-hdpi-2:px-vw-2">
                                     {auth?.user?.profile ? (
                                         <>
                                             <div
@@ -77,7 +84,7 @@ const NavbarSidebar = ({
                                                 }`}>
                                                 {getName().string}
                                             </div>
-                                            <div className="text-xs font-semibold">
+                                            <div className="text-xs d-hdpi-2:text-vw-xs font-semibold">
                                                 @{auth?.user?.username}
                                             </div>
                                         </>
@@ -89,9 +96,11 @@ const NavbarSidebar = ({
                             <div className="flex justify-end md:justify-start ">
                                 <button
                                     onClick={() => toggleNav(!navIsOpen)}
-                                    className={`focus:outline-none w-20 h-12
-                                       flex  items-center justify-center text-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
-                                           rtl ? 'rounded-r-lg' : 'rounded-l-lg'
+                                    className={`focus:outline-none w-20 h-12 d-hdpi-2:w-vw-20 d-hdpi-2:h-vw-12
+                                       flex  items-center justify-center text-2xl d-hdpi-2:text-vw-2xl bg-green-400 hover:bg-gray-900 hover:text-white ${
+                                           rtl
+                                               ? 'rounded-r-lg d-hdpi-2:rounded-r-vw-lg'
+                                               : 'rounded-l-lg d-hdpi-2:rounded-l-vw-lg'
                                        }`}>
                                     <i
                                         className={`${
@@ -104,26 +113,26 @@ const NavbarSidebar = ({
                         </div>
                     </div>
                     <div
-                        className={`border-t border-b border-gray-200 pt-8 pb-8 ${
+                        className={`border-t border-b border-gray-200 pt-8 pb-8 d-hdpi-2:pt-vw-8 d-hdpi-2:pb-vw-8 ${
                             handleRowReverse(rtl).rtl
                         }`}>
                         {children}
                     </div>
                     {!auth.isAuthenticated ? (
-                        <div className="px-12 flex items-center mt-8">
+                        <div className="px-12 d-hdpi-2:px-vw-12 flex items-center mt-8 d-hdpi-2:mt-vw-8">
                             <a
                                 target="_blank"
                                 href={process.env.NEXT_PUBLIC_KREATOR_BASE_URL}
-                                className="flex-1 py-3 px-4 rounded-full flex items-center justify-center border-2 border-green-400  hover:border-green-400 ring-4 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400">
+                                className="flex-1 py-3 px-4 d-hdpi-2:py-vw-3 d-hdpi-2:px-vw-4 rounded-full flex items-center justify-center border-2 d-hdpi-2:border border-green-400  hover:border-green-400 ring-4 d-hdpi-2:ring-2 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400">
                                 Become a kreator
                             </a>
                         </div>
                     ) : (
-                        <div className="px-12 flex items-center mt-8">
+                        <div className="px-12 d-hdpi-2:px-vw-12 flex items-center mt-8 d-hdpi-2:mt-vw-8">
                             <a
                                 target="_blank"
                                 href={`${process.env.NEXT_PUBLIC_KREATOR_BASE_URL}/c/experience/all`}
-                                className="flex-1 py-3 px-4 rounded-full flex items-center justify-center border-2 border-green-400  hover:border-green-400 ring-4 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400">
+                                className="flex-1 py-3 d-hdpi-2:py-vw-3 px-4 d-hdpi-2:px-vw-4 rounded-full flex items-center justify-center border-2 d-hdpi-2:border border-green-400  hover:border-green-400 ring-4 d-hdpi-2:ring-2 ring-transparent hover:ring-green-200   hover:bg-green-50 transition-all duration-200 ease-in-out shadow-2xl-green-400">
                                 Switch to Kreator mode
                             </a>
                         </div>

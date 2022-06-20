@@ -5,8 +5,8 @@ const MenuLink = ({
     href,
     type,
     label,
-    lineHeight = 'h-0.5',
-    boxHeight = 'h-8',
+    lineHeight = 'h-0.5 d-hdpi-2:h-vw-0.5',
+    boxHeight = 'h-8 d-hdpi-2:h-vw-8',
     lineColor = 'bg-green-400a bg-green-900 bg-opacity-75',
     textSize = '',
     activeClass = 'text-green-500a text-gray-900 font-semibold'

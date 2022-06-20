@@ -47,7 +47,7 @@ const Purchased = ({
                     username,
                     first,
                     last,
-                    avatar, 
+                    avatar,
                     displayname
                 },
                 content: {
@@ -94,19 +94,19 @@ const Purchased = ({
                 <>
                     <div
                         className={classNames(
-                            'mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40'
+                            'mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 d-hdpi-2:px-vw-40 d-hdpi-2:text-vw-base'
                         )}>
-                        <div className="px-4 mt-12 md:mt-20">
+                        <div className="px-4 mt-12 md:mt-20 d-hdpi-2:mt-vw-20 d-hdpi-2:px-vw-4">
                             <SectionTitle
                                 section={{
                                     title: 'My Purchases'
                                 }}
                                 padding=""
-                                size="text-4xl md:text-5xl"
+                                size="text-4xl md:text-5xl d-hdpi-2:text-vw-5xl"
                                 className=""
                             />
                             {digitalList?.length || guidedList?.length ? (
-                                <div className="mb-12">
+                                <div className="mb-12 d-hdpi-2:mb-vw-12">
                                     Clicking on an experience will open a new
                                     tab and take you to the Konnect Experience
                                     Viewer.
@@ -124,7 +124,7 @@ const Purchased = ({
                                     }}
                                     data={digitalList}
                                     purchasedView={true}
-                                    margins="mb-24"
+                                    margins="mb-16 d-hdpi-2:mb-vw-16"
                                     titleColor="text-green-400"
                                     titleClass=""
                                 />
@@ -138,7 +138,7 @@ const Purchased = ({
                                     }}
                                     data={guidedList}
                                     purchasedView={true}
-                                    margins="mb-24"
+                                    margins="mb-24 d-hdpi-2:mb-vw-4"
                                     titleColor="text-green-400"
                                     titleClass=""
                                 />
@@ -148,9 +148,9 @@ const Purchased = ({
                         <Row>
                             <div
                                 className={classNames(
-                                    'bg-gray-50 rounded-lg  flex w-full h-96 items-center justify-center'
+                                    'bg-gray-50 rounded-lg flex w-full h-96 d-hdpi-2:h-vw-96 items-center justify-center'
                                 )}>
-                                <div className="flex flex-col items-center px-4">
+                                <div className="flex flex-col items-center px-4 d-hdpi-2:px-vw-4">
                                     <div className="text-center">
                                         Seems you don't have any plans yet. How
                                         about we change that?

@@ -229,10 +229,10 @@ const BuyingCardGuide = ({
     return (
         <div
             className={classNames(
-                'relative flex flex-col px-4 xl:px-8 pt-8 pb-2 md:pb-4 xl:pb-8 xl:pt-8 bg-kn-white ',
+                'relative flex flex-col px-4 xl:px-8 pt-8 pb-2 md:pb-4 xl:pb-8 xl:pt-8 bg-kn-white d-hdpi-2:pt-vw-8 d-hdpi-2:pb-vw-8 d-hdpi-2:px-vw-8',
                 mobile
-                    ? 'rounded-t-2xl shadow-cards-top'
-                    : 'rounded-2xl shadow-cards',
+                    ? 'rounded-t-2xl d-hdpi-2:rounded-t-vw-2xl shadow-cards-top'
+                    : 'rounded-2xl d-hdpi-2:rounded-vw-2xl shadow-cards',
                 classes
             )}>
             {!loading && currentVariant ? (
@@ -241,12 +241,12 @@ const BuyingCardGuide = ({
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                             <PillType type="guided" label="Buying Options" />
                         </div>
-                        <div className="flex md:hidden lg:flex flex-col gap-4">
+                        <div className="flex md:hidden lg:flex flex-col gap-4 d-hdpi-2:gap-2">
                             <div
                                 className={classNames(
-                                    'flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4'
+                                    'flex flex-col gap-2 d-hdpi-2:gap-1 rounded-xl d-hdpi-2:rounded-vw-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4'
                                 )}>
-                                <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
+                                <div className="flex items-center gap-2 d-hdpi-2:gap-1 text-2xl d-hdpi-2:text-vw-2xl font-semibold uppercase justify-center ">
                                     <div
                                         className={classNames(
                                             'flex items-center'
@@ -275,17 +275,17 @@ const BuyingCardGuide = ({
                                                 )}`}
                                                 {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
                                             </span>
-                                            <div className="text-sm">
+                                            <div className="text-sm d-hdpi-2:text-vw-sm">
                                                 {currency.symbol}*
                                             </div>
                                         </>
                                     )}
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4 vk">
-                                <div className="flex items-center gap-2 ">
-                                    <i className="ri-calendar-2-line text-xl text-green-500"></i>
-                                    <div className="text-xs uppercase flex-none">
+                            <div className="flex flex-col gap-2 d-hdpi-2:gap-1 rounded-xl d-hdpi-2:rounded-vw-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4 vk d-hdpi-2:px-vw-8 d-hdpi-2:pt-vw-4 d-hdpi-2:pb-vw-4">
+                                <div className="flex items-center gap-2 d-hdpi-2:gap-1">
+                                    <i className="ri-calendar-2-line text-xl d-hdpi-2:text-vw-xl text-green-500"></i>
+                                    <div className="text-xs d-hdpi-2:text-vw-xs uppercase flex-none">
                                         Booking Date
                                     </div>
                                 </div>
@@ -297,7 +297,7 @@ const BuyingCardGuide = ({
                                     modifiersClassNames={modifiersClassNames}>
                                     {({ inputProps, focused }) => (
                                         <div className="relative">
-                                            <div className="ml-4 absolute left-0 top-1/2 transform -translate-y-1/2 text-xs text-gray-600 whitespace-nowrap">
+                                            <div className="ml-4 d-hdpi-2:ml-vw-4 absolute left-0 top-1/2 transform -translate-y-1/2 text-xs d-hdpi-2:text-vw-xs text-gray-600 whitespace-nowrap">
                                                 Check-in
                                             </div>
 
@@ -306,7 +306,7 @@ const BuyingCardGuide = ({
                                                     focused
                                                         ? ' input-focused'
                                                         : 'input',
-                                                    'flex-1 w-full focus:outline-none text-sm h-10 rounded-xl pl-28 pr-4'
+                                                    'flex-1 w-full focus:outline-none text-sm d-hdpi-2:text-vw-sm h-10 d-hdpi-2:h-vw-10 rounded-xl d-hdpi-2:rounded-vw-xl pl-28 pr-4 d-hdpi-2:pl-vw-28 d-hdpi-2:pr-vw-4'
                                                 )}
                                                 {...inputProps}
                                             />
@@ -321,10 +321,10 @@ const BuyingCardGuide = ({
                                     handleChange={updatePeople}
                                     id="price"
                                     iconText="Guests"
-                                    iconClass="text-xs"
-                                    iconPadding="pl-36 pr-2"
+                                    iconClass="text-xs d-hdpi-2:text-vw-xs"
+                                    iconPadding="pl-36 pr-2 d-hdpi-2:pl-vw-36 d-hdpi-2:pr-vw-2"
                                     width="w-full"
-                                    height="h-10"
+                                    height="h-10 d-hdpi-2:h-vw-10"
                                     margins=""
                                     value={currentVariant.quantity}
                                     placeholder=""
@@ -341,18 +341,20 @@ const BuyingCardGuide = ({
                                 width="w-full"
                             />
                         </div>
-                        <div className="hidden md:flex lg:hidden gap-4 ">
-                            <div className="flex flex-col gap-2 w-1/2 justify-between h-max">
+                        <div className="hidden md:flex lg:hidden gap-4 d-hdpi-2:gap-2">
+                            <div className="flex flex-col gap-2 d-hdpi-2:gap-1 w-1/2 justify-between h-max">
                                 <div
                                     className={classNames(
-                                        'flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4'
+                                        'flex flex-col gap-2 d-hdpi-2:gap-1 rounded-xl d-hdpi-2:rounded-vw-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4'
                                     )}>
-                                    <div className="flex items-center gap-2 text-2xl font-semibold uppercase justify-center ">
+                                    <div className="flex items-center gap-2 d-hdpi-2:gap-1 text-2xl d-hdpi-2:text-vw-2xl font-semibold uppercase justify-center ">
                                         <div
                                             className={classNames(
                                                 'flex items-center'
                                             )}>
-                                            <span className="text-base">$</span>
+                                            <span className="text-base d-hdpi-2:text-vw-base">
+                                                $
+                                            </span>
                                             <span className="">
                                                 {formatPrice(
                                                     currentVariant?.price,
@@ -377,7 +379,7 @@ const BuyingCardGuide = ({
                                                     )}`}
                                                     {/* <span className="absolute top-1/2 transform -translate-y-1/2 inset-x-0 h-1 bg-red-500"></span> */}
                                                 </span>
-                                                <div className="text-sm">
+                                                <div className="text-sm d-hdpi-2:text-vw-sm">
                                                     {currency.symbol}*
                                                 </div>
                                             </>
@@ -392,9 +394,9 @@ const BuyingCardGuide = ({
                                     width="w-full"
                                 />
                             </div>
-                            <div className="w-1/2 flex flex-col gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4">
-                                <div className="flex items-center gap-2 ">
-                                    <i className="ri-calendar-2-line text-xl text-green-500"></i>
+                            <div className="w-1/2 flex flex-col gap-2 d-hdpi-2:gap-1 rounded-xl d-hdpi-2:rounded-vw-xl bg-kn-gray-100 px-4 lg:px-8 pt-4 pb-4 d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4">
+                                <div className="flex items-center gap-2 d-hdpi-2:gap-1">
+                                    <i className="ri-calendar-2-line text-xl d-hdpi-2:text-vw-xl text-green-500"></i>
                                     <div className="text-xs uppercase flex-none">
                                         Booking Date
                                     </div>
@@ -445,11 +447,13 @@ const BuyingCardGuide = ({
                             </div>
                         </div>
                         {!mobile && (
-                            <div className="flex flex-col mt-8 px-2 gap-4">
-                                <div className="flex flex-col text-sm">
+                            <div className="flex flex-col mt-8 px-2 gap-4 d-hdpi-2:gap-2 d-hdpi-2:mt-vw-8 d-hdpi-2:px-vw-2">
+                                <div className="flex flex-col text-sm d-hdpi-2:text-vw-sm">
                                     <div className="flex justify-between">
-                                        <div className="flex gap-1">
-                                            <span className="text-base">$</span>
+                                        <div className="flex gap-1 d-hdpi-2:gap-0.5">
+                                            <span className="text-base d-hdpi-2:text-vw-base">
+                                                $
+                                            </span>
                                             <span className="">
                                                 {formatPrice(
                                                     currentVariant?.price,
@@ -465,8 +469,10 @@ const BuyingCardGuide = ({
                                             </span>
                                             <span>guests</span>
                                         </div>
-                                        <div className="flex gap-1">
-                                            <span className="text-base">$</span>
+                                        <div className="flex gap-1 d-hdpi-2:gap-0.5">
+                                            <span className="text-base d-hdpi-2:text-vw-base">
+                                                $
+                                            </span>
                                             <span className="">
                                                 {formatPrice(
                                                     cost,
@@ -480,15 +486,17 @@ const BuyingCardGuide = ({
                                     </div>
                                 </div>
                                 <div className="border-t border-gray-300"></div>
-                                <div className="flex flex-col text-sm font-bold">
+                                <div className="flex flex-col text-sm d-hdpi-2:text-vw-sm font-bold">
                                     <div className="flex justify-between">
-                                        <div className="flex gap-1">
-                                            <span className="text-base">
+                                        <div className="flex gap-1 d-hdpi-2:gap-0.5">
+                                            <span className="text-base d-hdpi-2:text-vw-base">
                                                 Total
                                             </span>
                                         </div>
-                                        <div className="flex gap-1">
-                                            <span className="text-base">$</span>
+                                        <div className="flex gap-1 d-hdpi-2:gap-0.5">
+                                            <span className="text-base d-hdpi-2:text-vw-base">
+                                                $
+                                            </span>
                                             <span className="">
                                                 {formatPrice(
                                                     cost,
@@ -524,33 +532,36 @@ const BuyingCardGuide = ({
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                         <PillType type="guided" label="Buying Options" />
                     </div>
-                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4">
-                        <div className="flex items-center gap-2 justify-center">
+                    <div className="flex flex-col pb-2  rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-4 d-hdpi-2:rounded-vw-xl d-hdpi-2:px-vw-8 d-hdpi-2:py-vw-4 d-hdpi-2:pb-vw-2">
+                        <div className="flex items-center gap-2 d-hdpi-2:gap-1 justify-center">
                             {/* <i className="ri-download-cloud-2-line text-xl text-green-500"></i> */}
-                            <SkeletonText width="w-6" height="h-6" />
-                            <SkeletonText width="w-28" />
+                            <SkeletonText
+                                width="w-6 d-hdpi-2:w-vw-6"
+                                height="h-6 d-hdpi-2:h-vw-6"
+                            />
+                            <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
                             {/* <div className="text-xs uppercase">
                             Digital Access Price
                         </div> */}
                         </div>
 
-                        <div className="justify-center flex items-center gap-2 text-2xl font-semibold uppercase animate-pulse my-4">
-                            <SkeletonText width="w-28" />
-                            <SkeletonText width="w-16" />
+                        <div className="justify-center flex items-center gap-2 d-hdpi-2:gap-1 text-2xl d-hdpi-2:text-vw-2xl font-semibold uppercase animate-pulse my-4 d-hdpi-2:my-vw-4">
+                            <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
+                            <SkeletonText width="w-16 d-hdpi-2:w-vw-16" />
                         </div>
                     </div>
-                    <div className="flex flex-col  gap-4 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-8 mt-4">
-                        <div className="flex items-center gap-2 justify-center ">
-                            <SkeletonText width="w-48" />
+                    <div className="flex flex-col  gap-4 d-hdpi-2:gap-2 rounded-xl bg-kn-gray-100 px-4 lg:px-8 py-8 mt-4 d-hdpi-2:rounded-vw-xl d-hdpi-2:px-vw-8 d-hdpi-2:mt-vw-4 d-hdpi-2:py-vw-8">
+                        <div className="flex items-center gap-2 d-hdpi-2:gap-1 justify-center ">
+                            <SkeletonText width="w-48 d-hdpi-2:w-vw-48" />
                         </div>
-                        <div className="flex items-center gap-2 justify-center ">
-                            <SkeletonText width="w-48" />
+                        <div className="flex items-center gap-2 d-hdpi-2:gap-1 justify-center ">
+                            <SkeletonText width="w-48 d-hdpi-2:w-vw-48" />
                         </div>
                     </div>
                     <div
                         className={classNames(
                             'h-full flex items-center flex-col justify-between',
-                            'mt-4'
+                            'mt-4 d-hdpi-2:mt-vw-4'
                         )}>
                         <SkeletonButton width="w-full" />
 
@@ -558,18 +569,18 @@ const BuyingCardGuide = ({
                     </div>
                     {!mobile && (
                         <>
-                            <div className="py-6 px-2">
-                                <div className="flex flex-col gap-3 text-xs">
-                                    <SkeletonText width="w-28" />
-                                    <SkeletonText width="w-20" />
+                            <div className="py-6 px-2 d-hdpi-2:py-vw-9 d-hdpi-2:px-vw-2">
+                                <div className="flex flex-col gap-3 d-hdpi-2:gap-1.5 text-xs d-hdpi-2:text-vw-xs">
+                                    <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
+                                    <SkeletonText width="w-20 d-hdpi-2:w-vw-20" />
                                 </div>
                             </div>
-                            <div className="border-b border-green-600 border-opacity-20 pb-4 mt-4 px-2">
+                            <div className="border-b border-gray-300 border-opacity-50 pb-4 mt-4 px-2 d-hdpi-2:pb-vw-4 d-hdpi-2:mt-vw-4 d-hdpi-2:px-vw-2">
                                 <p className="">{desc}</p>
                             </div>
-                            <div className="pt-6 px-2">
-                                <div className="flex flex-col gap-3 text-xs">
-                                    <SkeletonText width="w-28" />
+                            <div className="pt-6 px-2 d-hdpi-2:pt-vw-6 d-hdpi-2:px-vw-2">
+                                <div className="flex flex-col gap-3 d-hdpi-2:gap-1.5 text-xs d-hdpi-2:text-vw-xs">
+                                    <SkeletonText width="w-28 d-hdpi-2:w-vw-28" />
                                 </div>
                             </div>
                         </>

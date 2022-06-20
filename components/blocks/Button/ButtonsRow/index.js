@@ -22,7 +22,7 @@ const ButtonsRow = ({
     return (
         <>
             <div
-                className={`px-4 flex flex-row flex-wrap mt-5 mb-5 ${classes}`}>
+                className={`px-4 d-hdpi-2:px-vw-4 flex flex-row flex-wrap mt-5 d-hdpi-2:mt-vw-4 mb-5 d-hdpi-2:mb-vw-4 ${classes}`}>
                 {type === 'exception' ? (
                     <Exception items={items} handleClick={handleClick} />
                 ) : (

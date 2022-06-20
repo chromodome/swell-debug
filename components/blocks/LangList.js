@@ -89,7 +89,7 @@ absolute inset-y-0 ${handleRowReverse(rtl).left}-0 flex items-center ${
                                                                 ).pl
                                                             }-3`}>
                                                             <CheckIcon
-                                                                className="w-5 h-5"
+                                                                className="w-5 h-5 d-hdpi-2:w-vw-w-vw-6 d-hdpi-2:w-vw-h-vw-6"
                                                                 aria-hidden="true"
                                                             />
                                                         </span>

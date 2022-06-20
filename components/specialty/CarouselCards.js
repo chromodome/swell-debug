@@ -41,7 +41,12 @@ const CarouselCards = ({
     return (
         <div className="">
             <Row mainClasses={useRow ? undefined : ''}>
-                <div className={useRow ? 'mb-4 md:px-4' : ''}>
+                <div
+                    className={
+                        useRow
+                            ? 'mb-4 md:px-4 d-hdpi-2:mb-vw-4 d-hdpi-2:px-vw-4'
+                            : ''
+                    }>
                     <Buttons__GroupNextPrev
                         nextEnabled={nextBtnEnabled}
                         nextAction={scrollNext}

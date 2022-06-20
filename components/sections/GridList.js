@@ -23,8 +23,9 @@ const GridList = ({
     purchasedView = false,
     missing = false,
     margins,
-    titleClass = 'mb-8',
-    titleColor
+    titleClass = 'mb-8 d-hdpi-2:mb-vw-8',
+    titleColor,
+    filteredCount
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -40,8 +41,12 @@ const GridList = ({
     return (
         <>
             <div
-                className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 ${
-                    margins ? margins : sectionTitles ? 'mt-24 mb-12' : 'mb-12'
+                className={`mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40 d-hdpi-2:px-vw-40 ${
+                    margins
+                        ? margins
+                        : sectionTitles
+                        ? 'mt-24 mb-12 d-hdpi-2:mt-vw-24 d-hdpi-2:mb-vw-12'
+                        : 'mb-12 d-hdpi-2:mb-vw-12'
                 }`}>
                 <div className="flex justify-between">
                     {sectionTitles && (
@@ -52,9 +57,9 @@ const GridList = ({
                         />
                     )}
                     {btnPos && btnAction === 'url' && !purchasedView && (
-                        <div className="hidden md:block pr-4">
+                        <div className="hidden md:block pr-4 d-hdpi-2:pr-vw-4">
                             <ButtonLoad
-                                width="w-40"
+                                width="w-40 d-hdpi-2:w-vw-40"
                                 handleClick={handleClick}
                                 isLoading={loadMoreData}
                                 label={'Explore more'}
@@ -66,23 +71,29 @@ const GridList = ({
                 {!dataLoading ? (
                     <>
                         <div className="grid grid-cols-1 px-2 lg-px-0 gap-y-0 md:gap-y-0 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                            {data.map((item) => {
-                                return missing && purchasedView ? (
-                                    <ResultCardMissing
-                                        missing={true}
-                                        purchasedView={purchasedView}
-                                        myKey={item.id}
-                                        data={item}
-                                    />
-                                ) : (
-                                    <ResultCard
-                                        missing={true}
-                                        purchasedView={purchasedView}
-                                        myKey={item.id}
-                                        data={item}
-                                    />
-                                );
-                            })}
+                            {data
+                                .filter((item, index) => {
+                                    if (filteredCount)
+                                        return index <= filteredCount - 1;
+                                    else return true;
+                                })
+                                .map((item) => {
+                                    return missing && purchasedView ? (
+                                        <ResultCardMissing
+                                            missing={true}
+                                            purchasedView={purchasedView}
+                                            myKey={item.id}
+                                            data={item}
+                                        />
+                                    ) : (
+                                        <ResultCard
+                                            missing={true}
+                                            purchasedView={purchasedView}
+                                            myKey={item.id}
+                                            data={item}
+                                        />
+                                    );
+                                })}
                         </div>
                         {/* <div className="flex flex-wrap -mx-1a lg:-mx-4a">
                             {data.map((item) => {

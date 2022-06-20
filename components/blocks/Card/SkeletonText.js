@@ -3,8 +3,8 @@ import classNames from 'classnames';
 const SkeletonText = ({
     color = 'bg-gray-200',
     rounded = 'rounded-full',
-    height = 'h-3',
-    width = 'w-48',
+    height = 'h-3 d-hdpi-2:h-vw-3',
+    width = 'w-48 d-hdpi-2:w-vw-48',
     pulse = false,
     circle
 }) => {

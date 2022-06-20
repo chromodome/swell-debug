@@ -3,24 +3,24 @@ import classNames from 'classnames';
 const socialIcons = {
     instagram: {
         type: 'icon',
-        value: 'ri-instagram-line text-xl',
+        value: 'ri-instagram-line text-xl d-hdpi-2:text-vw-xl',
         order: 1
     },
     facebook: {
         type: 'icon',
-        value: 'ri-facebook-fill text-xl',
+        value: 'ri-facebook-fill text-xl  d-hdpi-2:text-vw-xl',
         order: 2
     },
 
     youtube: {
         type: 'icon',
-        value: 'ri-youtube-line text-2xl',
+        value: 'ri-youtube-line text-2xl  d-hdpi-2:text-vw-2xl',
         order: 3
     },
 
     twitter: {
         type: 'icon',
-        value: 'ri-twitter-fill text-xl',
+        value: 'ri-twitter-fill text-xl  d-hdpi-2:text-vw-xl',
         order: 4
     },
     tiktok: {
@@ -38,7 +38,7 @@ const socialIcons = {
 
 const SocialMediaKreator = ({ social, preset = 'default' }) => {
     return (
-        <div className="flex items-center gap-2 text-xl">
+        <div className="flex items-center gap-2 text-xl d-hdpi-2:gap-1 d-hdpi-2:text-vw-xl">
             {social?.website && (
                 <SocialLink social={social} item="website" preset={preset} />
             )}
@@ -89,18 +89,20 @@ const SocialLink = ({ social, item, preset = 'default' }) => {
             noreferrer
             href={social[item]}
             className={classNames(
-                'border-2',
+                'border-2 d-hdpi-2:border',
                 colorPresets[preset].textColor,
                 colorPresets[preset].hoverTextColor,
 
                 socialIcons[item].type !== 'icon'
-                    ? `rounded-full ${colorPresets[preset].borderColor} ${colorPresets[preset].hoverBorderColor} flex h-6 px-2 items-center -mt-1`
+                    ? `rounded-full ${colorPresets[preset].borderColor} ${colorPresets[preset].hoverBorderColor} flex h-6 d-hdpi-2:h-vw-6 d-hdpi-2:px-vw-2 px-2 items-center -mt-1`
                     : 'border-transparent'
             )}>
             {socialIcons[item]?.type === 'icon' ? (
                 <i className={classNames(socialIcons[item]?.value)}></i>
             ) : (
-                <span className="text-xs">{socialIcons[item]?.value}</span>
+                <span className="text-xs d-hdpi-2:text-vw-xs">
+                    {socialIcons[item]?.value}
+                </span>
             )}
         </a>
     ) : null;

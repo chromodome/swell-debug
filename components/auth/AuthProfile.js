@@ -35,7 +35,7 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
         const profile = {
             ...values,
             country: selectedCountry.id,
-            user: auth.user._id,
+            user: auth.user._id
         };
         props.createProfile(profile);
         actions.setSubmitting(false);
@@ -46,7 +46,6 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
         // props.clearLoginErrors();
         // animateIn('.kn-slide');
         // disableBodyScroll(targetElement, { reserveScrollBarGap: true });
-
         // return () => {
         //     clearAllBodyScrollLocks();
         // };
@@ -59,7 +58,7 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
 
     const [selectedCountry, setSelectedCountry] = useState({
         id: 'US',
-        name: 'USA',
+        name: 'USA'
     });
 
     // if (auth.isAuthenticated == null) {
@@ -71,8 +70,8 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
             // <Redirect to='/c' />
             <div>helo </div>
         ) : (
-            <div 
-                // className='relative kn-slide h-screen bg-white'
+            <div
+            // className='relative kn-slide h-screen bg-white'
             >
                 {/* <div 
                     // className=' relative px-12 py-12 lg:fixed w-full lg:w-7/12 lg:min-h-screen inset-0 lg:px-16 xl:px-32 2xl:px-48 lg:py-32'
@@ -82,24 +81,30 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
                         className='object-cover w-full h-80 lg:h-full rounded-3xl overflow-hidden shadow-3xl '
                     />
                 </div> */}
-                <div 
+                <div
                     // className='w-full lg:w-5/12 ml-auto rounded-3xl lg:rounded-none bg-white shadow-2xl-green-600-rev lg:shadow-2xl-green-600'
-                    style={{width: '100%'}}
-                >
+                    style={{ width: '100%' }}>
                     <div
-                        // className={`flex flex-col px-12 lg:px-16 xl:px-24 2xl:px-32  lg:h-screen  overflow-y-scroll`}
+                    // className={`flex flex-col px-12 lg:px-16 xl:px-24 2xl:px-32  lg:h-screen  overflow-y-scroll`}
                     >
                         <div
-                            className={`flex items-center gap-3 ${
-                                handleRowReverse(rtl).flex
-                            }`}
-                        >
-                            {/* <KLogoIcon /> */}
-                            {/* <KLogoText /> */}
-                            {/* <span className='text-xs mt-1'>(for Kreators)</span> */}
+                            className={`flex items-center gap-3 flex-row d-hdpi-2:gap-1.5`}>
+                            <img
+                                src="/assets/media/kn_logoicon.svg"
+                                className="h-12 d-hdpi-2:h-vw-12"
+                            />
+
+                            <img
+                                className="h-6 d-hdpi-2:h-vw-6"
+                                src="/assets/media/kn_logotext.svg"
+                            />
+
+                            <div className="rounded-full bg-green-400 px-1 text-xxs d-hdpi-2:text-vw-xxs d-hdpi-2:px-vw-1.5 d-hdpi-2:h-vw-4 h-4 flex items-center mt-1.5 d-hdpi-2:mt-vw-1.5">
+                                beta
+                            </div>
                         </div>
-                        <div className='flex'>
-                            <div className='flex-shrink-0 text-transparent bg-clip-text bg-gradient-to-tl from-gray-900 via-blue-500 to-green-400 text-2xl font-bold tracking-tighter mt-10 '>
+                        <div className="flex">
+                            <div className="flex-shrink-0 text-transparent bg-clip-text bg-gradient-to-tl from-gray-900 via-blue-500 to-green-400 text-2xl d-hdpi-2:text-vw-2xl font-bold tracking-tighter mt-10 d-hdpi-2:mt-vw-10 ">
                                 Finish your profile
                             </div>
                         </div>
@@ -107,7 +112,7 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
                             <Formik
                                 initialValues={{
                                     first: '',
-                                    last: '',
+                                    last: ''
                                 }}
                                 validationSchema={Yup.object({
                                     first: Yup.string()
@@ -127,18 +132,17 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
                                             regexString,
                                             ui.validation.lettersAllowed[lang]
                                         )
-                                        .required(ui.validation.required[lang]),
+                                        .required(ui.validation.required[lang])
                                 })}
-                                onSubmit={handleSubmit}
-                            >
+                                onSubmit={handleSubmit}>
                                 {(props) => (
-                                    <Form id='profileForm'>
-                                        <div className='flex flex-row lg:flex-col mt-6 gap-12 lg:gap-0'>
-                                            <div className='w-1/2 lg:w-full flex-1 flex flex-col'>
-                                                <div className='flex flex-col md:flex-row w-full gap-4 mb-4'>
+                                    <Form id="profileForm">
+                                        <div className="flex flex-row lg:flex-col mt-6 gap-12 lg:gap-0">
+                                            <div className="w-1/2 lg:w-full flex-1 flex flex-col">
+                                                <div className="flex flex-col md:flex-row w-full gap-4 mb-4 d-hdpi-2:gap-2 d-hdpi-2:mb-vw-4">
                                                     <FormIkInput
-                                                        name='first'
-                                                        type='text'
+                                                        name="first"
+                                                        type="text"
                                                         placeholder={
                                                             ui.forms.firstname[
                                                                 lang
@@ -147,8 +151,8 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
                                                     />
 
                                                     <FormIkInput
-                                                        name='last'
-                                                        type='text'
+                                                        name="last"
+                                                        type="text"
                                                         placeholder={
                                                             ui.forms.lastname[
                                                                 lang
@@ -163,28 +167,29 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
                                                     handleChange={
                                                         setSelectedCountry
                                                     }
-                                                    textClass={'text-sm'}
+                                                    textClass={
+                                                        'text-sm d-hdpi-2:text-vw-sm'
+                                                    }
                                                 />
 
                                                 <ButtonLoad
                                                     // handleClick={handleClick}
                                                     isLoading={auth.loading}
                                                     label="Let's go!"
-                                                    width='w-full'
+                                                    width="w-full"
                                                     // handleClick={handleSubmit}
-                                                    form='profileForm'
-                                                    type='submit'
+                                                    form="profileForm"
+                                                    type="submit"
                                                 />
                                             </div>
-                                            <div className='flex-1 flex flex-col -mt-12 lg:mt-0'>
-                                                <div className='flex justify-center items-center mt-8 text-sm gap-2'>
+                                            <div className="flex-1 flex flex-col -mt-12 lg:mt-0">
+                                                <div className="flex justify-center items-center mt-8 text-sm gap-2 d-hdpi-2:mt-vw-8 d-hdpi-2:text-vw-sm d-hdpi-2:gap-1">
                                                     <span>
                                                         Not your account?
                                                     </span>
                                                     <button
-                                                        className='focus:outline-none text-base text-green-400 font-medium'
-                                                        onClick={handleLogout}
-                                                    >
+                                                        className="focus:outline-none text-base text-green-400 font-medium d-hdpi-2:text-vw-base"
+                                                        onClick={handleLogout}>
                                                         Log out
                                                     </button>
                                                 </div>
@@ -208,7 +213,7 @@ const AuthProfile = ({ auth, globalState: { lang }, ...props }) => {
 
 const mapStateToProps = (state) => ({
     globalState: state.globalState,
-    auth: state.auth,
+    auth: state.auth
 });
 
 function mapDispatchToProps(dispatch) {
@@ -216,7 +221,7 @@ function mapDispatchToProps(dispatch) {
         {
             createProfile,
             logout,
-            clearLoginErrors,
+            clearLoginErrors
         },
         dispatch
     );
