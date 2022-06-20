@@ -28,7 +28,7 @@ const Showcase = ({
         ) : null;
     return !dataLoading ? (
         <div
-            className={`w-full md:h-128 d-hdpi-2:h-vw-128 relative flex justify-between flex-col-reverse md:flex-row`}>
+            className={`w-full lg:h-128 d-hdpi-2:h-vw-128 relative flex justify-between flex-col-reverse lg:flex-row`}>
             {/* div that will house bg + overlay */}
             <div className="absolute inset-0 bg-gray-200 overflow-hidden">
                 <img
@@ -61,9 +61,9 @@ const Showcase = ({
             )}
             {true && (
                 <div
-                    className={`z-100 mb-12 px-5 md:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 d-hdpi-2:pl-vw-40 d-hdpi-2:pr-vw-20  w-full md:w-1/2 flex-none`}>
+                    className={`z-100 mb-12 px-5 lg:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 d-hdpi-2:pl-vw-40 d-hdpi-2:pr-vw-20  w-full lg:w-1/2 flex-none`}>
                     <div
-                        className={`z-100 px-4 mt-8 md:mt-20 d-hdpi-2:px-vw-4 d-hdpi-2:mt-vw-20`}>
+                        className={`z-100 px-4 mt-8 lg:mt-20 d-hdpi-2:px-vw-4 d-hdpi-2:mt-vw-20`}>
                         {!children ? (
                             <>
                                 {data?.username && (
@@ -85,7 +85,7 @@ const Showcase = ({
                                 <div
                                     className={`${
                                         dark ? 'text-white' : 'text-gray-800'
-                                    } mt-2 text-xl md:text-2xl lg:text-4xl d-hdpi-2:text-vw-4xl md:font-bold lg:leading-tight mb-8 d-hdpi-2:mb-vw-8 whitespace-normal`}>
+                                    } mt-2 text-xl lg:text-2xl lg:text-4xl d-hdpi-2:text-vw-4xl lg:font-bold lg:leading-tight mb-8 d-hdpi-2:mb-vw-8 whitespace-normal`}>
                                     {data.headline}
                                 </div>
                                 {data.description && (
@@ -119,13 +119,24 @@ const Showcase = ({
                 </div>
             )}
             {collection != 'showcase' && (
-                <div className="z-50 flex-none md:w-1/2 h-64 md:h-full overflow-hidden ">
-                    <img
-                        alt="Placeholder"
-                        className="rounded-b-2xl object-cover w-full h-full transform md:rounded-l-full md:scale-150 md:translate-x-1/4"
-                        src={data.image}
-                    />
-                </div>
+                <>
+                    <div
+                        className="hidden lg:block z-50 flex-none lg:w-1/2 h-64 lg:h-full overflow-hidden rounded-l-fulla "
+                        style={{ borderRadius: '100px 0 0 100px' }}>
+                        <img
+                            alt="Placeholder"
+                            className="object-cover d-hdpi-2:object-right lg:object-right w-full h-full transform lg:rounded-l-fulla lg:scale-150a 2xl:translate-x-0 "
+                            src={data.image}
+                        />
+                    </div>
+                    <div className=" lg:hidden z-50 flex-none lg:w-1/2 h-64 lg:h-full overflow-hidden rounded-b-2xl">
+                        <img
+                            alt="Placeholder"
+                            className="rounded-b-2xl object-cover lg:object-right w-full h-full transform lg:rounded-l-fulla lg:scale-150a lg:translate-x-0"
+                            src={data.image}
+                        />
+                    </div>
+                </>
             )}
         </div>
     ) : (

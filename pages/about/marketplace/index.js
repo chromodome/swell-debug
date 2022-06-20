@@ -23,7 +23,7 @@ const AboutMarketplace = () => {
 
     return (
         <Layout>
-            <div className="w-full py-8 lg:py-16 d-hdpi-2:py-vw-16 landing-gradient-a bg-green-100 ">
+            <div className="w-full py-8 lg:py-16 d-hdpi-2:py-vw-16 landing-gradient bg-green-100a ">
                 <div
                     className={`relative 
                              md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-0 xl:py-8 px-4 xl:px-16 2xl:px-0 d-hdpi-2:max-w-screen-2/3 d-hdpi-2:px-0 d-hdpi-2:py-vw-8`}>
@@ -63,7 +63,7 @@ const AboutMarketplace = () => {
             <div className="w-full bg-gray-100 ">
                 <div
                     className={`relative 
-                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-16 xl:py-32 px-4 xl:px-16 2xl:px-0 d-hdpi-2:max-w-screen-2/3 d-hdpi-2:py-vw-32 d-hdpi-2:px-0`}>
+                             md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto bg-contain bg-no-repeat bg-center py-16 xl:py-32 px-4 xl:px-16 2xl:px-0 d-hdpi-2:max-w-screen-2/3 d-hdpi-2:py-vw-32`}>
                     <div className="flex flex-col-reverse lg:flex-row-reverse justify-between items-center mb-8 md:px-16 lg:px-0 md:gap-16 2xl:gap-32 d-hdpi-2:gap-16">
                         <div className="lg:w-1/2 flex flex-col px-8 md:px-0 d-hdpi-2:px-vw-8">
                             <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
@@ -110,14 +110,14 @@ const AboutMarketplace = () => {
                     <div className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                         <Pill__Logo />
                     </div>
-                    <div className="w-full flex flex-col px-0 md:px-8 lg:px-0">
+                    <div className="w-full flex flex-col px-0 md:px-8 lg:px-0 ">
                         <GradientTitle
                             label="How does the Marketplace work?"
                             textSize="text-3xl md:text-6xl d-hdpi-2:text-vw-6xl"
                             justify="justify-center"
                         />
 
-                        <div className="max-w-lg w-full mx-auto flex items-center border-b border-gray-200 mb-8 md:mb-0 mt-4 md:mt-12 d-hdpi-2:mt-vw-12 d-hdpi-2:max-w-screen-1/3">
+                        <div className="max-w-lg w-full mx-auto flex items-center border-b border-gray-200 mb-8 md:mb-0 mt-4 md:mt-12 d-hdpi-2:mt-vw-12 d-hdpi-2:max-w-screen-1/3 ">
                             <div
                                 onClick={() => setTab('travel')}
                                 className={`cursor-pointer w-1/2 h-12 flex items-center border-b-4 px-4 uppercase md:tracking-wider text-sm d-hdpi-2:text-vw-sm d-hdpi-2:border-b-2 d-hdpi-2:h-vw-12 d-hdpi-2:px-vw-4 ${
@@ -139,7 +139,7 @@ const AboutMarketplace = () => {
                         </div>
                         <div className="w-full rounded-3xl bg-white overflow-hidden d-hdpi-2:rounded-vw-3xl">
                             <div
-                                className={`p-4 xl:pb-16 flex flex-nowrap gap-8 md:gap-8 lg:gap-8 xl:gap-32 transform-gpu transition-all duration-500 ease-in-out-expo-hard d-hdpi-2:gap-16 d-hdpi-2:pb-vw-16 ${
+                                className={`p-4 xl:pb-16 xl:px-16 flex flex-nowrap gap-8 md:gap-8 lg:gap-8 xl:gap-32 transform-gpu transition-all duration-500 ease-in-out-expo-hard d-hdpi-2:gap-16 d-hdpi-2:px-vw-16 ${
                                     tab === 'travel'
                                         ? containerClasses.on
                                         : containerClasses.off
@@ -236,7 +236,7 @@ const AboutMarketplace = () => {
                                 width="md:w-96 d-hdpi-2:w-vw-96"
                             />
                         </div>
-                        <div className="lg:w-3/5 px-4 md:px-0 lg:pl-32 d-hdpi-2:pl-vw-24">
+                        <div className="lg:w-3/5 px-4 md:px-0 xl:pl-44 d-hdpi-2:pl-vw-36">
                             <img src="/assets/media/marketplace-02@2x.png" />
                         </div>
                     </div>
