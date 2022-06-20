@@ -156,7 +156,7 @@ const Header = ({
                             <MenuLink label={'Home'} href="/" />
                             <MenuLink
                                 label={'About us'}
-                                href="/about/konnect"
+                                href="`/help/article/1001"
                             />
                             <MenuLink
                                 label={'The Marketplace'}
