@@ -132,7 +132,7 @@ const Showcase = ({
                     <div className=" lg:hidden z-50 flex-none lg:w-1/2 h-64 lg:h-full overflow-hidden rounded-b-2xl">
                         <img
                             alt="Placeholder"
-                            className="rounded-b-2xl object-cover lg:object-right w-full h-full transform lg:rounded-l-fulla lg:scale-150a lg:translate-x-0"
+                            className="rounded-b-2xl object-cover object-right w-full h-full transform "
                             src={data.image}
                         />
                     </div>
