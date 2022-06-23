@@ -61,7 +61,7 @@ const Showcase = ({
             )}
             {true && (
                 <div
-                    className={`z-100 mb-12 px-5 lg:px-9 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 d-hdpi-2:pl-vw-40 d-hdpi-2:pr-vw-20  w-full lg:w-1/2 flex-none`}>
+                    className={`z-100 mb-12 px-5 lg:px-12 xl:pl-24 xl:pr-12 2xl:pl-40 2xl:pr-20 d-hdpi-2:pl-vw-40 d-hdpi-2:pr-vw-20  w-full lg:w-screen-4/7 flex-none`}>
                     <div
                         className={`z-100 px-4 mt-8 lg:mt-20 d-hdpi-2:px-vw-4 d-hdpi-2:mt-vw-20`}>
                         {!children ? (
@@ -85,7 +85,7 @@ const Showcase = ({
                                 <div
                                     className={`${
                                         dark ? 'text-white' : 'text-gray-800'
-                                    } mt-2 text-xl lg:text-2xl lg:text-4xl d-hdpi-2:text-vw-4xl lg:font-bold lg:leading-tight mb-8 d-hdpi-2:mb-vw-8 whitespace-normal`}>
+                                    } mt-2 text-xl lg:text-2xla lg:text-4xl d-hdpi-2:text-vw-4xl lg:font-bold lg:leading-tight mb-8 d-hdpi-2:mb-vw-8 whitespace-normal`}>
                                     {data.headline}
                                 </div>
                                 {data.description && (
@@ -121,7 +121,7 @@ const Showcase = ({
             {collection != 'showcase' && (
                 <>
                     <div
-                        className="hidden lg:block z-50 flex-none lg:w-1/2 h-64 lg:h-full overflow-hidden rounded-l-fulla "
+                        className="hidden lg:block z-50 flex-none lg:w-screen-3/7 h-64 lg:h-full overflow-hidden rounded-l-fulla "
                         style={{ borderRadius: '100px 0 0 100px' }}>
                         <img
                             alt="Placeholder"

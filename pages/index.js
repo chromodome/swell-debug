@@ -21,6 +21,7 @@ import Community from '@/components/sections/Community';
 import SliderShowcases from '@/components/sections/SliderShowcases';
 import useWindowSize from '@/hooks/useWindowSize';
 import { getTrendingGridColumns } from '@/helpers/responsive';
+import CallToAction from '@/components/sections/CallToAction';
 const LandingPage = ({
     globalState: {
         lang,
@@ -52,7 +53,7 @@ const LandingPage = ({
                 titleClass=""
                 filteredCount={getTrendingGridColumns(windowSize.width)}
             />
-
+            <SliderShowcases data={dataLanding?.data?.features} />
             <Row>
                 <div className="">
                     <SliderDestinations
@@ -62,6 +63,7 @@ const LandingPage = ({
                         }
                         data={destinationList || []}
                         tagRatio="portrait2"
+                        margins="mt-8 mb-0 lg:mt-12 lg:mb-16 d-hdpi-2:mt-vw-12 d-hdpi-2:mb-vw-16"
                     />
                 </div>
             </Row>
@@ -92,8 +94,9 @@ const LandingPage = ({
                 pill="top"
                 data={randomItem(dataLanding?.data?.features)}
             /> */}
-            <SliderShowcases data={dataLanding?.data?.features} />
+
             <Community />
+            <CallToAction />
 
             {/* <SliderCollections
                     sectionTitles={translations[lang].sections.curatedCollections}

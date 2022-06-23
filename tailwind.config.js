@@ -557,6 +557,8 @@ module.exports = {
                 'screen-4/5': '80vw',
                 'screen-5/6': '85vw',
                 'screen-90': '90vw',
+                'screen-3/7': '45vw',
+                'screen-4/7': '55vw',
                 'screen-95': '95vw',
                 'screen-100': '100vw',
                 'parent-120': '120%',
