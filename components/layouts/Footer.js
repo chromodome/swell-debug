@@ -13,7 +13,7 @@ const Footer = ({ isBody = true, isBottomBar = true }) => {
                             <div className="flex items-center gap-3 -mt-2">
                                 <img
                                     className="h-8 d-hdpi-2:h-vw-8"
-                                    src="/assets/media/kn_logoicon_white.svg"
+                                    src="/assets/media/kn_logoicon_new.svg"
                                     // height={45}
                                     // width={31}
                                 />

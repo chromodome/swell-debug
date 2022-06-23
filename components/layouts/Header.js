@@ -137,7 +137,7 @@ const Header = ({
                                 }`}>
                                 {/* <img src="/assets/media/kn_logoicon.svg" /> */}
                                 <img
-                                    src="/assets/media/kn_logoicon_black.svg"
+                                    src="/assets/media/kn_logoicon_new.svg"
                                     className="d-hdpi-2:h-vw-12"
                                 />
 

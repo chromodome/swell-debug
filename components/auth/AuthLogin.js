@@ -42,7 +42,7 @@ const AuthLogin = ({
                         <div
                             className={`flex items-center gap-3 flex-row d-hdpi-2:gap-1.5`}>
                             <img
-                                src="/assets/media/kn_logoicon.svg"
+                                src="/assets/media/kn_logoicon_new_green.svg"
                                 className="h-12 d-hdpi-2:h-vw-12"
                             />
 
