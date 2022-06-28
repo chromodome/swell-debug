@@ -3,22 +3,7 @@
         
         "baseUrl": ".",
         "paths": {
-            "@/swell/*": ["swell/*"],
-            "@/components/*": ["components/*"],
-            "@/blocks/*": ["components/blocks/*"],
-            "@/sections/*": ["components/sections/*"],
-            "@/layouts/*": ["components/layouts/*"],
-            "@/specialty/*": ["components/specialty/*"],
-            "@/styles/*": ["styles/*"],
-            "@/pages/*": ["pages/*"],
-            "@/helpers/*": ["helpers/*"],
-            "@/hooks/*": ["hooks/*"],
-            "@/constants/*": ["constants/*"],
-            "@/context/*": ["context/*"],
-            "@/config/*": ["config/*"],
-            "@/mockdata/*": ["mockdata/*"],
-            "@/apiServices/*": ["helpers/apiServices/*"],
-            "@/store/*": ["store/*"]
+            
         }
     }
     

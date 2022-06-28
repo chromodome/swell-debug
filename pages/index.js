@@ -1,11 +1,25 @@
+/*
+
+In this file the connection is refused when the component mounts and tries to connect to swell to create the cart
+
+
+
+*/
+
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import ToastMessage from '@/components/blocks/ToastMessage';
-import ExpSubsection from '@/components/blocks/ExpSubsection';
-import { capitalize, kreatorName, pluralize, formatPrice, parseCart, reduxMimic } from '@/helpers/FEutils';
-import swell from '@/swell/swelljs.js';
-import ButtonLoad from '@/components/blocks/ButtonLoad';
+import ToastMessage from '../components/ToastMessage';
+import ExpSubsection from '../components/ExpSubsection';
+import {
+    capitalize,
+    kreatorName,
+    pluralize,
+    formatPrice,
+    parseCart,
+    reduxMimic
+} from '../helpers/FEutils';
+import swell from '../swell/swelljs.js';
 import classNames from 'classnames';
 
 const currencyOptions = {
@@ -30,9 +44,10 @@ const Checkout = () => {
         first,
         description,
         price,
-        grand_total,
+        grand_total
     } = theProduct;
 
+    // Toast Message to show error
     const pushMessage = (msg) => {
         let message = '';
         let icon = '😕';
@@ -52,52 +67,14 @@ const Checkout = () => {
         );
     };
 
-    /////////////////
-    const tokenize = async () => {
-        setProcessing(true);
-        await swell.payment.tokenize({
-            card: {
-                onSuccess: () => {
-                    console.log('tokenize success');
-                    placeOrder();
-                },
-                onError: (err) => {
-                    setProcessing(false);
-                    pushMessage(err);
-                }
-            }
-        });
-    };
-
-    const placeOrder = async () => {
-        try {
-            await swell.cart.update({
-                account: {
-                    email: 'subscription@viakonnect.com'
-                }
-            });
-
-            await swell.cart.submitOrder();
-
-            router.push('/thanks');
-
-        } catch (err) {
-            setProcessing(false);
-            pushMessage(err);
+    // on mount create the cart
+    useEffect(() => {
+        if (isReady) {
+            createCart();
         }
-    };
+    }, []);
 
-    const createCart = async () => {
-        await swell.cart.setItems([]) // reset cart
-        const cart = await swell.cart.addItem({ // Create carts
-            product_id: '625b9bbddaaf7d596d9544d8',
-            quantity: 1
-        });
-
-        setTheProduct(parseCart(reduxMimic(cart))) // Parse Cart
-        setLoadingCart(false);
-    };
-
+    // When loading cart state changes create the stripe elements
     useEffect(() => {
         if (isReady && !loadingCart) {
             swell.payment.createElements({
@@ -125,19 +102,61 @@ const Checkout = () => {
                                 fontSize: '16px'
                             }
                         }
-                    },
+                    }
                 }
             });
         }
     }, [loadingCart]);
 
-    useEffect(() => {
-        if(isReady) {
-            createCart();
+    // Create Cart FN
+    const createCart = async () => {
+        await swell.cart.setItems([]); // reset cart
+        const cart = await swell.cart.addItem({
+            // Create carts
+            product_id: '625b9bbddaaf7d596d9544d8',
+            quantity: 1
+        });
+
+        setTheProduct(parseCart(reduxMimic(cart))); // Parse Cart
+        setLoadingCart(false);
+    };
+
+    // Tokenization
+    const tokenize = async () => {
+        setProcessing(true);
+        await swell.payment.tokenize({
+            card: {
+                onSuccess: () => {
+                    console.log('tokenize success');
+                    placeOrder();
+                },
+                onError: (err) => {
+                    setProcessing(false);
+                    pushMessage(err);
+                }
+            }
+        });
+    };
+
+    // When Confirm and Pay button is pressed
+    const placeOrder = async () => {
+        try {
+            await swell.cart.update({
+                account: {
+                    email: 'subscription@viakonnect.com'
+                }
+            });
+
+            await swell.cart.submitOrder();
+
+            router.push('/thanks');
+        } catch (err) {
+            setProcessing(false);
+            pushMessage(err);
         }
-    }, []);
+    };
 
-
+    // JSX below
     return (
         <>
             <div>
@@ -146,7 +165,7 @@ const Checkout = () => {
                         style={{ display: processing ? 'none' : 'block' }}
                         className={` mb-12a mt-12 lg:mt-12 mx-auto px-5 md:px-9 lg:px-12 xl:px-241 2xl:px-401 xl:max-w-7xl d-hdpi-2:max-w-screen-2/3 d-hdpi-2:px-vw-9 d-hdpi-2:mt-vw-12 d-hdpi-2:text-vw-base`}>
                         <div className={``}>
-                            <div className="inline-block text-transparent bg-clip-text bg-gradient-to-l from-blue-600 via-green-400 to-green-400 font-bold text-3xl tracking-tight leading-none pb-8 d-hdpi-2:text-vw-3xl d-hdpi-2:pb-vw-8">
+                            <div className="inline-block text-green-400 font-bold text-3xl tracking-tight leading-none pb-8 d-hdpi-2:text-vw-3xl d-hdpi-2:pb-vw-8">
                                 Checkout
                             </div>
                         </div>
@@ -325,12 +344,11 @@ const Checkout = () => {
                                         </div>
                                     </div>
                                     <div className="h-full flex items-center flex-col justify-between">
-                                        <ButtonLoad
-                                            handleClick={tokenize}
-                                            isLoading={false}
-                                            label="Confirm and Pay"
-                                            width="w-full"
-                                        />
+                                        <button
+                                            className="focus:outline-none rounded-lg w-full bg-green-400 flex items-center h-12 justify-center hover:bg-gray-900 hover:text-white"
+                                            onClick={tokenize}>
+                                            Confirm and Pay
+                                        </button>
                                     </div>
                                 </div>
                             </aside>
@@ -355,7 +373,5 @@ const Checkout = () => {
         </>
     );
 };
-
-
 
 export default Checkout;

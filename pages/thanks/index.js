@@ -1,8 +1,6 @@
-import Row from '@/components/blocks/Row';
-import SectionTitle from '@/components/blocks/SectionTitle';
 import classNames from 'classnames';
 
-const LandingPage = () => {
+const Thanks = () => {
     return (
         <>
             <div
@@ -10,14 +8,12 @@ const LandingPage = () => {
                     'mx-auto px-5 md:px-9 lg:px-12 xl:px-24 2xl:px-40'
                 )}>
                 <div className="px-4 mt-12 md:mt-20">
-                    <SectionTitle
-                        section={{
-                            title: 'Order Summary'
-                        }}
-                        padding=""
-                        size="text-4xl md:text-4xl"
-                        className=""
-                    />
+                    <div className={``}>
+                        <div className="inline-block text-green-400 font-bold text-3xl tracking-tight leading-none pb-8 d-hdpi-2:text-vw-3xl d-hdpi-2:pb-vw-8">
+                            Order Summary
+                        </div>
+                    </div>
+
                     <div className="text-xl font-bold mb-1">
                         Success! Thank you for your purchase.
                     </div>
@@ -27,22 +23,21 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-            <Row>
+            <div className="mx-auto px-44">
                 <div
                     className={classNames(
                         'bg-gray-50 rounded-lg  flex w-full h-96 items-center justify-center mt-12'
                     )}>
                     <div className="flex flex-col items-center px-4">
                         <div className="text-center mt-4">
-                            You will receive an email with your order
-                            details in the next couple of mins.
+                            You will receive an email with your order details in
+                            the next couple of mins.
                         </div>
                     </div>
                 </div>
-            </Row>
+            </div>
         </>
     );
 };
 
-
-export default LandingPage;
+export default Thanks;
