@@ -860,9 +860,9 @@ module.exports = {
         }
     },
     plugins: [
-        require('tailwind-scrollbar'),
-        require('tailwindcss-nested-groups'),
-        require('@tailwindcss/line-clamp')
+        // require('tailwind-scrollbar'),
+        // require('tailwindcss-nested-groups'),
+        // require('@tailwindcss/line-clamp')
         // require('@tailwindcss/aspect-ratio')
     ]
 };

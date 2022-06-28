@@ -87,6 +87,17 @@ const Checkout = () => {
         }
     };
 
+    const createCart = async () => {
+        await swell.cart.setItems([]) // reset cart
+        const cart = await swell.cart.addItem({ // Create carts
+            product_id: '625b9bbddaaf7d596d9544d8',
+            quantity: 1
+        });
+
+        setTheProduct(parseCart(reduxMimic(cart))) // Parse Cart
+        setLoadingCart(false);
+    };
+
     useEffect(() => {
         if (isReady && !loadingCart) {
             swell.payment.createElements({
@@ -119,18 +130,6 @@ const Checkout = () => {
             });
         }
     }, [loadingCart]);
-
-    const createCart = async () => {
-        await swell.cart.setItems([]) // reset cart
-        const cart = await swell.cart.addItem({ // Create carts
-            product_id: '625b9bbddaaf7d596d9544d8',
-            quantity: 1
-        });
-
-        setTheProduct(parseCart(reduxMimic(cart))) // Parse Cart
-        setLoadingCart(false);
-    };
-
 
     useEffect(() => {
         if(isReady) {
@@ -202,7 +201,7 @@ const Checkout = () => {
                                             <img
                                                 alt=""
                                                 className="object-cover object-center w-full h-full"
-                                                data-blink-src={featured_image}
+                                                src={featured_image}
                                             />
                                         </div>
                                         <div>
@@ -325,19 +324,6 @@ const Checkout = () => {
                                             Payment Services
                                         </div>
                                     </div>
-                                    <div className="border-b border-green-600 border-opacity-20  py-4 d-hdpi-2:py-vw-4">
-                                        <div className="px-2 text-xs d-hdpi-2:px-vw-2 d-hdpi-2:text-vw-xs">
-                                            To learn about our cancellation and
-                                            refund policy{' '}
-                                            <a
-                                                className="underline font-semibold text-green-700"
-                                                target="_blank"
-                                                href={`${process.env.NEXT_PUBLIC_URL}/help/article/4002`}>
-                                                click here
-                                            </a>
-                                        </div>
-                                    </div>
-
                                     <div className="h-full flex items-center flex-col justify-between">
                                         <ButtonLoad
                                             handleClick={tokenize}

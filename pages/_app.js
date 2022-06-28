@@ -1,5 +1,4 @@
 import {  Bounce, ToastContainer } from 'react-toastify';
-import SimpleReactLightbox from 'simple-react-lightbox';
 import '@/styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -15,9 +14,7 @@ function MyApp({ Component, pageProps }) {
                     icon={false}
                     theme="colored"
                 />
-                <SimpleReactLightbox>
-                        <Component {...pageProps} />
-                </SimpleReactLightbox>
+                    <Component {...pageProps} />
             </div>
     );
 }

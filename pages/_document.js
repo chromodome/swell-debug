@@ -1,5 +1,4 @@
 import Document, {
-    DocumentContext,
     Html,
     Head,
     Main,
@@ -40,7 +39,6 @@ class MyDocument extends Document {
                         crossOrigin="anonymous"
                         referrerPolicy="no-referrer"
                     />
-                    <script async src="/assets/scripts/uploadcare.js" />
                 </Head>
                 <body className="bg-gray-100">
                     <Main />
